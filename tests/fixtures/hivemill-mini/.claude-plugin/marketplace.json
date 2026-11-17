@@ -1,0 +1,6 @@
+{
+  "name": "hivemill",
+  "plugins": [
+    {"name": "hivemill", "source": "./plugins/hivemill"}
+  ]
+}

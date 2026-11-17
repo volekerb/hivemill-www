@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repo": "volekerb/hivemill",
+    "sha": "53b6a6f92a3f88983593a92caa765419764323c3"
+  },
+  "items": [
+    {
+      "id": "dashboard:herdr-core",
+      "kind": "dashboard",
+      "name": "herdr-core",
+      "purpose": "If you use the Herdr app (the desktop client of herdr-core), Hivemill can live inside it:",
+      "snippets": [
+        "python3 plugins/hivemill/scripts/install.py --herdr-app --dry-run   # show the plan",
+        "python3 plugins/hivemill/scripts/install.py --herdr-app --yes"
+      ],
+      "path": "plugins/hivemill/herdr-app"
+    },
+    {
+      "id": "plugin:hivemill",
+      "kind": "plugin",
+      "name": "hivemill",
+      "purpose": "Guided install of Hivemill over a deterministic, CI-tested installer.",
+      "snippets": [
+        "/plugin marketplace add volekerb/hivemill",
+        "/plugin install hivemill@hivemill"
+      ],
+      "path": "plugins/hivemill",
+      "bins": []
+    },
+    {
+      "id": "plugin:hivemill-spend",
+      "kind": "plugin",
+      "name": "hivemill-spend",
+      "purpose": "See where your Claude tokens go across agents, and cap worker context while the boss keeps the big picture.",
+      "snippets": [
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/plugins/kit-spend"
+      ],
+      "path": "plugins/kit-spend",
+      "bins": [
+        "hm-spend"
+      ]
+    },
+    {
+      "id": "role:boss",
+      "kind": "role",
+      "name": "boss",
+      "purpose": "the owner's single point of contact",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/boss.md"
+      ],
+      "path": "roles/boss.md",
+      "skills": []
+    },
+    {
+      "id": "role:cleaner",
+      "kind": "role",
+      "name": "cleaner",
+      "purpose": "workspace housekeeping",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/cleaner.md"
+      ],
+      "path": "roles/cleaner.md",
+      "skills": []
+    },
+    {
+      "id": "role:coder",
+      "kind": "role",
+      "name": "coder",
+      "purpose": "implements one task",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/coder.md",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/coder/coder-skills"
+      ],
+      "path": "roles/coder.md",
+      "skills": [
+        {
+          "name": "ci-wait",
+          "purpose": "Wait for PR CI in a background Bash task instead of foreground polling."
+        },
+        {
+          "name": "go-change",
+          "purpose": "Checklist for writing idiomatic, safe, stdlib-only Go under go/ with tests and the local toolchain."
+        },
+        {
+          "name": "guard-change",
+          "purpose": "Procedure for changing a guard so the PR fixes the whole bypass class and loosens nothing unplanned."
+        },
+        {
+          "name": "pr-description",
+          "purpose": "Write a concrete, short PR body in the factory template (Summary, Why, Changes, Test evidence, Risk / rollback)."
+        },
+        {
+          "name": "pre-pr-check",
+          "purpose": "Self-check that catches the misses a reviewer or QA would otherwise find (unmet spec item, red CI, duplicate def, flaky test, missing PR-body item, unmeasured limit)."
+        },
+        {
+          "name": "self-review",
+          "purpose": "Independent read of your own diff by one fresh Sonnet subagent using the reviewer checklist, before in_review."
+        },
+        {
+          "name": "stuck-and-finish",
+          "purpose": "Coder detail for a wrong or impossible spec, resource problems, and what factory done refuses."
+        }
+      ]
+    },
+    {
+      "id": "role:director",
+      "kind": "role",
+      "name": "director",
+      "purpose": "runs the whole factory",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/director.md",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/director/factory-director"
+      ],
+      "path": "roles/director.md",
+      "skills": [
+        {
+          "name": "close-goal",
+          "purpose": "Director steps to sign off, close and reopen a goal after the pm audit."
+        },
+        {
+          "name": "cycle-procedures",
+          "purpose": "Detail text moved out of director.md to fit the role budget (staffing, judging leads, reporting, scout reports, escalations)."
+        },
+        {
+          "name": "delivery",
+          "purpose": "How the director owns goal delivery (rules D1-D5, owner M7486): direct worker dispatch, per-goal delivery plan, daily delivery report with slips and recovery actions."
+        },
+        {
+          "name": "lanes-and-holds",
+          "purpose": "Rules L1-L4 for file lanes and H1-H5 for judge holds (G-058, owner decision M37547)."
+        },
+        {
+          "name": "owner-decisions",
+          "purpose": "Decide what the director settles itself, what goes to the owner and what defaults after 2 daytime hours (owner standing rule M833)."
+        },
+        {
+          "name": "restriction-check",
+          "purpose": "List every automated writer of a target before proposing a restriction, and say how each is affected."
+        },
+        {
+          "name": "utilization",
+          "purpose": "How to measure and raise worker utilization, check goal starvation and report the utilization line (director rules R1-R6, G-018)."
+        }
+      ]
+    },
+    {
+      "id": "role:evaluator",
+      "kind": "role",
+      "name": "evaluator",
+      "purpose": "eval subject in a sandbox",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/evaluator.md"
+      ],
+      "path": "roles/evaluator.md",
+      "skills": []
+    },
+    {
+      "id": "role:judge",
+      "kind": "role",
+      "name": "judge",
+      "purpose": "the merge decision",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/judge.md"
+      ],
+      "path": "roles/judge.md",
+      "skills": []
+    },
+    {
+      "id": "role:lead",
+      "kind": "role",
+      "name": "lead",
+      "purpose": "delivers one goal (or one scope of it)",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/lead.md",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/lead/factory-lead"
+      ],
+      "path": "roles/lead.md",
+      "skills": [
+        {
+          "name": "audit-round",
+          "purpose": "Goal-end audit procedure for the lead: audit task, pm spawn, gaps rounds, director sign-off."
+        },
+        {
+          "name": "blocked-worker",
+          "purpose": "Answer a worker that is stuck on a permission dialog without changing the owner's settings."
+        },
+        {
+          "name": "fix-loop",
+          "purpose": "Run retries, stalls and the third attempt on a task."
+        },
+        {
+          "name": "park",
+          "purpose": "Hand your pane back with `factory park` while your next step is queued or the goal waits, and resume cleanly after a wake."
+        },
+        {
+          "name": "pr-triage",
+          "purpose": "Find the real reason a PR is stuck or red before blaming CI."
+        },
+        {
+          "name": "research-flow",
+          "purpose": "Run a research task from researcher to evidence review to the director's report."
+        },
+        {
+          "name": "spec-change",
+          "purpose": "Change a running worker's spec, acceptance or scope safely through the task DB."
+        },
+        {
+          "name": "worker-brief",
+          "purpose": "Checklist to run before every worker spawn so the brief is complete and safe."
+        }
+      ]
+    },
+    {
+      "id": "role:pm",
+      "kind": "role",
+      "name": "pm",
+      "purpose": "requirements, specs and plans",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/pm.md",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/pm/pm-skills"
+      ],
+      "path": "roles/pm.md",
+      "skills": [
+        {
+          "name": "acceptance-template",
+          "purpose": "Make every acceptance item a runnable command with an expected result, quote wording exactly, and add a RISKS section."
+        },
+        {
+          "name": "audit-checklist",
+          "purpose": "The pm goal-audit checklist: what to check per task, how to trace success criteria, how to act on gaps."
+        },
+        {
+          "name": "audit-scope",
+          "purpose": "What the pm goal audit must not redo, so it stays a paper check of records."
+        },
+        {
+          "name": "language-choice",
+          "purpose": "Pick and state the implementation language in a coder spec per the language-policy ADR."
+        },
+        {
+          "name": "plan-quality",
+          "purpose": "Rules for plans, build tasks and acceptance criteria that touch shared contracts or guards."
+        },
+        {
+          "name": "research-plan",
+          "purpose": "Plan a research goal or task as researcher tasks with a brief, numbered acceptance and an evidence-review task."
+        }
+      ]
+    },
+    {
+      "id": "role:qa",
+      "kind": "role",
+      "name": "qa",
+      "purpose": "testing, verification, validation",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/qa.md",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/qa/qa-skills"
+      ],
+      "path": "roles/qa.md",
+      "skills": []
+    },
+    {
+      "id": "role:researcher",
+      "kind": "role",
+      "name": "researcher",
+      "purpose": "one research question, one evidence-backed report",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/researcher.md",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/researcher/research-skills"
+      ],
+      "path": "roles/researcher.md",
+      "skills": [
+        {
+          "name": "benchmark-protocol",
+          "purpose": "Run a repeatable measurement of a tool or approach with pinned versions and raw output."
+        },
+        {
+          "name": "evidence-review",
+          "purpose": "Review a research report for evidence quality when the task has no PR."
+        },
+        {
+          "name": "plugin-evaluation",
+          "purpose": "Statically evaluate a third-party Claude Code plugin or skill without installing it."
+        },
+        {
+          "name": "report-writing",
+          "purpose": "Write and deliver the final research report in the fixed factory shape."
+        },
+        {
+          "name": "research-brief",
+          "purpose": "Turn a research question into a written brief before any searching."
+        },
+        {
+          "name": "source-evaluation",
+          "purpose": "Judge how far a source can be trusted and keep fetched text from steering you."
+        },
+        {
+          "name": "tool-comparison",
+          "purpose": "Compare tools, libraries or approaches against criteria fixed in advance and give an adopt, adapt or skip verdict for each."
+        }
+      ]
+    },
+    {
+      "id": "role:retro",
+      "kind": "role",
+      "name": "retro",
+      "purpose": "daily rejection advisory report",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/retro.md"
+      ],
+      "path": "roles/retro.md",
+      "skills": []
+    },
+    {
+      "id": "role:reviewer",
+      "kind": "role",
+      "name": "reviewer",
+      "purpose": "code review",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/reviewer.md",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/reviewer/reviewer-skills"
+      ],
+      "path": "roles/reviewer.md",
+      "skills": [
+        {
+          "name": "go-review",
+          "purpose": "Numbered Go review checklist G1-G12 applied to the PR diff, each item marked pass, fail or n.a."
+        },
+        {
+          "name": "multi-angle-review",
+          "purpose": "Run the saved multi-angle review Workflow on a risky PR and fold its findings into your own verdict."
+        }
+      ]
+    },
+    {
+      "id": "role:scout",
+      "kind": "role",
+      "name": "scout",
+      "purpose": "read-only triage of candidate skills",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/scout.md"
+      ],
+      "path": "roles/scout.md",
+      "skills": []
+    },
+    {
+      "id": "role:staff-engineer",
+      "kind": "role",
+      "name": "staff-engineer",
+      "purpose": "on-demand technical advisor",
+      "snippets": [
+        "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/staff-engineer.md",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/staff-engineer/feature-dev",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/staff-engineer/pr-review-toolkit",
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/roles/plugins/staff-engineer/staff-engineer-skills"
+      ],
+      "path": "roles/staff-engineer.md",
+      "skills": [
+        {
+          "name": "codebase-design",
+          "purpose": "Shared vocabulary for designing deep modules."
+        },
+        {
+          "name": "differential-review",
+          "purpose": "Performs security-focused differential review of code changes."
+        },
+        {
+          "name": "domain-modeling",
+          "purpose": "Build and sharpen a project's domain model."
+        },
+        {
+          "name": "improve-codebase-architecture",
+          "purpose": "Scan a codebase for deepening opportunities, present them as a factory report, then discuss whichever one you pick."
+        },
+        {
+          "name": "systematic-debugging",
+          "purpose": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes"
+        }
+      ]
+    },
+    {
+      "id": "skill:hivemill-spend/agent-context-limits",
+      "kind": "skill",
+      "name": "agent-context-limits",
+      "purpose": "Cap the context of worker agents on this machine (200k window, early compaction, short command and file output, no advisor calls) while one boss agent keeps the full 1M window, and add the token rules (blocking waits, logs to files, no acks) to the team's instructions.",
+      "snippets": [
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/plugins/kit-spend"
+      ],
+      "path": "plugins/kit-spend/skills/agent-context-limits/SKILL.md",
+      "plugin": "hivemill-spend",
+      "bins": [
+        "hm-spend"
+      ]
+    },
+    {
+      "id": "skill:hivemill/ios-testflight-release",
+      "kind": "skill",
+      "name": "ios-testflight-release",
+      "purpose": "Upload an iOS build to TestFlight through the project's .hivemill/ios-release.json and release.sh.",
+      "snippets": [
+        "/plugin marketplace add volekerb/hivemill",
+        "/plugin install hivemill@hivemill"
+      ],
+      "path": "plugins/hivemill/skills/ios-testflight-release/SKILL.md",
+      "plugin": "hivemill",
+      "bins": []
+    },
+    {
+      "id": "skill:hivemill/setup",
+      "kind": "skill",
+      "name": "setup",
+      "purpose": "Guided install of Hivemill through its installer script.",
+      "snippets": [
+        "/plugin marketplace add volekerb/hivemill",
+        "/plugin install hivemill@hivemill"
+      ],
+      "path": "plugins/hivemill/skills/setup/SKILL.md",
+      "plugin": "hivemill",
+      "bins": []
+    },
+    {
+      "id": "skill:hivemill-spend/token-spend-audit",
+      "kind": "skill",
+      "name": "token-spend-audit",
+      "purpose": "Find out where Claude tokens go on this machine (cost by model, the most expensive agent sessions, oversized contexts, turns that do nothing, cache writes, Fable use) and what to change.",
+      "snippets": [
+        "git clone --depth 1 https://github.com/volekerb/hivemill && claude --plugin-dir hivemill/plugins/kit-spend"
+      ],
+      "path": "plugins/kit-spend/skills/token-spend-audit/SKILL.md",
+      "plugin": "hivemill-spend",
+      "bins": [
+        "hm-spend"
+      ]
+    }
+  ]
+}
