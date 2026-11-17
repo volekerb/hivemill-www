@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>setup | Hivemill</title>
+<meta name="description" content="Guided install of Hivemill through its installer script.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/v2.css">
+<link rel="stylesheet" href="../../assets/css/catalog.css">
+<script type="module" src="../../assets/js/motion.js"></script>
+<script type="module" src="../../assets/js/catalog.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
+<nav aria-label="Site">
+<a href="../../">Home</a>
+<a href="../../catalog/">Catalog</a>
+<a href="../../work-with-me/">Work with me</a>
+<a href="../../guides/install/">Install</a>
+<a href="https://github.com/volekerb/hivemill">GitHub</a>
+</nav>
+</div></header>
+<main id="main">
+<p class="sr" role="status" aria-live="polite" id="live"></p>
+<section class="page-head wrap detail-head">
+<p class="crumb"><a href="../">Catalog</a> / Skills</p>
+<h1><svg class="i i--lg" aria-hidden="true"><use href="../../assets/icons/icons.svg#install"/></svg>setup</h1>
+<p class="lede">Guided install of Hivemill through its installer script.</p>
+</section>
+<div class="wrap detail">
+<section><h2>Install</h2><div class="snip"><pre class="code"><code>/plugin marketplace add volekerb/hivemill
+/plugin install hivemill@hivemill</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for setup">Copy</button></div></section>
+<section><h2>Includes</h2><p class="meta"><span>Plugin: hivemill</span></p></section>
+<section><h2>Overview</h2><div class="doc"># Hivemill setup
+
+You are a thin guide over one script, a small verifier that runs the pinned installer build: `${CLAUDE_PLUGIN_ROOT}/scripts/install`. Call it `install` below.</div></section>
+<section><h2>Rules</h2><div class="doc">- Never ask for, accept or repeat a token, password or API key in this chat.
+- If the user pastes one, do not use it. Tell them to revoke it and create a new one in their own terminal.
+- Do not run the setup steps yourself. The installer does them; if it fails, stop and report.
+- Every login happens in the user&#x27;s own terminal, never through `!` here: output of a `!` command enters this conversation.
+- Ask one question at a time. Plain words, no jargon.</div></section>
+<section><h2>Steps, in order</h2><div class="doc">1. Run `${CLAUDE_PLUGIN_ROOT}/scripts/install --check`. Explain the report in plain words: `ok` is fine, `warn` is a note, `missing` needs action.
+2. If git or python is `missing`: tell the user the apt line is not in the `--check` report (only `--dry-run` and `--yes` print it): run `--dry-run` and show the apt line it prints, ask the user to run it in their own terminal, and stop until they say it is done. Then run `--check` again.
+3. If `gh-auth` is missing: ask the user to open a separate terminal and run `gh auth login` there. If `claude-auth` is missing: ask them to run `claude` in a separate terminal and complete `/login`. Wait until they say it is done, then run `--check` again.
+   `herdr` or `gh` `missing` (not installed yet) is expected on a fresh box: go on, the installer installs them. If `gh` is not installed, `gh-auth` cannot be checked yet; the installer asks for `gh auth login` later (exit 3, step 7). Any other `missing` line: show it and stop. If only `systemd-user` is missing, offer `--no-systemd`.
+4. Ask only the real choices:
+   - the project repo (optional): local path and GitHub owner/name, passed as `--project-id`, `--project-repo`, `--project-gh`;
+   - the agent cap: offer the `suggested-max-agents` value from the report, passed as `--max-agents`;
+   - start at boot, passed as `--linger`: default no;
+   - scout, the skills triage helper: default off, so pass `--no-scout` unless the user asks for scout.
+5. Run `${CLAUDE_PLUGIN_ROOT}/scripts/install --dry-run &lt;flags&gt;` and show the plan. Say that it installs user-local tools with pinned checksums, and that starting agents uses the user&#x27;s Claude usage. Get an explicit yes before going on.
+6. Run `${CLAUDE_PLUGIN_ROOT}/scripts/install --yes &lt;flags&gt;`. Read only the exit code and the `RESULT` line.
+7. Act on the exit code:
+   - 0 with `RESULT PASS url=...`: go to step 8.
+   - 3: show the printed command for the user to run in their own terminal, then stop. When they are done, re-run step 6 with `--resume` if the message says so.
+   - 2: show the message and fix the flags.
+   - 4: say Hivemill is already installed. Offer `--resume` only if the user says a previous run failed.
+   - 1: show the failing step from `RESULT FAIL step=...`. Do not improvise around it. Point to `docs/SETUP.md` in https://github.com/volekerb/hivemill.
+8. Print the UI URL from the RESULT line and say: &quot;Open the boss&#x27;s pane in herdr and describe what you want built.&quot;
+9. Optional, only if the user uses the Herdr desktop app: offer the Hivemill dashboard (a status bar and a dashboard tab in the app, see `docs/herdr-app-dashboard.md`). It installs on the machine where the app runs, which may be another computer: then give the user the command for that machine instead of running it here. Ask whether their factory runs Claude, Cursor or both (`--orgs auto` is fine when unsure) and, if the app runs elsewhere, the `hc machine ls` name of this box (`--factory-machine NAME`). Run `${CLAUDE_PLUGIN_ROOT}/scripts/install --herdr-app --dry-run &lt;flags&gt;`, show the plan, get a yes, then the same with `--yes`. Exit 3 means the Herdr app is not set up there yet: say so and stop.</div></section>
+<section><h2>Combines with</h2><ul class="plain"><li><a href="../plugin-hivemill/">hivemill</a> Guided install of Hivemill over a deterministic, CI-tested installer.</li></ul></section>
+<section><h2>Full file</h2><p class="meta"><span>plugins/hivemill/skills/setup/SKILL.md</span></p><div class="snip"><pre class="code" id="full"><code>---
+name: setup
+description: Guided install of Hivemill through its installer script. Use when the user runs /hivemill:setup or asks to install or set up Hivemill.
+disable-model-invocation: true
+argument-hint: &quot;[--dry-run]&quot;
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/install *)
+---
+
+# Hivemill setup
+
+You are a thin guide over one script, a small verifier that runs the pinned installer build: `${CLAUDE_PLUGIN_ROOT}/scripts/install`. Call it `install` below.
+
+## Rules
+
+- Never ask for, accept or repeat a token, password or API key in this chat.
+- If the user pastes one, do not use it. Tell them to revoke it and create a new one in their own terminal.
+- Do not run the setup steps yourself. The installer does them; if it fails, stop and report.
+- Every login happens in the user&#x27;s own terminal, never through `!` here: output of a `!` command enters this conversation.
+- Ask one question at a time. Plain words, no jargon.
+
+## Steps, in order
+
+1. Run `${CLAUDE_PLUGIN_ROOT}/scripts/install --check`. Explain the report in plain words: `ok` is fine, `warn` is a note, `missing` needs action.
+2. If git or python is `missing`: tell the user the apt line is not in the `--check` report (only `--dry-run` and `--yes` print it): run `--dry-run` and show the apt line it prints, ask the user to run it in their own terminal, and stop until they say it is done. Then run `--check` again.
+3. If `gh-auth` is missing: ask the user to open a separate terminal and run `gh auth login` there. If `claude-auth` is missing: ask them to run `claude` in a separate terminal and complete `/login`. Wait until they say it is done, then run `--check` again.
+   `herdr` or `gh` `missing` (not installed yet) is expected on a fresh box: go on, the installer installs them. If `gh` is not installed, `gh-auth` cannot be checked yet; the installer asks for `gh auth login` later (exit 3, step 7). Any other `missing` line: show it and stop. If only `systemd-user` is missing, offer `--no-systemd`.
+4. Ask only the real choices:
+   - the project repo (optional): local path and GitHub owner/name, passed as `--project-id`, `--project-repo`, `--project-gh`;
+   - the agent cap: offer the `suggested-max-agents` value from the report, passed as `--max-agents`;
+   - start at boot, passed as `--linger`: default no;
+   - scout, the skills triage helper: default off, so pass `--no-scout` unless the user asks for scout.
+5. Run `${CLAUDE_PLUGIN_ROOT}/scripts/install --dry-run &lt;flags&gt;` and show the plan. Say that it installs user-local tools with pinned checksums, and that starting agents uses the user&#x27;s Claude usage. Get an explicit yes before going on.
+6. Run `${CLAUDE_PLUGIN_ROOT}/scripts/install --yes &lt;flags&gt;`. Read only the exit code and the `RESULT` line.
+7. Act on the exit code:
+   - 0 with `RESULT PASS url=...`: go to step 8.
+   - 3: show the printed command for the user to run in their own terminal, then stop. When they are done, re-run step 6 with `--resume` if the message says so.
+   - 2: show the message and fix the flags.
+   - 4: say Hivemill is already installed. Offer `--resume` only if the user says a previous run failed.
+   - 1: show the failing step from `RESULT FAIL step=...`. Do not improvise around it. Point to `docs/SETUP.md` in https://github.com/volekerb/hivemill.
+8. Print the UI URL from the RESULT line and say: &quot;Open the boss&#x27;s pane in herdr and describe what you want built.&quot;
+9. Optional, only if the user uses the Herdr desktop app: offer the Hivemill dashboard (a status bar and a dashboard tab in the app, see `docs/herdr-app-dashboard.md`). It installs on the machine where the app runs, which may be another computer: then give the user the command for that machine instead of running it here. Ask whether their factory runs Claude, Cursor or both (`--orgs auto` is fine when unsure) and, if the app runs elsewhere, the `hc machine ls` name of this box (`--factory-machine NAME`). Run `${CLAUDE_PLUGIN_ROOT}/scripts/install --herdr-app --dry-run &lt;flags&gt;`, show the plan, get a yes, then the same with `--yes`. Exit 3 means the Herdr app is not set up there yet: say so and stop.</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy full file for setup">Copy full file</button></div></section>
+<p class="links"><a class="arrow-link" href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/plugins/hivemill/skills/setup/SKILL.md">Source on GitHub</a></p>
+</div>
+</main>
+<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Built from volekerb/hivemill at 53b6a6f92a3f (2026-11-17).</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
+</body>
+</html>

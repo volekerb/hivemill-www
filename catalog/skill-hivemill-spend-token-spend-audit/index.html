@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>token-spend-audit | Hivemill</title>
+<meta name="description" content="Find out where Claude tokens go on this machine (cost by model, the most expensive agent sessions, oversized contexts, turns that do nothing, cache writes, Fable use) and what to change.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/v2.css">
+<link rel="stylesheet" href="../../assets/css/catalog.css">
+<script type="module" src="../../assets/js/motion.js"></script>
+<script type="module" src="../../assets/js/catalog.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
+<nav aria-label="Site">
+<a href="../../">Home</a>
+<a href="../../catalog/">Catalog</a>
+<a href="../../work-with-me/">Work with me</a>
+<a href="../../guides/install/">Install</a>
+<a href="https://github.com/volekerb/hivemill">GitHub</a>
+</nav>
+</div></header>
+<main id="main">
+<p class="sr" role="status" aria-live="polite" id="live"></p>
+<section class="page-head wrap detail-head">
+<p class="crumb"><a href="../">Catalog</a> / Skills</p>
+<h1><svg class="i i--lg" aria-hidden="true"><use href="../../assets/icons/icons.svg#spend"/></svg>token-spend-audit</h1>
+<p class="lede">Find out where Claude tokens go on this machine (cost by model, the most expensive agent sessions, oversized contexts, turns that do nothing, cache writes, Fable use) and what to change.</p>
+</section>
+<div class="wrap detail">
+<section><h2>Install</h2><div class="snip"><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/plugins/kit-spend</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for token-spend-audit">Copy</button></div></section>
+<section><h2>Includes</h2><p class="meta"><span>Commands: hm-spend</span> <span>Plugin: hivemill-spend</span></p></section>
+<section><h2>Overview</h2><div class="doc"># Token spend audit
+
+You are a thin guide over one read-only command: `${CLAUDE_PLUGIN_ROOT}/bin/hm-spend report`. It reads the Claude Code transcripts on this machine and changes nothing. Background and the numbers behind each finding: docs/token-discipline.md in the hivemill repo.</div></section>
+<section><h2>Rules</h2><div class="doc">- Run only `hm-spend report`. Do not read transcript files yourself; they are large, and reading them costs the tokens this audit is about.
+- Costs are at API prices. On a subscription, say they show the share of the plan&#x27;s limits, not a bill.
+- Name sessions by their 8-character id and project folder. Do not guess which agent a session is; ask the user, or say how to match it (the id is in the agent&#x27;s `--resume` or `--session-id` argument).
+- Report numbers from the output only. Do not estimate savings the output does not show.</div></section>
+<section><h2>Steps</h2><div class="doc">1. Run `${CLAUDE_PLUGIN_ROOT}/bin/hm-spend report --hours 24` (or the hours the user gave). On exit 1 with &quot;not installed&quot;, show the build line it printed and stop.
+2. Tell the user, in plain words and in this order:
+   - the total and the split by model;
+   - the three most expensive sessions, each with its average context and its share of tiny turns;
+   - each finding with its fix.
+3. Map the findings to actions:
+   - `fable`: move those agents to Sonnet, or Opus for judgement. Restart them; do not use `/model`.
+   - `big-context`: apply context limits. Offer the `agent-context-limits` skill.
+   - `chatter`: the waiting and no-ack rules in docs/token-discipline.md (one blocking wait command, no acks, read screens instead of asking).
+   - `cache-writes`: fewer short-lived agents; mechanical steps such as rebases and CI waits become scripts.
+   - `unpriced`: the totals are missing that model; say so.
+4. If the user wants a check that can run on a schedule: `hm-spend report --check` exits 3 on any high finding. `--json` gives the data to a script.</div></section>
+<section><h2>Combines with</h2><ul class="plain"><li><a href="../plugin-hivemill-spend/">hivemill-spend</a> See where your Claude tokens go across agents, and cap worker context while the boss keeps the big picture.</li><li><a href="../skill-hivemill-spend-agent-context-limits/">agent-context-limits</a> Cap the context of worker agents on this machine (200k window, early compaction, short command and file output, no advisor calls) while one boss agent keeps the full 1M window, and add the token rules (blocking waits, logs to files, no acks) to the team&#x27;s instructions.</li></ul></section>
+<section><h2>Full file</h2><p class="meta"><span>plugins/kit-spend/skills/token-spend-audit/SKILL.md</span></p><div class="snip"><pre class="code" id="full"><code>---
+name: token-spend-audit
+description: Find out where Claude tokens go on this machine (cost by model, the most expensive agent sessions, oversized contexts, turns that do nothing, cache writes, Fable use) and what to change. Use when the user asks why Claude usage or cost is so high, why the weekly limit ran out, which agent is expensive, or wants a token or cost report.
+argument-hint: &quot;[--hours N]&quot;
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/bin/hm-spend report *)
+---
+
+# Token spend audit
+
+You are a thin guide over one read-only command: `${CLAUDE_PLUGIN_ROOT}/bin/hm-spend report`. It reads the Claude Code transcripts on this machine and changes nothing. Background and the numbers behind each finding: docs/token-discipline.md in the hivemill repo.
+
+## Rules
+
+- Run only `hm-spend report`. Do not read transcript files yourself; they are large, and reading them costs the tokens this audit is about.
+- Costs are at API prices. On a subscription, say they show the share of the plan&#x27;s limits, not a bill.
+- Name sessions by their 8-character id and project folder. Do not guess which agent a session is; ask the user, or say how to match it (the id is in the agent&#x27;s `--resume` or `--session-id` argument).
+- Report numbers from the output only. Do not estimate savings the output does not show.
+
+## Steps
+
+1. Run `${CLAUDE_PLUGIN_ROOT}/bin/hm-spend report --hours 24` (or the hours the user gave). On exit 1 with &quot;not installed&quot;, show the build line it printed and stop.
+2. Tell the user, in plain words and in this order:
+   - the total and the split by model;
+   - the three most expensive sessions, each with its average context and its share of tiny turns;
+   - each finding with its fix.
+3. Map the findings to actions:
+   - `fable`: move those agents to Sonnet, or Opus for judgement. Restart them; do not use `/model`.
+   - `big-context`: apply context limits. Offer the `agent-context-limits` skill.
+   - `chatter`: the waiting and no-ack rules in docs/token-discipline.md (one blocking wait command, no acks, read screens instead of asking).
+   - `cache-writes`: fewer short-lived agents; mechanical steps such as rebases and CI waits become scripts.
+   - `unpriced`: the totals are missing that model; say so.
+4. If the user wants a check that can run on a schedule: `hm-spend report --check` exits 3 on any high finding. `--json` gives the data to a script.</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy full file for token-spend-audit">Copy full file</button></div></section>
+<p class="links"><a class="arrow-link" href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/plugins/kit-spend/skills/token-spend-audit/SKILL.md">Source on GitHub</a></p>
+</div>
+</main>
+<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Built from volekerb/hivemill at 53b6a6f92a3f (2026-11-17).</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
+</body>
+</html>
