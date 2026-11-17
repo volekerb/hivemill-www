@@ -1,0 +1,362 @@
+[
+ {
+  "file": "tasks-480.webp",
+  "width": 480,
+  "height": 351,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/tasks-light.png",
+  "source_sha256": "c9213458827b1bc827a5f06dc775e329574c47c4c802fc313834764ccdf4c091",
+  "crop": null
+ },
+ {
+  "file": "tasks-480.png",
+  "width": 480,
+  "height": 351,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/tasks-light.png",
+  "source_sha256": "c9213458827b1bc827a5f06dc775e329574c47c4c802fc313834764ccdf4c091",
+  "crop": null
+ },
+ {
+  "file": "tasks-960.webp",
+  "width": 960,
+  "height": 702,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/tasks-light.png",
+  "source_sha256": "c9213458827b1bc827a5f06dc775e329574c47c4c802fc313834764ccdf4c091",
+  "crop": null
+ },
+ {
+  "file": "tasks-960.png",
+  "width": 960,
+  "height": 702,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/tasks-light.png",
+  "source_sha256": "c9213458827b1bc827a5f06dc775e329574c47c4c802fc313834764ccdf4c091",
+  "crop": null
+ },
+ {
+  "file": "tasks-1600.webp",
+  "width": 1600,
+  "height": 1170,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/tasks-light.png",
+  "source_sha256": "c9213458827b1bc827a5f06dc775e329574c47c4c802fc313834764ccdf4c091",
+  "crop": null
+ },
+ {
+  "file": "tasks-1600.png",
+  "width": 1600,
+  "height": 1170,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/tasks-light.png",
+  "source_sha256": "c9213458827b1bc827a5f06dc775e329574c47c4c802fc313834764ccdf4c091",
+  "crop": null
+ },
+ {
+  "file": "agents-480.webp",
+  "width": 480,
+  "height": 319,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/agents-light.png",
+  "source_sha256": "0397f77fb978b3ac6b1e93ac12a4f394cc43f5b971f8ab74b00c953167df7fa0",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "agents-480.png",
+  "width": 480,
+  "height": 319,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/agents-light.png",
+  "source_sha256": "0397f77fb978b3ac6b1e93ac12a4f394cc43f5b971f8ab74b00c953167df7fa0",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "agents-960.webp",
+  "width": 960,
+  "height": 638,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/agents-light.png",
+  "source_sha256": "0397f77fb978b3ac6b1e93ac12a4f394cc43f5b971f8ab74b00c953167df7fa0",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "agents-960.png",
+  "width": 960,
+  "height": 638,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/agents-light.png",
+  "source_sha256": "0397f77fb978b3ac6b1e93ac12a4f394cc43f5b971f8ab74b00c953167df7fa0",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "agents-1600.webp",
+  "width": 1600,
+  "height": 1062,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/agents-light.png",
+  "source_sha256": "0397f77fb978b3ac6b1e93ac12a4f394cc43f5b971f8ab74b00c953167df7fa0",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "agents-1600.png",
+  "width": 1600,
+  "height": 1062,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/agents-light.png",
+  "source_sha256": "0397f77fb978b3ac6b1e93ac12a4f394cc43f5b971f8ab74b00c953167df7fa0",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "goals-480.webp",
+  "width": 480,
+  "height": 319,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/goals-light.png",
+  "source_sha256": "905a3ca334c38670bf0d1916f1a2f24a85be8a6e57c2cfbe4a6a7991419a160e",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "goals-480.png",
+  "width": 480,
+  "height": 319,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/goals-light.png",
+  "source_sha256": "905a3ca334c38670bf0d1916f1a2f24a85be8a6e57c2cfbe4a6a7991419a160e",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "goals-960.webp",
+  "width": 960,
+  "height": 638,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/goals-light.png",
+  "source_sha256": "905a3ca334c38670bf0d1916f1a2f24a85be8a6e57c2cfbe4a6a7991419a160e",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "goals-960.png",
+  "width": 960,
+  "height": 638,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/goals-light.png",
+  "source_sha256": "905a3ca334c38670bf0d1916f1a2f24a85be8a6e57c2cfbe4a6a7991419a160e",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "goals-1600.webp",
+  "width": 1600,
+  "height": 1062,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/goals-light.png",
+  "source_sha256": "905a3ca334c38670bf0d1916f1a2f24a85be8a6e57c2cfbe4a6a7991419a160e",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "goals-1600.png",
+  "width": 1600,
+  "height": 1062,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/images/goals-light.png",
+  "source_sha256": "905a3ca334c38670bf0d1916f1a2f24a85be8a6e57c2cfbe4a6a7991419a160e",
+  "crop": [
+   0,
+   0,
+   2560,
+   1700
+  ]
+ },
+ {
+  "file": "herdr-panel-480.webp",
+  "width": 480,
+  "height": 270,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-480.png",
+  "width": 480,
+  "height": 270,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-960.webp",
+  "width": 960,
+  "height": 540,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-960.png",
+  "width": 960,
+  "height": 540,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-1600.webp",
+  "width": 1600,
+  "height": 900,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-1600.png",
+  "width": 1600,
+  "height": 900,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "skills-480.webp",
+  "width": 480,
+  "height": 270,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/skills.png",
+  "source_sha256": "91c734bb9e5ad99c6bd6498ab536399b8a1091c990c2b8ff908a7965a7993274",
+  "crop": null
+ },
+ {
+  "file": "skills-480.png",
+  "width": 480,
+  "height": 270,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/skills.png",
+  "source_sha256": "91c734bb9e5ad99c6bd6498ab536399b8a1091c990c2b8ff908a7965a7993274",
+  "crop": null
+ },
+ {
+  "file": "skills-960.webp",
+  "width": 960,
+  "height": 540,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/skills.png",
+  "source_sha256": "91c734bb9e5ad99c6bd6498ab536399b8a1091c990c2b8ff908a7965a7993274",
+  "crop": null
+ },
+ {
+  "file": "skills-960.png",
+  "width": 960,
+  "height": 540,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/skills.png",
+  "source_sha256": "91c734bb9e5ad99c6bd6498ab536399b8a1091c990c2b8ff908a7965a7993274",
+  "crop": null
+ },
+ {
+  "file": "skills-1600.webp",
+  "width": 1600,
+  "height": 900,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/skills.png",
+  "source_sha256": "91c734bb9e5ad99c6bd6498ab536399b8a1091c990c2b8ff908a7965a7993274",
+  "crop": null
+ },
+ {
+  "file": "skills-1600.png",
+  "width": 1600,
+  "height": 900,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/skills.png",
+  "source_sha256": "91c734bb9e5ad99c6bd6498ab536399b8a1091c990c2b8ff908a7965a7993274",
+  "crop": null
+ }
+]
