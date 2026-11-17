@@ -3,40 +3,50 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Where you watch – Hivemill</title>
+<title>Where you watch | Hivemill</title>
+<meta name="description" content="You watch the factory in the read-only web UI, or on a Mac in the Herdr desktop app.">
+<meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../assets/site.css">
+<link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/v2.css">
+<script type="module" src="../../assets/js/motion.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site">
-<a href="../../"><img src="../../assets/wordmark-light.svg" alt="Hivemill" width="144" height="32"></a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
 <nav aria-label="Site">
 <a href="../../">Home</a>
+<a href="../../catalog/">Catalog</a>
+<a href="../../work-with-me/">Work with me</a>
 <a href="../install/">Install</a>
 <a href="../ask-to-merge/">Ask to merge</a>
 <a href="./" aria-current="page">Where you watch</a>
-<a href="../../factories/what/">What a factory is</a>
-<a href="../../factories/who-merges/">Who merges</a>
+<a href="https://github.com/volekerb/hivemill">GitHub</a>
 </nav>
-</header>
+</div></header>
 <main id="main">
-<section>
+<section class="page-head wrap">
 <h1>You watch it in the web UI, or on a Mac in the Herdr desktop app.</h1>
-<div class="text">
 <p>The web UI is read-only and runs on your Debian or Ubuntu machine.</p>
 <p>A Mac can watch through the <a href="https://herdr.dev">Herdr</a> desktop app. The factory does not run on macOS yet.</p>
-</div>
+</section>
+<section class="band wrap">
+<div data-reveal>
 <figure class="fig--shot fig--col">
 <picture><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/home-dark-1x.webp 1x, ../../assets/img/home-dark-2x.webp 2x" width="480" height="540"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="../../assets/img/home-dark-1x.png 1x, ../../assets/img/home-dark-2x.png 2x" width="480" height="540"><source type="image/webp" srcset="../../assets/img/home-light-1x.webp 1x, ../../assets/img/home-light-2x.webp 2x" width="480" height="540"><img src="../../assets/img/home-light-1x.png" srcset="../../assets/img/home-light-1x.png 1x, ../../assets/img/home-light-2x.png 2x" width="480" height="540" alt="The Hivemill web UI overview" loading="lazy" decoding="async"></picture>
 <figcaption>The web UI overview, from the demo seed. Fictional data.</figcaption>
 </figure>
+</div>
+<div data-reveal>
 <figure class="fig--shot fig--app">
 <picture><source type="image/webp" srcset="../../assets/img/herdr-factory-1x.webp 1x" width="617" height="194"><img src="../../assets/img/herdr-factory-1x.png" srcset="../../assets/img/herdr-factory-1x.png 1x" width="617" height="194" alt="The Hivemill dashboard inside the Herdr desktop app" loading="lazy" decoding="async"></picture>
 <figcaption>The Hivemill dashboard in the Herdr desktop app. A committed crop of a demo-mode capture.</figcaption>
 </figure>
+</div>
+<p class="back"><a class="arrow-link" href="../../"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#arrow"/></svg>Back to Home</a></p>
 </section>
 </main>
-<footer>Hivemill is MIT licensed.</footer>
+<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
 </body>
 </html>
