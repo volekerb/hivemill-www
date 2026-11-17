@@ -830,5 +830,65 @@
   "source_path": "docs/film/herdr/panel-budget.png",
   "source_sha256": "f480c854605239f8ee5225248bf6d257893323e62d11aaf87eb04c0d14949327",
   "crop": null
+ },
+ {
+  "file": "herdr-panel-480.webp",
+  "width": 480,
+  "height": 270,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-480.png",
+  "width": 480,
+  "height": 270,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-960.webp",
+  "width": 960,
+  "height": 540,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-960.png",
+  "width": 960,
+  "height": 540,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-1600.webp",
+  "width": 1600,
+  "height": 900,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
+ },
+ {
+  "file": "herdr-panel-1600.png",
+  "width": 1600,
+  "height": 900,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/stills/herdr-core.png",
+  "source_sha256": "27dbfd096b38342313a470321857a74e339275cbf073104792933c154dba2109",
+  "crop": null
  }
 ]

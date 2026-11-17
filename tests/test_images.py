@@ -20,7 +20,7 @@ class Pictures(HTMLParser):
 
     def __init__(self):
         super().__init__()
-        self.pictures, self.loose, self._cur = [], [], None
+        self.pictures, self.loose, self.catalog, self._cur = [], [], [], None
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -34,7 +34,9 @@ class Pictures(HTMLParser):
 
     def handle_endtag(self, tag):
         if tag == "picture" and self._cur is not None:
-            self.pictures.append(self._cur)
+            # catalog panels (T-1809) are native single-theme crops owned by the catalog; tracked for the orphan check only
+            img = next((a for t, a in self._cur if t == "img"), {})
+            (self.catalog if Path(img.get("src", "")).name.startswith(("panel-", "herdr-panel-")) else self.pictures).append(self._cur)
             self._cur = None
 
 
@@ -122,7 +124,8 @@ class TestImages(unittest.TestCase):
         self.assertEqual(on_disk, set(entries), "assets/img and SOURCES.json disagree")
         used = set()
         for page in pages():
-            for pic in parse(page).pictures:
+            parsed = parse(page)
+            for pic in parsed.pictures + parsed.catalog:
                 for t, a in pic:
                     for r in (files_in(a["srcset"]) if "srcset" in a else []) + ([a["src"]] if t == "img" else []):
                         used.add(Path(r).name)
