@@ -24,13 +24,18 @@ SHA = "53b6a6f92a3f88983593a92caa765419764323c3"
 WIDTHS = (480, 960, 1600)
 OUT = Path(__file__).resolve().parent.parent / "assets" / "img"
 
-# name -> (source path, crop box (l, t, r, b) in source pixels or None)
+# name -> (source path, crop box (l, t, r, b) in source pixels or None[, widths])
 IMAGES = {
     "tasks": ("docs/images/tasks-light.png", None),
     "agents": ("docs/images/agents-light.png", (0, 0, 2560, 1700)),
     "goals": ("docs/images/goals-light.png", (0, 0, 2560, 1700)),
     "herdr-panel": ("docs/film/stills/herdr-core.png", None),
     "skills": ("docs/film/stills/skills.png", None),
+    # catalog dashboard item (T-1809): real panels, two widths only
+    "panel-factory": ("docs/film/herdr/panel-factory.png", None, (480, 960)),
+    "panel-resources": ("docs/film/herdr/panel-resources.png", None, (480, 960)),
+    "panel-active-goals": ("docs/film/herdr/panel-active-goals.png", None, (480, 960)),
+    "panel-budget": ("docs/film/herdr/panel-budget.png", None, (480, 960)),
 }
 
 
@@ -51,7 +56,7 @@ def main():
         if old.suffix in (".webp", ".png"):
             old.unlink()
     entries = []
-    for name, (path, crop) in IMAGES.items():
+    for name, (path, crop, *rest) in IMAGES.items():
         data = fetch(path, args.src_dir)
         tmp = OUT / f".{name}.src"
         tmp.write_bytes(data)
@@ -59,7 +64,7 @@ def main():
         tmp.unlink()
         if crop:
             img = img.crop(crop)
-        for w in WIDTHS:
+        for w in (rest[0] if rest else WIDTHS):
             h = round(img.height * w / img.width)
             small = img.resize((w, h), Image.LANCZOS)
             for ext, opts in (("webp", {"quality": 78, "method": 6}), ("png", {"optimize": True})):

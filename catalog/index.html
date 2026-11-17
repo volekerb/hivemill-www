@@ -9,7 +9,9 @@
 <link rel="icon" href="../assets/wordmark-light.svg" type="image/svg+xml">
 <link rel="preload" href="../assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/v2.css">
+<link rel="stylesheet" href="../assets/css/catalog.css">
 <script type="module" src="../assets/js/motion.js"></script>
+<script type="module" src="../assets/js/catalog.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,9 +29,160 @@
 <section class="page-head wrap">
 <h1>Catalog</h1>
 <p class="lede">The agent roles, kit skills and the herdr-core plugin you can copy into your own factory.</p>
-<a class="back arrow-link" href="../"><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg>Back to Home</a>
+<p class="measure">Copy a role file, install a skill plugin or add the dashboard. Each piece stands on its own, so take one or combine several into your own factory.</p>
+<nav class="kinds" aria-label="Catalog sections"><a href="#roles">Roles <span>14</span></a> <a href="#skills">Skills <span>4</span></a> <a href="#plugins">Plugins <span>2</span></a> <a href="#dashboard">Dashboard <span>1</span></a></nav>
 </section>
+<div class="wrap catalog">
+<p class="sr" role="status" aria-live="polite" id="live"></p>
+<section class="group" id="roles" data-group="role"><div class="group-head"><h2>Roles</h2><p>Each role is one Markdown file. Copy it next to your own agents and edit it.</p></div>
+<article class="entry" id="role-boss" data-item-id="role:boss" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#boss"/></svg><a href="role-boss/">boss</a></h3>
+<p class="purpose">the owner&#x27;s single point of contact</p>
+<p class="links"><a class="arrow-link" href="role-boss/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/boss.md">Source: roles/boss.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/boss.md</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for boss">Copy</button></div></div>
+</article>
+<article class="entry" id="role-cleaner" data-item-id="role:cleaner" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#cleaner"/></svg><a href="role-cleaner/">cleaner</a></h3>
+<p class="purpose">workspace housekeeping</p>
+<p class="links"><a class="arrow-link" href="role-cleaner/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/cleaner.md">Source: roles/cleaner.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/cleaner.md</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for cleaner">Copy</button></div></div>
+</article>
+<article class="entry" id="role-coder" data-item-id="role:coder" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#coder"/></svg><a href="role-coder/">coder</a></h3>
+<p class="purpose">implements one task</p>
+<p class="meta"><span>Skills: ci-wait, go-change, guard-change, pr-description, pre-pr-check, self-review, stuck-and-finish</span></p><p class="links"><a class="arrow-link" href="role-coder/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/coder.md">Source: roles/coder.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/coder.md
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/coder/coder-skills</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for coder">Copy</button></div></div>
+</article>
+<article class="entry" id="role-director" data-item-id="role:director" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#director"/></svg><a href="role-director/">director</a></h3>
+<p class="purpose">runs the whole factory</p>
+<p class="meta"><span>Skills: close-goal, cycle-procedures, delivery, lanes-and-holds, owner-decisions, restriction-check, utilization</span></p><p class="links"><a class="arrow-link" href="role-director/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/director.md">Source: roles/director.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/director.md
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/director/factory-director</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for director">Copy</button></div></div>
+</article>
+<article class="entry" id="role-evaluator" data-item-id="role:evaluator" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#evaluator"/></svg><a href="role-evaluator/">evaluator</a></h3>
+<p class="purpose">eval subject in a sandbox</p>
+<p class="links"><a class="arrow-link" href="role-evaluator/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/evaluator.md">Source: roles/evaluator.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/evaluator.md</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for evaluator">Copy</button></div></div>
+</article>
+<article class="entry" id="role-judge" data-item-id="role:judge" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#merge"/></svg><a href="role-judge/">judge</a></h3>
+<p class="purpose">the merge decision</p>
+<p class="links"><a class="arrow-link" href="role-judge/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/judge.md">Source: roles/judge.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/judge.md</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for judge">Copy</button></div></div>
+</article>
+<article class="entry" id="role-lead" data-item-id="role:lead" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#team"/></svg><a href="role-lead/">lead</a></h3>
+<p class="purpose">delivers one goal (or one scope of it)</p>
+<p class="meta"><span>Skills: audit-round, blocked-worker, fix-loop, park, pr-triage, research-flow, spec-change, worker-brief</span></p><p class="links"><a class="arrow-link" href="role-lead/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/lead.md">Source: roles/lead.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/lead.md
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/lead/factory-lead</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for lead">Copy</button></div></div>
+</article>
+<article class="entry" id="role-pm" data-item-id="role:pm" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#ask"/></svg><a href="role-pm/">pm</a></h3>
+<p class="purpose">requirements, specs and plans</p>
+<p class="meta"><span>Skills: acceptance-template, audit-checklist, audit-scope, language-choice, plan-quality, research-plan</span></p><p class="links"><a class="arrow-link" href="role-pm/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/pm.md">Source: roles/pm.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/pm.md
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/pm/pm-skills</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for pm">Copy</button></div></div>
+</article>
+<article class="entry" id="role-qa" data-item-id="role:qa" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#qa"/></svg><a href="role-qa/">qa</a></h3>
+<p class="purpose">testing, verification, validation</p>
+<p class="links"><a class="arrow-link" href="role-qa/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/qa.md">Source: roles/qa.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/qa.md
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/qa/qa-skills</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for qa">Copy</button></div></div>
+</article>
+<article class="entry" id="role-researcher" data-item-id="role:researcher" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#researcher"/></svg><a href="role-researcher/">researcher</a></h3>
+<p class="purpose">one research question, one evidence-backed report</p>
+<p class="meta"><span>Skills: benchmark-protocol, evidence-review, plugin-evaluation, report-writing, research-brief, source-evaluation, tool-comparison</span></p><p class="links"><a class="arrow-link" href="role-researcher/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/researcher.md">Source: roles/researcher.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/researcher.md
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/researcher/research-skills</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for researcher">Copy</button></div></div>
+</article>
+<article class="entry" id="role-retro" data-item-id="role:retro" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#retro"/></svg><a href="role-retro/">retro</a></h3>
+<p class="purpose">daily rejection advisory report</p>
+<p class="links"><a class="arrow-link" href="role-retro/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/retro.md">Source: roles/retro.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/retro.md</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for retro">Copy</button></div></div>
+</article>
+<article class="entry" id="role-reviewer" data-item-id="role:reviewer" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#review"/></svg><a href="role-reviewer/">reviewer</a></h3>
+<p class="purpose">code review</p>
+<p class="meta"><span>Skills: go-review, multi-angle-review</span></p><p class="links"><a class="arrow-link" href="role-reviewer/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/reviewer.md">Source: roles/reviewer.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/reviewer.md
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/reviewer/reviewer-skills</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for reviewer">Copy</button></div></div>
+</article>
+<article class="entry" id="role-scout" data-item-id="role:scout" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#scout"/></svg><a href="role-scout/">scout</a></h3>
+<p class="purpose">read-only triage of candidate skills</p>
+<p class="links"><a class="arrow-link" href="role-scout/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/scout.md">Source: roles/scout.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/scout.md</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for scout">Copy</button></div></div>
+</article>
+<article class="entry" id="role-staff-engineer" data-item-id="role:staff-engineer" data-kind="role" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#staff"/></svg><a href="role-staff-engineer/">staff-engineer</a></h3>
+<p class="purpose">on-demand technical advisor</p>
+<p class="meta"><span>Skills: codebase-design, differential-review, domain-modeling, improve-codebase-architecture, systematic-debugging</span></p><p class="links"><a class="arrow-link" href="role-staff-engineer/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/roles/staff-engineer.md">Source: roles/staff-engineer.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/53b6a6f92a3f88983593a92caa765419764323c3/roles/staff-engineer.md
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/staff-engineer/feature-dev
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/staff-engineer/pr-review-toolkit
+git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/staff-engineer/staff-engineer-skills</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for staff-engineer">Copy</button></div></div>
+</article>
+</section>
+<section class="group" id="skills" data-group="skill"><div class="group-head"><h2>Skills</h2><p>Skills ship inside plugins. Install the plugin that carries the skill.</p></div>
+<article class="entry" id="skill-hivemill-spend-agent-context-limits" data-item-id="skill:hivemill-spend/agent-context-limits" data-kind="skill" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#limits"/></svg><a href="skill-hivemill-spend-agent-context-limits/">agent-context-limits</a></h3>
+<p class="purpose">Cap the context of worker agents on this machine (200k window, early compaction, short command and file output, no advisor calls) while one boss agent keeps the full 1M window, and add the token rules (blocking waits, logs to files, no acks) to the team&#x27;s instructions.</p>
+<p class="meta"><span>Commands: hm-spend</span> <span>Plugin: hivemill-spend</span></p><p class="links"><a class="arrow-link" href="skill-hivemill-spend-agent-context-limits/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/plugins/kit-spend/skills/agent-context-limits/SKILL.md">Source: plugins/kit-spend/skills/agent-context-limits/SKILL.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/plugins/kit-spend</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for agent-context-limits">Copy</button></div></div>
+</article>
+<article class="entry" id="skill-hm-clean" data-item-id="skill:hm-clean" data-kind="skill" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#clean"/></svg><a href="skill-hm-clean/">hm-clean</a> <span class="tag">coming soon</span></h3>
+<p class="purpose">Deterministic resource hygiene</p>
+<p class="soon"><strong>Coming soon.</strong> On main at the pinned commit: go/internal/kit/clean/fsx. Not there yet: go/cmd/hm-clean, plugins/kit-clean.</p><p class="links"><a class="arrow-link" href="skill-hm-clean/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/docs/adr/0008-resource-hygiene.md">Source: docs/adr/0008-resource-hygiene.md</a></p></div>
+<div class="entry-snip"></div>
+</article>
+<article class="entry" id="skill-hivemill-setup" data-item-id="skill:hivemill/setup" data-kind="skill" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#install"/></svg><a href="skill-hivemill-setup/">setup</a></h3>
+<p class="purpose">Guided install of Hivemill through its installer script.</p>
+<p class="meta"><span>Plugin: hivemill</span></p><p class="links"><a class="arrow-link" href="skill-hivemill-setup/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/plugins/hivemill/skills/setup/SKILL.md">Source: plugins/hivemill/skills/setup/SKILL.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>/plugin marketplace add volekerb/hivemill
+/plugin install hivemill@hivemill</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for setup">Copy</button></div></div>
+</article>
+<article class="entry" id="skill-hivemill-spend-token-spend-audit" data-item-id="skill:hivemill-spend/token-spend-audit" data-kind="skill" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#spend"/></svg><a href="skill-hivemill-spend-token-spend-audit/">token-spend-audit</a></h3>
+<p class="purpose">Find out where Claude tokens go on this machine (cost by model, the most expensive agent sessions, oversized contexts, turns that do nothing, cache writes, Fable use) and what to change.</p>
+<p class="meta"><span>Commands: hm-spend</span> <span>Plugin: hivemill-spend</span></p><p class="links"><a class="arrow-link" href="skill-hivemill-spend-token-spend-audit/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/plugins/kit-spend/skills/token-spend-audit/SKILL.md">Source: plugins/kit-spend/skills/token-spend-audit/SKILL.md</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/plugins/kit-spend</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for token-spend-audit">Copy</button></div></div>
+</article>
+</section>
+<section class="group" id="plugins" data-group="plugin"><div class="group-head"><h2>Plugins</h2><p>A plugin bundles skills and the helper commands they call.</p></div>
+<article class="entry" id="plugin-hivemill" data-item-id="plugin:hivemill" data-kind="plugin" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#catalog"/></svg><a href="plugin-hivemill/">hivemill</a></h3>
+<p class="purpose">Guided install of Hivemill over a deterministic, CI-tested installer.</p>
+<p class="links"><a class="arrow-link" href="plugin-hivemill/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/tree/53b6a6f92a3f88983593a92caa765419764323c3/plugins/hivemill">Source: plugins/hivemill</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>/plugin marketplace add volekerb/hivemill
+/plugin install hivemill@hivemill</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for hivemill">Copy</button></div></div>
+</article>
+<article class="entry" id="plugin-hivemill-spend" data-item-id="plugin:hivemill-spend" data-kind="plugin" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#spend"/></svg><a href="plugin-hivemill-spend/">hivemill-spend</a></h3>
+<p class="purpose">See where your Claude tokens go across agents, and cap worker context while the boss keeps the big picture.</p>
+<p class="meta"><span>Commands: hm-spend</span></p><p class="links"><a class="arrow-link" href="plugin-hivemill-spend/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/tree/53b6a6f92a3f88983593a92caa765419764323c3/plugins/kit-spend">Source: plugins/kit-spend</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/plugins/kit-spend</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for hivemill-spend">Copy</button></div></div>
+</article>
+</section>
+<section class="group" id="dashboard" data-group="dashboard"><div class="group-head"><h2>Dashboard</h2><p>The dashboard that runs inside herdr-core. The screenshots are real.</p></div>
+<article class="entry" id="dashboard-herdr-core" data-item-id="dashboard:herdr-core" data-kind="dashboard" data-reveal>
+<div class="entry-main"><h3><svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#dashboard"/></svg><a href="dashboard-herdr-core/">herdr-core</a></h3>
+<p class="purpose">If you use the Herdr app (the desktop client of herdr-core), Hivemill can live inside it:</p>
+<p class="links"><a class="arrow-link" href="dashboard-herdr-core/">Details<svg class="i" aria-hidden="true"><use href="../assets/icons/icons.svg#arrow"/></svg></a> <a href="https://github.com/volekerb/hivemill/tree/53b6a6f92a3f88983593a92caa765419764323c3/plugins/hivemill/herdr-app">Source: plugins/hivemill/herdr-app</a></p></div>
+<div class="entry-snip"><div class="snip"><pre class="code"><code>python3 plugins/hivemill/scripts/install.py --herdr-app --dry-run   # show the plan
+python3 plugins/hivemill/scripts/install.py --herdr-app --yes</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for herdr-core">Copy</button></div></div>
+<div class="shots"><figure class="fig"><picture><source type="image/webp" srcset="../assets/img/panel-factory-480.webp 480w, ../assets/img/panel-factory-960.webp 960w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../assets/img/panel-factory-960.png" srcset="../assets/img/panel-factory-480.png 480w, ../assets/img/panel-factory-960.png 960w" sizes="(min-width: 52rem) 34rem, 100vw" width="960" height="302" alt="herdr-core dashboard, factory panel" loading="lazy" decoding="async"></picture></figure><figure class="fig"><picture><source type="image/webp" srcset="../assets/img/panel-resources-480.webp 480w, ../assets/img/panel-resources-960.webp 960w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../assets/img/panel-resources-960.png" srcset="../assets/img/panel-resources-480.png 480w, ../assets/img/panel-resources-960.png 960w" sizes="(min-width: 52rem) 34rem, 100vw" width="960" height="761" alt="herdr-core dashboard, resources panel" loading="lazy" decoding="async"></picture></figure><figure class="fig"><picture><source type="image/webp" srcset="../assets/img/panel-active-goals-480.webp 480w, ../assets/img/panel-active-goals-960.webp 960w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../assets/img/panel-active-goals-960.png" srcset="../assets/img/panel-active-goals-480.png 480w, ../assets/img/panel-active-goals-960.png 960w" sizes="(min-width: 52rem) 34rem, 100vw" width="960" height="636" alt="herdr-core dashboard, active goals panel" loading="lazy" decoding="async"></picture></figure><figure class="fig"><picture><source type="image/webp" srcset="../assets/img/panel-budget-480.webp 480w, ../assets/img/panel-budget-960.webp 960w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../assets/img/panel-budget-960.png" srcset="../assets/img/panel-budget-480.png 480w, ../assets/img/panel-budget-960.png 960w" sizes="(min-width: 52rem) 34rem, 100vw" width="960" height="823" alt="herdr-core dashboard, budget panel" loading="lazy" decoding="async"></picture></figure><figure class="fig"><picture><source type="image/webp" srcset="../assets/img/herdr-panel-480.webp 480w, ../assets/img/herdr-panel-960.webp 960w, ../assets/img/herdr-panel-1600.webp 1600w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../assets/img/herdr-panel-1600.png" srcset="../assets/img/herdr-panel-480.png 480w, ../assets/img/herdr-panel-960.png 960w, ../assets/img/herdr-panel-1600.png 1600w" sizes="(min-width: 52rem) 34rem, 100vw" width="1600" height="900" alt="herdr-core dashboard" loading="lazy" decoding="async"></picture></figure></div></article>
+</section>
+</div>
 </main>
-<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
+<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Built from volekerb/hivemill at 53b6a6f92a3f (2026-11-17).</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
 </body>
 </html>

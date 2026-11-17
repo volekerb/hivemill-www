@@ -1,1 +1,23 @@
-{}
+{
+ "dashboard:herdr-core": {"icon": "dashboard", "media": ["panel-factory", "panel-resources", "panel-active-goals", "panel-budget", "herdr-panel"]},
+ "plugin:hivemill": {"icon": "catalog"},
+ "plugin:hivemill-spend": {"icon": "spend"},
+ "role:boss": {"icon": "boss"},
+ "role:cleaner": {"icon": "cleaner"},
+ "role:coder": {"icon": "coder"},
+ "role:director": {"icon": "director"},
+ "role:evaluator": {"icon": "evaluator"},
+ "role:judge": {"icon": "merge"},
+ "role:lead": {"icon": "team"},
+ "role:pm": {"icon": "ask"},
+ "role:qa": {"icon": "qa"},
+ "role:researcher": {"icon": "researcher"},
+ "role:retro": {"icon": "retro"},
+ "role:reviewer": {"icon": "review"},
+ "role:scout": {"icon": "scout"},
+ "role:staff-engineer": {"icon": "staff"},
+ "skill:hivemill-spend/agent-context-limits": {"icon": "limits"},
+ "skill:hivemill-spend/token-spend-audit": {"icon": "spend"},
+ "skill:hivemill/setup": {"icon": "install"},
+ "skill:hm-clean": {"icon": "clean"}
+}
