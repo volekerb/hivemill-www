@@ -34,6 +34,13 @@ PANELS = {
     "herdr-budget": ("docs/film/herdr/panel-budget.png", "crop=616:528:652:131 of the 1920x960 1x app window"),
     "herdr-factory": ("docs/film/herdr/panel-factory.png", "crop=617:194:1280:131 of the 1920x960 1x app window"),
 }
+# catalog dashboard item (T-1809): real panels, two widths only
+CATALOG_PANELS = {
+    "panel-factory": "docs/film/herdr/panel-factory.png",
+    "panel-resources": "docs/film/herdr/panel-resources.png",
+    "panel-active-goals": "docs/film/herdr/panel-active-goals.png",
+    "panel-budget": "docs/film/herdr/panel-budget.png",
+}
 WEBP = {"quality": 86, "method": 6}
 
 
@@ -88,6 +95,18 @@ def main():
             fn = f"{name}-1x.{ext}"
             img.save(OUT / fn, **opts)
             entries.append({"file": fn, "width": img.width, "height": img.height, **meta})
+    for name, path in CATALOG_PANELS.items():
+        data = fetch(path, args.src_dir)
+        img = Image.open(io.BytesIO(data)).convert("RGB")
+        for w in (480, 960):
+            h = round(img.height * w / img.width)
+            small = img.resize((w, h), Image.LANCZOS)
+            for ext, opts in (("webp", {"quality": 78, "method": 6}), ("png", {"optimize": True})):
+                fn = f"{name}-{w}.{ext}"
+                small.save(OUT / fn, **opts)
+                entries.append({"file": fn, "width": w, "height": h, "source_repo": REPO,
+                                "source_sha": SHA, "source_path": path,
+                                "source_sha256": hashlib.sha256(data).hexdigest(), "crop": None})
     (OUT / "SOURCES.json").write_text(json.dumps(entries, indent=1) + "\n")
     print(f"wrote {len(entries)} files")
     return 0

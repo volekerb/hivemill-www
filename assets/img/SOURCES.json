@@ -670,5 +670,165 @@
   "crop": "crop=617:194:1280:131 of the 1920x960 1x app window",
   "kind": "native-1x-crop",
   "density": 1
+ },
+ {
+  "file": "panel-factory-480.webp",
+  "width": 480,
+  "height": 151,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-factory.png",
+  "source_sha256": "51b6f8fd26fdb020e1f67a3974ce2622b8070787e76724c82fecdc9807bd8df9",
+  "crop": null
+ },
+ {
+  "file": "panel-factory-480.png",
+  "width": 480,
+  "height": 151,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-factory.png",
+  "source_sha256": "51b6f8fd26fdb020e1f67a3974ce2622b8070787e76724c82fecdc9807bd8df9",
+  "crop": null
+ },
+ {
+  "file": "panel-factory-960.webp",
+  "width": 960,
+  "height": 302,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-factory.png",
+  "source_sha256": "51b6f8fd26fdb020e1f67a3974ce2622b8070787e76724c82fecdc9807bd8df9",
+  "crop": null
+ },
+ {
+  "file": "panel-factory-960.png",
+  "width": 960,
+  "height": 302,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-factory.png",
+  "source_sha256": "51b6f8fd26fdb020e1f67a3974ce2622b8070787e76724c82fecdc9807bd8df9",
+  "crop": null
+ },
+ {
+  "file": "panel-resources-480.webp",
+  "width": 480,
+  "height": 380,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-resources.png",
+  "source_sha256": "64d6c5a7de4477e15cb414ff48274d9aad10d11db51ef664032c8b516b68c42a",
+  "crop": null
+ },
+ {
+  "file": "panel-resources-480.png",
+  "width": 480,
+  "height": 380,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-resources.png",
+  "source_sha256": "64d6c5a7de4477e15cb414ff48274d9aad10d11db51ef664032c8b516b68c42a",
+  "crop": null
+ },
+ {
+  "file": "panel-resources-960.webp",
+  "width": 960,
+  "height": 761,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-resources.png",
+  "source_sha256": "64d6c5a7de4477e15cb414ff48274d9aad10d11db51ef664032c8b516b68c42a",
+  "crop": null
+ },
+ {
+  "file": "panel-resources-960.png",
+  "width": 960,
+  "height": 761,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-resources.png",
+  "source_sha256": "64d6c5a7de4477e15cb414ff48274d9aad10d11db51ef664032c8b516b68c42a",
+  "crop": null
+ },
+ {
+  "file": "panel-active-goals-480.webp",
+  "width": 480,
+  "height": 318,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-active-goals.png",
+  "source_sha256": "2cb769d120d993188563370a8d69240432af7c48f59af3e8222b4eef41846ccf",
+  "crop": null
+ },
+ {
+  "file": "panel-active-goals-480.png",
+  "width": 480,
+  "height": 318,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-active-goals.png",
+  "source_sha256": "2cb769d120d993188563370a8d69240432af7c48f59af3e8222b4eef41846ccf",
+  "crop": null
+ },
+ {
+  "file": "panel-active-goals-960.webp",
+  "width": 960,
+  "height": 636,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-active-goals.png",
+  "source_sha256": "2cb769d120d993188563370a8d69240432af7c48f59af3e8222b4eef41846ccf",
+  "crop": null
+ },
+ {
+  "file": "panel-active-goals-960.png",
+  "width": 960,
+  "height": 636,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-active-goals.png",
+  "source_sha256": "2cb769d120d993188563370a8d69240432af7c48f59af3e8222b4eef41846ccf",
+  "crop": null
+ },
+ {
+  "file": "panel-budget-480.webp",
+  "width": 480,
+  "height": 411,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-budget.png",
+  "source_sha256": "f480c854605239f8ee5225248bf6d257893323e62d11aaf87eb04c0d14949327",
+  "crop": null
+ },
+ {
+  "file": "panel-budget-480.png",
+  "width": 480,
+  "height": 411,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-budget.png",
+  "source_sha256": "f480c854605239f8ee5225248bf6d257893323e62d11aaf87eb04c0d14949327",
+  "crop": null
+ },
+ {
+  "file": "panel-budget-960.webp",
+  "width": 960,
+  "height": 823,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-budget.png",
+  "source_sha256": "f480c854605239f8ee5225248bf6d257893323e62d11aaf87eb04c0d14949327",
+  "crop": null
+ },
+ {
+  "file": "panel-budget-960.png",
+  "width": 960,
+  "height": 823,
+  "source_repo": "volekerb/hivemill",
+  "source_sha": "53b6a6f92a3f88983593a92caa765419764323c3",
+  "source_path": "docs/film/herdr/panel-budget.png",
+  "source_sha256": "f480c854605239f8ee5225248bf6d257893323e62d11aaf87eb04c0d14949327",
+  "crop": null
  }
 ]
