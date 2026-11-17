@@ -3,41 +3,51 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Install – Hivemill</title>
+<title>Install | Hivemill</title>
+<meta name="description" content="Install Hivemill on Debian or Ubuntu with three lines inside a logged-in Claude Code.">
+<meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../assets/site.css">
+<link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/v2.css">
+<script type="module" src="../../assets/js/motion.js"></script>
+<script type="module" src="../../assets/js/copy.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site">
-<a href="../../"><img src="../../assets/wordmark-light.svg" alt="Hivemill" width="144" height="32"></a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
 <nav aria-label="Site">
 <a href="../../">Home</a>
+<a href="../../catalog/">Catalog</a>
+<a href="../../work-with-me/">Work with me</a>
 <a href="./" aria-current="page">Install</a>
-<a href="../ask-to-merge/">Ask to merge</a>
-<a href="../watch/">Where you watch</a>
-<a href="../../factories/what/">What a factory is</a>
-<a href="../../factories/who-merges/">Who merges</a>
+<a href="https://github.com/volekerb/hivemill">GitHub</a>
 </nav>
-</header>
+</div></header>
 <main id="main">
-<section>
+<section class="page-head wrap">
 <h1>On Debian or Ubuntu, three lines install it.</h1>
-<pre><code>/plugin marketplace add volekerb/hivemill
-/plugin install hivemill
-/hivemill:setup</code></pre>
-<div class="text">
-<p>A Mac can watch through the Herdr desktop app. The factory does not run on macOS yet.</p>
-<p>Cursor is optional.</p>
-<p>The software is MIT.</p>
-<p>Manual steps are in the repository: <a href="https://github.com/volekerb/hivemill/blob/main/docs/SETUP.md">docs/SETUP.md</a>.</p>
+<p class="lede">Run them inside a logged-in Claude Code.</p>
+<ol class="steps" aria-label="Install steps">
+<li class="step" data-reveal><div><h3>Add the marketplace</h3><p>Tells Claude Code where the Hivemill plugin lives.</p><div class="cmd"><code id="c1">/plugin marketplace add volekerb/hivemill</code><button class="copy" type="button" data-copy="c1" aria-label="Copy: Add the marketplace" hidden>Copy</button></div></div></li>
+<li class="step" data-reveal><div><h3>Install the plugin</h3><div class="cmd"><code id="c2">/plugin install hivemill</code><button class="copy" type="button" data-copy="c2" aria-label="Copy: Install the plugin" hidden>Copy</button></div></div></li>
+<li class="step" data-reveal><div><h3>Run setup</h3><p>Brings up the factory on this machine.</p><div class="cmd"><code id="c3">/hivemill:setup</code><button class="copy" type="button" data-copy="c3" aria-label="Copy: Run setup" hidden>Copy</button></div></div></li>
+<li class="step" data-reveal><div><h3>Check it</h3><p>From a checkout of the repository, a read-only report shows what the installer sees. <code>--dry-run</code> prints the plan and changes nothing.</p><div class="cmd"><code id="c4">plugins/hivemill/scripts/install --check</code><button class="copy" type="button" data-copy="c4" aria-label="Copy: Check it" hidden>Copy</button></div></div></li>
+</ol>
+</section>
+<section class="band wrap">
+<div class="measure" data-reveal>
+<h2>Before you start</h2>
+<ul class="notes">
+<li><strong>Debian or Ubuntu.</strong> Mac can watch, factory not on macOS yet: a Mac can watch through the Herdr desktop app, but the factory does not run on macOS yet.</li>
+<li><strong>A logged-in Claude Code.</strong> Agents of the default org are Claude Code sessions.</li>
+<li><strong>Cursor is optional.</strong> It is only for the cursor org and the daily retro agent.</li>
+<li><strong>Manual steps</strong> are in the repository: <a href="https://github.com/volekerb/hivemill/blob/main/docs/SETUP.md">docs/SETUP.md</a>. The software is MIT.</li>
+</ul>
+<p class="back"><a class="arrow-link" href="../../"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#arrow"/></svg>Back to Home</a></p>
 </div>
-<figure>
-<img src="../../assets/home-light.png" alt="The Hivemill web UI overview" width="2560" height="2829" loading="lazy">
-<figcaption>The web UI overview, from the demo seed. Fictional data.</figcaption>
-</figure>
 </section>
 </main>
-<footer>Hivemill is MIT licensed.</footer>
+<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
 </body>
 </html>
