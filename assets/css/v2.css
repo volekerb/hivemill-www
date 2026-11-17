@@ -155,6 +155,11 @@ pre.code code { font: inherit; }
 @keyframes travel { 0% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; transform: translateX(calc(100% * 0 + 11rem)); } }
 @keyframes drift { from { transform: translateY(40px) scale(.97); opacity: .4; } to { transform: none; opacity: 1; } }
 
+/* work-with-me: non-link ruled rows */
+.rows div.row { display: flex; flex-wrap: wrap; gap: .25rem var(--s-4); align-items: baseline; padding: var(--s-3) 0; border-bottom: 1px solid var(--line); }
+.rows div.row strong { font: 700 var(--t-4)/1.2 var(--font-display); min-width: 12rem; }
+.rows div.row span { color: var(--ink-2); flex: 1 1 18rem; }
+
 /* install steps: numbered cards with a copy button (T-1810, additions only) */
 .steps { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: grid; gap: var(--s-4); counter-reset: step; }
 .step { position: relative; display: grid; grid-template-columns: 3rem 1fr; gap: var(--s-3) var(--s-4); padding: var(--s-4); background: var(--surface); border: 1px solid var(--line); border-radius: .75rem; box-shadow: var(--shadow); counter-increment: step; }
