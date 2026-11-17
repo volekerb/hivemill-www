@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>herdr-core | Hivemill</title>
+<meta name="description" content="If you use the Herdr app (the desktop client of herdr-core), Hivemill can live inside it:">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/v2.css">
+<link rel="stylesheet" href="../../assets/css/catalog.css">
+<script type="module" src="../../assets/js/motion.js"></script>
+<script type="module" src="../../assets/js/catalog.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
+<nav aria-label="Site">
+<a href="../../">Home</a>
+<a href="../../catalog/">Catalog</a>
+<a href="../../work-with-me/">Work with me</a>
+<a href="../../guides/install/">Install</a>
+<a href="https://github.com/volekerb/hivemill">GitHub</a>
+</nav>
+</div></header>
+<main id="main">
+<p class="sr" role="status" aria-live="polite" id="live"></p>
+<section class="page-head wrap detail-head">
+<p class="crumb"><a href="../">Catalog</a> / Dashboard</p>
+<h1><svg class="i i--lg" aria-hidden="true"><use href="../../assets/icons/icons.svg#dashboard"/></svg>herdr-core</h1>
+<p class="lede">If you use the Herdr app (the desktop client of herdr-core), Hivemill can live inside it:</p>
+</section>
+<div class="wrap detail">
+<section><h2>Install</h2><div class="snip"><pre class="code"><code>python3 plugins/hivemill/scripts/install.py --herdr-app --dry-run   # show the plan
+python3 plugins/hivemill/scripts/install.py --herdr-app --yes</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for herdr-core">Copy</button></div></section>
+<section><h2>How it looks</h2><div class="shots"><figure class="fig"><picture><source type="image/webp" srcset="../../assets/img/panel-factory-480.webp 480w, ../../assets/img/panel-factory-960.webp 960w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../../assets/img/panel-factory-960.png" srcset="../../assets/img/panel-factory-480.png 480w, ../../assets/img/panel-factory-960.png 960w" sizes="(min-width: 52rem) 34rem, 100vw" width="960" height="302" alt="herdr-core dashboard, factory panel" loading="lazy" decoding="async"></picture></figure><figure class="fig"><picture><source type="image/webp" srcset="../../assets/img/panel-resources-480.webp 480w, ../../assets/img/panel-resources-960.webp 960w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../../assets/img/panel-resources-960.png" srcset="../../assets/img/panel-resources-480.png 480w, ../../assets/img/panel-resources-960.png 960w" sizes="(min-width: 52rem) 34rem, 100vw" width="960" height="761" alt="herdr-core dashboard, resources panel" loading="lazy" decoding="async"></picture></figure><figure class="fig"><picture><source type="image/webp" srcset="../../assets/img/panel-active-goals-480.webp 480w, ../../assets/img/panel-active-goals-960.webp 960w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../../assets/img/panel-active-goals-960.png" srcset="../../assets/img/panel-active-goals-480.png 480w, ../../assets/img/panel-active-goals-960.png 960w" sizes="(min-width: 52rem) 34rem, 100vw" width="960" height="636" alt="herdr-core dashboard, active goals panel" loading="lazy" decoding="async"></picture></figure><figure class="fig"><picture><source type="image/webp" srcset="../../assets/img/panel-budget-480.webp 480w, ../../assets/img/panel-budget-960.webp 960w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../../assets/img/panel-budget-960.png" srcset="../../assets/img/panel-budget-480.png 480w, ../../assets/img/panel-budget-960.png 960w" sizes="(min-width: 52rem) 34rem, 100vw" width="960" height="823" alt="herdr-core dashboard, budget panel" loading="lazy" decoding="async"></picture></figure><figure class="fig"><picture><source type="image/webp" srcset="../../assets/img/herdr-panel-480.webp 480w, ../../assets/img/herdr-panel-960.webp 960w, ../../assets/img/herdr-panel-1600.webp 1600w" sizes="(min-width: 52rem) 34rem, 100vw"><img src="../../assets/img/herdr-panel-1600.png" srcset="../../assets/img/herdr-panel-480.png 480w, ../../assets/img/herdr-panel-960.png 960w, ../../assets/img/herdr-panel-1600.png 1600w" sizes="(min-width: 52rem) 34rem, 100vw" width="1600" height="900" alt="herdr-core dashboard" loading="lazy" decoding="async"></picture></figure></div></section>
+<section><h2>Overview</h2><div class="doc">If you use the [Herdr app](https://herdr.dev) (the desktop client of herdr-core), Hivemill can live inside it:
+
+- **A status bar** across the bottom of the window. It shows each project&#x27;s open PRs and last merge, one segment per team (`Lenovo factory 3 live`: the machine&#x27;s name, its role tag, the live agents), what needs you, Claude weekly usage, cost per merged PR and today&#x27;s spend, and on the right the most urgent alert. Clicking it opens the dashboard.
+- **A dashboard tab** with these cards:
+  - **Alerts:** only what needs a person.
+  - **Budget &amp; cost:** the Claude 7-day and 5-hour usage against the factory&#x27;s caps, and the Cursor plan state. It also shows spend per day and per org, cost per merged PR (median, p90 and average, with time to merge), and the most expensive tasks.
+  - **Resources:** every machine of your setup. That is this computer and each `hc machine ls` machine, with each team&#x27;s machine tagged `factory`; if no `hc` link reaches a team, its row comes from that team&#x27;s API. For each machine: reachable or not, OS and CPUs, uptime, agents running there, and memory, load, disk and swap. Below that: the spawn gate and merges per day. A machine that cannot be reached, or one low on disk (under 20 GB or 5% free), raises an alert.
+  - **One card per project:** its open PRs, oldest first, and its recent merges.
+  - **One card per team**, titled by the team&#x27;s machine (see [Machines and teams](#machines-and-teams)): its boss and lanes, what needs you, active goals, agents, and shipped work.
+
+![The dashboard&#x27;s factory card: lanes and tiles](film/herdr/panel-factory.png)
+![The status bar across the bottom of the app](film/herdr/panel-status-bar.png)
+
+The app&#x27;s own agents list already shows every agent on this machine, so the dashboard does not repeat it. An agent appears on the dashboard only in an alert, for example when its context window is almost full.
+
+New alerts also appear as notifications. Clicking one opens the dashboard.
+
+This is a Herdr app mod: JavaScript the app runs natively. It is not a web view. The factory&#x27;s web UI ([web-ui.md](web-ui.md)) stays as it is, and the dashboard reads the same JSON API (`/api/home.json`, `resources.json`, `throughput.json`, `tokens.json`).</div></section>
+<section><h2>Install</h2><div class="doc">Run this on the machine where you use the Herdr app. That can be your laptop rather than the factory&#x27;s box. Open the app once first.
+
+```sh
+python3 plugins/hivemill/scripts/install.py --herdr-app --dry-run   # show the plan
+python3 plugins/hivemill/scripts/install.py --herdr-app --yes
+```
+
+It changes three things and nothing else:
+
+| Path | What |
+|---|---|
+| `~/.config/herdr-app/mods/hivemill/` | the mod (`main.js`, `data.js`, `mod.json`), copied from `plugins/hivemill/herdr-app/mods/hivemill/` |
+| `~/.config/herdr-app/layouts/hivemill.json` | a copy of the app&#x27;s `main` layout, with its status bar replaced by the Hivemill bar |
+| `~/.config/hivemill/dashboard.json` | the settings below. A re-run changes only the fields you pass and keeps your projects. |
+
+When the app is running, the installer then switches it to the Hivemill layout. `--no-sidebar` hides the sidebar in that layout, for a machine kept for screenshots; a re-run keeps whichever you pass. `ctrl-shift-l` switches layouts, so you can go back to Herdr&#x27;s own at any time. To uninstall, delete the first two paths.
+
+A re-run updates the mod and regenerates `hivemill.json` from the app&#x27;s current `main` layout. Make your own layout changes in a separate copy.
+
+Exit codes:
+
+- `0`: done, with a last line of `RESULT PASS herdr-app ...`.
+- `2`: a usage error.
+- `3`: the Herdr app is not set up on this machine.
+- `1`: a step failed, with a last line of `RESULT FAIL step=herdr-app-&lt;step&gt;`.</div></section>
+<section><h2>Where the factory is</h2><div class="doc">This is the single-team setup, with one factory. For more than one team, see [Machines and teams](#machines-and-teams).
+
+The factory&#x27;s web UI listens on `127.0.0.1:8765` of the factory&#x27;s box by default ([SETUP.md](SETUP.md)). Pick one of these:
+
+| Your setup | Flags |
+|---|---|
+| The app runs on the factory&#x27;s box | none: the default `http://127.0.0.1:8765` |
+| The factory&#x27;s box is an `hc` machine in the app (`hc machine ls`) | `--factory-machine NAME`. The dashboard asks the factory from that machine, so no port is opened. |
+| The factory&#x27;s UI is reachable on your network | `--factory-url http://HOST:8765` |
+
+`--factory-web-url URL` is the address your browser uses for the dashboard&#x27;s &quot;Open&quot; links. It defaults to the factory URL when no machine is set.</div></section>
+<section><h2>Claude, Cursor or both</h2><div class="doc">A factory has two orgs, `claude` and `cursor` ([`scout/orgs.py`](../scout/orgs.py)). Most installs run one of them. With `&quot;orgs&quot;: &quot;auto&quot;` (the default), the dashboard shows an org only while it has a live boss or director, goals or agents:
+
+- Claude budget meters and Claude usage alerts appear only when `claude` is shown.
+- The Cursor plan row and the &quot;Cursor tasks unpriced&quot; note appear only when `cursor` is shown.
+- Lanes, needs, goals and agents are filtered to the orgs shown. Lanes appear only when more than one org is shown.
+
+To fix the choice, pass `--orgs claude`, `--orgs cursor` or `--orgs claude,cursor`. `--orgs auto` goes back to automatic.</div></section>
+<section><h2>Settings: `~/.config/hivemill/dashboard.json`</h2><div class="doc">The dashboard rereads this file every minute. A file it cannot parse shows up as an alert. The full example is in [`plugins/hivemill/herdr-app/dashboard.example.json`](../plugins/hivemill/herdr-app/dashboard.example.json).
+
+| Key | Default | Meaning |
+|---|---|---|
+| `teams` | `[]` | one entry per Hivemill team: `{&quot;machine&quot;: NAME or null, &quot;url&quot;: ..., &quot;web_url&quot;: ..., &quot;label&quot;: ...}`. Absent or empty: `factory` is the only team. See [Machines and teams](#machines-and-teams). |
+| `factory.url` | `http://127.0.0.1:8765` | the factory web UI, as seen from `factory.machine`, or from here when no machine is set |
+| `factory.machine` | `null` | an `hc machine ls` name. When set, the requests run there (`curl` on that machine). |
+| `factory.web_url` | `null` | the address the Open links use |
+| `orgs` | `&quot;auto&quot;` | `&quot;auto&quot;` or a list: `[&quot;claude&quot;]`, `[&quot;cursor&quot;]`, `[&quot;claude&quot;, &quot;cursor&quot;]` |
+| `projects` | `[]` | projects whose agents run in this app; see below |
+| `usage_file` | `null` | optional JSON with `five_hour_pct`, `seven_day_pct` and `updated_at`, for this machine&#x27;s own Claude usage. Without it, the factory&#x27;s figures are used. |
+| `alerts.context_below_pct` | `10` | alert when an agent&#x27;s context left is under this |
+| `alerts.stall_minutes` | `60` | alert when a project has ready PRs and has not merged for this long |
+| `alerts.usage_warn_pct` / `usage_danger_pct` | `80` / `90` | Claude weekly usage alerts |
+| `alerts.factory_down_minutes` | `5` | alert when the factory has been unreachable this long |
+| `machines` | `&quot;auto&quot;` | the machines in Resources: `&quot;auto&quot;` (this computer and every `hc machine ls` machine), or a list of names with `&quot;local&quot;` for this computer |
+| `machine_labels` | `{}` | display names, by `hc machine ls` name and `&quot;local&quot;` for this computer, e.g. `{&quot;local&quot;: &quot;MacBook&quot;, &quot;buildbox&quot;: &quot;Lenovo&quot;, &quot;macmini&quot;: &quot;Mac mini&quot;}` |
+| `context_pattern` | `ctx (\d+)% left` | a regex with one group: the context percent, as your agents&#x27; status line prints it |
+
+### Projects
+
+A project is a repository whose agents run in this Herdr app (for example a team you run beside the factory):
+
+```json
+{ &quot;name&quot;: &quot;My app&quot;, &quot;github&quot;: &quot;OWNER/NAME&quot;, &quot;space&quot;: &quot;my-app&quot;,
+  &quot;wait_patterns&quot;: [{ &quot;match&quot;: &quot;NEEDS REVIEW&quot;, &quot;clear&quot;: &quot;REVIEWED&quot;, &quot;label&quot;: &quot;waits for a review&quot;, &quot;after_min&quot;: 15 }] }
+```
+
+- `github`: the repository whose open and recently merged PRs get a card and a segment in the bar. This uses `gh`, logged in on this machine.
+- `space`: the Herdr space (id or name) that holds the project&#x27;s agents. Its tab is where the dashboard tab opens first. A space on an `hc` machine is written `machine/space`, for example `macmini/teamb` (the space named or with id `teamb` on machine `macmini`). An unprefixed name means this computer&#x27;s space; if this computer has none of that name and exactly one remote space has, that one is used.
+- `boss`: for a team that runs no Hivemill API. The exact name of the project&#x27;s boss terminal, or `{&quot;match&quot;: &quot;&lt;regex&gt;&quot;}`. See [Machines and teams](#machines-and-teams).
+- `wait_patterns`: text on an agent&#x27;s screen that means it is waiting on a person. An idle agent showing `match` (and not `clear`) for `after_min` minutes raises an alert, for example a team that asks for a shared resource and waits for a go.
+
+### Demo mode: screens for docs and films
+
+To take pictures you can publish, add this to the settings:
+
+```json
+&quot;demo&quot;: { &quot;enabled&quot;: true, &quot;hide&quot;: [&quot;a private word&quot;, &quot;another&quot;], &quot;alerts&quot;: true }
+```
+
+- Task, goal and PR numbers are removed from every title. Agent names lose their task suffix, and the bar says &quot;This computer&quot; instead of a machine name.
+- Any row whose text contains a `hide` word is left out: needs, goals, tasks, agents, shipped work, alerts and projects. `&quot;swap&quot;` in `hide` also leaves out the swap meter.
+- `&quot;alerts&quot;: false` shows no alerts at all.
+
+Turn it off again after the pictures. The Herdr app draws only while its window is on screen, so bring it forward before `herdr-app shot`.
+
+### Machines and teams
+
+Machines are shown by their plain machine name: `machine_labels[key]`, where the key is `local` for this computer or the `hc machine ls` name; without a label, the hc name, and &quot;This computer&quot; for local. The word &quot;factory&quot; is never part of a generated name. The role stays a separate tag (a chip on the machine row and on the team&#x27;s card, `factory 3 live` in the bar).
+
+**More than one team.** Each machine can run its own team with its own boss. Two ways to show a team:
+
+1. A Hivemill team (its web UI/API answers): list it in `teams`. Each entry gets its own card titled by the machine&#x27;s label, with its boss and director per lane, needs-you, goals, agents and shipped work. Cost and budget figures, the spawn gate and merges per day are shown per team once there are two or more. Each team has its own error and down-since state: one team down never blanks another, and raises one `&lt;label&gt; unreachable` alert after `alerts.factory_down_minutes`. Each team is polled in its own fetch.
+2. A team with no Hivemill API: set `projects[].boss` on the project that lives in that team&#x27;s space. The dashboard shows the boss&#x27;s status (from the app&#x27;s agents list, which includes remote machines&#x27; agents) and the project&#x27;s other agents in that space as lanes, on that project&#x27;s machine.
+
+```json
+&quot;teams&quot;: [{ &quot;machine&quot;: &quot;buildbox&quot; }],
+&quot;projects&quot;: [{ &quot;name&quot;: &quot;Team B&quot;, &quot;space&quot;: &quot;macmini/teamb&quot;, &quot;boss&quot;: &quot;teamb-boss&quot;,
+  &quot;wait_patterns&quot;: [{ &quot;match&quot;: &quot;SIM GO&quot;, &quot;label&quot;: &quot;waits for SIM GO&quot;, &quot;after_min&quot;: 15 }] }],
+&quot;machine_labels&quot;: { &quot;local&quot;: &quot;MacBook&quot;, &quot;buildbox&quot;: &quot;Lenovo&quot;, &quot;macmini&quot;: &quot;Mac mini&quot; }
+```
+
+The old single `factory` object keeps working and is read as `teams: [factory]`. A team reached by a network URL with no hc machine has no machine name to show: give it a `label` (else it is called &quot;Server&quot;).
+
+**Remote project spaces.** The dashboard reads the screens of this computer&#x27;s agents and of the agents in every space a project names, on an `hc` machine too (`macmini/teamb`). Wait patterns, expired logins and low context then raise alerts for those agents, written with the machine&#x27;s label: `Mac mini · teamb-w1 waits for SIM GO · 16m`. Agents in other remote spaces are not read. A remote agent&#x27;s address starts with its machine (`macmini/...`), and the screen read is `hc read &lt;that address&gt;`, which goes to that machine. If the project&#x27;s machine is offline or the space is missing, the project is skipped quietly.
+
+**Demo mode and names.** In demo mode the only machine names shown are `machine_labels` values (shown as is), or &quot;This computer&quot; and &quot;Machine N&quot; when there is none. A label that contains a `hide` word falls back to that generic name. No hc name, `machine/` space prefix, branch or task id is shown.</div></section>
+<section><h2>How it works</h2><div class="doc">- One copy of the mod at a time does the polling, using a short lease in the app&#x27;s shared state. Every copy reads the same data. The bar and the tab never poll twice.
+- The polling intervals: factory home every 45 s, resources every minute, cost every 5 minutes, project PRs every 2 minutes, and agent screens every 2 minutes (`hc read &lt;t&gt; --lines 30`: this computer&#x27;s agents and the agents of project spaces).
+- The mod&#x27;s data layer has node tests: `node --test plugins/hivemill/herdr-app/tests/*.test.mjs` (with node 24 the files must be named; a directory does not work). `tests/test_herdr_app_dashboard.py` runs them when node is installed.
+- `herdr-app check ~/.config/herdr-app/mods/hivemill` loads the mod once and reports errors.</div></section>
+<section><h2>Relation to G-031</h2><div class="doc">G-031 SC8 asks how herdr-core hosts a view. T-1392 and T-1420 found that `hc` has no view slot, and that is still true: herdr-core draws nothing. There is a slot one layer up, in the Herdr app. Its mods (`~/.config/herdr-app/mods/&lt;name&gt;/`) are panels, tabs and bars that the app draws, and they read `hc` through the app&#x27;s `hc()` and `exec()`. This dashboard is one working example of that slot. Whether it settles SC8 is for that goal&#x27;s own spec to decide.</div></section>
+<section><h2>Limits</h2><div class="doc">- The factory reports today&#x27;s spend, spend per day, cost per merged PR, merges per day and the most expensive tasks for all orgs together. When only one org is shown, the Budget card says so.
+- The Cursor CLI reports no token counts, so Cursor work is unpriced (see [web-ui.md](web-ui.md)).
+- The status bar replaces Herdr&#x27;s own status bar in the Hivemill layout. It keeps where you are, the branch and the commands hint, but not the agent count, which the agents list shows.</div></section>
+<section><h2>Combines with</h2><ul class="plain"><li><a href="../plugin-hivemill/">hivemill</a> Guided install of Hivemill over a deterministic, CI-tested installer.</li></ul></section>
+<section><h2>Full file</h2><p class="meta"><span>plugins/hivemill/herdr-app</span></p><div class="snip"><pre class="code" id="full"><code># Hivemill dashboard in the Herdr app
+
+If you use the [Herdr app](https://herdr.dev) (the desktop client of herdr-core), Hivemill can live inside it:
+
+- **A status bar** across the bottom of the window. It shows each project&#x27;s open PRs and last merge, one segment per team (`Lenovo factory 3 live`: the machine&#x27;s name, its role tag, the live agents), what needs you, Claude weekly usage, cost per merged PR and today&#x27;s spend, and on the right the most urgent alert. Clicking it opens the dashboard.
+- **A dashboard tab** with these cards:
+  - **Alerts:** only what needs a person.
+  - **Budget &amp; cost:** the Claude 7-day and 5-hour usage against the factory&#x27;s caps, and the Cursor plan state. It also shows spend per day and per org, cost per merged PR (median, p90 and average, with time to merge), and the most expensive tasks.
+  - **Resources:** every machine of your setup. That is this computer and each `hc machine ls` machine, with each team&#x27;s machine tagged `factory`; if no `hc` link reaches a team, its row comes from that team&#x27;s API. For each machine: reachable or not, OS and CPUs, uptime, agents running there, and memory, load, disk and swap. Below that: the spawn gate and merges per day. A machine that cannot be reached, or one low on disk (under 20 GB or 5% free), raises an alert.
+  - **One card per project:** its open PRs, oldest first, and its recent merges.
+  - **One card per team**, titled by the team&#x27;s machine (see [Machines and teams](#machines-and-teams)): its boss and lanes, what needs you, active goals, agents, and shipped work.
+
+![The dashboard&#x27;s factory card: lanes and tiles](film/herdr/panel-factory.png)
+![The status bar across the bottom of the app](film/herdr/panel-status-bar.png)
+
+The app&#x27;s own agents list already shows every agent on this machine, so the dashboard does not repeat it. An agent appears on the dashboard only in an alert, for example when its context window is almost full.
+
+New alerts also appear as notifications. Clicking one opens the dashboard.
+
+This is a Herdr app mod: JavaScript the app runs natively. It is not a web view. The factory&#x27;s web UI ([web-ui.md](web-ui.md)) stays as it is, and the dashboard reads the same JSON API (`/api/home.json`, `resources.json`, `throughput.json`, `tokens.json`).
+
+## Install
+
+Run this on the machine where you use the Herdr app. That can be your laptop rather than the factory&#x27;s box. Open the app once first.
+
+```sh
+python3 plugins/hivemill/scripts/install.py --herdr-app --dry-run   # show the plan
+python3 plugins/hivemill/scripts/install.py --herdr-app --yes
+```
+
+It changes three things and nothing else:
+
+| Path | What |
+|---|---|
+| `~/.config/herdr-app/mods/hivemill/` | the mod (`main.js`, `data.js`, `mod.json`), copied from `plugins/hivemill/herdr-app/mods/hivemill/` |
+| `~/.config/herdr-app/layouts/hivemill.json` | a copy of the app&#x27;s `main` layout, with its status bar replaced by the Hivemill bar |
+| `~/.config/hivemill/dashboard.json` | the settings below. A re-run changes only the fields you pass and keeps your projects. |
+
+When the app is running, the installer then switches it to the Hivemill layout. `--no-sidebar` hides the sidebar in that layout, for a machine kept for screenshots; a re-run keeps whichever you pass. `ctrl-shift-l` switches layouts, so you can go back to Herdr&#x27;s own at any time. To uninstall, delete the first two paths.
+
+A re-run updates the mod and regenerates `hivemill.json` from the app&#x27;s current `main` layout. Make your own layout changes in a separate copy.
+
+Exit codes:
+
+- `0`: done, with a last line of `RESULT PASS herdr-app ...`.
+- `2`: a usage error.
+- `3`: the Herdr app is not set up on this machine.
+- `1`: a step failed, with a last line of `RESULT FAIL step=herdr-app-&lt;step&gt;`.
+
+## Where the factory is
+
+This is the single-team setup, with one factory. For more than one team, see [Machines and teams](#machines-and-teams).
+
+The factory&#x27;s web UI listens on `127.0.0.1:8765` of the factory&#x27;s box by default ([SETUP.md](SETUP.md)). Pick one of these:
+
+| Your setup | Flags |
+|---|---|
+| The app runs on the factory&#x27;s box | none: the default `http://127.0.0.1:8765` |
+| The factory&#x27;s box is an `hc` machine in the app (`hc machine ls`) | `--factory-machine NAME`. The dashboard asks the factory from that machine, so no port is opened. |
+| The factory&#x27;s UI is reachable on your network | `--factory-url http://HOST:8765` |
+
+`--factory-web-url URL` is the address your browser uses for the dashboard&#x27;s &quot;Open&quot; links. It defaults to the factory URL when no machine is set.
+
+## Claude, Cursor or both
+
+A factory has two orgs, `claude` and `cursor` ([`scout/orgs.py`](../scout/orgs.py)). Most installs run one of them. With `&quot;orgs&quot;: &quot;auto&quot;` (the default), the dashboard shows an org only while it has a live boss or director, goals or agents:
+
+- Claude budget meters and Claude usage alerts appear only when `claude` is shown.
+- The Cursor plan row and the &quot;Cursor tasks unpriced&quot; note appear only when `cursor` is shown.
+- Lanes, needs, goals and agents are filtered to the orgs shown. Lanes appear only when more than one org is shown.
+
+To fix the choice, pass `--orgs claude`, `--orgs cursor` or `--orgs claude,cursor`. `--orgs auto` goes back to automatic.
+
+## Settings: `~/.config/hivemill/dashboard.json`
+
+The dashboard rereads this file every minute. A file it cannot parse shows up as an alert. The full example is in [`plugins/hivemill/herdr-app/dashboard.example.json`](../plugins/hivemill/herdr-app/dashboard.example.json).
+
+| Key | Default | Meaning |
+|---|---|---|
+| `teams` | `[]` | one entry per Hivemill team: `{&quot;machine&quot;: NAME or null, &quot;url&quot;: ..., &quot;web_url&quot;: ..., &quot;label&quot;: ...}`. Absent or empty: `factory` is the only team. See [Machines and teams](#machines-and-teams). |
+| `factory.url` | `http://127.0.0.1:8765` | the factory web UI, as seen from `factory.machine`, or from here when no machine is set |
+| `factory.machine` | `null` | an `hc machine ls` name. When set, the requests run there (`curl` on that machine). |
+| `factory.web_url` | `null` | the address the Open links use |
+| `orgs` | `&quot;auto&quot;` | `&quot;auto&quot;` or a list: `[&quot;claude&quot;]`, `[&quot;cursor&quot;]`, `[&quot;claude&quot;, &quot;cursor&quot;]` |
+| `projects` | `[]` | projects whose agents run in this app; see below |
+| `usage_file` | `null` | optional JSON with `five_hour_pct`, `seven_day_pct` and `updated_at`, for this machine&#x27;s own Claude usage. Without it, the factory&#x27;s figures are used. |
+| `alerts.context_below_pct` | `10` | alert when an agent&#x27;s context left is under this |
+| `alerts.stall_minutes` | `60` | alert when a project has ready PRs and has not merged for this long |
+| `alerts.usage_warn_pct` / `usage_danger_pct` | `80` / `90` | Claude weekly usage alerts |
+| `alerts.factory_down_minutes` | `5` | alert when the factory has been unreachable this long |
+| `machines` | `&quot;auto&quot;` | the machines in Resources: `&quot;auto&quot;` (this computer and every `hc machine ls` machine), or a list of names with `&quot;local&quot;` for this computer |
+| `machine_labels` | `{}` | display names, by `hc machine ls` name and `&quot;local&quot;` for this computer, e.g. `{&quot;local&quot;: &quot;MacBook&quot;, &quot;buildbox&quot;: &quot;Lenovo&quot;, &quot;macmini&quot;: &quot;Mac mini&quot;}` |
+| `context_pattern` | `ctx (\d+)% left` | a regex with one group: the context percent, as your agents&#x27; status line prints it |
+
+### Projects
+
+A project is a repository whose agents run in this Herdr app (for example a team you run beside the factory):
+
+```json
+{ &quot;name&quot;: &quot;My app&quot;, &quot;github&quot;: &quot;OWNER/NAME&quot;, &quot;space&quot;: &quot;my-app&quot;,
+  &quot;wait_patterns&quot;: [{ &quot;match&quot;: &quot;NEEDS REVIEW&quot;, &quot;clear&quot;: &quot;REVIEWED&quot;, &quot;label&quot;: &quot;waits for a review&quot;, &quot;after_min&quot;: 15 }] }
+```
+
+- `github`: the repository whose open and recently merged PRs get a card and a segment in the bar. This uses `gh`, logged in on this machine.
+- `space`: the Herdr space (id or name) that holds the project&#x27;s agents. Its tab is where the dashboard tab opens first. A space on an `hc` machine is written `machine/space`, for example `macmini/teamb` (the space named or with id `teamb` on machine `macmini`). An unprefixed name means this computer&#x27;s space; if this computer has none of that name and exactly one remote space has, that one is used.
+- `boss`: for a team that runs no Hivemill API. The exact name of the project&#x27;s boss terminal, or `{&quot;match&quot;: &quot;&lt;regex&gt;&quot;}`. See [Machines and teams](#machines-and-teams).
+- `wait_patterns`: text on an agent&#x27;s screen that means it is waiting on a person. An idle agent showing `match` (and not `clear`) for `after_min` minutes raises an alert, for example a team that asks for a shared resource and waits for a go.
+
+### Demo mode: screens for docs and films
+
+To take pictures you can publish, add this to the settings:
+
+```json
+&quot;demo&quot;: { &quot;enabled&quot;: true, &quot;hide&quot;: [&quot;a private word&quot;, &quot;another&quot;], &quot;alerts&quot;: true }
+```
+
+- Task, goal and PR numbers are removed from every title. Agent names lose their task suffix, and the bar says &quot;This computer&quot; instead of a machine name.
+- Any row whose text contains a `hide` word is left out: needs, goals, tasks, agents, shipped work, alerts and projects. `&quot;swap&quot;` in `hide` also leaves out the swap meter.
+- `&quot;alerts&quot;: false` shows no alerts at all.
+
+Turn it off again after the pictures. The Herdr app draws only while its window is on screen, so bring it forward before `herdr-app shot`.
+
+### Machines and teams
+
+Machines are shown by their plain machine name: `machine_labels[key]`, where the key is `local` for this computer or the `hc machine ls` name; without a label, the hc name, and &quot;This computer&quot; for local. The word &quot;factory&quot; is never part of a generated name. The role stays a separate tag (a chip on the machine row and on the team&#x27;s card, `factory 3 live` in the bar).
+
+**More than one team.** Each machine can run its own team with its own boss. Two ways to show a team:
+
+1. A Hivemill team (its web UI/API answers): list it in `teams`. Each entry gets its own card titled by the machine&#x27;s label, with its boss and director per lane, needs-you, goals, agents and shipped work. Cost and budget figures, the spawn gate and merges per day are shown per team once there are two or more. Each team has its own error and down-since state: one team down never blanks another, and raises one `&lt;label&gt; unreachable` alert after `alerts.factory_down_minutes`. Each team is polled in its own fetch.
+2. A team with no Hivemill API: set `projects[].boss` on the project that lives in that team&#x27;s space. The dashboard shows the boss&#x27;s status (from the app&#x27;s agents list, which includes remote machines&#x27; agents) and the project&#x27;s other agents in that space as lanes, on that project&#x27;s machine.
+
+```json
+&quot;teams&quot;: [{ &quot;machine&quot;: &quot;buildbox&quot; }],
+&quot;projects&quot;: [{ &quot;name&quot;: &quot;Team B&quot;, &quot;space&quot;: &quot;macmini/teamb&quot;, &quot;boss&quot;: &quot;teamb-boss&quot;,
+  &quot;wait_patterns&quot;: [{ &quot;match&quot;: &quot;SIM GO&quot;, &quot;label&quot;: &quot;waits for SIM GO&quot;, &quot;after_min&quot;: 15 }] }],
+&quot;machine_labels&quot;: { &quot;local&quot;: &quot;MacBook&quot;, &quot;buildbox&quot;: &quot;Lenovo&quot;, &quot;macmini&quot;: &quot;Mac mini&quot; }
+```
+
+The old single `factory` object keeps working and is read as `teams: [factory]`. A team reached by a network URL with no hc machine has no machine name to show: give it a `label` (else it is called &quot;Server&quot;).
+
+**Remote project spaces.** The dashboard reads the screens of this computer&#x27;s agents and of the agents in every space a project names, on an `hc` machine too (`macmini/teamb`). Wait patterns, expired logins and low context then raise alerts for those agents, written with the machine&#x27;s label: `Mac mini · teamb-w1 waits for SIM GO · 16m`. Agents in other remote spaces are not read. A remote agent&#x27;s address starts with its machine (`macmini/...`), and the screen read is `hc read &lt;that address&gt;`, which goes to that machine. If the project&#x27;s machine is offline or the space is missing, the project is skipped quietly.
+
+**Demo mode and names.** In demo mode the only machine names shown are `machine_labels` values (shown as is), or &quot;This computer&quot; and &quot;Machine N&quot; when there is none. A label that contains a `hide` word falls back to that generic name. No hc name, `machine/` space prefix, branch or task id is shown.
+
+## How it works
+
+- One copy of the mod at a time does the polling, using a short lease in the app&#x27;s shared state. Every copy reads the same data. The bar and the tab never poll twice.
+- The polling intervals: factory home every 45 s, resources every minute, cost every 5 minutes, project PRs every 2 minutes, and agent screens every 2 minutes (`hc read &lt;t&gt; --lines 30`: this computer&#x27;s agents and the agents of project spaces).
+- The mod&#x27;s data layer has node tests: `node --test plugins/hivemill/herdr-app/tests/*.test.mjs` (with node 24 the files must be named; a directory does not work). `tests/test_herdr_app_dashboard.py` runs them when node is installed.
+- `herdr-app check ~/.config/herdr-app/mods/hivemill` loads the mod once and reports errors.
+
+## Relation to G-031
+
+G-031 SC8 asks how herdr-core hosts a view. T-1392 and T-1420 found that `hc` has no view slot, and that is still true: herdr-core draws nothing. There is a slot one layer up, in the Herdr app. Its mods (`~/.config/herdr-app/mods/&lt;name&gt;/`) are panels, tabs and bars that the app draws, and they read `hc` through the app&#x27;s `hc()` and `exec()`. This dashboard is one working example of that slot. Whether it settles SC8 is for that goal&#x27;s own spec to decide.
+
+## Limits
+
+- The factory reports today&#x27;s spend, spend per day, cost per merged PR, merges per day and the most expensive tasks for all orgs together. When only one org is shown, the Budget card says so.
+- The Cursor CLI reports no token counts, so Cursor work is unpriced (see [web-ui.md](web-ui.md)).
+- The status bar replaces Herdr&#x27;s own status bar in the Hivemill layout. It keeps where you are, the branch and the commands hint, but not the agent count, which the agents list shows.</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy full file for herdr-core">Copy full file</button></div></section>
+<p class="links"><a class="arrow-link" href="https://github.com/volekerb/hivemill/tree/53b6a6f92a3f88983593a92caa765419764323c3/plugins/hivemill/herdr-app">Source on GitHub</a></p>
+</div>
+</main>
+<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Built from volekerb/hivemill at 53b6a6f92a3f (2026-11-17).</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
+</body>
+</html>
