@@ -20,6 +20,12 @@ jobs:
       - name: Unit tests
         run: python3 -m unittest tests.test_catalog -v
 
+      - name: Install Pillow (image tests)
+        run: python3 -m pip install -r requirements-dev.txt
+
+      - name: Image tests
+        run: python3 -m unittest discover -s tests -p test_images.py -v
+
       - name: Check out hivemill at the pinned sha
         run: |
           sha="$(python3 -c 'import json; print(json.load(open("catalog/catalog.json"))["source"]["sha"])')"

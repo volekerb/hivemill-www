@@ -121,6 +121,17 @@ footer.site .wrap { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); 
 .fig img { width: 100%; }
 .fig figcaption { padding: .75rem 1rem; font-size: var(--t-1); color: var(--ink-2); border-top: 1px solid var(--line); }
 .hero .fig { margin-top: var(--s-6); }
+/* product screenshots: one frame (window bar, radius, hairline, shadow). Col crops and native-1x app crops stay
+   at their pixel width so 1x/2x files render sharp; they never scale up past it. */
+.fig--shot::before { content: ""; display: block; height: 1.75rem; border-bottom: 1px solid var(--line);
+  background: radial-gradient(circle, var(--line) 0 3.5px, transparent 4px) 0.75rem 50% / 1.125rem 100% no-repeat,
+              radial-gradient(circle, var(--line) 0 3.5px, transparent 4px) 1.875rem 50% / 1.125rem 100% no-repeat,
+              radial-gradient(circle, var(--line) 0 3.5px, transparent 4px) 3rem 50% / 1.125rem 100% no-repeat,
+              var(--bg); }
+.fig--shot img { display: block; height: auto; }
+.fig--col { max-width: 30rem; }
+.fig--app { max-width: 38.5rem; }
+.fig--app img { width: auto; max-width: 100%; }
 
 /* content */
 .cols { display: grid; gap: var(--s-5) var(--s-6); grid-template-columns: 1fr; align-items: center; }
