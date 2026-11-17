@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hivemill</title>
+<meta name="description" content="A self-hosted software factory of AI coding agents.">
+<link rel="icon" href="assets/wordmark-light.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+<a href="./"><img src="assets/wordmark-light.svg" alt="Hivemill" width="144" height="32"></a>
+<nav aria-label="Site">
+<a href="./" aria-current="page">Home</a>
+<a href="guides/install/">Install</a>
+<a href="guides/ask-to-merge/">Ask to merge</a>
+<a href="guides/watch/">Where you watch</a>
+<a href="factories/what/">What a factory is</a>
+<a href="factories/who-merges/">Who merges</a>
+</nav>
+</header>
+<main id="main">
+
+<section>
+<h1>Hivemill is a self-hosted software factory of AI coding agents.</h1>
+<figure>
+<img src="assets/home-light.png" alt="The Hivemill web UI overview" width="2560" height="2829">
+<figcaption>The web UI overview, from the demo seed. Fictional data.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2>One change takes five steps.</h2>
+<ol class="steps">
+<li>You ask. You tell the boss what you want. It becomes a goal.</li>
+<li>A team forms. A director staffs a lead, and the lead orders the tasks.</li>
+<li>A coder opens a pull request. It cannot merge.</li>
+<li>A reviewer and QA check it. The reviewer reads the diff. QA runs the tests.</li>
+<li>A judge merges when both pass. A failure goes back with findings.</li>
+</ol>
+<figure>
+<img src="assets/tasks-light.png" alt="The Hivemill tasks page with status and pull request" width="2560" height="1872" loading="lazy">
+<figcaption>Tasks on the demo seed, with status and a pull request. Fictional data.</figcaption>
+</figure>
+<p class="more"><a href="guides/ask-to-merge/">Ask to merge</a></p>
+</section>
+
+<section>
+<h2>The factory runs on Debian or Ubuntu.</h2>
+<div class="text">
+<p>A Mac can watch through the Herdr desktop app. The factory does not run on macOS yet.</p>
+<p>Cursor is optional.</p>
+</div>
+<figure>
+<img src="assets/agents-light.png" alt="The Hivemill agents page" width="2560" height="3074" loading="lazy">
+<figcaption>Agents on the demo seed. Claude is the default runtime. Cursor is optional. Fictional data.</figcaption>
+</figure>
+<p class="more"><a href="guides/watch/">Where you watch</a></p>
+</section>
+
+<section>
+<h2>Install it inside a logged-in Claude Code.</h2>
+<pre><code>/plugin marketplace add volekerb/hivemill
+/plugin install hivemill
+/hivemill:setup</code></pre>
+<div class="text">
+<p>The software is MIT.</p>
+</div>
+<p class="more"><a href="guides/install/">Install</a></p>
+<p class="more"><a href="https://github.com/volekerb/hivemill">Hivemill on GitHub</a></p>
+</section>
+
+</main>
+<footer>Hivemill is MIT licensed.</footer>
+</body>
+</html>
