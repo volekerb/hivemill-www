@@ -36,5 +36,5 @@ p.more + p.more { margin-top: 1rem; }
 footer { max-width: 72rem; margin: 0 auto; padding: 8rem 1.5rem 4rem; color: var(--soft); font-size: .9375rem; }
 footer a { color: var(--soft); }
 @media (max-width: 640px) { body { font-size: 1.0625rem; } section { padding-top: 5rem; } section:first-child { padding-top: 3.5rem; } }
-figure img[src$="panel-factory.png"] { width: auto; max-width: 100%; }
+figure picture img { width: auto; max-width: 100%; } /* col and native-1x crops keep their pixel width */
 ol.steps b { color: inherit; font-weight: inherit; }
