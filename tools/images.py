@@ -42,7 +42,7 @@ CATALOG_PANELS = {
     "panel-active-goals": ("docs/film/herdr/panel-active-goals.png", (480, 960)),
     "panel-budget": ("docs/film/herdr/panel-budget.png", (480, 960)),
 }
-WEBP = {"quality": 86, "method": 6}
+WEBP = {"lossless": True, "method": 6}
 
 
 def fetch(path, src_dir):
@@ -102,7 +102,7 @@ def main():
         for w in widths:
             h = round(img.height * w / img.width)
             small = img.resize((w, h), Image.LANCZOS)
-            for ext, opts in (("webp", {"quality": 78, "method": 6}), ("png", {"optimize": True})):
+            for ext, opts in (("webp", {"lossless": True, "method": 6}), ("png", {"optimize": True})):
                 fn = f"{name}-{w}.{ext}"
                 small.save(OUT / fn, **opts)
                 entries.append({"file": fn, "width": w, "height": h, "source_repo": REPO,

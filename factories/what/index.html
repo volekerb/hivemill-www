@@ -1,37 +1,113 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What a software factory is – Hivemill</title>
-<link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../assets/site.css">
-</head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site">
-<a href="../../"><img src="../../assets/wordmark-light.svg" alt="Hivemill" width="144" height="32"></a>
-<nav aria-label="Site">
-<a href="../../">Home</a>
-<a href="../../guides/install/">Install</a>
-<a href="../../guides/ask-to-merge/">Ask to merge</a>
-<a href="../../guides/watch/">Where you watch</a>
-<a href="./" aria-current="page">What a factory is</a>
-<a href="../who-merges/">Who merges</a>
-</nav>
-</header>
-<main id="main">
-<section>
-<h1>A software factory is a fixed line for one change: ask, build, check, merge.</h1>
-<div class="text">
-<p>You say what you want once. The factory keeps the goal, the tasks and the verdicts. The coder writes the change. A reviewer and QA check it. A judge merges it. It runs on your Debian or Ubuntu machine.</p>
-</div>
-<figure class="fig--shot fig--col">
-<picture><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/goals-dark-1x.webp 1x, ../../assets/img/goals-dark-2x.webp 2x" width="480" height="540"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="../../assets/img/goals-dark-1x.png 1x, ../../assets/img/goals-dark-2x.png 2x" width="480" height="540"><source type="image/webp" srcset="../../assets/img/goals-light-1x.webp 1x, ../../assets/img/goals-light-2x.webp 2x" width="480" height="540"><img src="../../assets/img/goals-light-1x.png" srcset="../../assets/img/goals-light-1x.png 1x, ../../assets/img/goals-light-2x.png 2x" width="480" height="540" alt="The Hivemill goals page" loading="lazy" decoding="async"></picture>
-<figcaption>Goals on the demo seed. Fictional data.</figcaption>
-</figure>
-</section>
-</main>
-<footer>Hivemill is MIT licensed.</footer>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>What is a software factory? | Hivemill</title>
+    <meta name="description" content="See how a self-hosted team of coding agents turns a goal into independently checked pull requests.">
+    <link rel="canonical" href="https://hivemill.dev/factories/what/">
+    <link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
+    <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/v2.css">
+    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111804">
+    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111804">
+    <script type="module" src="/assets/js/motion.js"></script>
+    <script type="module" src="/assets/js/factory.js?v=2026111804"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026111804"></script>
+  </head>
+  <body class="editorial ed-what">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
+        <nav aria-label="Site">
+          <a href="/">Home</a>
+          <a href="/catalog/">Catalog</a>
+          <a href="/work-with-me/">Work with me</a>
+          <a href="/guides/install/">Install</a>
+          <a href="https://github.com/volekerb/hivemill">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="ed-feature">
+        <div class="wrap ed-feature-grid">
+          <div class="ed-title">
+            <p class="ed-kicker">Factory model / Overview</p>
+            <h1>What is a<br>software factory?</h1>
+            <p class="ed-lead">A fixed team of agents takes a goal through implementation, checks and a merge decision on a machine you own.</p>
+            <a class="ed-link" href="#the-line">Follow the production line<span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="ed-feature-art" role="img" aria-label="Mechanical cutaway of linked workstations carrying amber pieces along a production line"></div>
+        </div>
+      </section>
+      <section class="wrap ed-overview" id="the-line">
+        <div class="ed-overview-head" data-reveal>
+          <p class="ed-kicker">How the work moves</p>
+          <h2>One goal.<br>Several owners.</h2>
+          <p>You describe the outcome to the boss. The factory keeps the plan and the work on a separate Linux host, so you can close your laptop and return to the record.</p>
+        </div>
+        <ol class="ed-verbs">
+          <li>
+            <strong>Ask</strong>
+            <span>The boss records the intent and success criteria. A director and lead organize a team and turn the goal into tasks.</span>
+          </li>
+          <li>
+            <strong>Build</strong>
+            <span>A coder opens a pull request from a dedicated worktree and branch.</span>
+          </li>
+          <li>
+            <strong>Check</strong>
+            <span>One agent reviews the diff. A different agent runs tests against the acceptance criteria.</span>
+          </li>
+          <li>
+            <strong>Merge</strong>
+            <span>The judge checks the verdicts and the pull request. Failed checks return the change to the coder with findings.</span>
+          </li>
+        </ol>
+      </section>
+      <section class="ed-ledger">
+        <div class="wrap ed-proof-pair">
+          <div>
+            <p class="ed-kicker">The factory record</p>
+            <h2>Come back to<br>the evidence.</h2>
+            <p>Goals, tasks, messages and verdicts are stored in SQLite with an append-only event log. Open a goal to read its intent, trace its tasks and see the criteria they address.</p>
+            <a class="ed-link" href="/demo/goals.html">Browse the demo goals<span aria-hidden="true">↗</span></a>
+          </div>
+          <figure class="ed-shot">
+            <picture>
+              <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/goals-current-dark-1x.webp 1x, ../../assets/img/goals-current-dark-2x.webp 2x" width="520" height="320">
+              <source media="(prefers-color-scheme: dark)" type="image/png" srcset="../../assets/img/goals-current-dark-1x.png 1x, ../../assets/img/goals-current-dark-2x.png 2x" width="520" height="320">
+              <source type="image/webp" srcset="../../assets/img/goals-current-light-1x.webp 1x, ../../assets/img/goals-current-light-2x.webp 2x" width="520" height="320">
+              <img src="../../assets/img/goals-current-light-1x.png" srcset="../../assets/img/goals-current-light-1x.png 1x, ../../assets/img/goals-current-light-2x.png 2x" width="520" height="320" alt="Goals and progress in the Hivemill web UI" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>Goals register · Fictional demo data.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="wrap ed-overview ed-runtime">
+        <div data-reveal>
+          <p class="ed-kicker">Deployment</p>
+          <h2>Your host.<br>Your workflow.</h2>
+        </div>
+        <div>
+          <p>The factory runs on Debian or Ubuntu. Its default organization uses Claude Code, with a separate Cursor organization available on the same machine. Each runtime uses its model provider.</p>
+          <p>The catalog contains the roles, skills and plugins you can adapt for your own workflow.</p>
+          <a class="ed-link" href="/catalog/">Browse the catalog<span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
+        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Operator guide</span><strong>From ask to merge</strong><span class="ed-next-desc">Follow a fictional goal through the actual demo.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/guides/install/"><span class="ed-kicker">Getting started</span><strong>Bring up the factory</strong><span class="ed-next-desc">Run three commands inside Claude Code.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </main>
+    <footer class="site">
+      <div class="wrap">
+        <a class="brand" href="/">Hivemill</a>
+        <p>Open source. Self-hosted. MIT licensed.</p>
+        <a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </footer>
+  </body>
 </html>

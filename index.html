@@ -4,14 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hivemill: a self-hosted software factory of AI coding agents</title>
-<meta name="description" content="Hivemill is a self-hosted software factory of AI coding agents. You ask. A team builds, reviews and merges.">
+<meta name="description" content="Let AI agents work on your infrastructure while your laptop stays free. Hivemill coordinates implementation, independent review, QA and a judge-controlled merge gate.">
 <meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Hivemill. Close your laptop. Keep work moving.">
+<meta property="og:description" content="A software factory of AI agents. Built around independent review, real tests and a judge-controlled merge gate.">
+<meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<link rel="canonical" href="https://hivemill.dev/">
 <link rel="icon" href="assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/brand/hive-mill.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/v2.css">
+<link rel="stylesheet" href="assets/css/factory.css?v=2026111805">
 <script type="module" src="assets/js/motion.js"></script>
+<script type="module" src="assets/js/factory.js?v=2026111804"></script>
 </head>
-<body>
+<body class="factory-home">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap">
 <a class="brand" href="./"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
@@ -24,80 +31,102 @@
 </nav>
 </div></header>
 <main id="main">
-<section class="hero wrap">
-<h1>Ask for a change. Get a reviewed pull request.</h1>
-<p class="lede">Hivemill is a self-hosted software factory of AI coding agents. You tell the boss what you want. A team builds it, checks it and merges it.</p>
-<div class="actions"><a class="btn btn--quiet" href="guides/install/"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#install"/></svg>Install it</a><a class="btn btn--quiet" href="catalog/"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#catalog"/></svg>Browse the catalog</a><a class="btn btn--primary" href="work-with-me/"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#work"/></svg>Work with me</a></div>
-<ol class="pipe" aria-label="How one change flows">
-<li><span class="hex"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#ask"/></svg></span><span class="glow"></span><strong>Ask</strong>You tell the boss. It becomes a goal.</li>
-<li><span class="hex"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#team"/></svg></span><span class="glow"></span><strong>Team</strong>A director staffs a lead. The lead orders the tasks.</li>
-<li><span class="hex"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#pr"/></svg></span><span class="glow"></span><strong>Pull request</strong>A coder opens it. A coder cannot merge.</li>
-<li><span class="hex"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#review"/></svg></span><span class="glow"></span><strong>Review and QA</strong>One reads the diff. One runs the tests.</li>
-<li><span class="hex"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#merge"/></svg></span><span class="glow"></span><strong>Judge merges</strong>When both pass. A failure goes back with findings.</li>
-</ol>
-<figure class="fig fig--shot"><picture><source media="(max-width: 40rem) and (prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/tasks-dark-1x.webp 1x, assets/img/tasks-dark-2x.webp 2x" width="480" height="540"><source media="(max-width: 40rem) and (prefers-color-scheme: dark)" type="image/png" srcset="assets/img/tasks-dark-1x.png 1x, assets/img/tasks-dark-2x.png 2x" width="480" height="540"><source media="(max-width: 40rem)" type="image/webp" srcset="assets/img/tasks-light-1x.webp 1x, assets/img/tasks-light-2x.webp 2x" width="480" height="540"><source media="(max-width: 40rem)" type="image/png" srcset="assets/img/tasks-light-1x.png 1x, assets/img/tasks-light-2x.png 2x" width="480" height="540"><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/tasks-wide-dark-1x.webp 1x, assets/img/tasks-wide-dark-2x.webp 2x" width="1024" height="560"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="assets/img/tasks-wide-dark-1x.png 1x, assets/img/tasks-wide-dark-2x.png 2x" width="1024" height="560"><source type="image/webp" srcset="assets/img/tasks-wide-light-1x.webp 1x, assets/img/tasks-wide-light-2x.webp 2x" width="1024" height="560"><img src="assets/img/tasks-wide-light-1x.png" srcset="assets/img/tasks-wide-light-1x.png 1x, assets/img/tasks-wide-light-2x.png 2x" width="1024" height="560" alt="The Hivemill tasks page: each task with its status, goal and agent" fetchpriority="high"></picture><figcaption>Tasks on the demo seed, each with a status and a pull request.</figcaption></figure>
+<section class="factory-hero">
+  <div class="wrap hero-content">
+    <p class="eyebrow">Your own AI software factory</p>
+    <h1>Close your laptop.<br>Keep work moving.</h1>
+    <p class="hero-description">AI agents build, test and review on your infrastructure. Your laptop stays free, even when you close it.</p>
+    <div class="actions"><a class="btn btn--primary" href="demo/">Explore the demo <span aria-hidden="true">↗</span></a><a class="text-link" href="film/">Watch the factory <span aria-hidden="true">↗</span></a></div>
+  </div>
+  <div class="hero-machine" role="img" aria-label="A sculptural honeycomb production line: small amber workpieces move through precision workstations."><video class="hero-film" muted loop playsinline preload="none" poster="assets/brand/hive-mill.webp" aria-hidden="true" tabindex="-1" data-motion-src="assets/brand/hive-mill-loop.mp4"></video></div>
+  <button type="button" class="motion-toggle" hidden aria-label="Pause factory animation">Pause motion <span aria-hidden="true">Ⅱ</span></button>
+</section>
+<section class="principles wrap" aria-label="Built into Hivemill">
+  <p><strong>Agents run on your server.</strong><span>Your infrastructure. Your repositories.</span></p>
+  <p><strong>Independently checked.</strong><span>Separate reviewer and QA agents.</span></p>
+  <p><strong>Your laptop stays free.</strong><span>Delegate work. Disconnect. Come back.</span></p>
 </section>
 
-<section class="band wrap">
-<div class="cols">
-<div data-reveal>
-<h2>A factory, not a chat window.</h2>
-<p class="lede">Agents have roles: boss, director, lead, coder, reviewer, QA, judge. Only the judge merges, and only after review and QA agree.</p>
-<p class="back"><a class="arrow-link" href="factories/what/">What a factory is <svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#arrow"/></svg></a></p>
-</div>
-<figure class="fig fig--shot fig--col" data-reveal><picture><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/agents-dark-1x.webp 1x, assets/img/agents-dark-2x.webp 2x" width="480" height="540"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="assets/img/agents-dark-1x.png 1x, assets/img/agents-dark-2x.png 2x" width="480" height="540"><source type="image/webp" srcset="assets/img/agents-light-1x.webp 1x, assets/img/agents-light-2x.webp 2x" width="480" height="540"><img src="assets/img/agents-light-1x.png" srcset="assets/img/agents-light-1x.png 1x, assets/img/agents-light-2x.png 2x" width="480" height="540" alt="The Hivemill agents page, listing the agents by role" loading="lazy" decoding="async"></picture><figcaption>Agents on the demo seed. Claude is the default runtime. Cursor is optional.</figcaption></figure>
-</div>
+<section class="section wrap" id="factory">
+  <div class="section-intro" data-reveal><h2>One request.<br>A whole team behind it.</h2><p>Engineers, product managers and builders set the goal. The factory keeps agents working on a separate machine, through implementation, review and QA.</p></div>
+  <div class="factory-process" data-reveal data-active-stage="0">
+    <div class="process-controls" role="group" aria-label="Explore the factory workflow">
+      <button type="button" class="process-step" data-stage="0" aria-pressed="true"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#ask"/></svg><span>Set the goal</span></button>
+      <button type="button" class="process-step" data-stage="1" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#team"/></svg><span>Build the team</span></button>
+      <button type="button" class="process-step" data-stage="2" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#pr"/></svg><span>Open the PR</span></button>
+      <button type="button" class="process-step" data-stage="3" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#review"/></svg><span>Review + QA</span></button>
+      <button type="button" class="process-step" data-stage="4" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#merge"/></svg><span>Judge the result</span></button>
+    </div>
+    <div class="process-track" aria-hidden="true"><span class="process-parcel"></span></div><div class="process-detail" aria-live="polite"><div><p class="role-label" id="stage-role">You + the boss</p><h3 id="stage-title">Start with a clear outcome.</h3></div><p id="stage-copy">Describe the change and how you will know it works. The boss turns that request into a goal with acceptance criteria.</p></div>
+    <div class="process-footer"><a class="text-link" href="guides/ask-to-merge/">Follow a change from ask to merge <span aria-hidden="true">↗</span></a><button type="button" class="text-button" id="play-flow" hidden>Play the sequence <span aria-hidden="true">→</span></button></div>
+  </div>
+  <noscript><ol class="flow"><li>A director assigns a lead, who plans tasks.</li><li>A coder opens a pull request in its own worktree.</li><li>A reviewer checks the diff. QA runs tests.</li><li>The judge merges only when both pass. Otherwise, findings go back to the coder.</li></ol></noscript>
+
 </section>
 
-<section class="band wrap">
-<div class="cols cols--flip">
-<div data-reveal>
-<h2>One change, five checkpoints.</h2>
-<ol class="flow">
-<li><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#ask"/></svg><span><strong>You ask.</strong> The boss turns it into a goal.</span></li>
-<li><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#team"/></svg><span><strong>A team forms.</strong> A lead orders the tasks.</span></li>
-<li><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#pr"/></svg><span><strong>A coder opens a pull request.</strong></span></li>
-<li><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#qa"/></svg><span><strong>A reviewer and QA check it.</strong></span></li>
-<li><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#merge"/></svg><span><strong>A judge merges</strong> when both pass.</span></li>
-</ol>
-<p class="back"><a class="arrow-link" href="guides/ask-to-merge/">Ask to merge <svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#arrow"/></svg></a></p>
-</div>
-<figure class="fig fig--shot fig--col" data-reveal><picture><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/goals-dark-1x.webp 1x, assets/img/goals-dark-2x.webp 2x" width="480" height="540"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="assets/img/goals-dark-1x.png 1x, assets/img/goals-dark-2x.png 2x" width="480" height="540"><source type="image/webp" srcset="assets/img/goals-light-1x.webp 1x, assets/img/goals-light-2x.webp 2x" width="480" height="540"><img src="assets/img/goals-light-1x.png" srcset="assets/img/goals-light-1x.png 1x, assets/img/goals-light-2x.png 2x" width="480" height="540" alt="The Hivemill goals page with progress per goal" loading="lazy" decoding="async"></picture><figcaption>Goals on the demo seed, with progress per goal.</figcaption></figure>
-</div>
+<section class="product-stage section wrap" id="product" aria-labelledby="product-heading">
+ <div class="product-stage-heading" data-reveal><h2 id="product-heading">The work keeps moving.<br>You keep the full picture.</h2><p>Explore the actual Hivemill interface, with a fictional factory already at work.</p></div>
+ <div class="product-console" data-reveal>
+  <div class="console-toolbar"><div class="console-tabs" role="group" aria-label="Choose a product view">
+   <button type="button" data-product-view="index.html" aria-pressed="true">Overview</button>
+   <button type="button" data-product-view="tasks.html" aria-pressed="false">Tasks</button>
+   <button type="button" data-product-view="resources.html" aria-pressed="false">Resources</button>
+   <button type="button" data-product-view="tokens.html" aria-pressed="false">Cost &amp; usage</button>
+  </div><a class="console-open" href="demo/" id="open-product">Open demo <span aria-hidden="true">↗</span></a></div>
+  <div class="console-viewport" aria-busy="true"><iframe title="Hivemill product preview: Overview. Fictional demo data." data-src="demo/index.html" loading="lazy" tabindex="-1"></iframe><span class="console-loading" role="status">Loading the product view…</span></div>
+  <div class="console-caption"><p id="product-view-caption" aria-live="polite">Goals, active agents and the decisions that need you.</p><button type="button" class="text-button" id="interact-product" hidden>Interact with demo <span aria-hidden="true">↗</span></button></div>
+ </div>
+ <noscript>  <figure class="product-wide"><picture><source media="(max-width: 40rem) and (prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/tasks-dark-1x.webp 1x, assets/img/tasks-dark-2x.webp 2x" width="480" height="540"><source media="(max-width: 40rem) and (prefers-color-scheme: dark)" type="image/png" srcset="assets/img/tasks-dark-1x.png 1x, assets/img/tasks-dark-2x.png 2x" width="480" height="540"><source media="(max-width: 40rem)" type="image/webp" srcset="assets/img/tasks-light-1x.webp 1x, assets/img/tasks-light-2x.webp 2x" width="480" height="540"><source media="(max-width: 40rem)" type="image/png" srcset="assets/img/tasks-light-1x.png 1x, assets/img/tasks-light-2x.png 2x" width="480" height="540"><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/tasks-wide-dark-1x.webp 1x, assets/img/tasks-wide-dark-2x.webp 2x" width="1024" height="560"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="assets/img/tasks-wide-dark-1x.png 1x, assets/img/tasks-wide-dark-2x.png 2x" width="1024" height="560"><source type="image/webp" srcset="assets/img/tasks-wide-light-1x.webp 1x, assets/img/tasks-wide-light-2x.webp 2x" width="1024" height="560"><img src="assets/img/tasks-wide-light-1x.png" srcset="assets/img/tasks-wide-light-1x.png 1x, assets/img/tasks-wide-light-2x.png 2x" width="1024" height="560" alt="The Hivemill tasks page: each task with its status, goal and agent" loading="lazy" decoding="async"></picture><figcaption>The actual Hivemill task view. Fictional demo data.</figcaption></figure><p><a class="text-link" href="demo/">Explore the demo ↗</a></p></noscript>
 </section>
 
-<section class="band wrap">
-<div class="cols">
-<div data-reveal>
-<h2>Take the pieces you need.</h2>
-<p class="lede">The roles, the kit skills and the herdr-core plugin are shared so you can copy them into your own factory.</p>
-<div class="rows"><a class="row" href="catalog/"><strong>Catalog</strong><span>Roles, skills and the plugin, with what each one does.</span></a></div>
-</div>
-<figure class="fig fig--shot fig--col fig--app" data-reveal><picture><source type="image/webp" srcset="assets/img/herdr-budget-1x.webp 1x" width="616" height="528"><img src="assets/img/herdr-budget-1x.png" srcset="assets/img/herdr-budget-1x.png 1x" width="616" height="528" alt="The Herdr app panel: Claude weekly usage, spend and cost per merged pull request" loading="lazy" decoding="async"></picture><figcaption>The Herdr app panel: weekly usage, spend and cost per merged pull request.</figcaption></figure>
-</div>
+<section class="section stories-section" id="use-cases">
+ <div class="wrap">
+  <div class="section-intro" data-reveal><p class="eyebrow">Where it fits</p><h2>Different businesses.<br>The same delivery discipline.</h2><p>Start with a bounded change in a repository your team knows. These are example workflows, not customer case studies.</p></div>
+  <div class="story-tabs" role="group" aria-label="Choose a business example">
+    <button type="button" data-story="saas" aria-pressed="true">SaaS teams</button><button type="button" data-story="agency" aria-pressed="false">Development agencies</button><button type="button" data-story="operations" aria-pressed="false">Internal engineering</button>
+  </div>
+  <article class="business-story" id="story-saas" data-story-panel="saas">
+   <div class="story-art art-saas" role="img" aria-label="A modular hexagonal product receiving a new amber component."></div>
+   <div class="story-body"><p class="buyer">For CTOs and engineering leads</p><h3>The feature your roadmap keeps postponing.</h3><p>A B2B SaaS team needs CSV exports for its reporting screen. The core team is busy with a larger release.</p><blockquote>“Add a filtered CSV export. Respect account permissions and test empty results.”</blockquote><p>Hivemill splits the work, implements the change, and sends the PR through independent review and QA.</p><dl class="story-outcome"><dt>A useful first pilot</dt><dd>One repository, one export workflow, explicit acceptance tests.</dd></dl></div>
+  </article>
+  <article class="business-story" id="story-agency" data-story-panel="agency">
+   <div class="story-art art-agency" role="img" aria-label="Three distinct hexagonal workcells arranged around a shared assembly gantry."></div>
+   <div class="story-body"><p class="buyer">For agency founders and technical directors</p><h3>Keep client maintenance moving.</h3><p>A development agency maintains several customer portals. Small fixes compete with new project work.</p><blockquote>“Fix mobile navigation in this client portal. Preserve keyboard access and test the key pages.”</blockquote><p>Assign a clear goal to the right repository. Follow implementation, review and QA in one place, with the agency retaining client approval.</p><dl class="story-outcome"><dt>A useful first pilot</dt><dd>One client portal and a short, approved maintenance backlog.</dd></dl></div>
+  </article>
+  <article class="business-story" id="story-operations" data-story-panel="operations">
+   <div class="story-art art-operations" role="img" aria-label="A precision sorting machine arranges amber workpieces into orderly rows."></div>
+   <div class="story-body"><p class="buyer">For internal tools and platform leads</p><h3>Give everyday tools the attention they need.</h3><p>A logistics business has an internal operations portal. Staff need clearer validation when importing order files.</p><blockquote>“Flag duplicate orders before import. Show the affected rows and add regression tests.”</blockquote><p>The factory works on the software change. Your engineers define business rules, provide test data and review the result before rollout.</p><dl class="story-outcome"><dt>A useful first pilot</dt><dd>A noncritical internal workflow using synthetic order data.</dd></dl></div>
+  </article>
+  <div class="story-bottom"><p>Best fit: teams with an existing codebase, repeatable tests and an engineer who can own the outcome.</p><a class="text-link" href="work-with-me/">Work with me <span aria-hidden="true">↗</span></a></div>
+ </div>
 </section>
 
-<section class="band wrap">
-<div class="cols cols--flip" data-reveal>
-<div>
-<h2>Want a factory at your company?</h2>
-<p class="lede">I help teams set one up and run it.</p>
-<div class="actions" style="margin-top:var(--s-4)"><a class="btn btn--primary" href="work-with-me/"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#work"/></svg>Work with me</a></div>
-</div>
-<div></div>
-</div>
+<section class="section wrap" id="review">
+ <div class="review-layout">
+  <div class="review-copy" data-reveal><h2>Trust the checks.<br>Inspect the work.</h2><p>The agent that writes a change does not approve its own work. A separate reviewer and QA check the pull request.</p><div class="gate-diagram" aria-label="Both independent checks must pass before the judge can merge"><span>Reviewer<span class="gate-sub">Reads the diff</span></span><b aria-hidden="true">+</b><span>QA<span class="gate-sub">Runs the tests</span></span><b aria-hidden="true">→</b><span class="judge-node">Judge<span class="gate-sub">Controls merge</span></span></div><p class="detail-copy">If either check fails, findings return to the coder. Verdicts and decisions stay visible in the factory.</p><a class="text-link" href="factories/what/">What a factory is <span aria-hidden="true">↗</span></a></div>
+  <figure class="product-portrait" data-reveal><picture><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/agents-current-dark-1x.webp 1x, assets/img/agents-current-dark-2x.webp 2x" width="520" height="320"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="assets/img/agents-current-dark-1x.png 1x, assets/img/agents-current-dark-2x.png 2x" width="520" height="320"><source type="image/webp" srcset="assets/img/agents-current-light-1x.webp 1x, assets/img/agents-current-light-2x.webp 2x" width="520" height="320"><img src="assets/img/agents-current-light-1x.png" srcset="assets/img/agents-current-light-1x.png 1x, assets/img/agents-current-light-2x.png 2x" width="520" height="320" alt="The Hivemill agents page, listing the agents by role" loading="lazy" decoding="async"></picture><figcaption>Distinct roles in the real agent view. Demo data.</figcaption></figure>
+ </div>
 </section>
 
-<section class="band wrap" id="install">
-<div class="measure" data-reveal>
-<h2>Install it inside a logged-in Claude Code.</h2>
-<pre class="code"><code>/plugin marketplace add volekerb/hivemill
+<section class="section wrap" id="visibility">
+ <div class="section-intro" data-reveal><h2>Keep the whole operation in view.</h2><p>Give your team a clear view of capacity, estimated cost and work that needs attention, while agents run on your infrastructure.</p></div>
+ <div class="monitoring-grid" data-reveal><article><span class="monitor-index">Resources</span><h3>Know your capacity.</h3><p>Monitor agent counts, available memory, system load and usage limits. See the checks that govern new agent starts.</p></article><article><span class="monitor-index">Cost</span><h3>See where usage goes.</h3><p>Inspect Claude token use and estimated cost by goal, task and agent. Follow Cursor activity through sessions and agent-hours.</p></article><article><span class="monitor-index">Alerts</span><h3>Know what needs you.</h3><p>Surface blocked work, escalations and pending decisions. The Herdr dashboard brings alerts and budget visibility together.</p></article></div>
+ <p class="demo-entry"><a class="text-link" href="demo/resources.html">Explore resources, cost and alerts in the demo <span aria-hidden="true">↗</span></a></p>
+ <div class="visibility-grid">
+  <article class="visibility-item" data-reveal><div><h3>Follow the goal.</h3><p>See the plan, progress and tasks behind a request.</p></div><figure class="product-portrait"><picture><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/goals-current-dark-1x.webp 1x, assets/img/goals-current-dark-2x.webp 2x" width="520" height="320"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="assets/img/goals-current-dark-1x.png 1x, assets/img/goals-current-dark-2x.png 2x" width="520" height="320"><source type="image/webp" srcset="assets/img/goals-current-light-1x.webp 1x, assets/img/goals-current-light-2x.webp 2x" width="520" height="320"><img src="assets/img/goals-current-light-1x.png" srcset="assets/img/goals-current-light-1x.png 1x, assets/img/goals-current-light-2x.png 2x" width="520" height="320" alt="The Hivemill goals page with progress per goal" loading="lazy" decoding="async"></picture><figcaption>Hivemill goals. Fictional demo data.</figcaption></figure></article>
+  <article class="visibility-item budget-item" data-reveal><div><h3>Understand the cost.</h3><p>Inspect usage, budget and estimated cost in the Herdr desktop dashboard.</p></div><figure class="product-portrait product-budget"><picture><source type="image/webp" srcset="assets/img/herdr-budget-1x.webp 1x" width="616" height="528"><img src="assets/img/herdr-budget-1x.png" srcset="assets/img/herdr-budget-1x.png 1x" width="616" height="528" alt="The Herdr app panel: Claude weekly usage, spend and cost per merged pull request" loading="lazy" decoding="async"></picture><figcaption>The real Herdr dashboard, captured with demo data.</figcaption></figure><p class="metric-note">Cost estimates are based on model list prices, not invoices. Cursor CLI reports activity, not token cost.</p></article>
+ </div>
+</section>
+
+<section class="section wrap" id="install">
+ <div class="start-layout" data-reveal><div><h2>Build your factory.<br>Piece by piece.</h2><p>The catalog is your parts shelf: reusable agent roles, skills and plugins. Install a skill, adapt a role or combine the pieces into a factory that fits your workflow.</p><a class="text-link" href="catalog/">Explore roles, skills and plugins <span aria-hidden="true">↗</span></a></div>
+ <div class="install-panel"><h3>Inside Claude Code</h3><pre class="code"><code>/plugin marketplace add volekerb/hivemill
 /plugin install hivemill
-/hivemill:setup</code></pre>
-<p style="margin-top:var(--s-4)">The factory runs on Debian or Ubuntu. A Mac can watch through the Herdr desktop app. <a href="guides/install/">Install guide</a> · <a href="https://github.com/volekerb/hivemill">Hivemill on GitHub</a></p>
-</div>
+/hivemill:setup</code></pre><p>Run the factory on Debian or Ubuntu with a logged-in Claude Code. A Mac can watch through the Herdr desktop app.</p><a class="text-link" href="guides/install/">Install <span aria-hidden="true">↗</span></a></div></div>
 </section>
+
+<section class="section wrap closing" data-reveal><h2>Start with one<br>worthwhile change.</h2><div><p>Bring a repository and a real backlog. We can scope a pilot, configure the roles and put the first workflow to work.</p><a class="btn btn--primary" href="work-with-me/">Work with me <span aria-hidden="true">↗</span></a></div></section>
 </main>
-<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
+<footer class="site"><div class="wrap"><a class="brand" href="./">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Product screenshots use fictional demo data. Industrial illustrations are generated brand imagery.</div></footer>
 </body>
 </html>

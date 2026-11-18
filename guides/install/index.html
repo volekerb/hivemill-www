@@ -1,53 +1,147 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Install | Hivemill</title>
-<meta name="description" content="Install Hivemill on Debian or Ubuntu with three lines inside a logged-in Claude Code.">
-<meta name="color-scheme" content="light dark">
-<link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/css/v2.css">
-<script type="module" src="../../assets/js/motion.js"></script>
-<script type="module" src="../../assets/js/copy.js"></script>
-</head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site"><div class="wrap">
-<a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
-<nav aria-label="Site">
-<a href="../../">Home</a>
-<a href="../../catalog/">Catalog</a>
-<a href="../../work-with-me/">Work with me</a>
-<a href="./" aria-current="page">Install</a>
-<a href="https://github.com/volekerb/hivemill">GitHub</a>
-</nav>
-</div></header>
-<main id="main">
-<section class="page-head wrap">
-<h1>On Debian or Ubuntu, three lines install it.</h1>
-<p class="lede">Run them inside a logged-in Claude Code.</p>
-<ol class="steps" aria-label="Install steps">
-<li class="step" data-reveal><div><h3>Add the marketplace</h3><p>Tells Claude Code where the Hivemill plugin lives.</p><div class="cmd"><code id="c1">/plugin marketplace add volekerb/hivemill</code><button class="copy" type="button" data-copy="c1" aria-label="Copy: Add the marketplace" hidden>Copy</button></div></div></li>
-<li class="step" data-reveal><div><h3>Install the plugin</h3><div class="cmd"><code id="c2">/plugin install hivemill</code><button class="copy" type="button" data-copy="c2" aria-label="Copy: Install the plugin" hidden>Copy</button></div></div></li>
-<li class="step" data-reveal><div><h3>Run setup</h3><p>Brings up the factory on this machine.</p><div class="cmd"><code id="c3">/hivemill:setup</code><button class="copy" type="button" data-copy="c3" aria-label="Copy: Run setup" hidden>Copy</button></div></div></li>
-<li class="step" data-reveal><div><h3>Check it</h3><p>From a checkout of the repository, a read-only report shows what the installer sees. <code>--dry-run</code> prints the plan and changes nothing.</p><div class="cmd"><code id="c4">plugins/hivemill/scripts/install --check</code><button class="copy" type="button" data-copy="c4" aria-label="Copy: Check it" hidden>Copy</button></div></div></li>
-</ol>
-</section>
-<section class="band wrap">
-<div class="measure" data-reveal>
-<h2>Before you start</h2>
-<ul class="notes">
-<li><strong>Debian or Ubuntu.</strong> Mac can watch, factory not on macOS yet: a Mac can watch through the Herdr desktop app, but the factory does not run on macOS yet.</li>
-<li><strong>A logged-in Claude Code.</strong> Agents of the default org are Claude Code sessions.</li>
-<li><strong>Cursor is optional.</strong> It is only for the cursor org and the daily retro agent.</li>
-<li><strong>Manual steps</strong> are in the repository: <a href="https://github.com/volekerb/hivemill/blob/main/docs/SETUP.md">docs/SETUP.md</a>. The software is MIT.</li>
-</ul>
-<p class="back"><a class="arrow-link" href="../../"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#arrow"/></svg>Back to Home</a></p>
-</div>
-</section>
-</main>
-<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Install Hivemill | Hivemill</title>
+    <meta name="description" content="Set up your self-hosted factory on Debian or Ubuntu with Claude Code, then verify the host.">
+    <link rel="canonical" href="https://hivemill.dev/guides/install/">
+    <link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
+    <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/v2.css">
+    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111804">
+    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111804">
+    <script type="module" src="/assets/js/motion.js"></script>
+    <script type="module" src="/assets/js/factory.js?v=2026111804"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026111804"></script>
+    <script type="module" src="/assets/js/copy.js"></script>
+  </head>
+  <body class="editorial ed-install">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
+        <nav aria-label="Site">
+          <a href="/">Home</a>
+          <a href="/catalog/">Catalog</a>
+          <a href="/work-with-me/">Work with me</a>
+          <a href="/guides/install/" aria-current="page">Install</a>
+          <a href="https://github.com/volekerb/hivemill">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="wrap ed-opening ed-install-opening">
+        <div class="ed-title">
+          <p class="ed-kicker">Operator guide / Installation</p>
+          <h1>Install the<br>factory.</h1>
+          <p class="ed-lead">Three commands in Claude Code bring Hivemill onto a Linux machine you control.</p>
+          <a class="ed-link" href="#before-you-start">Check the prerequisites<span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="ed-command-plate" aria-labelledby="commands-title">
+          <div class="ed-plate-heading">
+            <span class="ed-dot" aria-hidden="true"></span>
+            <h2 id="commands-title">Inside Claude Code</h2>
+            <span class="ed-terminal-sign" aria-hidden="true">&gt;_</span>
+          </div>
+          <ol class="ed-command-list">
+            <li>
+              <p>Add the marketplace</p>
+              <div class="ed-command">
+                <code id="c1">/plugin marketplace add volekerb/hivemill</code>
+                <button type="button" class="copy" data-copy="c1" aria-label="Copy marketplace command" hidden>Copy</button>
+              </div>
+            </li>
+            <li>
+              <p>Install the plugin</p>
+              <div class="ed-command">
+                <code id="c2">/plugin install hivemill</code>
+                <button type="button" class="copy" data-copy="c2" aria-label="Copy plugin command" hidden>Copy</button>
+              </div>
+            </li>
+            <li>
+              <p>Run guided setup</p>
+              <div class="ed-command">
+                <code id="c3">/hivemill:setup</code>
+                <button type="button" class="copy" data-copy="c3" aria-label="Copy setup command" hidden>Copy</button>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+      <div class="wrap ed-reading">
+        <nav class="ed-toc" aria-label="On this page">
+          <p class="ed-kicker">On this page</p>
+          <ol>
+            <li>
+              <a href="#before-you-start">Prepare the host</a>
+            </li>
+            <li>
+              <a href="#setup">Guided setup</a>
+            </li>
+            <li>
+              <a href="#check">Verify the install</a>
+            </li>
+          </ol>
+        </nav>
+        <div class="ed-article">
+          <section class="ed-chapter" id="before-you-start" aria-labelledby="before-you-start-title">
+            <p class="ed-kicker">Prerequisites</p>
+            <h2 id="before-you-start-title">Prepare the host.</h2>
+            <dl class="ed-defs">
+              <div>
+                <dt>Linux machine</dt>
+                <dd>Use a separate Debian or Ubuntu machine that can stay on while your laptop is closed. The factory runtime needs Python 3.11 or newer.</dd>
+              </div>
+              <div>
+                <dt>Claude Code</dt>
+                <dd>Sign in on the factory machine. The default organization runs its agents as Claude Code sessions.</dd>
+              </div>
+              <div>
+                <dt>GitHub access</dt>
+                <dd>Sign in to the GitHub CLI with access to the repository where the factory will open pull requests.</dd>
+              </div>
+              <div>
+                <dt>Optional runtimes</dt>
+                <dd>Cursor Agent CLI supports the Cursor organization and the daily retro agent. A Mac can watch the Linux factory through the Herdr desktop app.</dd>
+              </div>
+            </dl>
+          </section>
+          <section class="ed-chapter" id="setup" aria-labelledby="setup-title">
+            <p class="ed-kicker">Guided setup</p>
+            <h2 id="setup-title">Bring up the factory.</h2>
+            <p>Run the three commands above, in order, inside a logged-in Claude Code session on the host. The marketplace supplies the plugin. Its setup skill walks you through installing the factory and bringing up the first agents.</p>
+            <p>The setup guide covers the CLI, database, configuration and systemd user services. Keep it handy if you prefer a manual install.</p>
+            <a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/SETUP.md">Read the full setup guide<span aria-hidden="true">↗</span></a>
+          </section>
+          <section class="ed-chapter" id="check" aria-labelledby="check-title">
+            <p class="ed-kicker">Verification</p>
+            <h2 id="check-title">Inspect the install.</h2>
+            <p>From a checkout of the Hivemill repository, run this read-only check in your own terminal. The report shows which prerequisites the installer sees.</p>
+            <div class="ed-command">
+              <code id="c4">plugins/hivemill/scripts/install --check</code>
+              <button type="button" class="copy" data-copy="c4" aria-label="Copy check command" hidden>Copy</button>
+            </div>
+            <p>To preview the installer’s ordered plan before applying it, run the dry run from the same checkout.</p>
+            <div class="ed-command">
+              <code id="c5">plugins/hivemill/scripts/install --dry-run</code>
+              <button type="button" class="copy" data-copy="c5" aria-label="Copy dry-run command" hidden>Copy</button>
+            </div>
+          </section>
+        </div>
+      </div>
+      <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
+        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Next guide</span><strong>Give the factory a goal</strong><span class="ed-next-desc">Follow a request into its first pull request.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/guides/watch/"><span class="ed-kicker">Operations</span><strong>Watch your factory</strong><span class="ed-next-desc">Find the web UI and Herdr desktop dashboard.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </main>
+    <footer class="site">
+      <div class="wrap">
+        <a class="brand" href="/">Hivemill</a>
+        <p>Open source. Self-hosted. MIT licensed.</p>
+        <a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </footer>
+  </body>
 </html>

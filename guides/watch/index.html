@@ -1,42 +1,132 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Where you watch – Hivemill</title>
-<link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../assets/site.css">
-</head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site">
-<a href="../../"><img src="../../assets/wordmark-light.svg" alt="Hivemill" width="144" height="32"></a>
-<nav aria-label="Site">
-<a href="../../">Home</a>
-<a href="../install/">Install</a>
-<a href="../ask-to-merge/">Ask to merge</a>
-<a href="./" aria-current="page">Where you watch</a>
-<a href="../../factories/what/">What a factory is</a>
-<a href="../../factories/who-merges/">Who merges</a>
-</nav>
-</header>
-<main id="main">
-<section>
-<h1>You watch it in the web UI, or on a Mac in the Herdr desktop app.</h1>
-<div class="text">
-<p>The web UI is read-only and runs on your Debian or Ubuntu machine.</p>
-<p>A Mac can watch through the <a href="https://herdr.dev">Herdr</a> desktop app. The factory does not run on macOS yet.</p>
-</div>
-<figure class="fig--shot fig--col">
-<picture><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/home-dark-1x.webp 1x, ../../assets/img/home-dark-2x.webp 2x" width="480" height="540"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="../../assets/img/home-dark-1x.png 1x, ../../assets/img/home-dark-2x.png 2x" width="480" height="540"><source type="image/webp" srcset="../../assets/img/home-light-1x.webp 1x, ../../assets/img/home-light-2x.webp 2x" width="480" height="540"><img src="../../assets/img/home-light-1x.png" srcset="../../assets/img/home-light-1x.png 1x, ../../assets/img/home-light-2x.png 2x" width="480" height="540" alt="The Hivemill web UI overview" loading="lazy" decoding="async"></picture>
-<figcaption>The web UI overview, from the demo seed. Fictional data.</figcaption>
-</figure>
-<figure class="fig--shot fig--app">
-<picture><source type="image/webp" srcset="../../assets/img/herdr-factory-1x.webp 1x" width="617" height="194"><img src="../../assets/img/herdr-factory-1x.png" srcset="../../assets/img/herdr-factory-1x.png 1x" width="617" height="194" alt="The Hivemill dashboard inside the Herdr desktop app" loading="lazy" decoding="async"></picture>
-<figcaption>The Hivemill dashboard in the Herdr desktop app. A committed crop of a demo-mode capture.</figcaption>
-</figure>
-</section>
-</main>
-<footer>Hivemill is MIT licensed.</footer>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Watch the factory | Hivemill</title>
+    <meta name="description" content="Read goals, capacity, agent usage and alerts in the Hivemill web UI and Herdr desktop app.">
+    <link rel="canonical" href="https://hivemill.dev/guides/watch/">
+    <link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
+    <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/v2.css">
+    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111804">
+    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111804">
+    <script type="module" src="/assets/js/motion.js"></script>
+    <script type="module" src="/assets/js/factory.js?v=2026111804"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026111804"></script>
+  </head>
+  <body class="editorial ed-watch">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
+        <nav aria-label="Site">
+          <a href="/">Home</a>
+          <a href="/catalog/">Catalog</a>
+          <a href="/work-with-me/">Work with me</a>
+          <a href="/guides/install/">Install</a>
+          <a href="https://github.com/volekerb/hivemill">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="wrap ed-opening ed-watch-opening">
+        <div class="ed-title">
+          <p class="ed-kicker">Operator guide / Monitoring</p>
+          <h1>Watch the<br>factory.</h1>
+          <p class="ed-lead">Come back to the decisions that need you. See which goals moved, what held up a merge and how much capacity is left.</p>
+          <a class="btn btn--primary" href="/demo/index.html#needs-you">Open the demo overview<span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="ed-monitor-print">
+          <figure class="ed-shot">
+            <picture>
+              <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/home-current-dark-1x.webp 1x, ../../assets/img/home-current-dark-2x.webp 2x" width="520" height="320">
+              <source media="(prefers-color-scheme: dark)" type="image/png" srcset="../../assets/img/home-current-dark-1x.png 1x, ../../assets/img/home-current-dark-2x.png 2x" width="520" height="320">
+              <source type="image/webp" srcset="../../assets/img/home-current-light-1x.webp 1x, ../../assets/img/home-current-light-2x.webp 2x" width="520" height="320">
+              <img src="../../assets/img/home-current-light-1x.png" srcset="../../assets/img/home-current-light-1x.png 1x, ../../assets/img/home-current-light-2x.png 2x" width="520" height="320" alt="Hivemill web overview with activity and items needing the owner" fetchpriority="high" decoding="async">
+            </picture>
+            <figcaption>Web overview · Fictional demo data.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <div class="wrap ed-reading">
+        <nav class="ed-toc" aria-label="On this page">
+          <p class="ed-kicker">On this page</p>
+          <ol>
+            <li>
+              <a href="#web">Web overview</a>
+            </li>
+            <li>
+              <a href="#desktop">Herdr on Mac</a>
+            </li>
+          </ol>
+        </nav>
+        <div class="ed-article">
+          <section class="ed-chapter" id="web" aria-labelledby="web-title">
+            <p class="ed-kicker">Browser / Read-only</p>
+            <h2 id="web-title">Open the web overview.</h2>
+            <p>Open the read-only web UI on the Linux host. The overview brings together live agents, open pull requests, active goals and work waiting for the owner.</p>
+            <a class="ed-view-row" href="/demo/index.html#needs-you">
+              <span class="ed-label">Attention</span>
+              <div>
+                <h3>What needs me?</h3>
+                <p>Start with pending decisions, blocked items and escalations.</p>
+              </div>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="ed-view-row" href="/demo/resources.html">
+              <span class="ed-label">Resources</span>
+              <div>
+                <h3>Can another agent start?</h3>
+                <p>Inspect the agent cap, available memory, system load and runtime usage limits.</p>
+              </div>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="ed-view-row" href="/demo/tokens.html">
+              <span class="ed-label">Usage</span>
+              <div>
+                <h3>Where did the work go?</h3>
+                <p>Trace Claude tokens and estimated costs. Cursor activity is reported through sessions and agent-hours.</p>
+              </div>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="ed-view-row" href="/demo/quality.html">
+              <span class="ed-label">Quality</span>
+              <div>
+                <h3>Why did a change come back?</h3>
+                <p>Inspect rejections, repeat attempts and merges held by the judge.</p>
+              </div>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <p class="ed-note">The public demo uses fictional records. Claude cost estimates use model list prices. Your provider’s invoice reflects actual billing.</p>
+          </section>
+          <section class="ed-chapter" id="desktop" aria-labelledby="desktop-title">
+            <p class="ed-kicker">Mac / Herdr desktop</p>
+            <h2 id="desktop-title">Keep an eye on the host.</h2>
+            <p>The factory runs on Debian or Ubuntu. On a Mac, the <a href="https://herdr.dev">Herdr desktop app</a> shows a Hivemill status bar and dashboard. Open the dashboard to see the active goals, budget and alerts across your configured teams.</p>
+            <figure class="ed-shot">
+              <picture>
+                <source type="image/webp" srcset="../../assets/img/herdr-factory-1x.webp 1x" width="617" height="194">
+                <img src="../../assets/img/herdr-factory-1x.png" srcset="../../assets/img/herdr-factory-1x.png 1x" width="617" height="194" alt="Factory summary inside the Herdr desktop dashboard" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Herdr desktop dashboard · Native demo capture.</figcaption>
+            </figure>
+            <a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/herdr-app-dashboard.md">Read the desktop dashboard guide<span aria-hidden="true">↗</span></a>
+          </section>
+        </div>
+      </div>
+      <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
+        <a class="ed-next" href="/factories/who-merges/"><span class="ed-kicker">Factory model</span><strong>Understand a merge decision</strong><span class="ed-next-desc">Read the independent reviewer and QA verdicts.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/guides/install/"><span class="ed-kicker">Setup</span><strong>Install your own factory</strong><span class="ed-next-desc">Run the guide on a Debian or Ubuntu machine.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </main>
+    <footer class="site">
+      <div class="wrap">
+        <a class="brand" href="/">Hivemill</a>
+        <p>Open source. Self-hosted. MIT licensed.</p>
+        <a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </footer>
+  </body>
 </html>

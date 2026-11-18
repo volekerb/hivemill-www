@@ -47,6 +47,7 @@ import re
 import subprocess
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 
 REPO = "volekerb/hivemill"
@@ -435,15 +436,12 @@ def cmd_verify(args):
 
 # ---------------------------------------------------------------- render
 
-KINDS = [("role", "Roles", "roles",
-          "Each role is one Markdown file. Copy it next to your own agents and edit it."),
-         ("skill", "Skills", "skills",
-          "Skills ship inside plugins. Install the plugin that carries the skill."),
-         ("plugin", "Plugins", "plugins",
-          "A plugin bundles skills and the helper commands they call."),
-         ("dashboard", "Dashboard", "dashboard",
-          "The dashboard that runs inside herdr-core. The screenshots are real.")]
+KINDS = [("role", "Roles", "roles", "Markdown instructions for individual agents."),
+         ("skill", "Skills", "skills", "Reusable workflows installed through the plugin that carries them."),
+         ("plugin", "Plugins", "plugins", "Installable bundles of skills and helper commands."),
+         ("dashboard", "Dashboard", "dashboard", "A desktop view of your factory.")]
 KIND_LABEL = {k: label for k, label, _, _ in KINDS}
+KIND_ANCHOR = {k: anchor for k, _, anchor, _ in KINDS}
 ICON_ID = re.compile(r'<symbol id="([^"]+)"')
 
 
@@ -491,10 +489,12 @@ def picture(root, name, widths, alt, lazy=True):
     sizes = sorted(widths)
     big = widths[sizes[-1]]["png"]
     srcset = lambda ext: ", ".join("%sassets/img/%s-%d.%s %dw" % (root, name, w, ext, w) for w in sizes)
-    return ('<picture><source type="image/webp" srcset="%s" sizes="(min-width: 52rem) 34rem, 100vw">'
-            '<img src="%sassets/img/%s-%d.png" srcset="%s" sizes="(min-width: 52rem) 34rem, 100vw" '
+    slot = ("(min-width: 85rem) 52rem, (min-width: 48rem) 66vw, 100vw" if name == "herdr-panel" else
+            "(min-width: 85rem) 25rem, (min-width: 48rem) 32vw, (min-width: 32rem) 48vw, 100vw")
+    return ('<picture><source type="image/webp" srcset="%s" sizes="%s">'
+            '<img src="%sassets/img/%s-%d.png" srcset="%s" sizes="%s" '
             'width="%d" height="%d" alt="%s"%s decoding="async"></picture>'
-            % (srcset("webp"), root, name, sizes[-1], srcset("png"), big["width"], big["height"],
+            % (srcset("webp"), slot, root, name, sizes[-1], srcset("png"), slot, big["width"], big["height"],
                esc(alt), ' loading="lazy"' if lazy else ""))
 
 
@@ -503,51 +503,77 @@ def media_alt(name):
         "herdr-core dashboard, %s panel" % name.replace("panel-", "").replace("-", " ")
 
 
-def snippet_block(item, root):
-    if not item["snippets"]:
+def display_name(item):
+    if item["kind"] == "plugin" and item.get("file"):
+        return json.loads(item["file"]).get("displayName") or item["name"]
+    if item["id"] == "dashboard:herdr-core":
+        return "Herdr dashboard"
+    if item["name"] in ("qa", "pm"):
+        return item["name"].upper()
+    if item["name"].startswith("hm-"):
+        return item["name"]
+    return item["name"].replace("-", " ").capitalize()
+
+
+def description(item):
+    if item["id"] == "dashboard:herdr-core":
+        return "Factory status, alerts and budgets inside the Herdr desktop app."
+    purpose = item["purpose"]
+    return purpose[:1].upper() + purpose[1:] + ("." if purpose and purpose[-1] not in ".:!?" else "")
+
+
+def source_file(item):
+    if item["kind"] == "dashboard":
+        return "docs/herdr-app-dashboard.md"
+    if item["kind"] == "plugin":
+        return item["path"] + "/.claude-plugin/plugin.json"
+    return item["path"]
+
+
+def code_block(content, label, button_label, accessible_label, code_id=None):
+    return ('<div class="snip"><div class="snippet-bar"><span>%s</span>'
+            '<button class="copy" type="button" hidden data-copy aria-label="%s">%s</button></div>'
+            '<pre class="code"%s><code>%s</code></pre></div>'
+            % (esc(label), esc(accessible_label), esc(button_label),
+               ' id="%s"' % code_id if code_id else "", esc(content)))
+
+
+def install_panel(item):
+    snippets = item["snippets"]
+    if not snippets:
         return ""
-    return ('<div class="snip"><pre class="code"><code>%s</code></pre>'
-            '<button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for %s">'
-            'Copy</button></div>' % (esc("\n".join(item["snippets"])), esc(item["name"])))
-
-
-def meta_line(item):
-    parts = []
-    if item.get("skills"):
-        parts.append("<span>Skills: %s</span>" % esc(", ".join(s["name"] for s in item["skills"])))
-    if item.get("bins"):
-        parts.append("<span>Commands: %s</span>" % esc(", ".join(item["bins"])))
-    if item.get("plugin"):
-        parts.append("<span>Plugin: %s</span>" % esc(item["plugin"]))
-    return '<p class="meta">%s</p>' % " ".join(parts) if parts else ""
-
-
-def soon_block(item):
-    return ('<p class="soon"><strong>Coming soon.</strong> On main at the pinned commit: %s. Not there yet: %s.</p>'
-            % (esc(", ".join(item["present"]) or "nothing"), esc(", ".join(item["absent"]))))
+    if item["kind"] == "role" and len(snippets) > 1:
+        groups = [("Role file · Terminal", snippets[:1]), ("Optional role skills · Terminal", snippets[1:])]
+    else:
+        label = "Claude Code" if snippets[0].startswith("/plugin ") else "Terminal"
+        groups = [(label, snippets)]
+    if item["kind"] == "role":
+        direction = "Download the role file and adapt its instructions for your agent."
+    elif item["kind"] == "dashboard":
+        direction = "From your Hivemill checkout, preview the changes before applying them."
+    elif item["kind"] == "skill" and item.get("plugin"):
+        direction = "Install the %s plugin to add this skill." % item["plugin"]
+    else:
+        direction = ("Run these commands in Claude Code." if snippets[0].startswith("/plugin ")
+                     else "Run this command in your terminal to load the plugin in Claude Code.")
+    return ('<section class="component-section" id="install"><h2>Install</h2><p>%s</p>%s</section>'
+            % (esc(direction), "".join(code_block("\n".join(lines), label, "Copy", "Copy %s commands for %s" % (label, item["name"]))
+                      for label, lines in groups)))
 
 
 def entry(item, ctx):
-    root, source = ctx["root"], ctx["source"]
-    ov = ctx["overrides"][item["id"]]
-    link = "%s/" % slug(item["id"])
-    head = ""
-    if ov.get("icon"):
-        head = icon_svg(root, ov["icon"])
-    gallery = ""
-    if ov.get("media"):
-        gallery = '<div class="shots">%s</div>' % "".join(
-            '<figure class="fig">%s</figure>' % picture(root, n, ctx["media"][n], media_alt(n))
-            for n in ov["media"])
-    status = ' <span class="tag">coming soon</span>' if item.get("status") == "soon" else ""
-    return ('<article class="entry" id="%s" data-item-id="%s" data-kind="%s" data-reveal>\n'
-            '<div class="entry-main"><h3>%s<a href="%s">%s</a>%s</h3>\n<p class="purpose">%s</p>\n%s%s'
-            '<p class="links"><a class="arrow-link" href="%s">Details%s</a> <a href="%s">Source: %s</a></p></div>\n'
-            '<div class="entry-snip">%s</div>\n%s</article>'
-            % (slug(item["id"]), esc(item["id"]), item["kind"], head, link, esc(item["name"]), status,
-               esc(item["purpose"]), meta_line(item), soon_block(item) if item.get("status") == "soon" else "",
-               link, icon_svg(root, "arrow"), esc(source_url(source, item)), esc(item["path"]),
-               snippet_block(item, root), gallery))
+    identifier = slug(item["id"])
+    icon = ctx["overrides"][item["id"]].get("icon", "catalog")
+    keywords = [item["id"], item["path"], item.get("plugin", "")] + item.get("bins", [])
+    keywords.extend(s["name"] for s in item.get("skills", []))
+    status = '<span class="catalog-status">Coming soon</span>' if item.get("status") == "soon" else ""
+    return ('<article class="entry" id="%s" data-item-id="%s" data-kind="%s" data-search="%s">'
+            '<a class="entry-link" href="%s/" aria-labelledby="%s-title" aria-describedby="%s-purpose">'
+            '<span class="entry-emblem">%s</span><h3 id="%s-title">%s%s</h3>'
+            '<p id="%s-purpose">%s</p>%s</a></article>'
+            % (identifier, esc(item["id"]), item["kind"], esc(" ".join(keywords)), identifier, identifier, identifier,
+               icon_svg(ctx["root"], icon), identifier, esc(display_name(item)), status, identifier, esc(description(item)),
+               icon_svg(ctx["root"], "arrow", "entry-arrow")))
 
 
 def sections(text):
@@ -556,9 +582,11 @@ def sections(text):
     if lines and lines[0].strip() == "---":
         end = next((i for i, l in enumerate(lines[1:], 1) if l.strip() == "---"), 0)
         lines = lines[end + 1:]
+    while lines and not lines[0].strip():
+        lines.pop(0)
     out, head, buf, fence = [], "Overview", [], False
     for line in lines:
-        if line.startswith("```"):
+        if line.lstrip().startswith("```"):
             fence = not fence
         if not fence and line.startswith("## "):
             out.append((head, buf))
@@ -567,6 +595,99 @@ def sections(text):
             buf.append(line)
     out.append((head, buf))
     return [(h, "\n".join(b).strip("\n")) for h, b in out if "".join(b).strip()]
+
+
+INLINE_TOKEN = re.compile(r"`([^`\n]+)`|\*\*(.+?)\*\*|!?\[([^\]\n]+)\]\(([^()\s]+)\)")
+LIST_ITEM = re.compile(r"^( *)([-*]|\d+\.)\s+(.*)$")
+
+
+def doc_inline(text, url):
+    """Format the inline syntax used in component files. All source text is escaped."""
+    out, end = [], 0
+    for token in INLINE_TOKEN.finditer(text):
+        out.append(esc(text[end:token.start()]))
+        code, strong, label, href = token.groups()
+        if code is not None:
+            out.append("<code>%s</code>" % esc(code))
+        elif strong is not None:
+            out.append("<strong>%s</strong>" % doc_inline(strong, url))
+        else:
+            dest = urllib.parse.urljoin(url, href)
+            if urllib.parse.urlsplit(dest).scheme in ("http", "https"):
+                out.append('<a href="%s">%s</a>' % (esc(dest), esc(label)))
+            else:
+                out.append(esc(label))
+        end = token.end()
+    return "".join(out) + esc(text[end:])
+
+
+def doc_blocks(text, url):
+    """Render source paragraphs, lists, headings, tables and fenced examples."""
+    lines, out, i = text.splitlines(), [], 0
+
+    def block_start(line):
+        return (not line.strip() or line.lstrip().startswith(("```", "#", "|"))
+                or LIST_ITEM.match(line))
+
+    while i < len(lines):
+        line = lines[i].strip()
+        i += 1
+        if not line:
+            continue
+        if line.startswith("```"):
+            code = []
+            while i < len(lines) and not lines[i].lstrip().startswith("```"):
+                code.append(lines[i])
+                i += 1
+            i += 1
+            out.append('<pre><code>%s</code></pre>' % esc("\n".join(code)))
+        elif line.startswith("|"):
+            rows = [line]
+            while i < len(lines) and lines[i].lstrip().startswith("|"):
+                rows.append(lines[i].strip())
+                i += 1
+            cells = [row.strip("|").split("|") for row in rows if not re.fullmatch(r"[ |:\-]+", row)]
+            out.append('<div class="doc-table"><table>')
+            for j, row in enumerate(cells):
+                tag = "td" if j else "th"
+                out.append("<tr>%s</tr>" % "".join("<%s>%s</%s>" % (tag, doc_inline(c.strip(), url), tag)
+                                                  for c in row))
+            out.append("</table></div>")
+        elif re.match(r"^#{1,6} ", line):
+            out.append("<h4>%s</h4>" % doc_inline(line.lstrip("# "), url))
+        elif LIST_ITEM.match(lines[i - 1]):
+            first = LIST_ITEM.match(lines[i - 1])
+            indent = len(first[1])
+            ordered = first[2].endswith(".")
+            tag = "ol" if ordered else "ul"
+            start = ' start="%d"' % int(first[2][:-1]) if ordered and first[2] != "1." else ""
+            out.append("<%s%s>" % (tag, start))
+            i -= 1
+            while i < len(lines):
+                match = LIST_ITEM.match(lines[i])
+                if not match or len(match[1]) != indent or match[2].endswith(".") != ordered:
+                    break
+                body = [match[3]]
+                i += 1
+                while i < len(lines):
+                    subline = lines[i]
+                    if subline and len(subline) - len(subline.lstrip()) > indent:
+                        body.append(subline[min(indent + len(match[2]) + 1,
+                                                len(subline) - len(subline.lstrip())):])
+                    elif not subline.strip() and i + 1 < len(lines) and lines[i + 1].startswith(" " * (indent + 1)):
+                        body.append("")
+                    else:
+                        break
+                    i += 1
+                out.append("<li>%s</li>" % doc_blocks("\n".join(body), url))
+            out.append("</%s>" % tag)
+        else:
+            para = [line]
+            while i < len(lines) and not block_start(lines[i]):
+                para.append(lines[i].strip())
+                i += 1
+            out.append("<p>%s</p>" % doc_inline(" ".join(para), url))
+    return "".join(out)
 
 
 def combines(item, items):
@@ -580,77 +701,132 @@ def combines(item, items):
         ids = [i["id"] for i in items if i["kind"] == "skill" and i.get("plugin") == item["name"]]
     elif item["kind"] == "dashboard":
         ids = [i["id"] for i in items if i["kind"] == "plugin" and i["path"] == "plugins/hivemill"]
+    elif item["kind"] == "role":
+        ids = [i["id"] for i in items if i["kind"] == "role" and i != item
+               and re.search(r"\b%s\b" % re.escape(i["name"]), item.get("file", ""), re.I)][:3]
     return [by_id[i] for i in ids if i in by_id]
 
 
 def detail_page(item, items, ctx):
     root, source = ctx["root"], ctx["source"]
     ov = ctx["overrides"][item["id"]]
-    out = ['<section class="page-head wrap detail-head">']
-    out.append('<p class="crumb"><a href="../">Catalog</a> / %s</p>' % esc(KIND_LABEL[item["kind"]]))
-    out.append("<h1>%s%s</h1>" % (icon_svg(root, ov["icon"], "i i--lg") if ov.get("icon") else "",
-                                  esc(item["name"])))
-    out.append('<p class="lede">%s</p>' % esc(item["purpose"]))
-    out.append("</section>")
-    out.append('<div class="wrap detail">')
+    kind = item["kind"]
+    anchor = KIND_ANCHOR[kind]
+    file_path = source_file(item)
+    source_link = source_url(source, item)
+    file_link = "https://github.com/%s/blob/%s/%s" % (source["repo"], source["sha"], file_path)
+    icon = icon_svg(root, ov.get("icon", "catalog"), "component-symbol")
+    out = ['<header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb">'
+           '<a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#%s">%s</a></nav>'
+           % (anchor, KIND_LABEL[kind]),
+           '<div class="component-heading"><div><h1>%s</h1><p>%s</p></div>'
+           '<div class="component-mark" aria-hidden="true">%s</div></div></header>'
+           % (esc(display_name(item)), esc(description(item)), icon),
+           '<div class="wrap component-layout"><div class="component-body">']
     if item.get("status") == "soon":
-        out.append(soon_block(item))
-    if item["snippets"]:
-        out.append('<section><h2>Install</h2>%s</section>' % snippet_block(item, root))
+        out.append('<section class="component-section"><h2>Availability</h2><p><strong>Coming soon.</strong> '
+                   'The implementation is in progress at this revision.</p><dl class="component-facts">'
+                   '<dt>Present</dt><dd>%s</dd><dt>Still needed</dt><dd>%s</dd></dl></section>'
+                   % (esc(", ".join(item["present"]) or "None"), esc(", ".join(item["absent"]))))
+    out.append(install_panel(item))
     if ov.get("media"):
-        out.append('<section><h2>How it looks</h2><div class="shots">%s</div></section>' % "".join(
-            '<figure class="fig">%s</figure>' % picture(root, n, ctx["media"][n], media_alt(n))
-            for n in ov["media"]))
-    meta = meta_line(item)
-    if meta:
-        out.append("<section><h2>Includes</h2>%s</section>" % meta)
+        out.append('<section class="component-section"><h2>Dashboard preview</h2>'
+                   '<p>Herdr desktop screenshots with fictional demo data. Select a view to open its source image.</p>'
+                   '<div class="catalog-shots">')
+        for name in sorted(ov["media"], key=lambda n: n != "herdr-panel"):
+            widths = ctx["media"][name]
+            original = widths[min(widths)]["png"]
+            url = "https://github.com/%s/blob/%s/%s" % (original["source_repo"], original["source_sha"],
+                                                        original["source_path"])
+            caption = "Desktop overview" if name == "herdr-panel" else name.removeprefix("panel-").replace("-", " ").capitalize()
+            out.append('<figure class="%s"><a href="%s">%s<span>%s <span aria-hidden="true">↗</span></span></a></figure>'
+                       % ("shot-wide" if name == "herdr-panel" else "", esc(url),
+                          picture(root, name, widths, media_alt(name)), esc(caption)))
+        out.append("</div></section>")
     if item.get("skills"):
-        out.append('<section><h2>Skills it ships with</h2><ul class="plain">%s</ul></section>' % "".join(
-            "<li><strong>%s</strong> %s</li>" % (esc(s["name"]), esc(s["purpose"])) for s in item["skills"]))
-    for head, body in sections(item.get("file", "")) if item.get("file", "").lstrip().startswith(("#", "---")) else []:
-        out.append('<section><h2>%s</h2><div class="doc">%s</div></section>' % (esc(head), esc(body)))
-    perms = item.get("permissions")
-    if perms:
+        out.append('<section class="component-section"><h2>Bundled skills</h2><dl class="bundled-skills">%s</dl></section>'
+                   % "".join('<div><dt>%s</dt><dd>%s</dd></div>' % (esc(s["name"]), esc(s["purpose"]))
+                             for s in item["skills"]))
+    if item.get("file", "").lstrip().startswith(("#", "---")):
+        doc = sections(item["file"])
+        if doc:
+            out.append('<section class="component-section" id="documentation"><h2>Documentation</h2>')
+            for index, (heading, body) in enumerate(doc):
+                out.append('<details class="doc-section"%s><summary>%s</summary><div class="doc">%s</div></details>'
+                           % (" open" if index == 0 else "", doc_inline(heading, file_link), doc_blocks(body, file_link)))
+            out.append("</section>")
+    if item.get("permissions"):
+        out.append('<section class="component-section"><h2>Tool permissions</h2>')
         for key, label in (("allow", "Allowed tools"), ("deny", "Blocked tools")):
-            if perms.get(key):
-                out.append('<section><h2>%s</h2><ul class="plain mono">%s</ul></section>' % (
-                    label, "".join("<li>%s</li>" % esc(p) for p in perms[key])))
-    rel = combines(item, items)
-    if rel:
-        out.append('<section><h2>Combines with</h2><ul class="plain">%s</ul></section>' % "".join(
-            '<li><a href="../%s/">%s</a> %s</li>' % (slug(r["id"]), esc(r["name"]), esc(r["purpose"]))
-            for r in rel))
+            tools = item["permissions"].get(key, [])
+            if tools:
+                out.append('<details class="doc-section"><summary>%s <small>%d</small></summary>'
+                           '<ul class="tool-list">%s</ul></details>'
+                           % (label, len(tools), "".join("<li><code>%s</code></li>" % esc(tool) for tool in tools)))
+        out.append("</section>")
     if item.get("file"):
-        out.append('<section><h2>Full file</h2><p class="meta"><span>%s</span></p>'
-                   '<div class="snip"><pre class="code" id="full"><code>%s</code></pre>'
-                   '<button class="copy" type="button" hidden data-copy aria-label="Copy full file for %s">Copy full file</button></div>'
-                   "</section>" % (esc(item["path"]), esc(item["file"].rstrip("\n")), esc(item["name"])))
-    out.append('<p class="links"><a class="arrow-link" href="%s">Source on GitHub</a></p>'
-               % esc(source_url(source, item)))
-    out.append("</div>")
+        out.append('<section class="component-section"><details class="raw-source"><summary>Full source file</summary>'
+                   '%s</details></section>' % code_block(item["file"].rstrip("\n"), file_path, "Copy full file",
+                                                         "Copy full file for " + item["name"], "full"))
+    out.append('</div><aside aria-label="Component information"><div class="component-aside">'
+               '<section><h2>Component details</h2><dl class="component-facts"><dt>Type</dt><dd>%s</dd>'
+               '<dt>Name</dt><dd><code>%s</code></dd>' % (kind.capitalize(), esc(item["name"])))
+    if item.get("plugin"):
+        out.append('<dt>Plugin</dt><dd>%s</dd>' % esc(item["plugin"]))
+    if item.get("bins"):
+        out.append('<dt>Commands</dt><dd>%s</dd>' % ", ".join('<code>%s</code>' % esc(b) for b in item["bins"]))
+    out.append('<dt>Revision</dt><dd><a href="https://github.com/%s/commit/%s"><code>%s</code></a></dd>'
+               '</dl><a class="catalog-text-link" href="%s">View source on GitHub <span aria-hidden="true">↗</span></a>'
+               '</section>' % (esc(source["repo"]), esc(source["sha"]), esc(source["sha"][:12]), esc(source_link)))
+    related = combines(item, items)
+    if related:
+        out.append('<section><h2>%s</h2><ul class="component-related">%s</ul></section>'
+                   % ("Mentioned roles" if kind == "role" else "Related components", "".join(
+                       '<li><a href="../%s/">%s<span>%s</span><span aria-hidden="true">↗</span></a></li>'
+                       % (slug(r["id"]), icon_svg(root, ctx["overrides"][r["id"]].get("icon", "catalog")),
+                          esc(display_name(r))) for r in related)))
+    out.append('</div></aside></div>')
     return "\n".join(out)
 
 
 def index_page(items, ctx):
-    source = ctx["source"]
-    out = ['<section class="page-head wrap">', "<h1>Catalog</h1>",
-           '<p class="lede">The agent roles, kit skills and the herdr-core plugin you can copy into your own factory.</p>',
-           '<p class="measure">Copy a role file, install a skill plugin or add the dashboard. Each piece stands on '
-           'its own, so take one or combine several into your own factory.</p>',
-           '<nav class="kinds" aria-label="Catalog sections">%s</nav>' % " ".join(
-               '<a href="#%s">%s <span>%d</span></a>' % (anchor, label, sum(1 for i in items if i["kind"] == k))
-               for k, label, anchor, _ in KINDS),
-           "</section>", '<div class="wrap catalog">',
-           '<p class="sr" role="status" aria-live="polite" id="live"></p>']
+    root = ctx["root"]
+    counts = {kind: sum(i["kind"] == kind for i in items) for kind, *_ in KINDS}
+    out = ['<header class="catalog-intro wrap"><div class="catalog-lead">'
+           '<p class="catalog-kicker">Developer library</p><h1>Factory catalog<span>.</span></h1>'
+           '<p class="catalog-deck">Reusable agent roles, skills and plugins for building your own software factory.</p>'
+           '</div>']
+    if any(i["id"] == "plugin:hivemill" for i in items):
+        out.append('<a class="catalog-feature" href="plugin-hivemill/">'
+                   '<div class="feature-caption"><span class="feature-label">Featured plugin</span>'
+                   '<strong>Hivemill installer</strong></div><span class="feature-arrow" aria-hidden="true">↗</span></a>')
+    out.append('</header><div class="catalog wrap" id="library">'
+               '<aside class="catalog-collections"><div class="collections-sticky">'
+               '<h2 id="collections-title">Collections</h2><nav aria-labelledby="collections-title">'
+               '<a href="#library" data-filter="all" aria-current="true"><span>All components</span>'
+               '<span class="collection-count">%d</span></a>' % len(items))
+    for kind, label, anchor, _ in KINDS:
+        if counts[kind]:
+            out.append('<a href="#%s" data-filter="%s"><span>%s</span><span class="collection-count">%d</span></a>'
+                       % (anchor, kind, label, counts[kind]))
+    out.append('</nav><a class="catalog-text-link catalog-guide" href="%sguides/install/">Installation guide '
+               '<span aria-hidden="true">↗</span></a></div></aside>'
+               '<div class="catalog-results"><div class="catalog-search" role="search" hidden>'
+               '%s<label class="sr" for="catalog-q">Search components</label><input id="catalog-q" '
+               'type="search" placeholder="Search components…" autocomplete="off" spellcheck="false">'
+               '<kbd aria-hidden="true">/</kbd></div><p class="sr" role="status" aria-live="polite" id="live"></p>'
+               % (root, icon_svg(root, "researcher")))
     for kind, label, anchor, intro in KINDS:
-        group = [i for i in items if i["kind"] == kind]
-        if not group:
+        if not counts[kind]:
             continue
-        out.append('<section class="group" id="%s" data-group="%s"><div class="group-head"><h2>%s</h2><p>%s</p></div>'
-                   % (anchor, kind, label, esc(intro)))
-        out.extend(entry(i, ctx) for i in group)
+        out.append('<section class="group" id="%s" data-group="%s" aria-labelledby="%s-title">'
+                   '<header class="group-head"><h2 id="%s-title">%s <small>%d</small></h2><p>%s</p></header>'
+                   % (anchor, kind, anchor, anchor, label, counts[kind], esc(intro)))
+        out.extend(entry(i, ctx) for i in items if i["kind"] == kind)
         out.append("</section>")
-    out.append("</div>")
+    out.append('<div class="catalog-empty" hidden><h2>No components found</h2>'
+               '<p>Try another search or browse all components.</p><button type="button" data-reset>Clear filters</button>'
+               '</div></div></div>')
     return "\n".join(out)
 
 
@@ -687,13 +863,13 @@ def render_site(catalog_path, overrides_path, template_path, detail_path, source
     ctx = {"source": source, "overrides": overrides, "media": media}
     built = "Built from %s at %s (%s)." % (source["repo"], source["sha"][:12], source["date"])
     pages = {}
-    for rel, tpl_path, body, root, title in [("index.html", template_path, None, "../", "Catalog")] + [
-            ("%s/index.html" % slug(i["id"]), detail_path, i, "../../", i["name"]) for i in items]:
+    for rel, tpl_path, body, root in [("index.html", template_path, None, "../")] + [
+            ("%s/index.html" % slug(i["id"]), detail_path, i, "../../") for i in items]:
         ctx["root"] = root
         content = index_page(items, ctx) if body is None else detail_page(body, items, ctx)
         pages[rel] = fill(read_text(tpl_path, "template"), {
             "root": root, "content": content, "built": esc(built),
-            "title": esc(title + " | Hivemill" if body else "Catalog | Hivemill"),
+            "title": esc(display_name(body) + " | Hivemill" if body else "Factory catalog | Hivemill"),
             "description": esc("The agent roles, kit skills and the herdr-core plugin you can copy into "
                                "your own factory." if body is None else body["purpose"]),
         })

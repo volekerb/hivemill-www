@@ -1,37 +1,130 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why the writer does not merge – Hivemill</title>
-<link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../assets/site.css">
-</head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site">
-<a href="../../"><img src="../../assets/wordmark-light.svg" alt="Hivemill" width="144" height="32"></a>
-<nav aria-label="Site">
-<a href="../../">Home</a>
-<a href="../../guides/install/">Install</a>
-<a href="../../guides/ask-to-merge/">Ask to merge</a>
-<a href="../../guides/watch/">Where you watch</a>
-<a href="../what/">What a factory is</a>
-<a href="./" aria-current="page">Who merges</a>
-</nav>
-</header>
-<main id="main">
-<section>
-<h1>The agent that writes the change does not merge it.</h1>
-<div class="text">
-<p>The coder opens a pull request and stops. A reviewer reads the diff. QA runs the tests. The judge merges only when both pass. A failure goes back with findings.</p>
-</div>
-<figure class="fig--shot fig--col">
-<picture><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/goal-dark-1x.webp 1x, ../../assets/img/goal-dark-2x.webp 2x" width="480" height="540"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="../../assets/img/goal-dark-1x.png 1x, ../../assets/img/goal-dark-2x.png 2x" width="480" height="540"><source type="image/webp" srcset="../../assets/img/goal-light-1x.webp 1x, ../../assets/img/goal-light-2x.webp 2x" width="480" height="540"><img src="../../assets/img/goal-light-1x.png" srcset="../../assets/img/goal-light-1x.png 1x, ../../assets/img/goal-light-2x.png 2x" width="480" height="540" alt="One goal in the Hivemill web UI" loading="lazy" decoding="async"></picture>
-<figcaption>One goal on the demo seed: intent, plan and tasks. Fictional data.</figcaption>
-</figure>
-</section>
-</main>
-<footer>Hivemill is MIT licensed.</footer>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Who merges the pull request? | Hivemill</title>
+    <meta name="description" content="Explore the roles of the reviewer, QA and the judge in a Hivemill merge decision.">
+    <link rel="canonical" href="https://hivemill.dev/factories/who-merges/">
+    <link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
+    <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/v2.css">
+    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111804">
+    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111804">
+    <script type="module" src="/assets/js/motion.js"></script>
+    <script type="module" src="/assets/js/factory.js?v=2026111804"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026111804"></script>
+  </head>
+  <body class="editorial ed-merge">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
+        <nav aria-label="Site">
+          <a href="/">Home</a>
+          <a href="/catalog/">Catalog</a>
+          <a href="/work-with-me/">Work with me</a>
+          <a href="/guides/install/">Install</a>
+          <a href="https://github.com/volekerb/hivemill">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="wrap ed-opening ed-merge-opening">
+        <div class="ed-title">
+          <p class="ed-kicker">Factory model / Merge authority</p>
+          <h1>Who merges<br>the change?</h1>
+          <p class="ed-lead">The judge. The coder opens the pull request. A reviewer reads the diff and QA runs the tests before the judge makes a decision.</p>
+          <a class="ed-link" href="#the-record">Read a merge record<span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="ed-gate">
+          <div class="ed-gate-title">
+            <p class="ed-kicker">Decision model</p>
+            <h2>The merge gate</h2>
+          </div>
+          <form class="ed-gate-controls" hidden aria-label="Try different review verdicts">
+            <fieldset>
+              <legend>Reviewer</legend>
+              <div class="ed-choices">
+                <label><input type="radio" name="review" value="pending"><span>Pending</span></label>
+                <label><input type="radio" name="review" value="pass" checked><span>Pass</span></label>
+                <label><input type="radio" name="review" value="fail"><span>Fail</span></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>QA</legend>
+              <div class="ed-choices">
+                <label><input type="radio" name="qa" value="pending" checked><span>Pending</span></label>
+                <label><input type="radio" name="qa" value="pass"><span>Pass</span></label>
+                <label><input type="radio" name="qa" value="fail"><span>Fail</span></label>
+              </div>
+            </fieldset>
+          </form>
+          <div class="ed-gate-static">
+            <p>The judge requires a passing review and a passing QA verdict on the current change. Failed checks return findings to the coder.</p>
+          </div>
+          <div class="ed-gate-result" hidden aria-live="polite" aria-atomic="true">
+            <p class="ed-label">Judge decision</p>
+            <h3>Await QA</h3>
+            <p data-gate-reason>The reviewer passed. The judge waits for a QA verdict.</p>
+          </div>
+        </div>
+      </section>
+      <section class="wrap ed-overview" id="authority">
+        <div data-reveal>
+          <p class="ed-kicker">Authority by role</p>
+          <h2>Separate work.<br>Separate verdicts.</h2>
+        </div>
+        <dl class="ed-defs">
+          <div>
+            <dt>Coder</dt>
+            <dd>Builds and updates the change. Review, QA and merge permissions belong to other roles.</dd>
+          </div>
+          <div>
+            <dt>Reviewer</dt>
+            <dd>Checks the diff against the task. Records a pass or actionable findings for the coder.</dd>
+          </div>
+          <div>
+            <dt>QA</dt>
+            <dd>Runs tests against the acceptance criteria and records a separate verdict tied to the checked commit.</dd>
+          </div>
+          <div>
+            <dt>Judge</dt>
+            <dd>Verifies the verdicts apply to the current revision and that the pull request can merge, including its required CI checks.</dd>
+          </div>
+        </dl>
+      </section>
+      <section class="ed-ledger" id="the-record">
+        <div class="wrap ed-proof-pair">
+          <div>
+            <p class="ed-kicker">Fictional demo / G-001</p>
+            <h2>A pricing table<br>takes two tries.</h2>
+            <p>The reviewer rejects the first attempt on task T-0003. On the revised commit, review and QA both pass, CI is green and the judge merges pull request #102. The task preserves both attempts.</p>
+            <a class="ed-link" href="/demo/task-t-0003.html">Read the task history<span aria-hidden="true">↗</span></a>
+          </div>
+          <figure class="ed-shot">
+            <picture>
+              <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/goal-current-dark-1x.webp 1x, ../../assets/img/goal-current-dark-2x.webp 2x" width="520" height="320">
+              <source media="(prefers-color-scheme: dark)" type="image/png" srcset="../../assets/img/goal-current-dark-1x.png 1x, ../../assets/img/goal-current-dark-2x.png 2x" width="520" height="320">
+              <source type="image/webp" srcset="../../assets/img/goal-current-light-1x.webp 1x, ../../assets/img/goal-current-light-2x.webp 2x" width="520" height="320">
+              <img src="../../assets/img/goal-current-light-1x.png" srcset="../../assets/img/goal-current-light-1x.png 1x, ../../assets/img/goal-current-light-2x.png 2x" width="520" height="320" alt="Goal detail with its plan and tasks in the Hivemill web UI" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>A goal and its linked tasks · Fictional demo data.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
+        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Operator guide</span><strong>Trace all five handoffs</strong><span class="ed-next-desc">See what happens before the pull request.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/demo/quality.html"><span class="ed-kicker">Demo</span><strong>Inspect the quality view</strong><span class="ed-next-desc">Explore rejections, retries and judge decisions.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </main>
+    <footer class="site">
+      <div class="wrap">
+        <a class="brand" href="/">Hivemill</a>
+        <p>Open source. Self-hosted. MIT licensed.</p>
+        <a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </footer>
+  </body>
 </html>

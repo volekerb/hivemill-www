@@ -1,0 +1,67 @@
+{
+  "generated_images": [
+    {
+      "file": "hive-mill.webp",
+      "master": "hive-mill-master.png",
+      "source": "Higgsfield",
+      "model": "gpt_image_2_6",
+      "generation_id": "b75f7f83-4597-4e4d-8baa-6f74315a4fa0",
+      "kind": "Generated industrial brand illustration; not product evidence",
+      "sha256": "f92019a9d59f08b21232a91f42e5623183b6cda0fbda60a89c32d096359c24da"
+    },
+    {
+      "file": "saas.webp",
+      "master": "saas-master.png",
+      "source": "Higgsfield",
+      "model": "gpt_image_2_6",
+      "generation_id": "6cca30ef-56e4-4f70-a629-25412012cc4e",
+      "kind": "Generated industrial brand illustration; not product evidence",
+      "sha256": "103a09fd6dbac9c9f4688bff6ebba595814e8adceb676ec88391243d7753e9a8"
+    },
+    {
+      "file": "agency.webp",
+      "master": "agency-master.png",
+      "source": "Higgsfield",
+      "model": "gpt_image_2_6",
+      "generation_id": "14e8f134-f0ec-4fc4-830f-b3e6bd6f804e",
+      "kind": "Generated industrial brand illustration; not product evidence",
+      "sha256": "950d95e42b523f8803287692a0550487ed07a6275d2d31a6c3207835a724791c"
+    },
+    {
+      "file": "operations.webp",
+      "master": "operations-master.png",
+      "source": "Higgsfield",
+      "model": "gpt_image_2_6",
+      "generation_id": "5d90e047-d22a-4995-b63b-56eff94cf402",
+      "kind": "Generated industrial brand illustration; not product evidence",
+      "sha256": "bb188cef95cacc361a8b0dd6d24804fdff5f82d03d4aaf6c4ea4c0cca7dd0628"
+    }
+  ],
+  "product_captures": {
+    "directory": "captures/",
+    "source": "Local isolated Hivemill demo, actual web UI, fictional seeded data",
+    "edits": "Crops and presentation frames in video; interface content unchanged",
+    "refresh": "Fresh full-page overview, goals, goal detail and agents captures in both themes; responsive crops rebuilt by tools/refresh_marketing_captures.py"
+  },
+  "film": {
+    "file": "hivemill-promo.mp4",
+    "duration_seconds": 29.9,
+    "resolution": "1920x1080",
+    "audio": "silent",
+    "method": "Higgsfield machinery footage with fixed typography; real product captures held completely still between crossfades. No simulated camera zoom.",
+    "renderer": "tools/render_promo.py"
+  },
+  "existing_screenshots": "../img/SOURCES.json",
+  "generated_video": {
+    "file": "hive-mill-motion.mp4",
+    "source": "Higgsfield",
+    "model": "seedance_2_5",
+    "generation_id": "6b1ccb31-4d05-417e-8672-9038c90da108",
+    "credits": 80,
+    "duration_seconds": 5,
+    "resolution": "1920x1080",
+    "kind": "Generated industrial brand film; not product evidence",
+    "sha256": "a8dae9984021bcc0e7971d3c0250c34c6865d7c06b4703e15937895385257ee4",
+    "web_loop": "hive-mill-loop.mp4"
+  }
+}

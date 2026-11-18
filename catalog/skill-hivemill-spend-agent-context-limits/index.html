@@ -3,23 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>agent-context-limits | Hivemill</title>
+<title>Agent context limits | Hivemill</title>
 <meta name="description" content="Cap the context of worker agents on this machine (200k window, early compaction, short command and file output, no advisor calls) while one boss agent keeps the full 1M window, and add the token rules (blocking waits, logs to files, no acks) to the team&#x27;s instructions.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/css/v2.css">
-<link rel="stylesheet" href="../../assets/css/catalog.css">
+<link rel="stylesheet" href="../../assets/css/factory.css?v=2026111804">
+<script type="module" src="../../assets/js/factory.js?v=2026111804"></script>
+<link rel="stylesheet" href="../../assets/css/catalog.css?v=2026111805">
 <script type="module" src="../../assets/js/motion.js"></script>
-<script type="module" src="../../assets/js/catalog.js"></script>
+<script type="module" src="../../assets/js/catalog.js?v=2026111804"></script>
 </head>
-<body>
+<body class="catalog-site">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap">
 <a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
 <nav aria-label="Site">
 <a href="../../">Home</a>
-<a href="../../catalog/">Catalog</a>
+<a href="../../catalog/" aria-current="location">Catalog</a>
 <a href="../../work-with-me/">Work with me</a>
 <a href="../../guides/install/">Install</a>
 <a href="https://github.com/volekerb/hivemill">GitHub</a>
@@ -27,39 +29,21 @@
 </div></header>
 <main id="main">
 <p class="sr" role="status" aria-live="polite" id="live"></p>
-<section class="page-head wrap detail-head">
-<p class="crumb"><a href="../">Catalog</a> / Skills</p>
-<h1><svg class="i i--lg" aria-hidden="true"><use href="../../assets/icons/icons.svg#limits"/></svg>agent-context-limits</h1>
-<p class="lede">Cap the context of worker agents on this machine (200k window, early compaction, short command and file output, no advisor calls) while one boss agent keeps the full 1M window, and add the token rules (blocking waits, logs to files, no acks) to the team&#x27;s instructions.</p>
+<header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb"><a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#skills">Skills</a></nav>
+<div class="component-heading"><div><h1>Agent context limits</h1><p>Cap the context of worker agents on this machine (200k window, early compaction, short command and file output, no advisor calls) while one boss agent keeps the full 1M window, and add the token rules (blocking waits, logs to files, no acks) to the team&#x27;s instructions.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#limits"/></svg></div></div></header>
+<div class="wrap component-layout"><div class="component-body">
+<section class="component-section" id="install"><h2>Install</h2><p>Install the hivemill-spend plugin to add this skill.</p><div class="snip"><div class="snippet-bar"><span>Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Terminal commands for agent-context-limits">Copy</button></div><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/plugins/kit-spend</code></pre></div></section>
+<section class="component-section" id="documentation"><h2>Documentation</h2>
+<details class="doc-section" open><summary>Overview</summary><div class="doc"><p>You are a thin guide over <code>${CLAUDE_PLUGIN_ROOT}/bin/hm-spend limits</code>. It writes only the <code>env</code> keys listed in docs/token-discipline.md (hivemill repo) into two Claude Code settings files and keeps every other setting. Before its first write to a file, it keeps a copy as <code>&lt;file&gt;.bak-hm-spend</code>.</p></div></details>
+<details class="doc-section"><summary>Rules</summary><div class="doc"><ul><li><p>Always show the plan (no <code>--apply</code>) first, and apply only after the user says yes in this conversation.</p></li><li><p>Never edit settings files by hand. Never touch keys other than the ones the command plans.</p></li><li><p>The worker limits apply to EVERY Claude Code session of this OS user that starts after the change, the user&#x27;s own included. Say this before applying. If the user&#x27;s own interactive sessions must keep the 1M window, they start them like the boss, with <code>claude --settings &lt;boss file&gt;</code>.</p></li><li><p>A running session keeps its old settings until it restarts. Say so; do not restart anyone&#x27;s agents yourself.</p></li><li><p>In the Hivemill factory, these limits already come from roles/settings. Do not run this skill on a factory box unless the user asks for it.</p></li></ul></div></details>
+<details class="doc-section"><summary>Steps</summary><div class="doc"><ol><li><p>Run <code>${CLAUDE_PLUGIN_ROOT}/bin/hm-spend limits</code> (add <code>--settings</code> or <code>--boss-settings</code> only if the user named other files). Show what it would set: the worker file (default <code>~/.claude/settings.json</code>) and the boss file (default <code>~/.claude/boss-settings.json</code>).</p></li><li><p>Explain in plain words: workers get a 200k window, summarized at about 120k, with command output cut at 20,000 characters, file reads at 15k tokens and no advisor calls. The boss keeps 1M, summarized at about 400k.</p></li><li><p>After an explicit yes, run the same command with <code>--apply</code>. Then give the one line the boss must start with: <code>claude --settings &lt;boss file&gt;</code>, plus the agent&#x27;s usual flags.</p></li><li><p>Offer to add the team rules to the file every agent reads (usually the project&#x27;s CLAUDE.md). Show the text first, and append it only after a yes:</p><pre><code>## Token rules (every agent)
+- Every turn re-reads your whole context. Wait with ONE blocking command (`gh pr checks N --watch`, `until …; do sleep 60; done`), never by repeated turns.
+- Long output goes to a file; show the exit code and the failing lines only. Ask gh/APIs for named fields.
+- No ack or status messages between agents; message at milestones only. To see an agent&#x27;s state, read its screen.
+- Workers end their session at PR ready or about 200k context, after writing a ~10-line handoff file.
+- Opus for judgement, Sonnet for building. Never Fable for agent work. Change models by restarting, never /model.</code></pre></li></ol><ol start="5"><li><p>Check with <code>hm-spend limits --check</code> (exit 0 = in place). The next day, offer the <code>token-spend-audit</code> skill to compare.</p></li></ol></div></details>
 </section>
-<div class="wrap detail">
-<section><h2>Install</h2><div class="snip"><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/plugins/kit-spend</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy install snippet for agent-context-limits">Copy</button></div></section>
-<section><h2>Includes</h2><p class="meta"><span>Commands: hm-spend</span> <span>Plugin: hivemill-spend</span></p></section>
-<section><h2>Overview</h2><div class="doc"># Agent context limits
-
-You are a thin guide over `${CLAUDE_PLUGIN_ROOT}/bin/hm-spend limits`. It writes only the `env` keys listed in docs/token-discipline.md (hivemill repo) into two Claude Code settings files and keeps every other setting. Before its first write to a file, it keeps a copy as `&lt;file&gt;.bak-hm-spend`.</div></section>
-<section><h2>Rules</h2><div class="doc">- Always show the plan (no `--apply`) first, and apply only after the user says yes in this conversation.
-- Never edit settings files by hand. Never touch keys other than the ones the command plans.
-- The worker limits apply to EVERY Claude Code session of this OS user that starts after the change, the user&#x27;s own included. Say this before applying. If the user&#x27;s own interactive sessions must keep the 1M window, they start them like the boss, with `claude --settings &lt;boss file&gt;`.
-- A running session keeps its old settings until it restarts. Say so; do not restart anyone&#x27;s agents yourself.
-- In the Hivemill factory, these limits already come from roles/settings. Do not run this skill on a factory box unless the user asks for it.</div></section>
-<section><h2>Steps</h2><div class="doc">1. Run `${CLAUDE_PLUGIN_ROOT}/bin/hm-spend limits` (add `--settings` or `--boss-settings` only if the user named other files). Show what it would set: the worker file (default `~/.claude/settings.json`) and the boss file (default `~/.claude/boss-settings.json`).
-2. Explain in plain words: workers get a 200k window, summarized at about 120k, with command output cut at 20,000 characters, file reads at 15k tokens and no advisor calls. The boss keeps 1M, summarized at about 400k.
-3. After an explicit yes, run the same command with `--apply`. Then give the one line the boss must start with: `claude --settings &lt;boss file&gt;`, plus the agent&#x27;s usual flags.
-4. Offer to add the team rules to the file every agent reads (usually the project&#x27;s CLAUDE.md). Show the text first, and append it only after a yes:
-
-   ```
-   ## Token rules (every agent)
-   - Every turn re-reads your whole context. Wait with ONE blocking command (`gh pr checks N --watch`, `until …; do sleep 60; done`), never by repeated turns.
-   - Long output goes to a file; show the exit code and the failing lines only. Ask gh/APIs for named fields.
-   - No ack or status messages between agents; message at milestones only. To see an agent&#x27;s state, read its screen.
-   - Workers end their session at PR ready or about 200k context, after writing a ~10-line handoff file.
-   - Opus for judgement, Sonnet for building. Never Fable for agent work. Change models by restarting, never /model.
-   ```
-
-5. Check with `hm-spend limits --check` (exit 0 = in place). The next day, offer the `token-spend-audit` skill to compare.</div></section>
-<section><h2>Combines with</h2><ul class="plain"><li><a href="../plugin-hivemill-spend/">hivemill-spend</a> See where your Claude tokens go across agents, and cap worker context while the boss keeps the big picture.</li><li><a href="../skill-hivemill-spend-token-spend-audit/">token-spend-audit</a> Find out where Claude tokens go on this machine (cost by model, the most expensive agent sessions, oversized contexts, turns that do nothing, cache writes, Fable use) and what to change.</li></ul></section>
-<section><h2>Full file</h2><p class="meta"><span>plugins/kit-spend/skills/agent-context-limits/SKILL.md</span></p><div class="snip"><pre class="code" id="full"><code>---
+<section class="component-section"><details class="raw-source"><summary>Full source file</summary><div class="snip"><div class="snippet-bar"><span>plugins/kit-spend/skills/agent-context-limits/SKILL.md</span><button class="copy" type="button" hidden data-copy aria-label="Copy full file for agent-context-limits">Copy full file</button></div><pre class="code" id="full"><code>---
 name: agent-context-limits
 description: Cap the context of worker agents on this machine (200k window, early compaction, short command and file output, no advisor calls) while one boss agent keeps the full 1M window, and add the token rules (blocking waits, logs to files, no acks) to the team&#x27;s instructions. Use when the user wants agents to use less context or fewer tokens, wants worker agents limited and the boss not, or after a token-spend-audit finding of big-context or chatter.
 argument-hint: &quot;[--settings FILE] [--boss-settings FILE]&quot;
@@ -94,10 +78,14 @@ You are a thin guide over `${CLAUDE_PLUGIN_ROOT}/bin/hm-spend limits`. It writes
    - Opus for judgement, Sonnet for building. Never Fable for agent work. Change models by restarting, never /model.
    ```
 
-5. Check with `hm-spend limits --check` (exit 0 = in place). The next day, offer the `token-spend-audit` skill to compare.</code></pre><button class="copy" type="button" hidden data-copy aria-label="Copy full file for agent-context-limits">Copy full file</button></div></section>
-<p class="links"><a class="arrow-link" href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/plugins/kit-spend/skills/agent-context-limits/SKILL.md">Source on GitHub</a></p>
-</div>
+5. Check with `hm-spend limits --check` (exit 0 = in place). The next day, offer the `token-spend-audit` skill to compare.</code></pre></div></details></section>
+</div><aside aria-label="Component information"><div class="component-aside"><section><h2>Component details</h2><dl class="component-facts"><dt>Type</dt><dd>Skill</dd><dt>Name</dt><dd><code>agent-context-limits</code></dd>
+<dt>Plugin</dt><dd>hivemill-spend</dd>
+<dt>Commands</dt><dd><code>hm-spend</code></dd>
+<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/53b6a6f92a3f88983593a92caa765419764323c3"><code>53b6a6f92a3f</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/plugins/kit-spend/skills/agent-context-limits/SKILL.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
+<section><h2>Related components</h2><ul class="component-related"><li><a href="../plugin-hivemill-spend/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#spend"/></svg><span>Hivemill Spend</span><span aria-hidden="true">↗</span></a></li><li><a href="../skill-hivemill-spend-token-spend-audit/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#spend"/></svg><span>Token spend audit</span><span aria-hidden="true">↗</span></a></li></ul></section>
+</div></aside></div>
 </main>
-<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Built from volekerb/hivemill at 53b6a6f92a3f (2026-11-17).</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
+<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at 53b6a6f92a3f (2026-11-17).</div></footer>
 </body>
 </html>
