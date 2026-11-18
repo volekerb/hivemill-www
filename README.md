@@ -1,10 +1,21 @@
 # hivemill-www
 
-Static site for hivemill.dev, served by GitHub Pages from the repo root. No framework, no bundler, no build step.
+Static site for hivemill.dev. GitHub Actions stages the marketing pages, generates the real product demo with fictional data, tests the resulting site, and publishes it through GitHub Pages. Runtime remains native HTML/CSS/JavaScript; no application server or frontend bundle is needed.
 
 ## Preview the redesign
 
-From this directory, run `python3 -m http.server 18440 --bind 127.0.0.1`, then open `http://127.0.0.1:18440/`.
+Build and preview the same artifact used in production:
+
+```sh
+python3 -m venv .local/venv
+.local/venv/bin/python -m pip install -r requirements-dev.txt
+git clone https://github.com/volekerb/hivemill .local/demo-source
+git -C .local/demo-source checkout --detach "$(python3 -c 'import json; print(json.load(open("demo/source.json"))["sha"])')"
+.local/venv/bin/python tools/build_site.py --factory .local/demo-source
+python3 -m http.server 18440 --bind 127.0.0.1 --directory build/site
+```
+
+Open `http://127.0.0.1:18440/`. Re-run the build after editing source files. The build replaces only `build/site`, and leaves the last successful artifact intact if generation fails.
 
 - `/`: the redesigned B2B homepage, customer workflow examples and developer catalog entry.
 - `/demo/`: the actual dashboard exported with fictional demo data. Goals, tasks, resources, usage, alerts, selected filters and themes are browsable. No live factory is connected and no agents run. Some compound filters and fictional external PR links are unavailable and labeled accordingly.
@@ -16,7 +27,9 @@ From this directory, run `python3 -m http.server 18440 --bind 127.0.0.1`, then o
 
 The central message is “Close your laptop. Keep work moving.” Agent execution happens on the customer's infrastructure. Monitoring helps the team oversee the work; the catalog helps developers compose a factory from individual roles, skills and plugins. The three business stories are examples, not customer case studies.
 
-GitHub Pages publishes the repository root on `main` to https://hivemill.dev/. Changes are checked through a pull request before merging into that publishing branch.
+The `site` workflow builds and tests every pull request. Only a push or manual workflow run on `main` deploys `build/site` to https://hivemill.dev/. Pull requests and scheduled checks never deploy.
+
+**One-time migration:** before merging the build-workflow change, set the repository’s **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. Keep the existing `hivemill.dev` custom domain. The current deployment stays live until the new workflow publishes its tested artifact. Do not keep “Deploy from a branch”: generated demo pages are no longer committed to `main`.
 
 ## Design and assets
 
@@ -27,13 +40,19 @@ GitHub Pages publishes the repository root on `main` to https://hivemill.dev/. C
 
 ## Refresh the demo
 
-Clone the public factory repository alongside this website, install its normal Python requirements if needed, then run `python3 tools/export_demo.py --factory ../hivemill`. The exporter creates a temporary isolated demo, starts only a loopback read-only server, exports the allowed view graph, and stops that server. It never connects to a configured or live factory. `demo/manifest.json` records the source commit and exported routes. Refresh all demo views together when the product changes.
+`demo/source.json` is the source of truth for the demo renderer commit, seed time, render time, timezone, fictional machine, and existing URL contract. It is intentionally independent of the catalog’s source pin. The current contract covers all 800 existing demo URLs, including timestamp-based resource pagination.
 
-Demo pages are generated artifacts. Keep them separate from the marketing CSS so visitors see the actual product. They require no server-side application on GitHub Pages; only the requested page and shared assets are loaded.
+`tools/build_site.py` copies only public files into a fresh staging directory and calls `tools/export_demo.py`. The exporter seeds a temporary factory home and runs only its read-only loopback server. It inherits no caller credentials or live factory settings. A build-only child freezes the sample’s clock, initializes token data before serving, and uses fictional machine telemetry so CI does not change the scenario. It stops the server and removes the temporary factory when finished. No database or factory process is deployed.
+
+The exported HTML, shared product assets, and `demo/manifest.json` exist only under ignored `build/site/demo/` and in the deployment artifact. Do not edit or commit them. CSS font paths remain relative to `/demo/static/`; theme preferences remain isolated from a live factory. Navigation, filters, details, disclosures, and themes use the same product UI as before.
+
+To update the product demo, review a new factory commit, update `demo/source.json`, check out that commit, and rebuild. A changed route contract deliberately fails the build: review removed/added URLs and preserve compatibility before updating its count and SHA-256 (computed from `json.dumps(routes, sort_keys=True)`). Keep the seed and renderer clocks aligned so time-windowed charts remain populated. To export only the demo, use `python3 tools/export_demo.py --factory PATH --out FRESH_DIRECTORY`.
 
 ## Validation
 
-Install `requirements-dev.txt`, then run `python3 -m unittest discover -s tests`. The demo integrity checks cover local links/assets, honest labels, route boundaries and removal of fictional external PR destinations. Set `HIVEMILL_SOURCE` to a factory checkout to include its public-text guard locally. The existing CI runs catalog and image tests, checks the pinned catalog, and verifies snippet references. Run the complete suite with `HIVEMILL_SOURCE` set before publishing demo changes. Regenerate catalog pages with `python3 tools/catalog.py render --out catalog/index.html` after editing either catalog template or the generator.
+After building, run `.local/venv/bin/python -m unittest discover -s tests`. Demo checks read `build/site` by default; set `SITE_ROOT` to inspect another complete artifact. Missing output fails instead of silently skipping checks. The suite validates the existing route contract, every demo link and asset, public-page packaging, source exclusions, font paths, theme isolation, honest labels, and unavailable fictional PR destinations.
+
+Set `HIVEMILL_SOURCE` to a clean checkout at `catalog/catalog.json`’s source SHA to include the factory public-text guard. CI checks out the catalog and demo pins separately, runs the full suite, checks catalog output, and verifies all snippet references before publishing. Regenerate catalog pages with `python3 tools/catalog.py render --out catalog/index.html` after editing either catalog template or the generator.
 
 ## Existing foundation
 

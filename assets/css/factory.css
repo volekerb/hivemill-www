@@ -28,19 +28,25 @@ header.site nav a[href*="work-with-me"] { background:var(--ink); color:var(--bg)
 .text-link:hover { text-decoration:underline; } .text-link span { font-size:1.25rem; }
 .actions { align-items:center; gap:1.8rem; }
 .factory-hero { position:relative; isolation:isolate; min-height:650px; overflow:hidden; }
-.hero-content { position:relative; z-index:1; padding-block:5.4rem 6rem; pointer-events:none; }
+.hero-content { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr); column-gap:3rem; padding-block:5.4rem 6rem; pointer-events:none; }
+.hero-content > * { grid-column:1; min-width:0; }
 .hero-content a { pointer-events:auto; }
 .eyebrow { font-size:.73rem; letter-spacing:.13em; text-transform:uppercase; color:var(--honey-ink); font-weight:600; margin-bottom:1.5rem; }
 .hero-content h1 { font-size:clamp(3.4rem,5.2vw,4.8rem); max-width:14ch; letter-spacing:-.055em; }
 .hero-description { color:var(--ink-2); font-size:1.13rem; line-height:1.65; max-width:25rem; margin:1.8rem 0 2.1rem; }
 .hero-machine { position:absolute; z-index:0; inset:0 -7% 0 24%; background:url(../brand/hive-mill.webp) 50% 50% / cover no-repeat; mask-image:linear-gradient(to right,transparent 0%,#000 24%); }
-/* The hero image is dark photography; light mode uses a contained image area instead of a theme-inverted section. */
-@media(prefers-color-scheme:light) { :root:not([data-theme="dark"]) .hero-machine { inset:3rem 3rem 3rem 45%; border-radius:10px; mask-image:none; background-position:64% 50%; } }
-:root[data-theme="light"] .hero-machine { inset:3rem 3rem 3rem 45%; border-radius:10px; mask-image:none; background-position:64% 50%; }
-@media(min-width:768px) {
- :root[data-theme="light"] .hero-content h1 { font-size:clamp(3rem,4.8vw,4.6rem); }
+/* Light mode reserves separate columns for copy and dark photography.
+   Both use the same midpoint and gutter, so the headline cannot cross the image. */
+@media(min-width:1024px) {
+ :root[data-theme="light"] .hero-content { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ :root[data-theme="light"] .hero-content h1 { max-width:100%; font-size:clamp(3rem,4.8vw,4.6rem); }
+ :root[data-theme="light"] .hero-machine { inset:3rem 3rem 3rem calc(50% + 1.5rem); border-radius:10px; mask-image:none; background-position:64% 50%; }
 }
-@media(min-width:768px) and (prefers-color-scheme:light) { :root:not([data-theme="dark"]) .hero-content h1 { font-size:clamp(3rem,4.8vw,4.6rem); } }
+@media(min-width:1024px) and (prefers-color-scheme:light) {
+ :root:not([data-theme="dark"]) .hero-content { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ :root:not([data-theme="dark"]) .hero-content h1 { max-width:100%; font-size:clamp(3rem,4.8vw,4.6rem); }
+ :root:not([data-theme="dark"]) .hero-machine { inset:3rem 3rem 3rem calc(50% + 1.5rem); border-radius:10px; mask-image:none; background-position:64% 50%; }
+}
 .principles { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; padding-block:2rem; border-block:1px solid var(--line); }
 .principles p { display:flex; flex-direction:column; gap:.35rem; font-size:.87rem; }
 .principles strong { font-weight:600; } .principles span { color:var(--ink-2); }
@@ -144,6 +150,11 @@ footer.site .footer-note { display:block; margin-top:1.7rem; font-size:.7rem; co
  .hero-machine { left:20%; right:-20%; } .review-layout,.business-story { gap:3rem; }
  .visibility-grid { gap:2rem; } .start-layout { gap:3rem; }
 }
+@media(max-width:1023px) {
+ .factory-hero { min-height:0; display:flex; flex-direction:column; padding-bottom:0; }
+ .hero-content { padding-block:3rem 1rem; pointer-events:auto; }
+ .hero-machine { position:relative; inset:auto; width:100%; height:auto; aspect-ratio:16/9; margin-top:1rem; mask-image:none; background-size:cover; background-position:center; }
+}
 @media(max-width:767px) {
  .wrap { width:calc(100% - 2rem); } header.site .wrap { min-height:68px; gap:.5rem 1rem; padding-block:.8rem; }
  header.site nav { width:100%; margin:0; gap:.6rem; justify-content:space-between; font-size:.72rem; order:3; }
@@ -153,7 +164,6 @@ footer.site .footer-note { display:block; margin-top:1.7rem; font-size:.7rem; co
  .hero-content { padding-block:3rem 1rem; pointer-events:auto; } .hero-content h1 { font-size:clamp(2rem,10vw,3.3rem); max-width:none; }
  .hero-description { max-width:32ch; font-size:1rem; margin:1.4rem 0 1.6rem; } .eyebrow { font-size:.64rem; margin-bottom:1rem; }
  .hero-machine { position:relative; inset:auto; height:auto; width:100%; aspect-ratio:16/9; margin-top:.5rem; mask-image:none; background-size:cover; background-position:center; }
- :root[data-theme="light"] .hero-machine { inset:auto; border-radius:0; }
  .actions { gap:1.5rem; } .btn { font-size:.9rem; }
  .principles { grid-template-columns:1fr; gap:1rem; padding-block:1.6rem; }
  .principles p { display:grid; grid-template-columns:1.1fr 1.5fr; gap:1rem; font-size:.76rem; }
@@ -178,11 +188,6 @@ footer.site .footer-note { display:block; margin-top:1.7rem; font-size:.7rem; co
  .closing { padding-block:4rem 1rem; } .closing h2 { font-size:3rem; }
  footer.site .wrap { gap:1.1rem; } .page-head { padding-top:3rem; } .page-head h1 { font-size:2.8rem; }
 }
-@media(max-width:767px) and (prefers-color-scheme:light) { :root:not([data-theme="dark"]) .hero-machine { inset:auto; border-radius:0; } }
-@media(min-width:768px) and (max-width:1100px) {
- :root[data-theme="light"] .hero-machine { inset:3rem 1.5rem 3rem 52%; }
-}
-@media(min-width:768px) and (max-width:1100px) and (prefers-color-scheme:light) { :root:not([data-theme="dark"]) .hero-machine { inset:3rem 1.5rem 3rem 52%; } }
 
 /* Product story, chapter transitions, and the moving factory. Native scrolling stays intact. */
 header.site { position:sticky; top:0; z-index:10; }

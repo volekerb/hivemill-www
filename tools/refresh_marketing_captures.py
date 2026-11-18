@@ -16,7 +16,7 @@ CROP = (240, 100, 1280, 740)
 
 def main():
     entries = json.loads((IMG/'SOURCES.json').read_text())
-    sha = json.loads((ROOT/'demo/manifest.json').read_text())['sha']
+    sha = json.loads((ROOT/'demo/source.json').read_text())['sha']
     for view in VIEWS:
         for theme in ('light','dark'):
             source = CAPTURES/f'{view}-{theme}.jpg'

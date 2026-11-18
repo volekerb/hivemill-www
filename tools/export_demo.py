@@ -7,7 +7,7 @@ Unexported compound filters and fictional external PR links are visibly unavaila
 """
 import argparse
 from collections import deque
-from datetime import datetime, timezone
+from contextlib import contextmanager
 import hashlib
 import html
 import json
@@ -17,10 +17,12 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from urllib.parse import parse_qsl, urlencode, urlsplit
 from urllib.request import urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / 'demo/source.json'
 BASE_PATHS = ('/', '/goals', '/tasks', '/agents', '/throughput', '/quality', '/tokens', '/changelog', '/resources')
 LINK = re.compile(r'<a\b([^>]*)>(.*?)</a>', re.S)
 HREF = re.compile(r'\bhref="([^"]*)"')
@@ -72,20 +74,57 @@ def render(raw, pages):
     banner = '<aside class="demo-banner" aria-label="Demo information"><div><strong>Interactive product demo</strong><span>Fictional data · No agents running</span></div><nav aria-label="Demo actions"><a href="index.html#needs-you">View alerts</a><a href="resources.html">Resources</a><a href="tokens.html">Cost &amp; usage</a><a href="../">Back to Hivemill ↗</a></nav><details><summary>About this demo</summary><p>This is the actual Hivemill interface with a fixed fictional scenario. Explore pages, goals, tasks, supported filters and themes. Some combined filters and external pull requests are unavailable. No live factory is connected.</p></details></aside>'
     return raw.replace('<body>', '<body>' + banner)
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--factory', type=Path, required=True)
-    args = parser.parse_args()
-    factory = args.factory.resolve()
+@contextmanager
+def demo_server(factory, scenario, config):
+    """Run only the isolated read-only server, with no caller credentials or live home."""
     sys.path.insert(0, str(factory / 'ci'))
-    from demo_cdp import seed_demo, serve_demo, stop
-    out = ROOT / 'demo'
-    out.mkdir(exist_ok=True)
+    import screenshots
+
+    port = screenshots.free_port()
+    env = {**screenshots.clean_env(scenario / 'home', scenario),
+           **screenshots.DEMO_MACHINE, 'TZ': config['timezone']}
+    with tempfile.TemporaryFile(mode='w+') as log:
+        process = subprocess.Popen(
+            [sys.executable, str(ROOT / 'tools/serve_demo_snapshot.py'),
+             '--factory', str(factory), '--port', str(port), '--at', config['render_at'],
+             '--config', str(SOURCE)],
+            env=env, stdout=log, stderr=log, start_new_session=True)
+        try:
+            deadline = time.monotonic() + 30
+            while time.monotonic() < deadline:
+                if process.poll() is not None:
+                    log.seek(0)
+                    raise RuntimeError('Demo server exited early:\n' + log.read())
+                try:
+                    with urlopen(f'http://127.0.0.1:{port}/', timeout=2) as response:
+                        if response.status == 200:
+                            break
+                except OSError:
+                    time.sleep(0.1)
+            else:
+                raise RuntimeError('Demo server did not become ready within 30 seconds')
+            yield port
+        finally:
+            screenshots.stop(process)
+
+
+def export_demo(factory, out):
+    factory, out = Path(factory).resolve(), Path(out).resolve()
+    config = json.loads(SOURCE.read_text())
+    sha = subprocess.check_output(['git', '-C', str(factory), 'rev-parse', 'HEAD'], text=True).strip()
+    if sha != config['sha']:
+        raise ValueError(f'Demo source must be pinned to {config["sha"]}; found {sha}')
+    if subprocess.check_output(['git', '-C', str(factory), 'status', '--porcelain', '--untracked-files=no']):
+        raise ValueError('Demo source checkout has modified tracked files; use a clean pinned checkout')
+    if out.exists():
+        raise ValueError(f'Output already exists: {out}. Use a fresh output directory.')
+    sys.path.insert(0, str(factory / 'ci'))
+    from demo_cdp import seed_demo
+
     with tempfile.TemporaryDirectory(prefix='hivemill-marketing-demo-') as tmp:
         scenario = Path(tmp) / 'factory'
-        seed_demo(scenario, datetime.now(timezone.utc).isoformat(timespec='seconds'))
-        port, process = serve_demo(scenario)
-        try:
+        seed_demo(scenario, config['seed_at'])
+        with demo_server(factory, scenario, config) as port:
             queue, queued, pages = deque(BASE_PATHS), set(BASE_PATHS), {}
             while queue:
                 route = queue.popleft()
@@ -98,11 +137,14 @@ def main():
                         queued.add(target); queue.append(target)
                 if len(queued) > 1500:
                     raise RuntimeError('Demo route graph unexpectedly large; inspect before exporting.')
-        finally:
-            stop(process)
+    routes = {k: filename(k) for k in sorted(pages)}
+    digest = hashlib.sha256(json.dumps(routes, sort_keys=True).encode()).hexdigest()
+    if len(routes) != config['routes']['count'] or digest != config['routes']['sha256']:
+        raise RuntimeError('Demo routes changed. Review the source update and URL compatibility before updating demo/source.json.')
+    out.mkdir(parents=True)
     for route, raw in pages.items():
         (out / filename(route)).write_text(render(raw, pages))
-    shutil.copytree(factory / 'web/static', out / 'static', dirs_exist_ok=True)
+    shutil.copytree(factory / 'web/static', out / 'static')
     # Stylesheet URLs must remain inside /demo/static on a static host.
     for css in (out / 'static').glob('*.css'):
         css.write_text(re.sub(r'''url\((["']?)/static/''', r'url(\1', css.read_text()))
@@ -110,11 +152,19 @@ def main():
     # Theme preference must not affect a live factory on another path of the same origin.
     theme = out / 'static/theme.js'
     theme.write_text(theme.read_text().replace('"factory-theme"', '"hivemill-demo-theme"').replace('"factory-keep"', '"hivemill-demo-keep"'))
-    provenance = {'source': 'https://github.com/volekerb/hivemill',
-                  'sha': subprocess.check_output(['git', '-C', str(factory), 'rev-parse', 'HEAD'], text=True).strip(),
+    provenance = {'source': config['source'], 'sha': sha,
                   'data': 'Isolated ci demo_seed fictional data; no live factory data',
-                  'pages': len(pages), 'routes': {k: filename(k) for k in sorted(pages)}}
+                  'seed_at': config['seed_at'], 'render_at': config['render_at'],
+                  'timezone': config['timezone'], 'pages': len(pages), 'routes': routes}
     (out / 'manifest.json').write_text(json.dumps(provenance, indent=2) + '\n')
     print(f'Exported {len(pages)} real dashboard views to {out}')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--factory', type=Path, required=True)
+    parser.add_argument('--out', type=Path, required=True, help='Fresh output directory (normally build/site/demo)')
+    args = parser.parse_args()
+    export_demo(args.factory, args.out)
 
 if __name__ == '__main__': main()
