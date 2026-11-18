@@ -1,0 +1,108 @@
+name: site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+
+      - name: Read the independent source pins
+        id: sources
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          print('demo=' + json.load(open('demo/source.json'))['sha'])
+          print('catalog=' + json.load(open('catalog/catalog.json'))['source']['sha'])
+          PY
+
+      - name: Check out the demo renderer
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: volekerb/hivemill
+          ref: ${{ steps.sources.outputs.demo }}
+          path: .local/demo-source
+          persist-credentials: false
+
+      - name: Check out the catalog source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: volekerb/hivemill
+          ref: ${{ steps.sources.outputs.catalog }}
+          path: .local/catalog-source
+          persist-credentials: false
+
+      - name: Install build and test dependencies
+        run: python3 -m pip install -r requirements-dev.txt
+
+      - name: Build the public site and isolated demo
+        run: python3 tools/build_site.py --factory .local/demo-source
+
+      - name: Test the source and built artifact
+        env:
+          HIVEMILL_SOURCE: ${{ github.workspace }}/.local/catalog-source
+          SITE_ROOT: ${{ github.workspace }}/build/site
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Catalog matches the pinned source
+        run: python3 tools/catalog.py check --src .local/catalog-source
+
+      - name: Snippets resolve (paths and raw URLs)
+        run: python3 tools/catalog.py verify-snippets --src .local/catalog-source --network
+
+      - name: Upload the generated Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: build/site
+          include-hidden-files: true
+
+      - name: Report when the pin is behind hivemill main
+        if: github.event_name == 'schedule'
+        run: |
+          git -C .local/catalog-source fetch --depth=1 origin main
+          git -C .local/catalog-source checkout --quiet --detach FETCH_HEAD
+          python3 tools/catalog.py build --src .local/catalog-source --out "$RUNNER_TEMP/main-catalog.json"
+          pinned="$(python3 -c 'import json; print(json.load(open("catalog/catalog.json"))["source"]["sha"])')"
+          latest="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["source"]["sha"])' "$RUNNER_TEMP/main-catalog.json")"
+          if [ "$pinned" != "$latest" ]; then
+            echo "catalog behind main: pinned $pinned, hivemill main is $latest"
+          fi
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Deploy the tested artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
