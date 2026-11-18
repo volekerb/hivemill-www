@@ -162,6 +162,14 @@ class CatalogTest(unittest.TestCase):
         self.assertIn("purpose", r.stderr)
         self.assertFalse(os.path.exists(self.out))
 
+    def test_editorial_overrides_do_not_replace_source_content(self):
+        baseline = self.build()
+        self.write(self.ov, json.dumps({"role:alpha": {"summary": "Help a reader choose this role.",
+                                                       "use_when": "Use for a scoped task."}}))
+        updated = self.build()
+        self.assertEqual(updated, baseline, "editorial copy must not change source-derived catalog data")
+        self.assertEqual(self.item(updated, "role:alpha")["purpose"], "does the first thing")
+
     def test_check_passes_when_equal(self):
         self.build()
         r = tool("check", "--src", self.src, "--catalog", self.out, "--overrides", self.ov, "--skip-pages")
@@ -283,6 +291,21 @@ class CatalogTest(unittest.TestCase):
         self.assertRegex(page, r'href="\.\./\.\./assets/css/catalog\.css(?:\?v=[0-9]+)?"')
         self.assertIn('href="../"', page)
         self.assertIn("/blob/%s/roles/alpha.md" % git(self.src, "rev-parse", "HEAD"), page)
+
+    def test_detail_editorial_copy_keeps_install_and_full_source(self):
+        result = self.render_site({"role:alpha": {"icon": "ask", "summary": "Choose a scoped worker role.",
+                                                  "use_when": "When a task needs an owner.",
+                                                  "requirements": "A configured factory."}})
+        self.assertEqual(result.returncode, 0, result.stderr)
+        page = self.page("role-alpha/index.html")
+        self.assertIn('Choose a scoped worker role.', page)
+        self.assertIn('When a task needs an owner.', page)
+        self.assertIn('A configured factory.', page)
+        self.assertIn('Copy full file', page)
+        self.assertIn('does the first thing', page)
+        self.assertIn('curl -fsSLO', page)
+        self.assertIn('<title>Alpha agent role | Hivemill</title>', page)
+        self.assertIn('rel="canonical" href="https://hivemill.dev/catalog/role-alpha/"', page)
 
     def test_check_fails_when_a_page_drifts_and_passes_when_fresh(self):
         self.render_site()

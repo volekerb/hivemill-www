@@ -1,10 +1,10 @@
 // Progressive enhancement: all stories remain readable without JavaScript.
 const stages = [
- ['You + the boss', 'Start with a clear outcome.', 'Describe the change and how you will know it works. The boss turns that request into a goal with acceptance criteria.'],
- ['Director + lead', 'Give every agent a clear job.', 'A director staffs a lead. The lead plans tasks and assigns work, so each agent has a defined responsibility.'],
- ['Coder', 'Build the change in its own branch.', 'A coder implements the task in a dedicated worktree and opens a pull request. The coder cannot approve or merge its own change.'],
- ['Reviewer + QA', 'Check the code. Run the tests.', 'One agent reviews the diff. Another runs tests against the acceptance criteria. Their verdicts are separate and recorded.'],
- ['Judge', 'Merge only when both checks pass.', 'The judge evaluates the reviewer and QA verdicts. Both must pass to merge. A failure returns to the coder with findings.']
+ ['You + the boss', 'Define the outcome.', 'Describe the change and acceptance criteria. The boss turns your request into a goal.'],
+ ['Director + lead', 'Give every agent a clear job.', 'A lead plans tasks and assigns agents, each with a defined responsibility.'],
+ ['Coder', 'Build in a separate worktree.', 'A coder implements the task and opens a pull request. Separate agents check the change.'],
+ ['Reviewer + QA', 'Review the diff. Run the tests.', 'A reviewer inspects the code. QA checks the acceptance criteria. Both record their verdicts.'],
+ ['Judge', 'Apply the project’s merge policy.', 'By default, review and QA must pass before merging. Failed checks return findings to the coder.']
 ];
 const stageButtons = [...document.querySelectorAll('[data-stage]')];
 const play = document.getElementById('play-flow');
@@ -39,7 +39,7 @@ function selectStory(name) {
  storyButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.story === name)));
  stories.forEach(p => { p.hidden = p.dataset.storyPanel !== name; p.classList.toggle('is-entering', !p.hidden); });
 }
-if (stories.length) { selectStory('saas'); storyButtons.forEach(b => b.addEventListener('click', () => selectStory(b.dataset.story))); }
+if (stories.length) { stories[0].closest('.stories-section')?.classList.add('is-tabbed'); selectStory('saas'); storyButtons.forEach(b => b.addEventListener('click', () => selectStory(b.dataset.story))); }
 // An explicit theme control makes the design accessible in either appearance.
 const header = document.querySelector('header.site .wrap');
 if (header) {
@@ -103,6 +103,7 @@ if (productFrame) {
   viewport.classList.add('is-interactive'); productFrame.tabIndex=0; interact.textContent='Finish exploring ×';
  });
  const observer=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){ if(!productFrame.src) productFrame.src=productFrame.dataset.src; observer.disconnect(); }},{rootMargin:'400px'});
+ productFrame.closest('.product-console').hidden=false;
  observer.observe(viewport);
 }
 // Film chapters are direct, keyboard-operable ways to inspect the walkthrough.

@@ -3,35 +3,54 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agent context limits | Hivemill</title>
-<meta name="description" content="Cap the context of worker agents on this machine (200k window, early compaction, short command and file output, no advisor calls) while one boss agent keeps the full 1M window, and add the token rules (blocking waits, logs to files, no acks) to the team&#x27;s instructions.">
+<title>Agent context limits skill | Hivemill</title>
+<meta name="description" content="Limit worker context while preserving a larger context for the coordinating agent.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
 <link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/css/v2.css">
-<link rel="stylesheet" href="../../assets/css/factory.css?v=2026111806">
-<script type="module" src="../../assets/js/factory.js?v=2026111804"></script>
-<link rel="stylesheet" href="../../assets/css/catalog.css?v=2026111805">
+<link rel="stylesheet" href="../../assets/css/factory.css?v=2026111807">
+<script type="module" src="../../assets/js/factory.js?v=2026111807"></script>
+<link rel="stylesheet" href="../../assets/css/catalog.css?v=2026111807">
 <script type="module" src="../../assets/js/motion.js"></script>
-<script type="module" src="../../assets/js/catalog.js?v=2026111804"></script>
+<script type="module" src="../../assets/js/catalog.js?v=2026111807"></script>
+<!-- Generated search metadata: tools/site_metadata.py -->
+<link rel="canonical" href="https://hivemill.dev/catalog/skill-hivemill-spend-agent-context-limits/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hivemill">
+<meta property="og:title" content="Agent context limits skill | Hivemill">
+<meta property="og:description" content="Limit worker context while preserving a larger context for the coordinating agent.">
+<meta property="og:url" content="https://hivemill.dev/catalog/skill-hivemill-spend-agent-context-limits/">
+<meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta property="og:image:width" content="1344">
+<meta property="og:image:height" content="752">
+<meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent context limits skill | Hivemill">
+<meta name="twitter:description" content="Limit worker context while preserving a larger context for the coordinating agent.">
+<meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hivemill","item":"https://hivemill.dev/"},{"@type":"ListItem","position":2,"name":"Catalog","item":"https://hivemill.dev/catalog/"},{"@type":"ListItem","position":3,"name":"Agent context limits skill","item":"https://hivemill.dev/catalog/skill-hivemill-spend-agent-context-limits/"}]}</script>
+<!-- End generated search metadata -->
 </head>
 <body class="catalog-site">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap">
 <a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
 <nav aria-label="Site">
-<a href="../../">Home</a>
+<a href="../../factories/what/">How it works</a>
+<a href="../../demo/">Demo</a>
 <a href="../../catalog/" aria-current="location">Catalog</a>
-<a href="../../work-with-me/">Work with me</a>
 <a href="../../guides/install/">Install</a>
-<a href="https://github.com/volekerb/hivemill">GitHub</a>
+<a href="../../work-with-me/">Discuss a pilot</a>
 </nav>
 </div></header>
 <main id="main">
 <p class="sr" role="status" aria-live="polite" id="live"></p>
 <header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb"><a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#skills">Skills</a></nav>
-<div class="component-heading"><div><h1>Agent context limits</h1><p>Cap the context of worker agents on this machine (200k window, early compaction, short command and file output, no advisor calls) while one boss agent keeps the full 1M window, and add the token rules (blocking waits, logs to files, no acks) to the team&#x27;s instructions.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#limits"/></svg></div></div></header>
+<div class="component-heading"><div><h1>Agent context limits</h1><p>Limit worker context while preserving a larger context for the coordinating agent.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#limits"/></svg></div></div></header>
 <div class="wrap component-layout"><div class="component-body">
+<section class="component-section" id="use"><h2>When to use it</h2><p>Reduce unnecessary context growth across worker sessions on a factory host.</p><h3>Requirements</h3><p>Claude Code and the hivemill-spend plugin on the host where worker settings will be configured.</p></section>
 <section class="component-section" id="install"><h2>Install</h2><p>Install the hivemill-spend plugin to add this skill.</p><div class="snip"><div class="snippet-bar"><span>Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Terminal commands for agent-context-limits">Copy</button></div><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/plugins/kit-spend</code></pre></div></section>
 <section class="component-section" id="documentation"><h2>Documentation</h2>
 <details class="doc-section" open><summary>Overview</summary><div class="doc"><p>You are a thin guide over <code>${CLAUDE_PLUGIN_ROOT}/bin/hm-spend limits</code>. It writes only the <code>env</code> keys listed in docs/token-discipline.md (hivemill repo) into two Claude Code settings files and keeps every other setting. Before its first write to a file, it keeps a copy as <code>&lt;file&gt;.bak-hm-spend</code>.</p></div></details>

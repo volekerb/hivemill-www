@@ -18,7 +18,7 @@ header.site .wrap { min-height:76px; padding-block:.6rem; gap:2rem; }
 .brand { font-size:1.45rem; gap:.65rem; } .brand svg { width:1.9rem; height:1.9rem; }
 header.site nav { gap:1.7rem; font-size:.88rem; align-items:center; }
 header.site nav a { border:0; padding:.65rem 0; }
-header.site nav a[aria-current="page"] { color:var(--ink); }
+header.site nav a[aria-current] { color:var(--ink); }
 header.site nav a[href*="work-with-me"] { background:var(--ink); color:var(--bg); padding:.6rem 1rem; border-radius:4px; }
 .theme-toggle { border:1px solid var(--line); background:transparent; color:var(--ink-2); padding:.5rem .65rem; border-radius:4px; font-size:.75rem; }
 .btn { border:1px solid var(--line); border-radius:4px; padding:.95rem 1.15rem; min-height:3.2rem; gap:2rem; font-weight:600; }
@@ -139,7 +139,8 @@ footer.site .footer-note { display:block; margin-top:1.7rem; font-size:.7rem; co
  .hero-content h1 { animation-delay:.08s; } .hero-description { animation-delay:.16s; } .hero-content .actions { animation-delay:.24s; }
  .hero-machine { animation:machine-in 1.4s both cubic-bezier(.16,1,.3,1); }
  .process-step::before { transition:transform .45s ease; }
- .business-story.is-entering { animation:hero-in .45s both; }
+ .business-story.is-entering { animation:story-in .25s both; }
+ @keyframes story-in { from { opacity:0; } to { opacity:1; } }
  @keyframes hero-in { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
  @keyframes machine-in { from { opacity:0; transform:translateX(28px); } to { opacity:1; transform:none; } }
 }
@@ -157,7 +158,7 @@ footer.site .footer-note { display:block; margin-top:1.7rem; font-size:.7rem; co
 }
 @media(max-width:767px) {
  .wrap { width:calc(100% - 2rem); } header.site .wrap { min-height:68px; gap:.5rem 1rem; padding-block:.8rem; }
- header.site nav { width:100%; margin:0; gap:.6rem; justify-content:space-between; font-size:.72rem; order:3; }
+ header.site nav { width:100%; margin:0; gap:.45rem; justify-content:space-between; font-size:.72rem; order:3; }
  header.site nav a[href*="work-with-me"] { background:none; color:var(--ink-2); padding:.6rem 0; }
  .theme-toggle { margin-left:auto; } .brand { font-size:1.3rem; }
  .factory-hero { min-height:0; display:flex; flex-direction:column; padding-bottom:0; }
@@ -193,7 +194,7 @@ footer.site .footer-note { display:block; margin-top:1.7rem; font-size:.7rem; co
 header.site { position:sticky; top:0; z-index:10; }
 header.site nav a:not([href*="work-with-me"]) { position:relative; }
 header.site nav a:not([href*="work-with-me"])::after { content:""; position:absolute; inset:auto 0 .3rem; height:1px; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .28s ease; }
-header.site nav a:hover::after,header.site nav a[aria-current="page"]::after { transform:scaleX(1); transform-origin:left; }
+header.site nav a:hover::after,header.site nav a[aria-current]::after { transform:scaleX(1); transform-origin:left; }
 .btn,.text-link span,.theme-toggle,.console-tabs button { transition:transform .3s cubic-bezier(.16,1,.3,1),background-color .2s,color .2s,border-color .2s; }
 .btn:hover { transform:translateY(-2px); }
 .btn:active { transform:translateY(1px); }
@@ -235,10 +236,6 @@ header.site nav a:hover::after,header.site nav a[aria-current="page"]::after { t
  .js [data-reveal] { transition-duration:.85s; transition-timing-function:cubic-bezier(.16,1,.3,1); }
  .story-art { transition:transform .7s cubic-bezier(.16,1,.3,1); }
  .business-story:hover .story-art { transform:scale(1.015); }
- @supports (animation-timeline:view()) {
-  .hero-machine { animation:hero-depth linear both; animation-timeline:view(); animation-range:exit 0% exit 100%; }
-  @keyframes hero-depth { from { transform:translateY(0); } to { transform:translateY(8%); } }
- }
 }
 @media(min-width:768px) { .hero-content h1 { max-width:16ch; font-size:clamp(3.5rem,5.2vw,5rem); } }
 @media(max-width:767px) {
@@ -274,3 +271,60 @@ header.site nav a:hover::after,header.site nav a[aria-current="page"]::after { t
 .product-lightbox p { font-size:.8rem; color:var(--ink-2); margin-top:1rem; }
 .lightbox-close { position:absolute; top:.7rem; right:1rem; border:0; background:none; color:var(--ink); padding:.4rem; font-size:.8rem; }
 @media(prefers-reduced-transparency:reduce) { .product-lightbox::backdrop { background:#080b08; backdrop-filter:none; } }
+
+/* A shorter homepage puts product evidence before explanation. */
+.factory-home .factory-hero { min-height:580px; }
+.factory-home .hero-content { padding-block:4.4rem; }
+.factory-home .section { padding-top:5rem; }
+.factory-home .product-stage-heading { display:flex; align-items:end; justify-content:space-between; gap:2rem; max-width:none; margin-bottom:2rem; }
+.factory-home .product-stage-heading h2 { font-size:clamp(2.2rem,3.6vw,3.5rem); }
+.factory-home .product-stage-heading .eyebrow { margin:0 0 .9rem; }
+.factory-home .product-stage-heading > p { max-width:23ch; margin:0 0 .25rem; font-size:.95rem; }
+.product-context { display:grid; grid-template-columns:1fr 1fr auto; gap:2.5rem; padding-top:1.5rem; }
+.product-context h3 { font-size:.94rem; font-weight:600; letter-spacing:-.015em; margin-bottom:.5rem; }
+.product-context p { color:var(--ink-2); font-size:.85rem; line-height:1.65; max-width:42ch; }
+.product-context-links { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; }
+.product-context-links .text-link { font-size:.82rem; gap:.8rem; padding:.4rem 0; }
+.product-context .product-cost-note { grid-column:1 / -1; max-width:none; font-size:.78rem; margin-top:-1rem; }
+.factory-home .workflow-intro { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:end; max-width:none; margin-bottom:2rem; }
+.factory-home .workflow-intro > p { margin:0; max-width:42ch; font-size:.98rem; }
+.factory-home .stories-section { margin-top:5rem; padding-block:4rem; }
+.factory-home .stories-section .section-intro { margin-bottom:2rem; }
+.factory-home .story-art { aspect-ratio:16/9; }
+.stories-section.is-tabbed .business-story { margin-top:0; }
+.factory-home .story-body h3 { font-size:clamp(1.8rem,2.5vw,2.5rem); }
+.factory-home .story-body blockquote { margin-bottom:0; }
+.factory-home .story-bottom { margin-top:2rem; padding-top:1.2rem; }
+.start-choice { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+.start-choice p { color:var(--ink-2); max-width:45ch; }
+.start-actions { display:flex; align-items:center; flex-wrap:wrap; gap:1rem 2rem; margin-top:1.5rem; }
+.hosting-answers { display:grid; grid-template-columns:1fr 1fr; gap:4rem; border-top:1px solid var(--line); margin:3rem 0 0; padding-top:2rem; }
+.hosting-answers dt { font-weight:600; font-size:.95rem; margin-bottom:.6rem; }
+.hosting-answers dd { margin:0; color:var(--ink-2); font-size:.9rem; line-height:1.7; max-width:53ch; }
+@media(max-width:1100px) {
+ .product-context { grid-template-columns:1fr 1fr; gap:1.5rem 3rem; }
+ .product-context-links { grid-column:1 / -1; flex-direction:row; gap:2rem; justify-content:flex-start; }
+ .start-choice,.hosting-answers { gap:3rem; }
+}
+@media(max-width:1023px) {
+ .factory-home .factory-hero { min-height:0; }
+ .factory-home .hero-content { padding-block:3rem 1rem; }
+}
+@media(max-width:767px) {
+ .factory-home .section { padding-top:3.5rem; }
+ .factory-home .product-stage-heading { display:block; margin-bottom:1.5rem; }
+ .factory-home .product-stage-heading h2 { font-size:clamp(2rem,8.5vw,3rem); }
+ .factory-home .product-stage-heading > p { max-width:none; margin-top:.8rem; font-size:.9rem; }
+ .product-context { grid-template-columns:1fr; gap:1.25rem; }
+ .product-context p { max-width:none; }
+ .product-context-links { flex-wrap:wrap; gap:.5rem 1.5rem; }
+ .product-context .product-cost-note { margin-top:0; }
+ .factory-home .workflow-intro { grid-template-columns:1fr; gap:1rem; }
+ .factory-home .workflow-intro > p { font-size:.93rem; }
+ .factory-home .stories-section { margin-top:3.5rem; padding-block:3rem; }
+ .factory-home .story-body h3 { font-size:2rem; }
+ .stories-section.is-tabbed .story-body h3 { min-height:2.24em; }
+ .stories-section.is-tabbed .story-body blockquote { min-height:4.8em; }
+ .start-choice,.hosting-answers { grid-template-columns:1fr; gap:1.8rem; }
+ .hosting-answers { margin-top:2rem; padding-top:1.8rem; }
+}

@@ -20,16 +20,17 @@ Open `http://127.0.0.1:18440/`. Re-run the build after editing source files. The
 - `/`: the redesigned B2B homepage, customer workflow examples and developer catalog entry.
 - `/demo/`: the actual dashboard exported with fictional demo data. Goals, tasks, resources, usage, alerts, selected filters and themes are browsable. No live factory is connected and no agents run. Some compound filters and fictional external PR links are unavailable and labeled accordingly.
 - `/catalog/`: searchable developer library with concise component rows and individual installation/reference pages.
-- `/guides/install/`, `/guides/ask-to-merge/`, `/guides/watch/`: installation, delivery and monitoring guides.
-- `/factories/what/`, `/factories/who-merges/`: the factory model and an interactive merge-gate explanation.
+- `/factories/what/`: how the factory works, including the boundary between your host and model providers.
+- `/guides/install/`, `/guides/ask-to-merge/`, `/guides/watch/`: installation, a worked delivery example, and monitoring. Existing guide URLs remain available.
+- `/factories/who-merges/`: configurable merge policy and an interactive example of the default gate.
 - `/work-with-me/`: a scoped implementation and pilot path.
 - `/film/`: a silent, approximately 30-second product film with seekable chapters. The full film plays on request; the small homepage machinery loop pauses offscreen and respects reduced motion.
 
-The central message is “Close your laptop. Keep work moving.” Agent execution happens on the customer's infrastructure. Monitoring helps the team oversee the work; the catalog helps developers compose a factory from individual roles, skills and plugins. The three business stories are examples, not customer case studies.
+The central message is “Close your laptop. Keep work moving.” The homepage shows the product before explaining its workflow. Agent sessions run on the customer's host; Claude Code and Cursor still use their model providers. Monitoring distinguishes resource and usage caps from estimated monetary cost. The catalog helps developers compose a factory from individual roles, skills and plugins. The three business stories are examples, not customer case studies.
 
 The `site` workflow builds and tests every pull request. Only a push or manual workflow run on `main` deploys `build/site` to https://hivemill.dev/. Pull requests and scheduled checks never deploy.
 
-**One-time migration:** before merging the build-workflow change, set the repository’s **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. Keep the existing `hivemill.dev` custom domain. The current deployment stays live until the new workflow publishes its tested artifact. Do not keep “Deploy from a branch”: generated demo pages are no longer committed to `main`.
+GitHub Pages uses **GitHub Actions** as its deployment source, with the existing `hivemill.dev` custom domain. Generated demo pages are deployment output and are not committed to `main`.
 
 ## Design and assets
 
@@ -53,6 +54,19 @@ To update the product demo, review a new factory commit, update `demo/source.jso
 After building, run `.local/venv/bin/python -m unittest discover -s tests`. Demo checks read `build/site` by default; set `SITE_ROOT` to inspect another complete artifact. Missing output fails instead of silently skipping checks. The suite validates the existing route contract, every demo link and asset, public-page packaging, source exclusions, font paths, theme isolation, honest labels, and unavailable fictional PR destinations.
 
 Set `HIVEMILL_SOURCE` to a clean checkout at `catalog/catalog.json`’s source SHA to include the factory public-text guard. CI checks out the catalog and demo pins separately, runs the full suite, checks catalog output, and verifies all snippet references before publishing. Regenerate catalog pages with `python3 tools/catalog.py render --out catalog/index.html` after editing either catalog template or the generator.
+
+## Search metadata and page copy
+
+Each page owns its visible copy, title and description. `tools/site_metadata.py` derives canonical URLs, social previews and the supported structured data from those facts. After changing a title or description, run:
+
+```sh
+python3 tools/site_metadata.py --write
+python3 tools/site_metadata.py --check
+```
+
+Catalog summaries belong in `catalog/overrides.json`; keep the pinned prompts and source instructions intact. Rebuild the catalog from its pinned source and render its pages after changing those summaries. The catalog renderer uses the same metadata helper as the editorial pages.
+
+The build rejects stale metadata, excludes catalog source templates from the public artifact, and generates `sitemap.xml` and `robots.txt` inside `build/site`. The sitemap includes only the intended marketing and reference pages. The fictional demo remains crawlable so search engines can read its `noindex` directive, and its 800 route variants are excluded from the sitemap. Search and training crawler access remain unchanged. No special AI crawler file, fabricated review markup or guaranteed search ranking is implied.
 
 ## Existing foundation
 

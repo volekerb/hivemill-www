@@ -1,6 +1,6 @@
 /* Hivemill field guides and implementation offer. Shared site tokens live in factory.css. */
 .editorial {
-  --ed-space: clamp(3.5rem, 6.8vw, 6.5rem);
+  --ed-space: clamp(2.8rem, 5vw, 4.5rem);
   --ed-gap: clamp(2.5rem, 7vw, 7rem);
   --ed-plate: #242622;
   --ed-white: #f6f5ed;
@@ -12,13 +12,13 @@
 .editorial [id] { scroll-margin-top: 1.5rem; }
 .editorial h1, .editorial h2, .editorial h3 { font-family: var(--font-text); font-weight: 500; }
 .ed-title h1, .ed-contact h2 {
-  font-size: clamp(4rem, 7.6vw, 7.2rem);
+  font-size: clamp(3.2rem, 5.4vw, 5.2rem);
   letter-spacing: -.078em;
   line-height: .98;
-  text-wrap: initial;
+  text-wrap: balance;
 }
 .editorial main h2:not(.ed-plate-heading h2, .ed-gate-title h2, .ed-contact h2) {
-  font-size: clamp(2.8rem, 4.8vw, 4.65rem);
+  font-size: clamp(2.3rem, 3.6vw, 3.5rem);
   letter-spacing: -.068em;
   line-height: 1.035;
 }
@@ -155,6 +155,7 @@
 .ed-gate { padding: clamp(1.5rem, 3.2vw, 3rem); }
 .ed-gate-title .ed-kicker { color: var(--honey); margin-bottom: .6rem; }
 .ed-gate-title h2 { font-size: clamp(1.8rem, 2.8vw, 2.65rem); line-height: 1.05; letter-spacing: -.055em; }
+.ed-gate-context { margin-top: .85rem; color: var(--ed-metal); font-size: .85rem; line-height: 1.6; }
 .ed-gate-controls { margin-top: 1.6rem; display: grid; grid-template-columns: repeat(2,minmax(0, 1fr)); gap: 1.3rem; }
 .ed-gate-controls[hidden], .ed-gate-result[hidden], .ed-gate-static[hidden] { display: none; }
 .ed-gate-controls fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
@@ -196,6 +197,24 @@
 .ed-next-arrow { position: absolute; right: 0; top: 1.65rem; color: var(--honey-ink); font-size: 1.65rem; }
 .ed-ledger + .ed-nexts { margin-top: var(--ed-space); }
 .editorial footer.site { margin-top: 0; }
+/* Guides are reading surfaces: keep text in place while the visitor scrolls. */
+.js .editorial [data-reveal] { opacity: 1; transform: none; transition: none; }
+.ed-product-intro { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: clamp(2rem,5vw,5rem); align-items: end; padding-block: var(--ed-space) 2.5rem; }
+.ed-product-intro .ed-lead { max-width: 38ch; }
+.ed-product-intro .ed-link { margin-top: 1.2rem; }
+.ed-deployment { padding-bottom: var(--ed-space); border-bottom: 1px solid var(--line); }
+.editorial main .ed-deployment h2 { font-size: 1.6rem; letter-spacing: -.035em; margin-bottom: 1.2rem; }
+.ed-architecture { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 2rem; list-style: none; padding: 0; margin: 0; }
+.ed-architecture li { position: relative; min-width: 0; padding: 1.35rem; border-top: 2px solid var(--line); }
+.ed-architecture li:not(:last-child)::after { content: '→'; position: absolute; right: -1.4rem; top: 50%; color: var(--honey-ink); font-size: 1.2rem; }
+.ed-architecture .ed-architecture-host { background: var(--tint); border-color: var(--honey-ink); }
+.ed-architecture .ed-kicker { font-size: .65rem; margin-bottom: .65rem; }
+.ed-architecture h3 { font-size: 1.3rem; letter-spacing: -.035em; margin-bottom: .55rem; }
+.ed-architecture p:not(.ed-kicker) { font-size: .9rem; line-height: 1.6; color: var(--ink-2); }
+.ed-deployment > .ed-note { max-width: 85ch; margin-top: 1.3rem; color: var(--ink-2); font-size: .9rem; line-height: 1.7; }
+.ed-policy { display: grid; grid-template-columns: minmax(0,.83fr) minmax(0,1.18fr); gap: 1.5rem var(--ed-gap); padding-bottom: var(--ed-space); }
+.ed-policy code { overflow-wrap: anywhere; font-size: .85em; }
+.ed-policy-source { grid-column: 2; display: flex; gap: 1.1rem; flex-wrap: wrap; font-size: .88rem; }
 @media (prefers-reduced-motion: no-preference) {
   .ed-opening .ed-title, .ed-pilot-head .ed-title, .ed-feature-grid .ed-title { animation: ed-rise .8s var(--ease) both; }
   .ed-command-plate, .ed-source, .ed-monitor-print, .ed-gate, .ed-pilot-strip { animation: ed-rise 1.05s .08s var(--ease) backwards; }
@@ -203,7 +222,7 @@
   .ed-link span, .ed-next-arrow, .ed-view-row > :last-child { transition: transform .28s var(--ease); }
   .ed-link:hover span, .ed-next:hover .ed-next-arrow, .ed-view-row:hover > :last-child { transform: translate(3px,-2px); }
   .ed-gate-result.is-updated h3 { animation: ed-rise .3s var(--ease) both; }
-  @keyframes ed-rise { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: none; } }
+  @keyframes ed-rise { from { opacity: 0; } to { opacity: 1; } }
   @keyframes ed-machine-in { from { opacity: .35; transform: scale(1.04); } to { opacity: 1; transform: none; } }
 }
 @media (max-width: 1023px) {
@@ -217,6 +236,12 @@
   .editorial { --ed-space: 3.4rem; --ed-gap: 2rem; }
   .editorial [id] { scroll-margin-top: .5rem; }
   .ed-opening, .ed-handoffs, .ed-reading, .ed-overview, .ed-proof-pair, .ed-engagement, .ed-pilot-head, .ed-contact { grid-template-columns: 1fr; gap: 1.8rem; }
+  .ed-product-intro, .ed-policy { grid-template-columns: 1fr; gap: 1.5rem; }
+  .ed-product-intro { padding-block: 2.6rem 2rem; }
+  .ed-policy-source { grid-column: 1; }
+  .ed-architecture { grid-template-columns: 1fr; gap: 1.6rem; }
+  .ed-architecture li { padding: 1rem 1.15rem; }
+  .ed-architecture li:not(:last-child)::after { content: '↓'; top: auto; bottom: -1.55rem; right: 50%; }
   .ed-title h1, .ed-feature-grid h1, .ed-contact h2 { font-size: clamp(3.4rem, 11vw, 5rem); }
   .ed-title .ed-lead { margin-top: 1.15rem; }
   .ed-kicker { font-size: .63rem; margin-bottom: 1rem; }

@@ -4,38 +4,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <title>Watch the factory | Hivemill</title>
-    <meta name="description" content="Read goals, capacity, agent usage and alerts in the Hivemill web UI and Herdr desktop app.">
-    <link rel="canonical" href="https://hivemill.dev/guides/watch/">
-    <link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
+    <title>Monitor agents, resources and cost | Hivemill</title>
+    <meta name="description" content="Inspect progress, resource limits and estimated usage in Hivemill’s web dashboard, and add alert notifications through the optional Herdr app for Mac.">
+<link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
     <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/v2.css">
-    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111806">
-    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111804">
+    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111807">
+    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111807">
     <script type="module" src="/assets/js/motion.js"></script>
-    <script type="module" src="/assets/js/factory.js?v=2026111804"></script>
-    <script type="module" src="/assets/js/editorial.js?v=2026111804"></script>
-  </head>
+    <script type="module" src="/assets/js/factory.js?v=2026111807"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026111807"></script>
+<!-- Generated search metadata: tools/site_metadata.py -->
+<link rel="canonical" href="https://hivemill.dev/guides/watch/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hivemill">
+<meta property="og:title" content="Monitor agents, resources and cost | Hivemill">
+<meta property="og:description" content="Inspect progress, resource limits and estimated usage in Hivemill’s web dashboard, and add alert notifications through the optional Herdr app for Mac.">
+<meta property="og:url" content="https://hivemill.dev/guides/watch/">
+<meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta property="og:image:width" content="1344">
+<meta property="og:image:height" content="752">
+<meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monitor agents, resources and cost | Hivemill">
+<meta name="twitter:description" content="Inspect progress, resource limits and estimated usage in Hivemill’s web dashboard, and add alert notifications through the optional Herdr app for Mac.">
+<meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<!-- End generated search metadata -->
+</head>
   <body class="editorial ed-watch">
     <a class="skip" href="#main">Skip to content</a>
     <header class="site">
       <div class="wrap">
         <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
         <nav aria-label="Site">
-          <a href="/">Home</a>
-          <a href="/catalog/">Catalog</a>
-          <a href="/work-with-me/">Work with me</a>
-          <a href="/guides/install/">Install</a>
-          <a href="https://github.com/volekerb/hivemill">GitHub</a>
-        </nav>
+<a href="/factories/what/">How it works</a>
+<a href="/demo/">Demo</a>
+<a href="/catalog/">Catalog</a>
+<a href="/guides/install/">Install</a>
+<a href="/work-with-me/">Discuss a pilot</a>
+</nav>
       </div>
     </header>
     <main id="main">
       <section class="wrap ed-opening ed-watch-opening">
         <div class="ed-title">
           <p class="ed-kicker">Operator guide / Monitoring</p>
-          <h1>Watch the<br>factory.</h1>
-          <p class="ed-lead">Come back to the decisions that need you. See which goals moved, what held up a merge and how much capacity is left.</p>
+          <h1>Monitor work,<br>capacity and cost.</h1>
+          <p class="ed-lead">Use the read-only web dashboard to inspect progress and capacity. Add the optional Herdr app for Mac for a status bar and alert notifications.</p>
           <a class="btn btn--primary" href="/demo/index.html#needs-you">Open the demo overview<span aria-hidden="true">↗</span></a>
         </div>
         <div class="ed-monitor-print">
@@ -65,8 +81,8 @@
         <div class="ed-article">
           <section class="ed-chapter" id="web" aria-labelledby="web-title">
             <p class="ed-kicker">Browser / Read-only</p>
-            <h2 id="web-title">Open the web overview.</h2>
-            <p>Open the read-only web UI on the Linux host. The overview brings together live agents, open pull requests, active goals and work waiting for the owner.</p>
+            <h2 id="web-title">Inspect the web dashboard.</h2>
+            <p>The web UI runs on the Linux host. It shows live agents, pull requests, goals and work waiting for the owner. It does not run tasks from the browser.</p>
             <a class="ed-view-row" href="/demo/index.html#needs-you">
               <span class="ed-label">Attention</span>
               <div>
@@ -99,12 +115,13 @@
               </div>
               <span aria-hidden="true">↗</span>
             </a>
-            <p class="ed-note">The public demo uses fictional records. Claude cost estimates use model list prices. Your provider’s invoice reflects actual billing.</p>
+            <figure class="ed-shot"><picture><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/agents-current-dark-1x.webp 1x, ../../assets/img/agents-current-dark-2x.webp 2x" width="520" height="320"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="../../assets/img/agents-current-dark-1x.png 1x, ../../assets/img/agents-current-dark-2x.png 2x" width="520" height="320"><source type="image/webp" srcset="../../assets/img/agents-current-light-1x.webp 1x, ../../assets/img/agents-current-light-2x.webp 2x" width="520" height="320"><img src="../../assets/img/agents-current-light-1x.png" srcset="../../assets/img/agents-current-light-1x.png 1x, ../../assets/img/agents-current-light-2x.png 2x" width="520" height="320" alt="The Hivemill agents page, listing the agents by role" loading="lazy" decoding="async"></picture><figcaption>Agent roles and activity · Fictional demo data.</figcaption></figure>
+            <p class="ed-note">The public demo uses fictional records. Claude cost estimates use model list prices, not invoices. Cursor activity has no token-cost estimate. Usage caps govern agent starts; cost estimates are not monetary hard limits.</p>
           </section>
           <section class="ed-chapter" id="desktop" aria-labelledby="desktop-title">
             <p class="ed-kicker">Mac / Herdr desktop</p>
-            <h2 id="desktop-title">Keep an eye on the host.</h2>
-            <p>The factory runs on Debian or Ubuntu. On a Mac, the <a href="https://herdr.dev">Herdr desktop app</a> shows a Hivemill status bar and dashboard. Open the dashboard to see the active goals, budget and alerts across your configured teams.</p>
+            <h2 id="desktop-title">Add desktop alerts.</h2>
+            <p>The optional <a href="https://herdr.dev">Herdr app for Mac</a> adds a native status bar, a dashboard across configured machines and teams, and notifications for new alerts. This is a separate desktop interface, not the web demo.</p>
             <figure class="ed-shot">
               <picture>
                 <source type="image/webp" srcset="../../assets/img/herdr-factory-1x.webp 1x" width="617" height="194">
@@ -112,6 +129,7 @@
               </picture>
               <figcaption>Herdr desktop dashboard · Native demo capture.</figcaption>
             </figure>
+            <figure class="ed-shot"><picture><source type="image/webp" srcset="../../assets/img/herdr-budget-1x.webp 1x" width="616" height="528"><img src="../../assets/img/herdr-budget-1x.png" srcset="../../assets/img/herdr-budget-1x.png 1x" width="616" height="528" alt="The Herdr app panel: Claude weekly usage, spend and cost per merged pull request" loading="lazy" decoding="async"></picture><figcaption>Herdr usage and estimated cost · Fictional demo data.</figcaption></figure>
             <a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/herdr-app-dashboard.md">Read the desktop dashboard guide<span aria-hidden="true">↗</span></a>
           </section>
         </div>

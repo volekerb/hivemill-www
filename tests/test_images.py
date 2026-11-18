@@ -60,8 +60,13 @@ def resolve(page, ref):
 
 class TestImages(unittest.TestCase):
     def test_pages_have_screenshots(self):
-        total = sum(len(parse(p).pictures) for p in pages())
-        self.assertGreaterEqual(total, 9, "expected the 9 product screenshots on the pages")
+        # Product evidence belongs on its relevant guide; the homepage no longer
+        # needs duplicate captures alongside the real interactive dashboard.
+        for relative in ('index.html', 'factories/what/index.html',
+                         'factories/who-merges/index.html', 'guides/ask-to-merge/index.html',
+                         'guides/watch/index.html'):
+            self.assertTrue(parse(ROOT / relative).pictures,
+                            f'{relative}: expected a real product screenshot or demo fallback')
 
     def test_no_loose_site_images(self):
         # a screenshot is always a <picture>; a bare <img> pointing into assets/ is the old single-file form

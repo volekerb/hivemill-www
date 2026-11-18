@@ -29,8 +29,9 @@ JSON schema (schemaVersion 1; consumed by the `render` subcommand)
     snippets  [str] copy/install lines, in order
     path      str   source path inside the hivemill repo
     file      str   full text of the source file (omitted for items without one)
-    icon, media     optional; only these two keys may come from
-                    catalog/overrides.json ({"<item id>": {"icon": ..., "media": ...}})
+    icon, media     optional; presentation assets from catalog/overrides.json
+                    Curated summary/use_when/requirements overrides affect HTML only;
+                    source-derived purpose, files and snippets remain unchanged.
   role extra:   skills  [{"name", "purpose"}] from roles/plugins/<name>/*/skills/*/SKILL.md
                 permissions {"allow": [str], "deny": [str]} from roles/settings/<name>.json.in (when present)
   planned item  {"status": "soon", "present": [path], "absent": [path]}: named by an ADR in the
@@ -49,10 +50,11 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+from site_metadata import apply_metadata
 
 REPO = "volekerb/hivemill"
 SCHEMA_VERSION = 1
-OVERRIDE_KEYS = ("icon", "media")
+OVERRIDE_KEYS = ("icon", "media", "summary", "use_when", "requirements")
 # Items that exist in hivemill but are not factory pieces to share (owner decision, M40888).
 EXCLUDED_IDS = frozenset({"skill:hivemill/ios-testflight-release"})
 # Pieces an ADR names that may not be on main yet: id, name, ADR, paths of the finished piece.
@@ -323,6 +325,8 @@ def load_overrides(path):
             if key not in OVERRIDE_KEYS:
                 raise UsageError("overrides[%s] has key '%s'; only %s are allowed"
                                  % (item_id, key, ", ".join(OVERRIDE_KEYS)))
+            if key in ("summary", "use_when", "requirements") and (not isinstance(val[key], str) or not val[key].strip()):
+                raise UsageError("overrides[%s].%s must be a nonempty string" % (item_id, key))
     return data
 
 
@@ -335,7 +339,7 @@ def derive(src, sha, overrides):
         if item_id not in ids:
             raise UsageError("overrides names unknown item id '%s'" % item_id)
     for item in items:
-        item.update(overrides.get(item["id"], {}))
+        item.update({key: value for key, value in overrides.get(item["id"], {}).items() if key in ("icon", "media")})
     items.sort(key=lambda i: (i["kind"], i["name"], i["id"]))
     return {"schemaVersion": SCHEMA_VERSION, "source": {"repo": REPO, "sha": sha, "date": head_date(src)}, "items": items}
 
@@ -515,11 +519,38 @@ def display_name(item):
     return item["name"].replace("-", " ").capitalize()
 
 
-def description(item):
+def description(item, overrides=None):
+    if overrides and overrides.get("summary"):
+        return overrides["summary"]
     if item["id"] == "dashboard:herdr-core":
         return "Factory status, alerts and budgets inside the Herdr desktop app."
     purpose = item["purpose"]
     return purpose[:1].upper() + purpose[1:] + ("." if purpose and purpose[-1] not in ".:!?" else "")
+
+
+def choosing_component(item, overrides):
+    """Human-facing selection guidance; full source and copy/install behavior stay intact."""
+    if item.get("status") == "soon":
+        return ''
+    defaults = {
+        "role": ("Use this role when assembling or adapting your factory's agent team.",
+                 "A Hivemill factory checkout. Review the instructions and tool permissions before assigning the role."),
+        "skill": ("Add this skill when you need its workflow in Claude Code.",
+                  "Claude Code with the containing plugin installed. Check the source instructions for workflow-specific prerequisites."),
+        "plugin": ("Install this plugin to add its commands and bundled skills to Claude Code.",
+                   "Claude Code. Follow the installation guide for the plugin's host and runtime requirements."),
+        "dashboard": ("Use this dashboard to watch your factory from the Herdr desktop app.",
+                      "A Hivemill installation and the Herdr app for Mac. Apply the dashboard integration from your factory checkout."),
+    }
+    when, requires = defaults[item["kind"]]
+    return ('<section class="component-section" id="use"><h2>When to use it</h2><p>%s</p>'
+            '<h3>Requirements</h3><p>%s</p></section>' %
+            (esc(overrides.get("use_when", when)), esc(overrides.get("requirements", requires))))
+
+
+def search_title(item):
+    label = {"role": "agent role", "skill": "skill", "plugin": "plugin", "dashboard": "for Hivemill"}[item["kind"]]
+    return display_name(item) + " " + label + " | Hivemill"
 
 
 def source_file(item):
@@ -572,7 +603,7 @@ def entry(item, ctx):
             '<span class="entry-emblem">%s</span><h3 id="%s-title">%s%s</h3>'
             '<p id="%s-purpose">%s</p>%s</a></article>'
             % (identifier, esc(item["id"]), item["kind"], esc(" ".join(keywords)), identifier, identifier, identifier,
-               icon_svg(ctx["root"], icon), identifier, esc(display_name(item)), status, identifier, esc(description(item)),
+               icon_svg(ctx["root"], icon), identifier, esc(display_name(item)), status, identifier, esc(description(item, ctx["overrides"][item["id"]])),
                icon_svg(ctx["root"], "arrow", "entry-arrow")))
 
 
@@ -721,13 +752,14 @@ def detail_page(item, items, ctx):
            % (anchor, KIND_LABEL[kind]),
            '<div class="component-heading"><div><h1>%s</h1><p>%s</p></div>'
            '<div class="component-mark" aria-hidden="true">%s</div></div></header>'
-           % (esc(display_name(item)), esc(description(item)), icon),
+           % (esc(display_name(item)), esc(description(item, ov)), icon),
            '<div class="wrap component-layout"><div class="component-body">']
     if item.get("status") == "soon":
         out.append('<section class="component-section"><h2>Availability</h2><p><strong>Coming soon.</strong> '
                    'The implementation is in progress at this revision.</p><dl class="component-facts">'
                    '<dt>Present</dt><dd>%s</dd><dt>Still needed</dt><dd>%s</dd></dl></section>'
                    % (esc(", ".join(item["present"]) or "None"), esc(", ".join(item["absent"]))))
+    out.append(choosing_component(item, ov))
     out.append(install_panel(item))
     if ov.get("media"):
         out.append('<section class="component-section"><h2>Dashboard preview</h2>'
@@ -867,12 +899,13 @@ def render_site(catalog_path, overrides_path, template_path, detail_path, source
             ("%s/index.html" % slug(i["id"]), detail_path, i, "../../") for i in items]:
         ctx["root"] = root
         content = index_page(items, ctx) if body is None else detail_page(body, items, ctx)
-        pages[rel] = fill(read_text(tpl_path, "template"), {
+        text = fill(read_text(tpl_path, "template"), {
             "root": root, "content": content, "built": esc(built),
-            "title": esc(display_name(body) + " | Hivemill" if body else "Factory catalog | Hivemill"),
-            "description": esc("The agent roles, kit skills and the herdr-core plugin you can copy into "
-                               "your own factory." if body is None else body["purpose"]),
+            "title": esc(search_title(body) if body else "AI agent roles, skills and plugins | Hivemill catalog"),
+            "description": esc("Browse reusable AI agent roles, skills, plugins and a desktop dashboard. Inspect the source and install components for your Hivemill factory."
+                               if body is None else description(body, overrides[body["id"]])),
         })
+        pages[rel] = apply_metadata(text, "catalog/" + rel)
     return pages
 
 

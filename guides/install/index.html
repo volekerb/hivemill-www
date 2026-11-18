@@ -6,29 +6,45 @@
     <meta name="color-scheme" content="light dark">
     <title>Install Hivemill | Hivemill</title>
     <meta name="description" content="Set up your self-hosted factory on Debian or Ubuntu with Claude Code, then verify the host.">
-    <link rel="canonical" href="https://hivemill.dev/guides/install/">
-    <link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
     <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/v2.css">
-    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111806">
-    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111804">
+    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111807">
+    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111807">
     <script type="module" src="/assets/js/motion.js"></script>
-    <script type="module" src="/assets/js/factory.js?v=2026111804"></script>
-    <script type="module" src="/assets/js/editorial.js?v=2026111804"></script>
+    <script type="module" src="/assets/js/factory.js?v=2026111807"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026111807"></script>
     <script type="module" src="/assets/js/copy.js"></script>
-  </head>
+<!-- Generated search metadata: tools/site_metadata.py -->
+<link rel="canonical" href="https://hivemill.dev/guides/install/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hivemill">
+<meta property="og:title" content="Install Hivemill | Hivemill">
+<meta property="og:description" content="Set up your self-hosted factory on Debian or Ubuntu with Claude Code, then verify the host.">
+<meta property="og:url" content="https://hivemill.dev/guides/install/">
+<meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta property="og:image:width" content="1344">
+<meta property="og:image:height" content="752">
+<meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Install Hivemill | Hivemill">
+<meta name="twitter:description" content="Set up your self-hosted factory on Debian or Ubuntu with Claude Code, then verify the host.">
+<meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<!-- End generated search metadata -->
+</head>
   <body class="editorial ed-install">
     <a class="skip" href="#main">Skip to content</a>
     <header class="site">
       <div class="wrap">
         <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
         <nav aria-label="Site">
-          <a href="/">Home</a>
-          <a href="/catalog/">Catalog</a>
-          <a href="/work-with-me/">Work with me</a>
-          <a href="/guides/install/" aria-current="page">Install</a>
-          <a href="https://github.com/volekerb/hivemill">GitHub</a>
-        </nav>
+<a href="/factories/what/">How it works</a>
+<a href="/demo/">Demo</a>
+<a href="/catalog/">Catalog</a>
+<a href="/guides/install/" aria-current="page">Install</a>
+<a href="/work-with-me/">Discuss a pilot</a>
+</nav>
       </div>
     </header>
     <main id="main">
@@ -36,7 +52,7 @@
         <div class="ed-title">
           <p class="ed-kicker">Operator guide / Installation</p>
           <h1>Install the<br>factory.</h1>
-          <p class="ed-lead">Three commands in Claude Code bring Hivemill onto a Linux machine you control.</p>
+          <p class="ed-lead">Set up Hivemill on a separate Debian or Ubuntu host. Start with the prerequisites, then run guided setup inside Claude Code.</p>
           <a class="ed-link" href="#before-you-start">Check the prerequisites<span aria-hidden="true">↓</span></a>
         </div>
         <div class="ed-command-plate" aria-labelledby="commands-title">
@@ -96,7 +112,7 @@
               </div>
               <div>
                 <dt>Claude Code</dt>
-                <dd>Sign in on the factory machine. The default organization runs its agents as Claude Code sessions.</dd>
+                <dd>Sign in on the factory machine. Claude Code uses its model provider; self-hosting the factory does not move model inference onto your host.</dd>
               </div>
               <div>
                 <dt>GitHub access</dt>
@@ -111,8 +127,8 @@
           <section class="ed-chapter" id="setup" aria-labelledby="setup-title">
             <p class="ed-kicker">Guided setup</p>
             <h2 id="setup-title">Bring up the factory.</h2>
-            <p>Run the three commands above, in order, inside a logged-in Claude Code session on the host. The marketplace supplies the plugin. Its setup skill walks you through installing the factory and bringing up the first agents.</p>
-            <p>The setup guide covers the CLI, database, configuration and systemd user services. Keep it handy if you prefer a manual install.</p>
+            <p>Run the three commands above in a logged-in Claude Code session on the host. The setup skill guides installation and starts the first agents.</p>
+            <p>For manual installation, host services and configuration, use the full setup guide.</p>
             <a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/SETUP.md">Read the full setup guide<span aria-hidden="true">↗</span></a>
           </section>
           <section class="ed-chapter" id="check" aria-labelledby="check-title">
@@ -133,7 +149,7 @@
       </div>
       <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
         <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Next guide</span><strong>Give the factory a goal</strong><span class="ed-next-desc">Follow a request into its first pull request.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
-        <a class="ed-next" href="/guides/watch/"><span class="ed-kicker">Operations</span><strong>Watch your factory</strong><span class="ed-next-desc">Find the web UI and Herdr desktop dashboard.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/guides/watch/"><span class="ed-kicker">Operations</span><strong>Monitor your factory</strong><span class="ed-next-desc">Find the web UI and Herdr desktop dashboard.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
       </nav>
     </main>
     <footer class="site">
