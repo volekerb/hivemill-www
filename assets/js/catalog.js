@@ -1,13 +1,12 @@
-// Catalog enhancements (T-1809). The pages work without this file: every item is listed,
-// anchors scroll, snippets are selectable. This adds copy buttons and a client-side filter.
+// Each component and source file remains reachable without JavaScript.
 const live = document.getElementById("live");
-const say = (text) => { if (live) live.textContent = text; };
 
 async function copyText(text) {
   try {
     await navigator.clipboard.writeText(text);
     return true;
-  } catch (_) {
+  } catch {
+    const focused = document.activeElement;
     const area = document.createElement("textarea");
     area.value = text;
     area.setAttribute("readonly", "");
@@ -16,69 +15,109 @@ async function copyText(text) {
     document.body.append(area);
     area.select();
     let ok = false;
-    try { ok = document.execCommand("copy"); } catch (_e) { ok = false; }
+    try { ok = document.execCommand("copy"); } catch { /* Selectable source stays visible. */ }
     area.remove();
+    focused?.focus({ preventScroll: true });
     return ok;
   }
 }
 
-document.querySelectorAll("button[data-copy]").forEach((btn) => {
-  const code = btn.parentElement.querySelector("pre code");
-  if (!code) return;
-  const label = btn.textContent;
-  btn.hidden = false;
-  btn.addEventListener("click", async () => {
+for (const button of document.querySelectorAll("button[data-copy]")) {
+  const code = button.closest(".snip")?.querySelector("pre code");
+  if (!code) continue;
+  const label = button.textContent;
+  let reset;
+  button.hidden = false;
+  button.addEventListener("click", async () => {
     const ok = await copyText(code.textContent);
-    say(ok ? "Copied" : "Copy failed. Select the text and copy it by hand.");
-    if (!ok) return;
-    btn.dataset.done = "";
-    btn.textContent = "Copied";
-    setTimeout(() => { delete btn.dataset.done; btn.textContent = label; }, 1800);
+    button.toggleAttribute("data-done", ok);
+    button.textContent = ok ? "Copied" : "Select and copy";
+    if (live) live.textContent = ok ? "Copied to clipboard." : "Select the command or file and copy it manually.";
+    clearTimeout(reset);
+    reset = setTimeout(() => { button.removeAttribute("data-done"); button.textContent = label; }, 1800);
   });
-});
+}
+
+function enableLibrary(catalog) {
+  const search = catalog.querySelector(".catalog-search");
+  const field = search.querySelector("input");
+  const filters = Array.from(catalog.querySelectorAll("[data-filter]"));
+  const groups = Array.from(catalog.querySelectorAll(".group"));
+  const entries = Array.from(catalog.querySelectorAll(".entry"), node => ({
+    node, text: [node.textContent, node.dataset.search, node.dataset.kind].join(" ").toLowerCase()
+  }));
+  const empty = catalog.querySelector(".catalog-empty");
+  let kind = "all";
+  search.hidden = false;
+
+  function render() {
+    const terms = field.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    let matches = 0;
+    for (const {node, text} of entries) {
+      const visible = (kind === "all" || kind === node.dataset.kind) && terms.every(term => text.includes(term));
+      node.hidden = !visible;
+      if (visible) matches += 1;
+    }
+    for (const group of groups) {
+      const count = group.querySelectorAll(".entry:not([hidden])").length;
+      group.hidden = !count;
+      group.querySelector("h2 small").textContent = count;
+    }
+    for (const filter of filters) {
+      if (filter.dataset.filter === kind) filter.setAttribute("aria-current", "true");
+      else filter.removeAttribute("aria-current");
+    }
+    empty.hidden = matches !== 0;
+    live.textContent = matches + (matches === 1 ? " component shown" : " components shown");
+  }
+
+  function fromLocation() {
+    const url = new URL(location.href);
+    // A direct component anchor always exposes that row, even with an older search URL.
+    const row = document.getElementById(url.hash.slice(1))?.closest(".entry");
+    const filter = filters.find(link => link.hash === url.hash);
+    field.value = row ? "" : url.searchParams.get("q") || "";
+    kind = filter?.dataset.filter || "all";
+    render();
+  }
+
+  function updateLocation(method) {
+    const url = new URL(location.href);
+    const query = field.value.trim();
+    if (query) url.searchParams.set("q", query);
+    else url.searchParams.delete("q");
+    url.hash = kind === "all" ? "" : filters.find(link => link.dataset.filter === kind).hash;
+    if (url.href !== location.href) history[method](null, "", url);
+    render();
+  }
+
+  for (const filter of filters) {
+    filter.addEventListener("click", event => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      kind = filter.dataset.filter;
+      updateLocation("pushState");
+      // Selecting a sticky collection far down the page should land on its results.
+      if (search.getBoundingClientRect().bottom < 0) search.scrollIntoView({ block: "start", behavior: "instant" });
+    });
+  }
+  field.addEventListener("input", () => updateLocation("replaceState"));
+  empty.querySelector("[data-reset]").addEventListener("click", () => {
+    kind = "all";
+    field.value = "";
+    updateLocation("pushState");
+    field.focus();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key !== "/" || event.metaKey || event.ctrlKey || event.altKey || event.defaultPrevented) return;
+    if (event.target.closest("input, textarea, select, [contenteditable]")) return;
+    event.preventDefault();
+    field.focus();
+  });
+  window.addEventListener("popstate", fromLocation);
+  window.addEventListener("hashchange", fromLocation);
+  fromLocation();
+}
 
 const catalog = document.querySelector(".catalog");
-if (catalog) {
-  document.documentElement.classList.add("cat-js");
-  const entries = [...catalog.querySelectorAll(".entry")];
-  const groups = [...catalog.querySelectorAll(".group")];
-  const bar = document.createElement("div");
-  bar.className = "filter";
-  bar.setAttribute("role", "group");
-  bar.setAttribute("aria-label", "Filter the catalog");
-  const input = document.createElement("input");
-  input.type = "search";
-  input.id = "catalog-q";
-  input.autocomplete = "off";
-  const lab = document.createElement("label");
-  lab.htmlFor = "catalog-q";
-  lab.textContent = "Filter";
-  bar.append(lab, input);
-  const kinds = ["all", ...new Set(entries.map((e) => e.dataset.kind))];
-  let kind = "all";
-  const chips = kinds.map((k) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "chip";
-    b.dataset.kind = k;
-    b.textContent = k === "all" ? "All" : k[0].toUpperCase() + k.slice(1) + "s";
-    b.setAttribute("aria-pressed", String(k === "all"));
-    b.addEventListener("click", () => { kind = k; apply(); });
-    bar.append(b);
-    return b;
-  });
-  catalog.parentElement.querySelector(".page-head").append(bar);
-  const apply = () => {
-    const q = input.value.trim().toLowerCase();
-    let shown = 0;
-    for (const e of entries) {
-      const hit = (kind === "all" || e.dataset.kind === kind) && (!q || e.textContent.toLowerCase().includes(q));
-      e.hidden = !hit;
-      if (hit) shown += 1;
-    }
-    for (const g of groups) g.hidden = !g.querySelector(".entry:not([hidden])");
-    chips.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.kind === kind)));
-    say(`${shown} of ${entries.length} items shown`);
-  };
-  input.addEventListener("input", apply);
-}
+if (catalog) enableLibrary(catalog);

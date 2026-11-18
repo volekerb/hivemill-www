@@ -7,19 +7,21 @@
 <meta name="description" content="Deterministic resource hygiene">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/css/v2.css">
-<link rel="stylesheet" href="../../assets/css/catalog.css">
+<link rel="stylesheet" href="../../assets/css/factory.css?v=2026111804">
+<script type="module" src="../../assets/js/factory.js?v=2026111804"></script>
+<link rel="stylesheet" href="../../assets/css/catalog.css?v=2026111805">
 <script type="module" src="../../assets/js/motion.js"></script>
-<script type="module" src="../../assets/js/catalog.js"></script>
+<script type="module" src="../../assets/js/catalog.js?v=2026111804"></script>
 </head>
-<body>
+<body class="catalog-site">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap">
 <a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
 <nav aria-label="Site">
 <a href="../../">Home</a>
-<a href="../../catalog/">Catalog</a>
+<a href="../../catalog/" aria-current="location">Catalog</a>
 <a href="../../work-with-me/">Work with me</a>
 <a href="../../guides/install/">Install</a>
 <a href="https://github.com/volekerb/hivemill">GitHub</a>
@@ -27,16 +29,15 @@
 </div></header>
 <main id="main">
 <p class="sr" role="status" aria-live="polite" id="live"></p>
-<section class="page-head wrap detail-head">
-<p class="crumb"><a href="../">Catalog</a> / Skills</p>
-<h1><svg class="i i--lg" aria-hidden="true"><use href="../../assets/icons/icons.svg#clean"/></svg>hm-clean</h1>
-<p class="lede">Deterministic resource hygiene</p>
-</section>
-<div class="wrap detail">
-<p class="soon"><strong>Coming soon.</strong> On main at the pinned commit: go/internal/kit/clean/fsx. Not there yet: go/cmd/hm-clean, plugins/kit-clean.</p>
-<p class="links"><a class="arrow-link" href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/docs/adr/0008-resource-hygiene.md">Source on GitHub</a></p>
-</div>
+<header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb"><a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#skills">Skills</a></nav>
+<div class="component-heading"><div><h1>hm-clean</h1><p>Deterministic resource hygiene.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#clean"/></svg></div></div></header>
+<div class="wrap component-layout"><div class="component-body">
+<section class="component-section"><h2>Availability</h2><p><strong>Coming soon.</strong> The implementation is in progress at this revision.</p><dl class="component-facts"><dt>Present</dt><dd>go/internal/kit/clean/fsx</dd><dt>Still needed</dt><dd>go/cmd/hm-clean, plugins/kit-clean</dd></dl></section>
+
+</div><aside aria-label="Component information"><div class="component-aside"><section><h2>Component details</h2><dl class="component-facts"><dt>Type</dt><dd>Skill</dd><dt>Name</dt><dd><code>hm-clean</code></dd>
+<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/53b6a6f92a3f88983593a92caa765419764323c3"><code>53b6a6f92a3f</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/53b6a6f92a3f88983593a92caa765419764323c3/docs/adr/0008-resource-hygiene.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
+</div></aside></div>
 </main>
-<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>Built from volekerb/hivemill at 53b6a6f92a3f (2026-11-17).</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
+<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at 53b6a6f92a3f (2026-11-17).</div></footer>
 </body>
 </html>

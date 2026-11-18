@@ -241,10 +241,14 @@ class CatalogTest(unittest.TestCase):
     def test_render_without_js_shows_content_and_hides_copy_buttons(self):
         self.render_site()
         index = self.page("index.html")
-        self.assertIn('<pre class="code"><code>', index)
-        self.assertIn("<button class=\"copy\" type=\"button\" hidden", index)
+        self.assertNotIn('<pre class="code">', index)
+        self.assertIn('href="role-alpha/"', index)
+        self.assertIn('href="#roles"', index)
+        self.assertIn('role="search" hidden', index)
         self.assertIn('aria-live="polite"', index)
-        self.assertNotIn("class=\"chip\"", index)
+        detail = self.page("role-alpha/index.html")
+        self.assertIn('<pre class="code"><code>', detail)
+        self.assertIn('<button class="copy" type="button" hidden', detail)
         self.assertIn('id="roles"', index)
         self.assertIn("2026-01-01", index)
         self.assertIn(git(self.src, "rev-parse", "HEAD")[:12], index)
@@ -276,7 +280,7 @@ class CatalogTest(unittest.TestCase):
         with open(os.path.join(self.src, "roles", "alpha.md"), encoding="utf-8") as fh:
             first_line = fh.read().splitlines()[0]
         self.assertIn(first_line.replace("&", "&amp;"), page)
-        self.assertIn('href="../../assets/css/catalog.css"', page)
+        self.assertRegex(page, r'href="\.\./\.\./assets/css/catalog\.css(?:\?v=[0-9]+)?"')
         self.assertIn('href="../"', page)
         self.assertIn("/blob/%s/roles/alpha.md" % git(self.src, "rev-parse", "HEAD"), page)
 
@@ -337,9 +341,12 @@ class CatalogTest(unittest.TestCase):
         self.assertNotIn("skill:hm-clean", [i["id"] for i in self.build()["items"]])
 
     def test_rendered_pages_pass_the_public_text_guard(self):
-        guard = os.path.join(os.path.expanduser("~"), "factory", "ci", "public_text_guard.py")
+        source = os.environ.get("HIVEMILL_SOURCE", os.path.join(os.path.expanduser("~"), "factory"))
+        guard = os.path.join(source, "ci", "public_text_guard.py")
         if not os.path.isfile(guard):
-            self.skipTest("public_text_guard.py not on this machine; CI runs it on the push")
+            if "HIVEMILL_SOURCE" in os.environ:
+                self.fail("HIVEMILL_SOURCE must contain ci/public_text_guard.py")
+            self.skipTest("set HIVEMILL_SOURCE to run the public-text guard locally")
         self.render_site()
         for rel in ("index.html", "role-alpha/index.html"):
             r = subprocess.run([sys.executable, guard, "--no-terms", "text", os.path.join(self.site, rel)],

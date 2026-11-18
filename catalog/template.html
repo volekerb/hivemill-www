@@ -7,13 +7,15 @@
 <meta name="description" content="{{description}}">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="{{root}}assets/wordmark-light.svg" type="image/svg+xml">
-<link rel="preload" href="{{root}}assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{root}}assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{root}}assets/css/v2.css">
-<link rel="stylesheet" href="{{root}}assets/css/catalog.css">
+<link rel="stylesheet" href="{{root}}assets/css/factory.css?v=2026111804">
+<script type="module" src="{{root}}assets/js/factory.js?v=2026111804"></script>
+<link rel="stylesheet" href="{{root}}assets/css/catalog.css?v=2026111805">
 <script type="module" src="{{root}}assets/js/motion.js"></script>
-<script type="module" src="{{root}}assets/js/catalog.js"></script>
+<script type="module" src="{{root}}assets/js/catalog.js?v=2026111804"></script>
 </head>
-<body>
+<body class="catalog-site">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap">
 <a class="brand" href="{{root}}"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
@@ -28,6 +30,6 @@
 <main id="main">
 {{content}}
 </main>
-<footer class="site"><div class="wrap"><span>Hivemill is MIT licensed.</span><span>{{built}}</span><span>Screenshots come from the demo seed. The data in them is fictional.</span></div></footer>
+<footer class="site"><div class="wrap"><a class="brand" href="{{root}}">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">{{built}}</div></footer>
 </body>
 </html>
