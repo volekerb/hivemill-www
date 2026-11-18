@@ -1,3 +1,6 @@
 build/
 __pycache__/
 .local/
+/demo/*.html
+/demo/static/
+/demo/manifest.json
