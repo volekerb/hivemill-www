@@ -1,23 +1,119 @@
 {
- "dashboard:herdr-core": {"icon": "dashboard", "media": ["panel-factory", "panel-resources", "panel-active-goals", "panel-budget", "herdr-panel"]},
- "plugin:hivemill": {"icon": "catalog"},
- "plugin:hivemill-spend": {"icon": "spend"},
- "role:boss": {"icon": "boss"},
- "role:cleaner": {"icon": "cleaner"},
- "role:coder": {"icon": "coder"},
- "role:director": {"icon": "director"},
- "role:evaluator": {"icon": "evaluator"},
- "role:judge": {"icon": "merge"},
- "role:lead": {"icon": "team"},
- "role:pm": {"icon": "ask"},
- "role:qa": {"icon": "qa"},
- "role:researcher": {"icon": "researcher"},
- "role:retro": {"icon": "retro"},
- "role:reviewer": {"icon": "review"},
- "role:scout": {"icon": "scout"},
- "role:staff-engineer": {"icon": "staff"},
- "skill:hivemill-spend/agent-context-limits": {"icon": "limits"},
- "skill:hivemill-spend/token-spend-audit": {"icon": "spend"},
- "skill:hivemill/setup": {"icon": "install"},
- "skill:hm-clean": {"icon": "clean"}
+  "dashboard:herdr-core": {
+    "icon": "dashboard",
+    "media": [
+      "panel-factory",
+      "panel-resources",
+      "panel-active-goals",
+      "panel-budget",
+      "herdr-panel"
+    ],
+    "summary": "Follow factory status, resources, estimated cost and alerts in the Herdr app.",
+    "use_when": "Watch active goals, machine capacity and requests for attention from your Mac."
+  },
+  "plugin:hivemill": {
+    "icon": "catalog",
+    "summary": "Set up a self-hosted Hivemill factory with the guided installer.",
+    "use_when": "Install the factory on a fresh Debian or Ubuntu host with a logged-in Claude Code.",
+    "requirements": "A fresh Debian or Ubuntu host and a logged-in Claude Code. The installer guide documents the remaining dependencies."
+  },
+  "plugin:hivemill-spend": {
+    "icon": "spend",
+    "summary": "Inspect Claude token usage and configure worker context limits.",
+    "use_when": "Investigate costly sessions or reduce oversized worker contexts on a factory host.",
+    "requirements": "Claude Code and access to the local Claude session data you want to inspect."
+  },
+  "role:boss": {
+    "icon": "boss",
+    "summary": "Turn requests into goals and keep the owner informed.",
+    "use_when": "Give the factory owner one point of contact for goals, progress and decisions."
+  },
+  "role:cleaner": {
+    "icon": "cleaner",
+    "summary": "Keep factory workspaces tidy through scoped housekeeping tasks.",
+    "use_when": "Assign routine workspace maintenance with explicit limits and checks."
+  },
+  "role:coder": {
+    "icon": "coder",
+    "summary": "Implement a scoped task, open a pull request and address review findings.",
+    "use_when": "Assign an implementation task with clear acceptance criteria and a separate review path."
+  },
+  "role:director": {
+    "icon": "director",
+    "summary": "Coordinate the factory and assign goals to team leads.",
+    "use_when": "Staff and coordinate work across multiple goals in a Hivemill factory."
+  },
+  "role:evaluator": {
+    "icon": "evaluator",
+    "summary": "Run an evaluation task inside a controlled sandbox.",
+    "use_when": "Evaluate an agent on a bounded task without granting production access."
+  },
+  "role:judge": {
+    "icon": "merge",
+    "summary": "Apply the project’s merge policy to a checked pull request.",
+    "use_when": "Keep the merge decision separate from implementation, review and QA."
+  },
+  "role:lead": {
+    "icon": "team",
+    "summary": "Plan tasks and coordinate delivery of one goal.",
+    "use_when": "Break a goal into scoped tasks and follow the team’s progress."
+  },
+  "role:pm": {
+    "icon": "ask",
+    "summary": "Turn a request into requirements, acceptance criteria and a plan.",
+    "use_when": "Clarify what should be built and how the team will know it works."
+  },
+  "role:qa": {
+    "icon": "qa",
+    "summary": "Test a change against its acceptance criteria and record results.",
+    "use_when": "Verify a pull request independently from the agent that implemented it."
+  },
+  "role:researcher": {
+    "icon": "researcher",
+    "summary": "Investigate one question and produce an evidence-backed report.",
+    "use_when": "Resolve a bounded technical question before committing to an implementation."
+  },
+  "role:retro": {
+    "icon": "retro",
+    "summary": "Review rejected work and recommend process improvements.",
+    "use_when": "Look for recurring causes in rejected work without changing the active workflow automatically."
+  },
+  "role:reviewer": {
+    "icon": "review",
+    "summary": "Review a pull request against its task and record findings.",
+    "use_when": "Check a proposed change independently before the merge decision."
+  },
+  "role:scout": {
+    "icon": "scout",
+    "summary": "Assess candidate skills through read-only research.",
+    "use_when": "Evaluate a potentially useful skill before adding it to the factory."
+  },
+  "role:staff-engineer": {
+    "icon": "staff",
+    "summary": "Provide technical advice on a specific engineering decision.",
+    "use_when": "Get a second technical perspective on architecture or a difficult implementation question."
+  },
+  "skill:hivemill-spend/agent-context-limits": {
+    "icon": "limits",
+    "summary": "Limit worker context while preserving a larger context for the coordinating agent.",
+    "use_when": "Reduce unnecessary context growth across worker sessions on a factory host.",
+    "requirements": "Claude Code and the hivemill-spend plugin on the host where worker settings will be configured."
+  },
+  "skill:hivemill-spend/token-spend-audit": {
+    "icon": "spend",
+    "summary": "Find costly Claude sessions and practical ways to reduce token use.",
+    "use_when": "Understand which models, sessions and context patterns drive estimated Claude spend.",
+    "requirements": "Claude Code, the hivemill-spend plugin and readable local Claude session logs."
+  },
+  "skill:hivemill/setup": {
+    "icon": "install",
+    "summary": "Guide Claude Code through the Hivemill installation.",
+    "use_when": "Set up a factory using the installer rather than assembling its services manually.",
+    "requirements": "A fresh Debian or Ubuntu host and a logged-in Claude Code. The installer guide documents the remaining dependencies."
+  },
+  "skill:hm-clean": {
+    "icon": "clean",
+    "summary": "Planned tools for deterministic factory resource cleanup.",
+    "use_when": "Inspect the resource-hygiene proposal and implementation status."
+  }
 }

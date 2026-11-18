@@ -4,78 +4,74 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <title>What is a software factory? | Hivemill</title>
-    <meta name="description" content="See how a self-hosted team of coding agents turns a goal into independently checked pull requests.">
-    <link rel="canonical" href="https://hivemill.dev/factories/what/">
-    <link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
+    <title>How Hivemill works | Self-hosted AI coding agents</title>
+    <meta name="description" content="See where Hivemill runs, how agents turn goals into checked pull requests, and how your host connects to model providers and GitHub.">
+<link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
     <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/v2.css">
-    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111806">
-    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111804">
+    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111807">
+    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111807">
     <script type="module" src="/assets/js/motion.js"></script>
-    <script type="module" src="/assets/js/factory.js?v=2026111804"></script>
-    <script type="module" src="/assets/js/editorial.js?v=2026111804"></script>
-  </head>
+    <script type="module" src="/assets/js/factory.js?v=2026111807"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026111807"></script>
+<!-- Generated search metadata: tools/site_metadata.py -->
+<link rel="canonical" href="https://hivemill.dev/factories/what/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hivemill">
+<meta property="og:title" content="How Hivemill works | Self-hosted AI coding agents">
+<meta property="og:description" content="See where Hivemill runs, how agents turn goals into checked pull requests, and how your host connects to model providers and GitHub.">
+<meta property="og:url" content="https://hivemill.dev/factories/what/">
+<meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta property="og:image:width" content="1344">
+<meta property="og:image:height" content="752">
+<meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How Hivemill works | Self-hosted AI coding agents">
+<meta name="twitter:description" content="See where Hivemill runs, how agents turn goals into checked pull requests, and how your host connects to model providers and GitHub.">
+<meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<!-- End generated search metadata -->
+</head>
   <body class="editorial ed-what">
     <a class="skip" href="#main">Skip to content</a>
     <header class="site">
       <div class="wrap">
         <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
         <nav aria-label="Site">
-          <a href="/">Home</a>
-          <a href="/catalog/">Catalog</a>
-          <a href="/work-with-me/">Work with me</a>
-          <a href="/guides/install/">Install</a>
-          <a href="https://github.com/volekerb/hivemill">GitHub</a>
-        </nav>
+<a href="/factories/what/" aria-current="page">How it works</a>
+<a href="/demo/">Demo</a>
+<a href="/catalog/">Catalog</a>
+<a href="/guides/install/">Install</a>
+<a href="/work-with-me/">Discuss a pilot</a>
+</nav>
       </div>
     </header>
     <main id="main">
-      <section class="ed-feature">
-        <div class="wrap ed-feature-grid">
-          <div class="ed-title">
-            <p class="ed-kicker">Factory model / Overview</p>
-            <h1>What is a<br>software factory?</h1>
-            <p class="ed-lead">A fixed team of agents takes a goal through implementation, checks and a merge decision on a machine you own.</p>
-            <a class="ed-link" href="#the-line">Follow the production line<span aria-hidden="true">↓</span></a>
-          </div>
-          <div class="ed-feature-art" role="img" aria-label="Mechanical cutaway of linked workstations carrying amber pieces along a production line"></div>
-        </div>
+      <section class="wrap ed-product-intro">
+        <div class="ed-title"><p class="ed-kicker">How it works</p><h1>Your goal.<br>A factory on your host.</h1></div>
+        <div><p class="ed-lead">Hivemill is an open-source, self-hosted system that coordinates AI coding agents through implementation, review, QA and merge.</p><a class="ed-link" href="#the-line">Follow the workflow<span aria-hidden="true">↓</span></a></div>
+      </section>
+      <section class="wrap ed-deployment" aria-labelledby="deployment-title" id="hosting">
+        <h2 id="deployment-title">What runs where?</h2>
+        <ol class="ed-architecture">
+          <li><p class="ed-kicker">Your laptop</p><h3>Set the goal.</h3><p>Connect to the host, delegate work and inspect progress.</p></li>
+          <li class="ed-architecture-host"><p class="ed-kicker">Your Debian or Ubuntu host</p><h3>The factory runs here.</h3><p>Agent sessions, repository worktrees and the work record stay on the host.</p></li>
+          <li><p class="ed-kicker">Connected services</p><h3>Models and GitHub.</h3><p>Claude Code and Cursor connect to their model providers. GitHub holds pull requests and CI checks.</p></li>
+        </ol>
+        <p class="ed-note">Your laptop can close while the host stays running and connected. Work may pause for decisions or resource and usage limits. Self-hosting the factory does not mean the models run locally.</p>
       </section>
       <section class="wrap ed-overview" id="the-line">
-        <div class="ed-overview-head" data-reveal>
-          <p class="ed-kicker">How the work moves</p>
-          <h2>One goal.<br>Several owners.</h2>
-          <p>You describe the outcome to the boss. The factory keeps the plan and the work on a separate Linux host, so you can close your laptop and return to the record.</p>
-        </div>
+        <div class="ed-overview-head"><p class="ed-kicker">The workflow</p><h2>One goal.<br>A checked change.</h2><p>Describe the outcome and acceptance criteria. The factory coordinates the handoffs and records what happened.</p><a class="ed-link" href="/guides/ask-to-merge/">Follow a demo goal<span aria-hidden="true">↗</span></a></div>
         <ol class="ed-verbs">
-          <li>
-            <strong>Ask</strong>
-            <span>The boss records the intent and success criteria. A director and lead organize a team and turn the goal into tasks.</span>
-          </li>
-          <li>
-            <strong>Build</strong>
-            <span>A coder opens a pull request from a dedicated worktree and branch.</span>
-          </li>
-          <li>
-            <strong>Check</strong>
-            <span>One agent reviews the diff. A different agent runs tests against the acceptance criteria.</span>
-          </li>
-          <li>
-            <strong>Merge</strong>
-            <span>The judge checks the verdicts and the pull request. Failed checks return the change to the coder with findings.</span>
-          </li>
+          <li><strong>Plan</strong><span>The boss records the goal; a director and lead organize tasks and agents.</span></li>
+          <li><strong>Build</strong><span>A coder works in a separate worktree and opens a pull request.</span></li>
+          <li><strong>Check</strong><span>A reviewer checks the diff; QA tests the acceptance criteria.</span></li>
+          <li><strong>Merge</strong><span>By default, both verdicts must pass before the judge merges. Your configured policy controls the final gate. <a href="/factories/who-merges/">Read the merge policy.</a></span></li>
         </ol>
       </section>
-      <section class="ed-ledger">
-        <div class="wrap ed-proof-pair">
-          <div>
-            <p class="ed-kicker">The factory record</p>
-            <h2>Come back to<br>the evidence.</h2>
-            <p>Goals, tasks, messages and verdicts are stored in SQLite with an append-only event log. Open a goal to read its intent, trace its tasks and see the criteria they address.</p>
-            <a class="ed-link" href="/demo/goals.html">Browse the demo goals<span aria-hidden="true">↗</span></a>
-          </div>
-          <figure class="ed-shot">
+      <section class="ed-ledger"><div class="wrap ed-proof-pair">
+        <div><p class="ed-kicker">The work record</p><h2>Inspect the evidence.</h2><p>Follow a goal through its tasks, agent messages and verdicts. The read-only web dashboard keeps progress and decisions visible.</p><a class="ed-link" href="/demo/goals.html">Browse demo goals<span aria-hidden="true">↗</span></a></div>
+        <figure class="ed-shot">
             <picture>
               <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/goals-current-dark-1x.webp 1x, ../../assets/img/goals-current-dark-2x.webp 2x" width="520" height="320">
               <source media="(prefers-color-scheme: dark)" type="image/png" srcset="../../assets/img/goals-current-dark-1x.png 1x, ../../assets/img/goals-current-dark-2x.png 2x" width="520" height="320">
@@ -84,23 +80,9 @@
             </picture>
             <figcaption>Goals register · Fictional demo data.</figcaption>
           </figure>
-        </div>
-      </section>
-      <section class="wrap ed-overview ed-runtime">
-        <div data-reveal>
-          <p class="ed-kicker">Deployment</p>
-          <h2>Your host.<br>Your workflow.</h2>
-        </div>
-        <div>
-          <p>The factory runs on Debian or Ubuntu. Its default organization uses Claude Code, with a separate Cursor organization available on the same machine. Each runtime uses its model provider.</p>
-          <p>The catalog contains the roles, skills and plugins you can adapt for your own workflow.</p>
-          <a class="ed-link" href="/catalog/">Browse the catalog<span aria-hidden="true">↗</span></a>
-        </div>
-      </section>
-      <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
-        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Operator guide</span><strong>From ask to merge</strong><span class="ed-next-desc">Follow a fictional goal through the actual demo.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
-        <a class="ed-next" href="/guides/install/"><span class="ed-kicker">Getting started</span><strong>Bring up the factory</strong><span class="ed-next-desc">Run three commands inside Claude Code.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
-      </nav>
+      </div></section>
+      <section class="wrap ed-overview ed-runtime"><div><p class="ed-kicker">Make it yours</p><h2>Adapt the workflow.</h2></div><div><p>Reuse roles, skills and plugins from the catalog. Set resource limits and Claude usage caps for the host; use monitoring to inspect capacity and estimated costs.</p><a class="ed-link" href="/catalog/">Browse the catalog<span aria-hidden="true">↗</span></a></div></section>
+      <nav class="ed-nexts wrap" aria-label="Related pages"><a class="ed-next" href="/guides/watch/"><span class="ed-kicker">Monitoring</span><strong>See what needs you</strong><span class="ed-next-desc">Web dashboard, costs and the optional Herdr app.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a><a class="ed-next" href="/guides/install/"><span class="ed-kicker">Getting started</span><strong>Install Hivemill</strong><span class="ed-next-desc">Prepare the host, run setup and verify the install.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a></nav>
     </main>
     <footer class="site">
       <div class="wrap">

@@ -5,6 +5,7 @@ import shutil
 import tempfile
 
 from export_demo import export_demo
+from site_metadata import validate_metadata, write_discovery
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / 'build'
@@ -14,6 +15,7 @@ PUBLIC_DIRS = ('assets', 'catalog', 'factories', 'film', 'guides', 'work-with-me
 
 
 def build_site(factory):
+    validate_metadata(ROOT)
     BUILD.mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='site-', dir=BUILD) as tmp:
         stage = Path(tmp) / 'site'
@@ -21,7 +23,9 @@ def build_site(factory):
         for name in PUBLIC_FILES:
             shutil.copy2(ROOT / name, stage / name)
         for name in PUBLIC_DIRS:
-            shutil.copytree(ROOT / name, stage / name)
+            ignore = shutil.ignore_patterns('template.html', 'detail-template.html', 'overrides.json') if name == 'catalog' else None
+            shutil.copytree(ROOT / name, stage / name, ignore=ignore)
+        write_discovery(stage)
         export_demo(factory, stage / 'demo')
         # Replace only our generated output, and only after a successful export.
         if SITE.exists():

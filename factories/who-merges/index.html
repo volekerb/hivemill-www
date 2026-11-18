@@ -4,44 +4,60 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <title>Who merges the pull request? | Hivemill</title>
-    <meta name="description" content="Explore the roles of the reviewer, QA and the judge in a Hivemill merge decision.">
-    <link rel="canonical" href="https://hivemill.dev/factories/who-merges/">
-    <link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
+    <title>Merge policy and review gates | Hivemill</title>
+    <meta name="description" content="Understand Hivemill’s default review and QA gates, configurable CI policy and the option to stop before automatic merging.">
+<link rel="icon" href="/assets/wordmark-light.svg" type="image/svg+xml">
     <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/v2.css">
-    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111806">
-    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111804">
+    <link rel="stylesheet" href="/assets/css/factory.css?v=2026111807">
+    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111807">
     <script type="module" src="/assets/js/motion.js"></script>
-    <script type="module" src="/assets/js/factory.js?v=2026111804"></script>
-    <script type="module" src="/assets/js/editorial.js?v=2026111804"></script>
-  </head>
+    <script type="module" src="/assets/js/factory.js?v=2026111807"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026111807"></script>
+<!-- Generated search metadata: tools/site_metadata.py -->
+<link rel="canonical" href="https://hivemill.dev/factories/who-merges/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hivemill">
+<meta property="og:title" content="Merge policy and review gates | Hivemill">
+<meta property="og:description" content="Understand Hivemill’s default review and QA gates, configurable CI policy and the option to stop before automatic merging.">
+<meta property="og:url" content="https://hivemill.dev/factories/who-merges/">
+<meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta property="og:image:width" content="1344">
+<meta property="og:image:height" content="752">
+<meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Merge policy and review gates | Hivemill">
+<meta name="twitter:description" content="Understand Hivemill’s default review and QA gates, configurable CI policy and the option to stop before automatic merging.">
+<meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<!-- End generated search metadata -->
+</head>
   <body class="editorial ed-merge">
     <a class="skip" href="#main">Skip to content</a>
     <header class="site">
       <div class="wrap">
         <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
         <nav aria-label="Site">
-          <a href="/">Home</a>
-          <a href="/catalog/">Catalog</a>
-          <a href="/work-with-me/">Work with me</a>
-          <a href="/guides/install/">Install</a>
-          <a href="https://github.com/volekerb/hivemill">GitHub</a>
-        </nav>
+<a href="/factories/what/">How it works</a>
+<a href="/demo/">Demo</a>
+<a href="/catalog/">Catalog</a>
+<a href="/guides/install/">Install</a>
+<a href="/work-with-me/">Discuss a pilot</a>
+</nav>
       </div>
     </header>
     <main id="main">
       <section class="wrap ed-opening ed-merge-opening">
         <div class="ed-title">
-          <p class="ed-kicker">Factory model / Merge authority</p>
-          <h1>Who merges<br>the change?</h1>
-          <p class="ed-lead">The judge. The coder opens the pull request. A reviewer reads the diff and QA runs the tests before the judge makes a decision.</p>
+          <p class="ed-kicker">Reference / Merge policy</p>
+          <h1>Your policy.<br>The judge applies it.</h1>
+          <p class="ed-lead">By default, separate review and QA must pass before the judge merges. You configure the review policy, CI gate and whether the project permits auto-merge.</p>
           <a class="ed-link" href="#the-record">Read a merge record<span aria-hidden="true">↓</span></a>
         </div>
         <div class="ed-gate">
           <div class="ed-gate-title">
-            <p class="ed-kicker">Decision model</p>
-            <h2>The merge gate</h2>
+            <p class="ed-kicker">Default review policy</p>
+            <h2>Try the verdicts</h2><p class="ed-gate-context">Assumes auto-merge is enabled and the default review and CI gates are in use.</p>
           </div>
           <form class="ed-gate-controls" hidden aria-label="Try different review verdicts">
             <fieldset>
@@ -62,7 +78,7 @@
             </fieldset>
           </form>
           <div class="ed-gate-static">
-            <p>The judge requires a passing review and a passing QA verdict on the current change. Failed checks return findings to the coder.</p>
+            <p>Under the default policy, review and QA must pass on the current revision. Failed checks return findings to the coder.</p>
           </div>
           <div class="ed-gate-result" hidden aria-live="polite" aria-atomic="true">
             <p class="ed-label">Judge decision</p>
@@ -91,9 +107,19 @@
           </div>
           <div>
             <dt>Judge</dt>
-            <dd>Verifies the verdicts apply to the current revision and that the pull request can merge, including its required CI checks.</dd>
+            <dd>Applies the configured review and CI gates, checks the current revision and mergeability, and respects project auto-merge settings.</dd>
           </div>
         </dl>
+      </section>
+      <section class="wrap ed-policy" id="policy" aria-labelledby="policy-title">
+        <div><p class="ed-kicker">Configuration</p><h2 id="policy-title">Choose the gate.</h2></div>
+        <dl class="ed-defs">
+          <div><dt>Default checks</dt><dd><code>judge_review_gate=passpass</code> requires passing review and QA. <code>judge_ci_gate=pr</code> waits for green PR checks.</dd></div>
+          <div><dt>CI-led review</dt><dd><code>judge_review_gate=green</code> allows missing PASS verdicts when CI is green on the current head and no current review or QA verdict is FAIL. CI remains required in this mode.</dd></div>
+          <div><dt>Optional CI gate</dt><dd><code>judge_ci_gate=none</code> skips the judge’s PR-check gate under the default review policy. It retains verdict and mergeability checks. Read the configuration guide before changing this policy.</dd></div>
+          <div><dt>Human handoff</dt><dd>Register a project with <code>--no-auto-merge</code> to make the judge stop before merging.</dd></div>
+        </dl>
+        <p class="ed-policy-source"><a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/judge-ci-gate.md">Read the full merge policy<span aria-hidden="true">↗</span></a> <a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/SETUP.md">Project configuration<span aria-hidden="true">↗</span></a></p>
       </section>
       <section class="ed-ledger" id="the-record">
         <div class="wrap ed-proof-pair">
@@ -115,7 +141,7 @@
         </div>
       </section>
       <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
-        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Operator guide</span><strong>Trace all five handoffs</strong><span class="ed-next-desc">See what happens before the pull request.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Operator guide</span><strong>Follow a worked example</strong><span class="ed-next-desc">Trace a goal, a failed review and the revised change.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
         <a class="ed-next" href="/demo/quality.html"><span class="ed-kicker">Demo</span><strong>Inspect the quality view</strong><span class="ed-next-desc">Explore rejections, retries and judge decisions.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
       </nav>
     </main>
