@@ -102,6 +102,72 @@ class CatalogTest(unittest.TestCase):
                          "--plugin-dir hivemill/roles/plugins/beta/beta-skills")
         self.assertEqual(beta["skills"], [{"name": "tidy", "purpose": "Tidy the workspace."}])
 
+    def test_option_b_lane_roles_task_and_task_judge(self):
+        before = {i["id"]: i for i in self.build()["items"] if i["kind"] == "role"}
+        lane = os.path.join(self.src, "roles", "hivemill")
+        self.write(os.path.join(lane, "task.md"),
+                   "# Role: task session (Option B lane)\n\nYou own one task from start to an open,\n"
+                   "green PR. You work alone.\n\nSecond paragraph.\n")
+        self.write(os.path.join(lane, "task-judge.md"),
+                   "# Role: task judge (Option B lane)\n\nYou decide whether one pull request should merge. "
+                   "You did not write it.\n")
+        self.write(os.path.join(lane, "task.json.in"), json.dumps(
+            {"permissions": {"allow": ["Bash(git push origin HEAD:factory/*)"], "deny": ["Bash(gh pr merge:*)"]}}))
+        self.write(os.path.join(lane, "task-judge.json.in"), json.dumps(
+            {"permissions": {"deny": ["Edit", "Write"]}}))
+        self.commit()
+        data = self.build()
+        sha = data["source"]["sha"]
+        roles = [i["id"] for i in data["items"] if i["kind"] == "role"]
+        self.assertEqual(roles, ["role:alpha", "role:beta", "role:task", "role:task-judge"])
+        task = self.item(data, "role:task")
+        self.assertEqual(task["purpose"], "You own one task from start to an open, green PR.")
+        self.assertEqual(task["path"], "roles/hivemill/task.md")
+        self.assertEqual(task["snippets"], [
+            "curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/%s/roles/hivemill/task.md" % sha])
+        self.assertEqual(task["permissions"], {"allow": ["Bash(git push origin HEAD:factory/*)"],
+                                               "deny": ["Bash(gh pr merge:*)"]})
+        judge = self.item(data, "role:task-judge")
+        self.assertEqual(judge["purpose"], "You decide whether one pull request should merge.")
+        self.assertEqual(judge["permissions"], {"allow": [], "deny": ["Edit", "Write"]})
+        self.assertIn("You did not write it.", judge["file"])
+        # Existing roles are unchanged apart from the pinned sha in their download line.
+        for rid in ("role:alpha", "role:beta"):
+            old = dict(before[rid], snippets=None)
+            self.assertEqual(dict(self.item(data, rid), snippets=None), old)
+
+    def test_lane_role_name_clash_with_top_level_role_fails(self):
+        self.write(os.path.join(self.src, "roles", "hivemill", "alpha.md"), "# Role: x\n\nClash.\n")
+        self.commit()
+        r = tool("build", "--src", self.src, "--out", self.out, "--overrides", self.ov)
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("roles/hivemill/alpha.md", r.stderr)
+
+    def test_lane_role_edge_cases(self):
+        lane = os.path.join(self.src, "roles", "hivemill")
+        self.write(os.path.join(lane, "solo.md"), "# Role: solo\n\nSee [the guide](g.md) first. More.\n")
+        self.write(os.path.join(lane, "_common.md"), "Shared text.\n")
+        self.write(os.path.join(lane, "README.md"), "About the lane.\n")
+        self.write(os.path.join(self.src, "roles", "settings", "solo.json.in"),
+                   json.dumps({"permissions": {"deny": ["Edit"]}}))
+        self.commit()
+        data = self.build()
+        roles = [i["id"] for i in data["items"] if i["kind"] == "role"]
+        self.assertEqual(roles, ["role:alpha", "role:beta", "role:solo"])
+        solo = self.item(data, "role:solo")
+        self.assertEqual(solo["purpose"], "See the guide first.")
+        self.assertEqual(solo["permissions"], {"allow": [], "deny": ["Edit"]})
+        os.remove(os.path.join(self.src, "roles", "settings", "solo.json.in"))
+        self.commit()
+        self.assertNotIn("permissions", self.item(self.build(), "role:solo"))
+
+    def test_lane_role_without_paragraph_fails(self):
+        self.write(os.path.join(self.src, "roles", "hivemill", "bare.md"), "# Role: bare\n\n## Steps\n")
+        self.commit()
+        r = tool("build", "--src", self.src, "--out", self.out, "--overrides", self.ov)
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("roles/hivemill/bare.md", r.stderr)
+
     def test_marketplace_listed_plugin_uses_install_lines(self):
         data = self.build()
         self.assertEqual(self.item(data, "skill:hivemill/setup")["snippets"],
