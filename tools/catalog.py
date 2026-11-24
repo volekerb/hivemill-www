@@ -35,7 +35,8 @@ JSON schema (schemaVersion 1; consumed by the `render` subcommand)
   role extra:   skills  [{"name", "purpose"}] from roles/plugins/<name>/*/skills/*/SKILL.md
                 permissions {"allow": [str], "deny": [str]} from roles/settings/<name>.json.in (when present)
                 Option B lane roles come from roles/hivemill/<name>.md (purpose: first sentence of
-                the first paragraph) with permissions from roles/hivemill/<name>.json.in
+                the first paragraph) with permissions from roles/hivemill/<name>.json.in (else roles/settings/<name>.json.in);
+                _*.md and README.md there are not roles
   planned item  {"status": "soon", "present": [path], "absent": [path]}: named by an ADR in the
                 checkout but not shipped; lists which of its paths exist and which do not
   skill extra:  plugin (str, plugin.json name), bins [str] (files in the plugin's bin/)
@@ -198,11 +199,11 @@ def lane_purpose(src, rel):
             break
     if not para:
         raise CatalogError("%s: no paragraph after the heading" % rel)
-    return first_sentence(" ".join(para))
+    return first_sentence(strip_links(" ".join(para)))
 
 
 def role_permissions(src, name, rel=None):
-    rel = rel or "roles/settings/%s.json.in" % name
+    rel = rel if rel and os.path.isfile(os.path.join(src, rel)) else "roles/settings/%s.json.in" % name
     if not os.path.isfile(os.path.join(src, rel)):
         return None
     perms = read_json(src, rel).get("permissions", {})
@@ -217,7 +218,7 @@ def role_sources(src):
             yield fname[:-3], "roles/" + fname, role_purpose, None
     # Option B lane: roles/hivemill/<name>.md with settings roles/hivemill/<name>.json.in.
     for fname in files(src, "roles/hivemill"):
-        if fname.endswith(".md"):
+        if fname.endswith(".md") and not fname.startswith("_") and fname.lower() != "readme.md":
             yield fname[:-3], "roles/hivemill/" + fname, lane_purpose, "roles/hivemill/%s.json.in" % fname[:-3]
 
 

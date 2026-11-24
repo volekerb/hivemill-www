@@ -143,6 +143,31 @@ class CatalogTest(unittest.TestCase):
         self.assertEqual(r.returncode, 1)
         self.assertIn("roles/hivemill/alpha.md", r.stderr)
 
+    def test_lane_role_edge_cases(self):
+        lane = os.path.join(self.src, "roles", "hivemill")
+        self.write(os.path.join(lane, "solo.md"), "# Role: solo\n\nSee [the guide](g.md) first. More.\n")
+        self.write(os.path.join(lane, "_common.md"), "Shared text.\n")
+        self.write(os.path.join(lane, "README.md"), "About the lane.\n")
+        self.write(os.path.join(self.src, "roles", "settings", "solo.json.in"),
+                   json.dumps({"permissions": {"deny": ["Edit"]}}))
+        self.commit()
+        data = self.build()
+        roles = [i["id"] for i in data["items"] if i["kind"] == "role"]
+        self.assertEqual(roles, ["role:alpha", "role:beta", "role:solo"])
+        solo = self.item(data, "role:solo")
+        self.assertEqual(solo["purpose"], "See the guide first.")
+        self.assertEqual(solo["permissions"], {"allow": [], "deny": ["Edit"]})
+        os.remove(os.path.join(self.src, "roles", "settings", "solo.json.in"))
+        self.commit()
+        self.assertNotIn("permissions", self.item(self.build(), "role:solo"))
+
+    def test_lane_role_without_paragraph_fails(self):
+        self.write(os.path.join(self.src, "roles", "hivemill", "bare.md"), "# Role: bare\n\n## Steps\n")
+        self.commit()
+        r = tool("build", "--src", self.src, "--out", self.out, "--overrides", self.ov)
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("roles/hivemill/bare.md", r.stderr)
+
     def test_marketplace_listed_plugin_uses_install_lines(self):
         data = self.build()
         self.assertEqual(self.item(data, "skill:hivemill/setup")["snippets"],
