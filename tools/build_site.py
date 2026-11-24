@@ -10,7 +10,7 @@ from site_metadata import validate_metadata, write_discovery
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / 'build'
 SITE = BUILD / 'site'
-PUBLIC_FILES = ('index.html', 'CNAME', '.nojekyll', 'LICENSE')
+PUBLIC_FILES = ('index.html', '404.html', 'CNAME', '.nojekyll', 'LICENSE')
 PUBLIC_DIRS = ('assets', 'catalog', 'factories', 'film', 'guides', 'work-with-me')
 
 
