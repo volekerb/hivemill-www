@@ -93,6 +93,16 @@
     "summary": "Provide technical advice on a specific engineering decision.",
     "use_when": "Get a second technical perspective on architecture or a difficult implementation question."
   },
+  "role:task": {
+    "icon": "coder",
+    "summary": "Carry one task from its specification to an open pull request with passing checks.",
+    "use_when": "Run a single agent per task that implements, tests, reviews and opens the pull request for a separate merge decision."
+  },
+  "role:task-judge": {
+    "icon": "merge",
+    "summary": "Decide whether one pull request should merge, from its task, proofs and review record.",
+    "use_when": "Keep the merge decision independent of the agent that wrote the change."
+  },
   "skill:hivemill-spend/agent-context-limits": {
     "icon": "limits",
     "summary": "Limit worker context while preserving a larger context for the coordinating agent.",
@@ -110,6 +120,11 @@
     "summary": "Guide Claude Code through the Hivemill installation.",
     "use_when": "Set up a factory using the installer rather than assembling its services manually.",
     "requirements": "A fresh Debian or Ubuntu host and a logged-in Claude Code. The installer guide documents the remaining dependencies."
+  },
+  "skill:hivemill/web": {
+    "icon": "ask",
+    "summary": "File a web delivery goal from one sentence.",
+    "use_when": "Send a change to a project repository through review, QA and the merge decision."
   },
   "skill:hm-clean": {
     "icon": "clean",

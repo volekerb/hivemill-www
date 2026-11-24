@@ -34,6 +34,8 @@ JSON schema (schemaVersion 1; consumed by the `render` subcommand)
                     source-derived purpose, files and snippets remain unchanged.
   role extra:   skills  [{"name", "purpose"}] from roles/plugins/<name>/*/skills/*/SKILL.md
                 permissions {"allow": [str], "deny": [str]} from roles/settings/<name>.json.in (when present)
+                Option B lane roles come from roles/hivemill/<name>.md (purpose: first sentence of
+                the first paragraph) with permissions from roles/hivemill/<name>.json.in
   planned item  {"status": "soon", "present": [path], "absent": [path]}: named by an ADR in the
                 checkout but not shipped; lists which of its paths exist and which do not
   skill extra:  plugin (str, plugin.json name), bins [str] (files in the plugin's bin/)
@@ -185,8 +187,22 @@ def role_purpose(src, rel):
     raise CatalogError("%s: no '# Role: <name> — <purpose>' heading and no paragraph line" % rel)
 
 
-def role_permissions(src, name):
-    rel = "roles/settings/%s.json.in" % name
+def lane_purpose(src, rel):
+    """First sentence of the first paragraph of a lane prompt (roles/hivemill/*.md)."""
+    para = []
+    for line in read(src, rel).split("\n"):
+        s = line.strip()
+        if s and not s.startswith("#"):
+            para.append(s)
+        elif para:
+            break
+    if not para:
+        raise CatalogError("%s: no paragraph after the heading" % rel)
+    return first_sentence(" ".join(para))
+
+
+def role_permissions(src, name, rel=None):
+    rel = rel or "roles/settings/%s.json.in" % name
     if not os.path.isfile(os.path.join(src, rel)):
         return None
     perms = read_json(src, rel).get("permissions", {})
@@ -194,13 +210,23 @@ def role_permissions(src, name):
     return out if out["allow"] or out["deny"] else None
 
 
-def role_items(src, sha):
-    items = []
+def role_sources(src):
+    """(name, prompt path, purpose function, settings path) for every role prompt."""
     for fname in files(src, "roles"):
-        if not fname.endswith(".md") or fname == "_common.md":
-            continue
-        name = fname[:-3]
-        rel = "roles/" + fname
+        if fname.endswith(".md") and fname != "_common.md":
+            yield fname[:-3], "roles/" + fname, role_purpose, None
+    # Option B lane: roles/hivemill/<name>.md with settings roles/hivemill/<name>.json.in.
+    for fname in files(src, "roles/hivemill"):
+        if fname.endswith(".md"):
+            yield fname[:-3], "roles/hivemill/" + fname, lane_purpose, "roles/hivemill/%s.json.in" % fname[:-3]
+
+
+def role_items(src, sha):
+    items, seen = [], set()
+    for name, rel, purpose, settings in role_sources(src):
+        if name in seen:
+            raise CatalogError("%s: role name '%s' is already used by another prompt" % (rel, name))
+        seen.add(name)
         snippets = ["curl -fsSLO https://raw.githubusercontent.com/%s/%s/%s" % (REPO, sha, rel)]
         skills = []
         for plugin in subdirs(src, "roles/plugins/" + name):
@@ -213,9 +239,9 @@ def role_items(src, sha):
                     sname, spurpose = skill_meta(src, srel, sk)
                     skills.append({"name": sname, "purpose": spurpose})
         item = {"id": "role:" + name, "kind": "role", "name": name,
-                "purpose": role_purpose(src, rel), "snippets": snippets,
+                "purpose": purpose(src, rel), "snippets": snippets,
                 "path": rel, "file": read(src, rel), "skills": skills}
-        perms = role_permissions(src, name)
+        perms = role_permissions(src, name, settings)
         if perms:
             item["permissions"] = perms
         items.append(item)

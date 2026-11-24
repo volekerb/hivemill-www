@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web skill | Hivemill</title>
+<meta name="description" content="File a web delivery goal from one sentence.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/v2.css">
+<link rel="stylesheet" href="../../assets/css/factory.css?v=2026111807">
+<script type="module" src="../../assets/js/factory.js?v=2026111807"></script>
+<link rel="stylesheet" href="../../assets/css/catalog.css?v=2026111807">
+<script type="module" src="../../assets/js/motion.js"></script>
+<script type="module" src="../../assets/js/catalog.js?v=2026111807"></script>
+<!-- Generated search metadata: tools/site_metadata.py -->
+<link rel="canonical" href="https://hivemill.dev/catalog/skill-hivemill-web/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hivemill">
+<meta property="og:title" content="Web skill | Hivemill">
+<meta property="og:description" content="File a web delivery goal from one sentence.">
+<meta property="og:url" content="https://hivemill.dev/catalog/skill-hivemill-web/">
+<meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta property="og:image:width" content="1344">
+<meta property="og:image:height" content="752">
+<meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Web skill | Hivemill">
+<meta name="twitter:description" content="File a web delivery goal from one sentence.">
+<meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
+<meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hivemill","item":"https://hivemill.dev/"},{"@type":"ListItem","position":2,"name":"Catalog","item":"https://hivemill.dev/catalog/"},{"@type":"ListItem","position":3,"name":"Web skill","item":"https://hivemill.dev/catalog/skill-hivemill-web/"}]}</script>
+<!-- End generated search metadata -->
+</head>
+<body class="catalog-site">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M28 24 L18 30 L8 24 L8 12 L18 6 L28 12 Z"/><path d="M56 24 L46 30 L36 24 L36 12 L46 6 L56 12 Z"/></g><path d="M42 50 L32 56 L22 50 L22 38 L32 32 L42 38 Z" fill="#e9a100" stroke="#e9a100" stroke-width="4" stroke-linejoin="round"/></svg>Hivemill</a>
+<nav aria-label="Site">
+<a href="../../factories/what/">How it works</a>
+<a href="../../demo/">Demo</a>
+<a href="../../catalog/" aria-current="location">Catalog</a>
+<a href="../../guides/install/">Install</a>
+<a href="../../work-with-me/">Discuss a pilot</a>
+</nav>
+</div></header>
+<main id="main">
+<p class="sr" role="status" aria-live="polite" id="live"></p>
+<header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb"><a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#skills">Skills</a></nav>
+<div class="component-heading"><div><h1>Web</h1><p>File a web delivery goal from one sentence.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#ask"/></svg></div></div></header>
+<div class="wrap component-layout"><div class="component-body">
+<section class="component-section" id="use"><h2>When to use it</h2><p>Send a change to a project repository through review, QA and the merge decision.</p><h3>Requirements</h3><p>Claude Code with the containing plugin installed. Check the source instructions for workflow-specific prerequisites.</p></section>
+<section class="component-section" id="install"><h2>Install</h2><p>Install the hivemill plugin to add this skill.</p><div class="snip"><div class="snippet-bar"><span>Claude Code</span><button class="copy" type="button" hidden data-copy aria-label="Copy Claude Code commands for web">Copy</button></div><pre class="code"><code>/plugin marketplace add volekerb/hivemill
+/plugin install hivemill@hivemill</code></pre></div></section>
+<section class="component-section" id="documentation"><h2>Documentation</h2>
+<details class="doc-section" open><summary>Overview</summary><div class="doc"><p>You tell the boss how to file a goal. You do not write the product change, review it, test it, or merge it. The coder writes; reviewer, QA, and the judge finish the pull request.</p></div></details>
+<details class="doc-section"><summary>Project repo</summary><div class="doc"><p>The user&#x27;s project repo holds <code>.hivemill/web.json</code>. Copy the shape from <code>plugins/hivemill/skills/web/web.example.json</code> in the Hivemill checkout. Keys are only <code>schemaVersion</code>, <code>defaultBranch</code>, and <code>checks</code>. No tokens, passwords, or key paths in that file. GitHub auth stays the user&#x27;s existing <code>gh auth</code> login; this pipeline adds no secret file under <code>~/.config/hivemill/</code>.</p><p>Each check is an argv array, or an object with exactly <code>cwd</code> and <code>argv</code>. Every <code>cwd</code> stays inside the repo. <code>checks</code> must be non-empty.</p><p>Register the repo with the factory before filing the goal (<code>factory project add</code> if it is new).</p></div></details>
+<details class="doc-section"><summary>Goal from one sentence</summary><div class="doc"><p>The owner gives one sentence: what should change in the web project. Turn that sentence into a goal with this template.</p><p><strong>Title:</strong> the sentence.</p><p><strong>Intent:</strong> the sentence, then this line on its own:</p><p>Web pipeline. The agent that writes the change does not review it, test it, or merge it. Checks are the argv list in .hivemill/web.json.</p><p><strong>Success:</strong></p><ol><li><p>The change matches the sentence.</p></li><li><p>Every check in <code>.hivemill/web.json</code> passes.</p></li><li><p>Reviewer pass, QA pass, and the judge merges.</p></li></ol><p>The merged pull request URL is the done result.</p><h4>Commands</h4><p>Use the project id from <code>factory project list</code>. Only one <code>-</code> field per call.</p><pre><code>factory goal new --title &quot;&lt;sentence&gt;&quot; --project &lt;id&gt; --priority 2 --intent - &lt;&lt;&#x27;EOF&#x27;
+&lt;sentence&gt;
+
+Web pipeline. The agent that writes the change does not review it, test it, or merge it. Checks are the argv list in .hivemill/web.json.
+EOF</code></pre><p>Then set success (replace <code>G-xxx</code> with the new goal id):</p><pre><code>factory goal edit G-xxx --success - &lt;&lt;&#x27;EOF&#x27;
+1. The change matches the sentence.
+2. Every check in .hivemill/web.json passes.
+3. Reviewer pass, QA pass, and the judge merges.
+
+The merged pull request URL is the done result.
+EOF</code></pre><p>Hand off to the director: <code>factory msg director &quot;new goal G-xxx&quot; &quot;&lt;one paragraph: sentence, repo, checks summary&gt;&quot; --kind request --goal G-xxx</code>.</p></div></details>
+<details class="doc-section"><summary>What the user sees when it finishes</summary><div class="doc"><p>The done result is the merged pull request URL. It shows in the web UI changelog and on the Herdr project card. The owner does not need to merge or run checks themselves.</p></div></details>
+<details class="doc-section"><summary>Out of scope for this skill</summary><div class="doc"><ul><li><p>Do not run checks in the chat, spawn coders, or merge pull requests.</p></li><li><p>Do not use the factory checkout (<code>~/factory</code>) or <code>volekerb/hivemill</code> as the sample web project repo.</p></li><li><p>iOS, research, and desktop pipelines use other skills; staff them only when the director says that stage is ready.</p></li></ul></div></details>
+</section>
+<section class="component-section"><details class="raw-source"><summary>Full source file</summary><div class="snip"><div class="snippet-bar"><span>plugins/hivemill/skills/web/SKILL.md</span><button class="copy" type="button" hidden data-copy aria-label="Copy full file for web">Copy full file</button></div><pre class="code" id="full"><code>---
+name: web
+description: File a web-pipeline goal from one sentence. Use when the boss wires a project repo for web work or the owner describes a change they want shipped through review, QA, and merge.
+disable-model-invocation: true
+---
+
+# Hivemill web pipeline
+
+You tell the boss how to file a goal. You do not write the product change, review it, test it, or merge it. The coder writes; reviewer, QA, and the judge finish the pull request.
+
+## Project repo
+
+The user&#x27;s project repo holds `.hivemill/web.json`. Copy the shape from `plugins/hivemill/skills/web/web.example.json` in the Hivemill checkout. Keys are only `schemaVersion`, `defaultBranch`, and `checks`. No tokens, passwords, or key paths in that file. GitHub auth stays the user&#x27;s existing `gh auth` login; this pipeline adds no secret file under `~/.config/hivemill/`.
+
+Each check is an argv array, or an object with exactly `cwd` and `argv`. Every `cwd` stays inside the repo. `checks` must be non-empty.
+
+Register the repo with the factory before filing the goal (`factory project add` if it is new).
+
+## Goal from one sentence
+
+The owner gives one sentence: what should change in the web project. Turn that sentence into a goal with this template.
+
+**Title:** the sentence.
+
+**Intent:** the sentence, then this line on its own:
+
+Web pipeline. The agent that writes the change does not review it, test it, or merge it. Checks are the argv list in .hivemill/web.json.
+
+**Success:**
+
+1. The change matches the sentence.
+2. Every check in `.hivemill/web.json` passes.
+3. Reviewer pass, QA pass, and the judge merges.
+
+The merged pull request URL is the done result.
+
+### Commands
+
+Use the project id from `factory project list`. Only one `-` field per call.
+
+```
+factory goal new --title &quot;&lt;sentence&gt;&quot; --project &lt;id&gt; --priority 2 --intent - &lt;&lt;&#x27;EOF&#x27;
+&lt;sentence&gt;
+
+Web pipeline. The agent that writes the change does not review it, test it, or merge it. Checks are the argv list in .hivemill/web.json.
+EOF
+```
+
+Then set success (replace `G-xxx` with the new goal id):
+
+```
+factory goal edit G-xxx --success - &lt;&lt;&#x27;EOF&#x27;
+1. The change matches the sentence.
+2. Every check in .hivemill/web.json passes.
+3. Reviewer pass, QA pass, and the judge merges.
+
+The merged pull request URL is the done result.
+EOF
+```
+
+Hand off to the director: `factory msg director &quot;new goal G-xxx&quot; &quot;&lt;one paragraph: sentence, repo, checks summary&gt;&quot; --kind request --goal G-xxx`.
+
+## What the user sees when it finishes
+
+The done result is the merged pull request URL. It shows in the web UI changelog and on the Herdr project card. The owner does not need to merge or run checks themselves.
+
+## Out of scope for this skill
+
+- Do not run checks in the chat, spawn coders, or merge pull requests.
+- Do not use the factory checkout (`~/factory`) or `volekerb/hivemill` as the sample web project repo.
+- iOS, research, and desktop pipelines use other skills; staff them only when the director says that stage is ready.</code></pre></div></details></section>
+</div><aside aria-label="Component information"><div class="component-aside"><section><h2>Component details</h2><dl class="component-facts"><dt>Type</dt><dd>Skill</dd><dt>Name</dt><dd><code>web</code></dd>
+<dt>Plugin</dt><dd>hivemill</dd>
+<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838"><code>7368c0c3cec3</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/plugins/hivemill/skills/web/SKILL.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
+<section><h2>Related components</h2><ul class="component-related"><li><a href="../plugin-hivemill/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#catalog"/></svg><span>Hivemill</span><span aria-hidden="true">↗</span></a></li><li><a href="../skill-hivemill-setup/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#install"/></svg><span>Setup</span><span aria-hidden="true">↗</span></a></li></ul></section>
+</div></aside></div>
+</main>
+<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at 7368c0c3cec3 (2026-11-24).</div></footer>
+</body>
+</html>
