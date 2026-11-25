@@ -57,6 +57,13 @@
 .catalog-results .group + .group { margin-top: 3.9rem; }
 .catalog-search:not([hidden]) ~ .group { margin-top: 2.15rem; }
 .catalog-search:not([hidden]) ~ .group ~ .group { margin-top: 3.9rem; }
+/* catalog.js reveals the search after load. With scripting on, its row is laid out (invisible) from the
+   first paint, so revealing it does not push the results down (layout shift). */
+@media (scripting: enabled) {
+  .catalog-site .catalog-search[hidden] { display: flex !important; visibility: hidden; }
+  .catalog-search[hidden] ~ .group { margin-top: 2.15rem; }
+  .catalog-search[hidden] ~ .group ~ .group { margin-top: 3.9rem; }
+}
 .catalog-results .group { scroll-margin-top: 1.5rem; }
 .group-head { padding-bottom: 1.15rem; border-bottom: 1px solid var(--catalog-rule); }
 .group-head h2 { display: flex; align-items: start; gap: .6rem; font: 500 clamp(1.8rem, 2.9vw, 2.65rem)/1.1 var(--font-text); letter-spacing: -.052em; }
@@ -185,6 +192,10 @@
   .group-head p { font-size: .88rem; }
   .catalog-search:not([hidden]) ~ .group { margin-top: 1.5rem; }
   .catalog-results .group + .group, .catalog-search:not([hidden]) ~ .group ~ .group { margin-top: 2.65rem; }
+  @media (scripting: enabled) {
+    .catalog-search[hidden] ~ .group { margin-top: 1.5rem; }
+    .catalog-search[hidden] ~ .group ~ .group { margin-top: 2.65rem; }
+  }
   .entry-link { grid-template-columns: 2.45rem minmax(0, 1fr) 1.1rem; gap: .23rem .8rem; padding-block: .85rem; min-height: 4.75rem; }
   .entry h3 { align-self: end; font-size: 1.07rem; }
   .entry-emblem, .entry-arrow { grid-row: 1 / 3; }
