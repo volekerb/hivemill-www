@@ -89,8 +89,11 @@ class TestLinks(unittest.TestCase):
         self.assertEqual(failures, [])
 
     def test_404_local_links_resolve(self):
-        self.assertTrue((SITE / 'index.html').is_file(),
-                        f'built site not found at {SITE}: run tools/build_site.py (or set SITE_ROOT)')
+        if not (SITE / 'index.html').is_file():
+            message = f'built site not found at {SITE}: run tools/build_site.py (or set SITE_ROOT)'
+            if os.environ.get('CI') or os.environ.get('SITE_ROOT'):
+                self.fail(message)  # CI, or a build that was asked for, must never pass vacuously
+            self.skipTest(message)
         page = SITE / '404.html'
         self.assertEqual(broken_links(page, scan(page).links, SITE), [])
 
