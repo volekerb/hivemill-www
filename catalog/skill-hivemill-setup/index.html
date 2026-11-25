@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Setup skill | Hivemill</title>
-<meta name="description" content="Guide Claude Code through the Hivemill installation.">
+<meta name="description" content="Guide Claude Code through installing the legacy pipeline.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
 <link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hivemill">
 <meta property="og:title" content="Setup skill | Hivemill">
-<meta property="og:description" content="Guide Claude Code through the Hivemill installation.">
+<meta property="og:description" content="Guide Claude Code through installing the legacy pipeline.">
 <meta property="og:url" content="https://hivemill.dev/catalog/skill-hivemill-setup/">
 <meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta property="og:image:width" content="1344">
@@ -27,7 +27,7 @@
 <meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Setup skill | Hivemill">
-<meta name="twitter:description" content="Guide Claude Code through the Hivemill installation.">
+<meta name="twitter:description" content="Guide Claude Code through installing the legacy pipeline.">
 <meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hivemill","item":"https://hivemill.dev/"},{"@type":"ListItem","position":2,"name":"Catalog","item":"https://hivemill.dev/catalog/"},{"@type":"ListItem","position":3,"name":"Setup skill","item":"https://hivemill.dev/catalog/skill-hivemill-setup/"}]}</script>
@@ -48,9 +48,9 @@
 <main id="main">
 <p class="sr" role="status" aria-live="polite" id="live"></p>
 <header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb"><a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#skills">Skills</a></nav>
-<div class="component-heading"><div><h1>Setup</h1><p>Guide Claude Code through the Hivemill installation.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#install"/></svg></div></div></header>
+<div class="component-heading"><div><h1>Setup</h1><p>Guide Claude Code through installing the legacy pipeline.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#install"/></svg></div></div></header>
 <div class="wrap component-layout"><div class="component-body">
-<section class="component-section" id="use"><h2>When to use it</h2><p>Set up a factory using the installer rather than assembling its services manually.</p><h3>Requirements</h3><p>A fresh Debian or Ubuntu host and a logged-in Claude Code. The installer guide documents the remaining dependencies.</p></section>
+<section class="component-section" id="use"><h2>When to use it</h2><p>Set up the legacy pipeline with the installer. For the runner, follow the installation guide.</p><h3>Requirements</h3><p>A fresh Debian or Ubuntu host and a logged-in Claude Code. The installer guide documents the remaining dependencies.</p></section>
 <section class="component-section" id="install"><h2>Install</h2><p>Install the hivemill plugin to add this skill.</p><div class="snip"><div class="snippet-bar"><span>Claude Code</span><button class="copy" type="button" hidden data-copy aria-label="Copy Claude Code commands for setup">Copy</button></div><pre class="code"><code>/plugin marketplace add volekerb/hivemill
 /plugin install hivemill@hivemill</code></pre></div></section>
 <section class="component-section" id="documentation"><h2>Documentation</h2>
@@ -101,10 +101,10 @@ You are a thin guide over one script, a small verifier that runs the pinned inst
 9. Optional, only if the user uses the Herdr desktop app: offer the Hivemill dashboard (a status bar and a dashboard tab in the app, see `docs/herdr-app-dashboard.md`). It installs on the machine where the app runs, which may be another computer: then give the user the command for that machine instead of running it here. Ask whether their factory runs Claude, Cursor or both (`--orgs auto` is fine when unsure) and, if the app runs elsewhere, the `hc machine ls` name of this box (`--factory-machine NAME`). Run `${CLAUDE_PLUGIN_ROOT}/scripts/install --herdr-app --dry-run &lt;flags&gt;`, show the plan, get a yes, then the same with `--yes`. Exit 3 means the Herdr app is not set up there yet: say so and stop.</code></pre></div></details></section>
 </div><aside aria-label="Component information"><div class="component-aside"><section><h2>Component details</h2><dl class="component-facts"><dt>Type</dt><dd>Skill</dd><dt>Name</dt><dd><code>setup</code></dd>
 <dt>Plugin</dt><dd>hivemill</dd>
-<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838"><code>7368c0c3cec3</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/plugins/hivemill/skills/setup/SKILL.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
+<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/c58021c92833e4c62466ce95bfb73e957ddb5ef0"><code>c58021c92833</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/c58021c92833e4c62466ce95bfb73e957ddb5ef0/plugins/hivemill/skills/setup/SKILL.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
 <section><h2>Related components</h2><ul class="component-related"><li><a href="../plugin-hivemill/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#catalog"/></svg><span>Hivemill</span><span aria-hidden="true">↗</span></a></li><li><a href="../skill-hivemill-web/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#ask"/></svg><span>Web</span><span aria-hidden="true">↗</span></a></li></ul></section>
 </div></aside></div>
 </main>
-<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at 7368c0c3cec3 (2026-11-24).</div></footer>
+<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at c58021c92833 (2026-11-25).</div></footer>
 </body>
 </html>

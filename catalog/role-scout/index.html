@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scout agent role | Hivemill</title>
-<meta name="description" content="Assess candidate skills through read-only research.">
+<meta name="description" content="Legacy pipeline (paused): assessed candidate skills through read-only research.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
 <link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hivemill">
 <meta property="og:title" content="Scout agent role | Hivemill">
-<meta property="og:description" content="Assess candidate skills through read-only research.">
+<meta property="og:description" content="Legacy pipeline (paused): assessed candidate skills through read-only research.">
 <meta property="og:url" content="https://hivemill.dev/catalog/role-scout/">
 <meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta property="og:image:width" content="1344">
@@ -27,7 +27,7 @@
 <meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Scout agent role | Hivemill">
-<meta name="twitter:description" content="Assess candidate skills through read-only research.">
+<meta name="twitter:description" content="Legacy pipeline (paused): assessed candidate skills through read-only research.">
 <meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hivemill","item":"https://hivemill.dev/"},{"@type":"ListItem","position":2,"name":"Catalog","item":"https://hivemill.dev/catalog/"},{"@type":"ListItem","position":3,"name":"Scout agent role","item":"https://hivemill.dev/catalog/role-scout/"}]}</script>
@@ -48,10 +48,10 @@
 <main id="main">
 <p class="sr" role="status" aria-live="polite" id="live"></p>
 <header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb"><a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#roles">Roles</a></nav>
-<div class="component-heading"><div><h1>Scout</h1><p>Assess candidate skills through read-only research.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#scout"/></svg></div></div></header>
+<div class="component-heading"><div><h1>Scout</h1><p>Legacy pipeline (paused): assessed candidate skills through read-only research.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#scout"/></svg></div></div></header>
 <div class="wrap component-layout"><div class="component-body">
-<section class="component-section" id="use"><h2>When to use it</h2><p>Evaluate a potentially useful skill before adding it to the factory.</p><h3>Requirements</h3><p>A Hivemill factory checkout. Review the instructions and tool permissions before assigning the role.</p></section>
-<section class="component-section" id="install"><h2>Install</h2><p>Download the role file and adapt its instructions for your agent.</p><div class="snip"><div class="snippet-bar"><span>Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Terminal commands for scout">Copy</button></div><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/roles/scout.md</code></pre></div></section>
+<section class="component-section" id="use"><h2>When to use it</h2><p>Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner.</p><h3>Requirements</h3><p>A Hivemill factory checkout. Review the instructions and tool permissions before assigning the role.</p></section>
+<section class="component-section" id="install"><h2>Install</h2><p>Download the role file and adapt its instructions for your agent.</p><div class="snip"><div class="snippet-bar"><span>Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Terminal commands for scout">Copy</button></div><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/c58021c92833e4c62466ce95bfb73e957ddb5ef0/roles/scout.md</code></pre></div></section>
 <section class="component-section" id="documentation"><h2>Documentation</h2>
 <details class="doc-section" open><summary>Overview</summary><div class="doc"><p>You triage third-party Claude Code skills, plugins, agents and hooks that the factory has fetched. You change nothing: no files, no git, no web browsing, no commands other than the ones below. Finish within 20 minutes.</p></div></details>
 <details class="doc-section"><summary>Steps</summary><div class="doc"><ol><li><p><code>factory scout fetch</code> collects new candidates.</p></li><li><p><code>factory scout pending</code> lists untriaged candidates and our own inventory of skills and plugins.</p></li><li><p>For each candidate, read its facts and run <code>factory scout triage C-xxxx --purpose … --roles … --overlap … --rec adopt|watch|skip --why …</code>.</p><ul><li><p><code>adopt</code> only when the risk is prompt-only (text skills, no scripts, hooks or MCP servers).</p></li><li><p>Anything with executable parts (scripts, hooks, MCP servers, install steps) is <code>watch</code> or <code>skip</code>, and <code>--why</code> says &quot;owner decision: executable parts&quot;.</p></li><li><p><code>--suggest-eval</code> only for a prompt-only candidate you rec <code>adopt</code>.</p></li><li><p><code>--overlap</code> names what we already have that does the same job, or says &quot;none&quot;.</p></li></ul></li><li><p><code>factory done &quot;&lt;new N, triaged M, top picks&gt;&quot;</code>.</p></li></ol></div></details>
@@ -80,9 +80,9 @@ You triage third-party Claude Code skills, plugins, agents and hooks that the fa
 - Allowed commands: `factory scout …`, `factory whoami`, `factory inbox`, `factory done`, and read-only `gh api` calls for facts the scout command lacks. Nothing else.
 - If a command fails or a candidate cannot be judged, triage it `watch` with the reason, or leave it pending and say so in your summary. Never guess.</code></pre></div></details></section>
 </div><aside aria-label="Component information"><div class="component-aside"><section><h2>Component details</h2><dl class="component-facts"><dt>Type</dt><dd>Role</dd><dt>Name</dt><dd><code>scout</code></dd>
-<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838"><code>7368c0c3cec3</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/roles/scout.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
+<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/c58021c92833e4c62466ce95bfb73e957ddb5ef0"><code>c58021c92833</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/c58021c92833e4c62466ce95bfb73e957ddb5ef0/roles/scout.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
 </div></aside></div>
 </main>
-<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at 7368c0c3cec3 (2026-11-24).</div></footer>
+<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at c58021c92833 (2026-11-25).</div></footer>
 </body>
 </html>
