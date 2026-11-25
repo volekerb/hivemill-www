@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111807">
     <script type="module" src="/assets/js/motion.js"></script>
     <script type="module" src="/assets/js/factory.js?v=2026111807"></script>
-    <script type="module" src="/assets/js/editorial.js?v=2026111807"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026112501"></script>
 <!-- Generated search metadata: tools/site_metadata.py -->
 <link rel="canonical" href="https://hivemill.dev/factories/what/">
 <meta property="og:type" content="website">
@@ -48,29 +48,29 @@
     </header>
     <main id="main">
       <section class="wrap ed-product-intro">
-        <div class="ed-title"><p class="ed-kicker">How it works</p><h1>Your goal.<br>A factory on your host.</h1></div>
-        <div><p class="ed-lead">Hivemill is an open-source, self-hosted system that coordinates AI coding agents through implementation, review, QA and merge.</p><a class="ed-link" href="#the-line">Follow the workflow<span aria-hidden="true">↓</span></a></div>
+        <div class="ed-title"><p class="ed-kicker">How it works</p><h1>Your spec.<br>A runner on your machine.</h1></div>
+        <div><p class="ed-lead">Hivemill is an open-source, self-hosted runner for Claude Code. Three AI roles do the judgement. A deterministic Go runner does the rest.</p><a class="ed-link" href="#the-line">Follow the workflow<span aria-hidden="true">↓</span></a></div>
       </section>
       <section class="wrap ed-deployment" aria-labelledby="deployment-title" id="hosting">
         <h2 id="deployment-title">What runs where?</h2>
         <ol class="ed-architecture">
-          <li><p class="ed-kicker">Your laptop</p><h3>Set the goal.</h3><p>Connect to the host, delegate work and inspect progress.</p></li>
-          <li class="ed-architecture-host"><p class="ed-kicker">Your Debian or Ubuntu host</p><h3>The factory runs here.</h3><p>Agent sessions, repository worktrees and the work record stay on the host.</p></li>
-          <li><p class="ed-kicker">Connected services</p><h3>Models and GitHub.</h3><p>Claude Code and Cursor connect to their model providers. GitHub holds pull requests and CI checks.</p></li>
+          <li><p class="ed-kicker">You</p><h3>Write the spec.</h3><p>Name each criterion’s proof, answer the planner’s questions and read the morning digest.</p></li>
+          <li class="ed-architecture-host"><p class="ed-kicker">Your laptop, homelab or server</p><h3>The runner runs here.</h3><p>Claude Code sessions, task clones and the SQLite work record stay on your machine.</p></li>
+          <li><p class="ed-kicker">Connected services</p><h3>Models and GitHub.</h3><p>Claude Code connects to its model provider. GitHub holds pull requests and CI checks.</p></li>
         </ol>
-        <p class="ed-note">Your laptop can close while the host stays running and connected. Work may pause for decisions or resource and usage limits. Self-hosting the factory does not mean the models run locally.</p>
+        <p class="ed-note">On an always-on box, your laptop can close. On a laptop, runs pause while it sleeps and resume on wake. Work also waits for your decisions, budgets and usage caps. Self-hosting the runner does not mean the models run locally.</p>
       </section>
       <section class="wrap ed-overview" id="the-line">
-        <div class="ed-overview-head"><p class="ed-kicker">The workflow</p><h2>One goal.<br>A checked change.</h2><p>Describe the outcome and acceptance criteria. The factory coordinates the handoffs and records what happened.</p><a class="ed-link" href="/guides/ask-to-merge/">Follow a demo goal<span aria-hidden="true">↗</span></a></div>
+        <div class="ed-overview-head"><p class="ed-kicker">The workflow</p><h2>One spec.<br>A proven change.</h2><p>Every merged PR is proven against its spec, at a known cost. Three AI roles: a planner, one task session per task and a fresh judge.</p><a class="ed-link" href="/factories/who-merges/">Read the merge rules<span aria-hidden="true">↗</span></a></div>
         <ol class="ed-verbs">
-          <li><strong>Plan</strong><span>The boss records the goal; a director and lead organize tasks and agents.</span></li>
-          <li><strong>Build</strong><span>A coder works in a separate worktree and opens a pull request.</span></li>
-          <li><strong>Check</strong><span>A reviewer checks the diff; QA tests the acceptance criteria.</span></li>
-          <li><strong>Merge</strong><span>By default, both verdicts must pass before the judge merges. Your configured policy controls the final gate. <a href="/factories/who-merges/">Read the merge policy.</a></span></li>
+          <li><strong>Plan</strong><span>Every criterion names its proof, or the task is refused. The planner keeps each queue of ready tasks full and asks you when it needs a decision.</span></li>
+          <li><strong>Build</strong><span>One Claude Code session per task implements it, runs the tests, runs /code-review, fixes the findings and opens the pull request.</span></li>
+          <li><strong>Check</strong><span>Before the session may stop, the runner re-runs every test and command proof. Then a fresh, read-only judge maps every behaviour change to a criterion.</span></li>
+          <li><strong>Merge</strong><span>On a merge verdict, the runner checks the head, CI, risk tier and main, then merges. Budgets, usage caps, recovery and the digest are code too. <a href="/factories/who-merges/">Read the merge rules.</a></span></li>
         </ol>
       </section>
       <section class="ed-ledger"><div class="wrap ed-proof-pair">
-        <div><p class="ed-kicker">The work record</p><h2>Inspect the evidence.</h2><p>Follow a goal through its tasks, agent messages and verdicts. The read-only web dashboard keeps progress and decisions visible.</p><a class="ed-link" href="/demo/goals.html">Browse demo goals<span aria-hidden="true">↗</span></a></div>
+        <div><p class="ed-kicker">The work record</p><h2>Inspect the evidence.</h2><p>Each run records its gate results, re-run proofs, verdicts and session costs. <code>hivemill report</code> prints them per task. The web dashboard shown here belongs to the legacy pipeline.</p><a class="ed-link" href="/demo/goals.html">Browse demo goals<span aria-hidden="true">↗</span></a></div>
         <figure class="ed-shot">
             <picture>
               <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="../../assets/img/goals-current-dark-1x.webp 1x, ../../assets/img/goals-current-dark-2x.webp 2x" width="520" height="320">
@@ -81,8 +81,8 @@
             <figcaption>Goals register · Fictional demo data.</figcaption>
           </figure>
       </div></section>
-      <section class="wrap ed-overview ed-runtime"><div><p class="ed-kicker">Make it yours</p><h2>Adapt the workflow.</h2></div><div><p>Reuse roles, skills and plugins from the catalog. Set resource limits and Claude usage caps for the host; use monitoring to inspect capacity and estimated costs.</p><a class="ed-link" href="/catalog/">Browse the catalog<span aria-hidden="true">↗</span></a></div></section>
-      <nav class="ed-nexts wrap" aria-label="Related pages"><a class="ed-next" href="/guides/watch/"><span class="ed-kicker">Monitoring</span><strong>See what needs you</strong><span class="ed-next-desc">Web dashboard, costs and the optional Herdr app.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a><a class="ed-next" href="/guides/install/"><span class="ed-kicker">Getting started</span><strong>Install Hivemill</strong><span class="ed-next-desc">Prepare the host, run setup and verify the install.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a></nav>
+      <section class="wrap ed-overview ed-runtime"><div><p class="ed-kicker">Make it yours</p><h2>Adapt the workflow.</h2></div><div><p>Read the role prompts in the catalog. Set a budget per task, per project per day and per week, and Claude usage caps. Projects replace the old teams; research and design task kinds are planned.</p><a class="ed-link" href="/catalog/">Browse the catalog<span aria-hidden="true">↗</span></a></div></section>
+      <nav class="ed-nexts wrap" aria-label="Related pages"><a class="ed-next" href="/guides/watch/"><span class="ed-kicker">Monitoring</span><strong>See what needs you</strong><span class="ed-next-desc">Reports, the owner queue and the digest.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a><a class="ed-next" href="/guides/install/"><span class="ed-kicker">Getting started</span><strong>Install Hivemill</strong><span class="ed-next-desc">Build the runner and run your first task.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a></nav>
     </main>
     <footer class="site">
       <div class="wrap">

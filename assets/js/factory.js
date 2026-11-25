@@ -1,10 +1,10 @@
 // Progressive enhancement: all stories remain readable without JavaScript.
 const stages = [
- ['You + the boss', 'Define the outcome.', 'Describe the change and acceptance criteria. The boss turns your request into a goal.'],
- ['Director + lead', 'Give every agent a clear job.', 'A lead plans tasks and assigns agents, each with a defined responsibility.'],
- ['Coder', 'Build in a separate worktree.', 'A coder implements the task and opens a pull request. Separate agents check the change.'],
- ['Reviewer + QA', 'Review the diff. Run the tests.', 'A reviewer inspects the code. QA checks the acceptance criteria. Both record their verdicts.'],
- ['Judge', 'Apply the project’s merge policy.', 'By default, review and QA must pass before merging. Failed checks return findings to the coder.']
+ ['You + the planner', 'Name the proof.', 'Every acceptance criterion names its proof: a test or a command and its expected result. The planner keeps the queue of ready tasks full.'],
+ ['Task session', 'One session per task.', 'One Claude Code session implements the task, runs the tests, runs /code-review, fixes the findings and opens the pull request.'],
+ ['Runner', 'Re-run the proofs.', 'Before the session may stop, the runner checks its work and re-runs every test and command proof itself. Red CI goes back to the same session.'],
+ ['Judge', 'Map every change to the spec.', 'A fresh, read-only judge lists every behaviour change and maps it to a criterion. A change nobody asked for is rejected or held for you.'],
+ ['Runner', 'Merge by rule.', 'On a merge verdict the runner checks the exact head, green CI, the risk tier and main, then merges. High-risk changes wait for you.']
 ];
 const stageButtons = [...document.querySelectorAll('[data-stage]')];
 const play = document.getElementById('play-flow');

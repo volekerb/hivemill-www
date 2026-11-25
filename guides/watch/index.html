@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111807">
     <script type="module" src="/assets/js/motion.js"></script>
     <script type="module" src="/assets/js/factory.js?v=2026111807"></script>
-    <script type="module" src="/assets/js/editorial.js?v=2026111807"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026112501"></script>
 <!-- Generated search metadata: tools/site_metadata.py -->
 <link rel="canonical" href="https://hivemill.dev/guides/watch/">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
         <div class="ed-title">
           <p class="ed-kicker">Operator guide / Monitoring</p>
           <h1>Monitor work,<br>capacity and cost.</h1>
-          <p class="ed-lead">Use the read-only web dashboard to inspect progress and capacity. Add the optional Herdr app for Mac for a status bar and alert notifications.</p>
+          <p class="ed-lead">The runner reports in the terminal: <code>hivemill report</code>, <code>hivemill run status</code>, the owner queue and a morning digest. The web dashboard and the Herdr app below show the legacy pipeline.</p>
           <a class="btn btn--primary" href="/demo/index.html#needs-you">Open the demo overview<span aria-hidden="true">↗</span></a>
         </div>
         <div class="ed-monitor-print">
@@ -82,7 +82,7 @@
           <section class="ed-chapter" id="web" aria-labelledby="web-title">
             <p class="ed-kicker">Browser / Read-only</p>
             <h2 id="web-title">Inspect the web dashboard.</h2>
-            <p>The web UI runs on the Linux host. It shows live agents, pull requests, goals and work waiting for the owner. It does not run tasks from the browser.</p>
+            <p>The web UI belongs to the legacy pipeline and reads its records, not runner state. It shows live agents, pull requests, goals and work waiting for the owner. It does not run tasks from the browser.</p>
             <a class="ed-view-row" href="/demo/index.html#needs-you">
               <span class="ed-label">Attention</span>
               <div>
@@ -121,7 +121,7 @@
           <section class="ed-chapter" id="desktop" aria-labelledby="desktop-title">
             <p class="ed-kicker">Mac / Herdr desktop</p>
             <h2 id="desktop-title">Add desktop alerts.</h2>
-            <p>The optional <a href="https://herdr.dev">Herdr app for Mac</a> adds a native status bar, a dashboard across configured machines and teams, and notifications for new alerts. This is a separate desktop interface, not the web demo.</p>
+            <p>The optional <a href="https://herdr.dev">Herdr app for Mac</a> adds a native status bar, a dashboard across configured machines and teams, and notifications for new alerts. Like the web UI, it reads the legacy pipeline.</p>
             <figure class="ed-shot">
               <picture>
                 <source type="image/webp" srcset="../../assets/img/herdr-factory-1x.webp 1x" width="617" height="194">
@@ -135,8 +135,8 @@
         </div>
       </div>
       <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
-        <a class="ed-next" href="/factories/who-merges/"><span class="ed-kicker">Factory model</span><strong>Understand a merge decision</strong><span class="ed-next-desc">Read the independent reviewer and QA verdicts.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
-        <a class="ed-next" href="/guides/install/"><span class="ed-kicker">Setup</span><strong>Install your own factory</strong><span class="ed-next-desc">Run the guide on a Debian or Ubuntu machine.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/factories/who-merges/"><span class="ed-kicker">Factory model</span><strong>Understand a merge decision</strong><span class="ed-next-desc">The fresh judge and the merge checks.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/guides/install/"><span class="ed-kicker">Setup</span><strong>Install your own factory</strong><span class="ed-next-desc">Build the runner on Linux or macOS.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
       </nav>
     </main>
     <footer class="site">

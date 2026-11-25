@@ -467,7 +467,7 @@ def cmd_verify(args):
 
 # ---------------------------------------------------------------- render
 
-KINDS = [("role", "Roles", "roles", "Markdown instructions for individual agents."),
+KINDS = [("role", "Roles", "roles", "Markdown instructions for individual agents. Planner, task and task judge run on the Hivemill runner; the others belong to the paused legacy pipeline."),
          ("skill", "Skills", "skills", "Reusable workflows installed through the plugin that carries them."),
          ("plugin", "Plugins", "plugins", "Installable bundles of skills and helper commands."),
          ("dashboard", "Dashboard", "dashboard", "A desktop view of your factory.")]

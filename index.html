@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hivemill | Self-hosted AI coding agent factory</title>
-<meta name="description" content="Run AI coding agents on your own infrastructure. Follow implementation, review, testing and estimated cost while your laptop stays free.">
+<title>Hivemill | Self-hosted runner for Claude Code</title>
+<meta name="description" content="Every merged PR proven against its spec, at a known cost. Hivemill runs one Claude Code session per task on your own machine, re-runs the proofs and asks a fresh judge before it merges.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="assets/wordmark-light.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -12,24 +12,24 @@
 <link rel="stylesheet" href="assets/css/v2.css">
 <link rel="stylesheet" href="assets/css/factory.css?v=2026111807">
 <script type="module" src="assets/js/motion.js"></script>
-<script type="module" src="assets/js/factory.js?v=2026111807"></script>
+<script type="module" src="assets/js/factory.js?v=2026112501"></script>
 <!-- Generated search metadata: tools/site_metadata.py -->
 <link rel="canonical" href="https://hivemill.dev/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hivemill">
-<meta property="og:title" content="Hivemill | Self-hosted AI coding agent factory">
-<meta property="og:description" content="Run AI coding agents on your own infrastructure. Follow implementation, review, testing and estimated cost while your laptop stays free.">
+<meta property="og:title" content="Hivemill | Self-hosted runner for Claude Code">
+<meta property="og:description" content="Every merged PR proven against its spec, at a known cost. Hivemill runs one Claude Code session per task on your own machine, re-runs the proofs and asks a fresh judge before it merges.">
 <meta property="og:url" content="https://hivemill.dev/">
 <meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta property="og:image:width" content="1344">
 <meta property="og:image:height" content="752">
 <meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hivemill | Self-hosted AI coding agent factory">
-<meta name="twitter:description" content="Run AI coding agents on your own infrastructure. Follow implementation, review, testing and estimated cost while your laptop stays free.">
+<meta name="twitter:title" content="Hivemill | Self-hosted runner for Claude Code">
+<meta name="twitter:description" content="Every merged PR proven against its spec, at a known cost. Hivemill runs one Claude Code session per task on your own machine, re-runs the proofs and asks a fresh judge before it merges.">
 <meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://hivemill.dev/#website","name":"Hivemill","url":"https://hivemill.dev/"},{"@type":"SoftwareSourceCode","@id":"https://hivemill.dev/#software","name":"Hivemill","url":"https://hivemill.dev/","description":"Run AI coding agents on your own infrastructure. Follow implementation, review, testing and estimated cost while your laptop stays free.","codeRepository":"https://github.com/volekerb/hivemill","license":"https://github.com/volekerb/hivemill/blob/main/LICENSE"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://hivemill.dev/#website","name":"Hivemill","url":"https://hivemill.dev/"},{"@type":"SoftwareSourceCode","@id":"https://hivemill.dev/#software","name":"Hivemill","url":"https://hivemill.dev/","description":"Every merged PR proven against its spec, at a known cost. Hivemill runs one Claude Code session per task on your own machine, re-runs the proofs and asks a fresh judge before it merges.","codeRepository":"https://github.com/volekerb/hivemill","license":"https://github.com/volekerb/hivemill/blob/main/LICENSE"}]}</script>
 <!-- End generated search metadata -->
 </head>
 <body class="factory-home">
@@ -47,9 +47,9 @@
 <main id="main">
 <section class="factory-hero">
   <div class="wrap hero-content">
-    <p class="eyebrow">Your own AI software factory</p>
-    <h1>Close your laptop.<br>Keep work moving.</h1>
-    <p class="hero-description">Run AI coding agents on your own Linux host. Hivemill coordinates implementation, review and testing while your laptop stays free.</p>
+    <p class="eyebrow">A self-hosted runner for Claude Code</p>
+    <h1>Every merged PR,<br>proven against its spec.</h1>
+    <p class="hero-description">At a known cost. Hivemill runs one Claude Code session per task on your own machine, re-runs every proof in code and asks a fresh judge before it merges.</p>
     <div class="actions"><a class="btn btn--primary" href="demo/">Explore the demo <span aria-hidden="true">↗</span></a><a class="text-link" href="work-with-me/">Discuss a pilot <span aria-hidden="true">↗</span></a></div>
   </div>
   <div class="hero-machine" role="img" aria-label="A sculptural honeycomb production line: small amber workpieces move through precision workstations."><video class="hero-film" muted loop playsinline preload="none" poster="assets/brand/hive-mill.webp" aria-hidden="true" tabindex="-1" data-motion-src="assets/brand/hive-mill-loop.mp4"></video></div>
@@ -57,7 +57,7 @@
 </section>
 
 <section class="product-stage section wrap" id="product" aria-labelledby="product-heading">
- <div class="product-stage-heading"><div><p class="eyebrow">Inside Hivemill</p><h2 id="product-heading">See the factory at work.</h2></div><p>The real interface, with fictional demo data.</p></div>
+ <div class="product-stage-heading"><div><p class="eyebrow">Inside Hivemill</p><h2 id="product-heading">See the factory at work.</h2></div><p>The legacy pipeline’s web dashboard, with fictional demo data.</p></div>
  <div class="product-console" hidden>
   <div class="console-toolbar"><div class="console-tabs" role="group" aria-label="Choose a product view">
    <button type="button" data-product-view="index.html" aria-pressed="true">Overview</button>
@@ -70,28 +70,28 @@
  </div>
  <noscript>  <figure class="product-wide"><picture><source media="(max-width: 40rem) and (prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/tasks-dark-1x.webp 1x, assets/img/tasks-dark-2x.webp 2x" width="480" height="540"><source media="(max-width: 40rem) and (prefers-color-scheme: dark)" type="image/png" srcset="assets/img/tasks-dark-1x.png 1x, assets/img/tasks-dark-2x.png 2x" width="480" height="540"><source media="(max-width: 40rem)" type="image/webp" srcset="assets/img/tasks-light-1x.webp 1x, assets/img/tasks-light-2x.webp 2x" width="480" height="540"><source media="(max-width: 40rem)" type="image/png" srcset="assets/img/tasks-light-1x.png 1x, assets/img/tasks-light-2x.png 2x" width="480" height="540"><source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/tasks-wide-dark-1x.webp 1x, assets/img/tasks-wide-dark-2x.webp 2x" width="1024" height="560"><source media="(prefers-color-scheme: dark)" type="image/png" srcset="assets/img/tasks-wide-dark-1x.png 1x, assets/img/tasks-wide-dark-2x.png 2x" width="1024" height="560"><source type="image/webp" srcset="assets/img/tasks-wide-light-1x.webp 1x, assets/img/tasks-wide-light-2x.webp 2x" width="1024" height="560"><img src="assets/img/tasks-wide-light-1x.png" srcset="assets/img/tasks-wide-light-1x.png 1x, assets/img/tasks-wide-light-2x.png 2x" width="1024" height="560" alt="The Hivemill tasks page: each task with its status, goal and agent" loading="lazy" decoding="async"></picture><figcaption>The actual Hivemill task view. Fictional demo data.</figcaption></figure><p><a class="text-link" href="demo/">Explore the demo ↗</a></p></noscript>
  <div class="product-context" id="visibility">
-  <div><h3>Web dashboard</h3><p>Read-only progress, resources and Claude cost estimates. Cursor activity is measured in sessions and agent-hours.</p></div>
-  <div><h3>Optional Herdr app for Mac</h3><p>A status bar and alert notifications.</p></div>
+  <div><h3>Runner reports</h3><p>Cost per merged PR, hours to merge, rounds and verdicts per task in <code>hivemill report</code>, plus a morning digest. The web dashboard shown here reads the legacy pipeline.</p></div>
+  <div><h3>Owner queue</h3><p>Questions for you wait in one queue and never block other work. Answer them from any terminal.</p></div>
   <div class="product-context-links"><a class="text-link" href="guides/watch/">Explore monitoring <span aria-hidden="true">↗</span></a><a class="text-link" href="film/">Watch the walkthrough <span aria-hidden="true">↗</span></a></div>
-  <p class="product-cost-note">Cost estimates use model list prices, not invoices.</p>
+  <p class="product-cost-note">Costs are estimated from session transcripts at API list prices, not invoices.</p>
  </div>
 </section>
 
 <section class="section wrap" id="factory" aria-labelledby="workflow-heading">
- <div class="section-intro workflow-intro" id="review"><h2 id="workflow-heading">One goal.<br>A checked pull request.</h2><p>By default, separate review and QA must pass before the judge merges. Your project controls the final gate.</p></div>
+ <div class="section-intro workflow-intro" id="review"><h2 id="workflow-heading">One spec.<br>A proven pull request.</h2><p>Three AI roles do the judgement: a planner, one session per task and a fresh judge. A deterministic runner does the rest.</p></div>
  <div class="factory-process" data-active-stage="0">
   <div class="process-controls" role="group" aria-label="Explore the factory workflow">
-   <button type="button" class="process-step" data-stage="0" aria-pressed="true"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#ask"/></svg><span>Set the goal</span></button>
-   <button type="button" class="process-step" data-stage="1" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#team"/></svg><span>Build the team</span></button>
-   <button type="button" class="process-step" data-stage="2" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#pr"/></svg><span>Open the PR</span></button>
-   <button type="button" class="process-step" data-stage="3" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#review"/></svg><span>Review + QA</span></button>
-   <button type="button" class="process-step" data-stage="4" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#merge"/></svg><span>Apply merge policy</span></button>
+   <button type="button" class="process-step" data-stage="0" aria-pressed="true"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#ask"/></svg><span>Write the spec</span></button>
+   <button type="button" class="process-step" data-stage="1" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#team"/></svg><span>One session</span></button>
+   <button type="button" class="process-step" data-stage="2" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#pr"/></svg><span>Re-run the proofs</span></button>
+   <button type="button" class="process-step" data-stage="3" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#review"/></svg><span>Fresh judge</span></button>
+   <button type="button" class="process-step" data-stage="4" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="assets/icons/icons.svg#merge"/></svg><span>Merge by rule</span></button>
   </div>
   <div class="process-track" aria-hidden="true"><span class="process-parcel"></span></div>
-  <div class="process-detail" aria-live="polite"><div><p class="role-label" id="stage-role">You + the boss</p><h3 id="stage-title">Define the outcome.</h3></div><p id="stage-copy">Describe the change and acceptance criteria. The boss turns your request into a goal.</p></div>
+  <div class="process-detail" aria-live="polite"><div><p class="role-label" id="stage-role">You + the planner</p><h3 id="stage-title">Name the proof.</h3></div><p id="stage-copy">Every acceptance criterion names its proof: a test or a command and its expected result. The planner keeps the queue of ready tasks full.</p></div>
   <div class="process-footer"><a class="text-link" href="factories/what/">How it works <span aria-hidden="true">↗</span></a><button type="button" class="text-button" id="play-flow" hidden>Play the sequence <span aria-hidden="true">→</span></button></div>
  </div>
- <noscript><ol class="flow"><li>A director assigns a lead, who plans tasks.</li><li>A coder opens a pull request in its own worktree.</li><li>A reviewer checks the diff. QA runs tests.</li><li>By default, both must pass before the judge merges. The project’s policy controls the final gate.</li></ol></noscript>
+ <noscript><ol class="flow"><li>Every acceptance criterion names its proof. The planner keeps the queue full.</li><li>One Claude Code session implements the task, runs the tests and /code-review, and opens a pull request.</li><li>The runner re-runs every test and command proof before the session may stop.</li><li>A fresh judge maps every behaviour change to a criterion: merge, reject or hold.</li><li>The runner merges only when the head, CI, risk tier and main all check out.</li></ol></noscript>
 </section>
 
 <section class="section stories-section" id="use-cases" aria-labelledby="stories-heading">
@@ -117,10 +117,10 @@
 </section>
 
 <section class="section wrap" id="install" aria-labelledby="start-heading">
- <div class="start-choice"><h2 id="start-heading">Build your own.<br>Or start with a pilot.</h2><div><p>Install Hivemill and adapt roles, skills and plugins from the catalog. For a guided pilot, bring one repository and a concrete change.</p><div class="start-actions"><a class="btn btn--primary" href="guides/install/">Install Hivemill <span aria-hidden="true">↗</span></a><a class="text-link" href="catalog/">Browse the catalog <span aria-hidden="true">↗</span></a></div></div></div>
+ <div class="start-choice"><h2 id="start-heading">Build your own.<br>Or start with a pilot.</h2><div><p>Build the runner from source, add a project and write your first spec. For a guided pilot, bring one repository and a concrete change.</p><div class="start-actions"><a class="btn btn--primary" href="guides/install/">Install Hivemill <span aria-hidden="true">↗</span></a><a class="text-link" href="catalog/">Browse the catalog <span aria-hidden="true">↗</span></a></div></div></div>
  <dl class="hosting-answers">
-  <div><dt>What runs on my infrastructure?</dt><dd>Hivemill and agent sessions run on your Debian or Ubuntu host. Claude Code and Cursor still connect to their model providers.</dd></div>
-  <div><dt>Can I close my laptop?</dt><dd>Yes, while the host stays running and connected. Work can pause for required decisions or resource and usage limits.</dd></div>
+  <div><dt>What runs on my infrastructure?</dt><dd>The runner and its Claude Code sessions run on your machine: a laptop, a homelab box or a company server. Claude Code still connects to its model provider.</dd></div>
+  <div><dt>Can I close my laptop?</dt><dd>Yes, when the runner lives on an always-on box. On a laptop, runs pause while it sleeps and resume on wake. Work also waits for your decisions, budgets and usage caps.</dd></div>
  </dl>
 </section>
 </main>

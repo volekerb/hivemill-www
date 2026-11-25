@@ -20,13 +20,13 @@ Open `http://127.0.0.1:18440/`. Re-run the build after editing source files. The
 - `/`: the redesigned B2B homepage, customer workflow examples and developer catalog entry.
 - `/demo/`: the actual dashboard exported with fictional demo data. Goals, tasks, resources, usage, alerts, selected filters and themes are browsable. No live factory is connected and no agents run. Some compound filters and fictional external PR links are unavailable and labeled accordingly.
 - `/catalog/`: searchable developer library with concise component rows and individual installation/reference pages.
-- `/factories/what/`: how the factory works, including the boundary between your host and model providers.
+- `/factories/what/`: how the runner works, including the boundary between your machine and model providers.
 - `/guides/install/`, `/guides/ask-to-merge/`, `/guides/watch/`: installation, a worked delivery example, and monitoring. Existing guide URLs remain available.
-- `/factories/who-merges/`: configurable merge policy and an interactive example of the default gate.
+- `/factories/who-merges/`: the judge, the mechanical merge checks and an interactive example of the merge decision.
 - `/work-with-me/`: a scoped implementation and pilot path.
 - `/film/`: a silent, approximately 30-second product film with seekable chapters. The full film plays on request; the small homepage machinery loop pauses offscreen and respects reduced motion.
 
-The central message is “Close your laptop. Keep work moving.” The homepage shows the product before explaining its workflow. Agent sessions run on the customer's host; Claude Code and Cursor still use their model providers. Monitoring distinguishes resource and usage caps from estimated monetary cost. The catalog helps developers compose a factory from individual roles, skills and plugins. The three business stories are examples, not customer case studies.
+The central message is “Every merged PR proven against its spec, at a known cost.” Hivemill is a self-hosted runner for Claude Code with three AI roles (planner, task session, judge); a deterministic Go runner does the gating, merging, budgets and recovery. Sessions run on the customer’s machine; Claude Code still uses its model provider. Monitoring distinguishes usage caps and budgets from estimated monetary cost. The product demo, the film and the workflow example show the legacy pipeline (a chain of chat agents), which the runner replaced; the pages say so. The catalog lists the runner’s roles and marks the legacy roles. The three business stories are examples, not customer case studies.
 
 The `site` workflow builds and tests every pull request. Only a push or manual workflow run on `main` deploys `build/site` to https://hivemill.dev/. Pull requests and scheduled checks never deploy.
 
