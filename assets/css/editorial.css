@@ -66,6 +66,7 @@
   flex: 0 0 auto; border: 1px solid var(--ed-plate-rule); background: transparent; color: var(--ed-white);
   padding: .55rem .65rem; font-size: .74rem; font-weight: 550; border-radius: 4px;
 }
+.ed-command .copy { min-width: 5.5rem; }
 .ed-command .copy:not(.ready) { visibility: hidden; }
 .ed-command .copy:hover { background: var(--honey); color: var(--on-honey); border-color: var(--honey); }
 .ed-reading {
