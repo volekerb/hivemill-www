@@ -1,6 +1,11 @@
 /* Component library and its source-backed reference pages. */
+/* Both families are preloaded by the template. If one is not ready for the first paint, keep the metric-matched
+   fallback for this page view instead of swapping late and re-wrapping the heading (layout shift). */
+@font-face { font-family: "Bricolage Grotesque"; src: url(../fonts/bricolage-grotesque-latin.woff2) format("woff2"); font-weight: 200 800; font-display: optional; }
+@font-face { font-family: "Instrument Sans"; src: url(../fonts/instrument-sans-latin.woff2) format("woff2"); font-weight: 400 700; font-display: optional; }
 .catalog-site { --catalog-rule: color-mix(in srgb, var(--ink) 23%, var(--bg)); }
-.catalog-site [hidden] { display: none !important; }
+.catalog-site [hidden]:not(.catalog-search) { display: none !important; }
+.catalog-site .catalog-search[hidden] { display: none; }
 .catalog-site .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .catalog-site :is(input, button) { font-family: inherit; }
 .catalog-site header.site a[aria-current="location"] { color: var(--ink); }
@@ -57,6 +62,13 @@
 .catalog-results .group + .group { margin-top: 3.9rem; }
 .catalog-search:not([hidden]) ~ .group { margin-top: 2.15rem; }
 .catalog-search:not([hidden]) ~ .group ~ .group { margin-top: 3.9rem; }
+/* catalog.js reveals the search after load. With scripting on, its row is laid out (invisible) from the
+   first paint, so revealing it does not push the results down (layout shift). */
+@media (scripting: enabled) {
+  .catalog-site .catalog-search[hidden] { display: flex; visibility: hidden; }
+  .catalog-search[hidden] ~ .group { margin-top: 2.15rem; }
+  .catalog-search[hidden] ~ .group ~ .group { margin-top: 3.9rem; }
+}
 .catalog-results .group { scroll-margin-top: 1.5rem; }
 .group-head { padding-bottom: 1.15rem; border-bottom: 1px solid var(--catalog-rule); }
 .group-head h2 { display: flex; align-items: start; gap: .6rem; font: 500 clamp(1.8rem, 2.9vw, 2.65rem)/1.1 var(--font-text); letter-spacing: -.052em; }
@@ -185,6 +197,10 @@
   .group-head p { font-size: .88rem; }
   .catalog-search:not([hidden]) ~ .group { margin-top: 1.5rem; }
   .catalog-results .group + .group, .catalog-search:not([hidden]) ~ .group ~ .group { margin-top: 2.65rem; }
+  @media (scripting: enabled) {
+    .catalog-search[hidden] ~ .group { margin-top: 1.5rem; }
+    .catalog-search[hidden] ~ .group ~ .group { margin-top: 2.65rem; }
+  }
   .entry-link { grid-template-columns: 2.45rem minmax(0, 1fr) 1.1rem; gap: .23rem .8rem; padding-block: .85rem; min-height: 4.75rem; }
   .entry h3 { align-self: end; font-size: 1.07rem; }
   .entry-emblem, .entry-arrow { grid-row: 1 / 3; }
