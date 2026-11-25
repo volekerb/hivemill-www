@@ -1,6 +1,7 @@
 // Copy buttons for install steps. Without JS the commands stay selectable text.
 for (const btn of document.querySelectorAll("button.copy[data-copy]")) {
-  btn.hidden = !navigator.clipboard;
+  // Space is reserved in CSS (visibility) so showing the button shifts nothing.
+  if (navigator.clipboard) btn.classList.add("ready");
   btn.addEventListener("click", async () => {
     const text = document.getElementById(btn.dataset.copy).textContent;
     try {
