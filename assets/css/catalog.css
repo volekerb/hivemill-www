@@ -60,7 +60,7 @@
 /* catalog.js reveals the search after load. With scripting on, its row is laid out (invisible) from the
    first paint, so revealing it does not push the results down (layout shift). */
 @media (scripting: enabled) {
-  .catalog-site .catalog-search[hidden] { display: flex !important; visibility: hidden; }
+  .catalog-site .catalog-search[hidden] { display: flex; visibility: hidden; }
   .catalog-search[hidden] ~ .group { margin-top: 2.15rem; }
   .catalog-search[hidden] ~ .group ~ .group { margin-top: 3.9rem; }
 }
