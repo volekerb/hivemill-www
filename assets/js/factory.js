@@ -1,6 +1,6 @@
 // Progressive enhancement: all stories remain readable without JavaScript.
 const stages = [
- ['You + the planner', 'Name the proof.', 'Every acceptance criterion names its proof: a test or a command and its expected result. The planner keeps the queue of ready tasks full.'],
+ ['You + the planner', 'Name the proof.', 'Every acceptance criterion names its proof: a test, a command and its expected result, or a check only you can make. The planner keeps the queue of ready tasks full.'],
  ['Task session', 'One session per task.', 'One Claude Code session implements the task, runs the tests, runs /code-review, fixes the findings and opens the pull request.'],
  ['Runner', 'Re-run the proofs.', 'Before the session may stop, the runner checks its work and re-runs every test and command proof itself. Red CI goes back to the same session.'],
  ['Judge', 'Map every change to the spec.', 'A fresh, read-only judge lists every behaviour change and maps it to a criterion. A change nobody asked for is rejected or held for you.'],

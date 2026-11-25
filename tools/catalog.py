@@ -858,7 +858,7 @@ def index_page(items, ctx):
     if any(i["id"] == "plugin:hivemill" for i in items):
         out.append('<a class="catalog-feature" href="plugin-hivemill/">'
                    '<div class="feature-caption"><span class="feature-label">Featured plugin</span>'
-                   '<strong>Hivemill installer</strong></div><span class="feature-arrow" aria-hidden="true">↗</span></a>')
+                   '<strong>Legacy pipeline installer</strong></div><span class="feature-arrow" aria-hidden="true">↗</span></a>')
     out.append('</header><div class="catalog wrap" id="library">'
                '<aside class="catalog-collections"><div class="collections-sticky">'
                '<h2 id="collections-title">Collections</h2><nav aria-labelledby="collections-title">'
