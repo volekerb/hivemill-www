@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111807">
     <script type="module" src="/assets/js/motion.js"></script>
     <script type="module" src="/assets/js/factory.js?v=2026111807"></script>
-    <script type="module" src="/assets/js/editorial.js?v=2026111807"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026112501"></script>
 <!-- Generated search metadata: tools/site_metadata.py -->
 <link rel="canonical" href="https://hivemill.dev/factories/who-merges/">
 <meta property="og:type" content="website">
@@ -50,18 +50,18 @@
       <section class="wrap ed-opening ed-merge-opening">
         <div class="ed-title">
           <p class="ed-kicker">Reference / Merge policy</p>
-          <h1>Your policy.<br>The judge applies it.</h1>
-          <p class="ed-lead">By default, separate review and QA must pass before the judge merges. You configure the review policy, CI gate and whether the project permits auto-merge.</p>
+          <h1>A fresh judge.<br>A merge by rule.</h1>
+          <p class="ed-lead">A fresh, read-only judge decides whether the diff does what the spec asked and nothing else. Then the runner merges only if every mechanical check passes.</p>
           <a class="ed-link" href="#the-record">Read a merge record<span aria-hidden="true">↓</span></a>
         </div>
         <div class="ed-gate">
           <div class="ed-gate-title">
-            <p class="ed-kicker">Default review policy</p>
-            <h2>Try the verdicts</h2><p class="ed-gate-context">Assumes auto-merge is enabled and the default review and CI gates are in use.</p>
+            <p class="ed-kicker">Merge decision</p>
+            <h2>Try the checks</h2><p class="ed-gate-context">Assumes a risk tier of T2 or lower and a green main branch.</p>
           </div>
-          <form class="ed-gate-controls" hidden aria-label="Try different review verdicts">
+          <form class="ed-gate-controls" hidden aria-label="Try different CI results and judge verdicts">
             <fieldset>
-              <legend>Reviewer</legend>
+              <legend>CI</legend>
               <div class="ed-choices">
                 <label><input type="radio" name="review" value="pending"><span>Pending</span></label>
                 <label><input type="radio" name="review" value="pass" checked><span>Pass</span></label>
@@ -69,7 +69,7 @@
               </div>
             </fieldset>
             <fieldset>
-              <legend>QA</legend>
+              <legend>Judge</legend>
               <div class="ed-choices">
                 <label><input type="radio" name="qa" value="pending" checked><span>Pending</span></label>
                 <label><input type="radio" name="qa" value="pass"><span>Pass</span></label>
@@ -78,55 +78,55 @@
             </fieldset>
           </form>
           <div class="ed-gate-static">
-            <p>Under the default policy, review and QA must pass on the current revision. Failed checks return findings to the coder.</p>
+            <p>CI must be green before the judge starts. A judge MERGE on the current head lets the runner merge. A REJECT goes back to the same task session; a HOLD waits for you.</p>
           </div>
           <div class="ed-gate-result" hidden aria-live="polite" aria-atomic="true">
             <p class="ed-label">Judge decision</p>
-            <h3>Await QA</h3>
-            <p data-gate-reason>The reviewer passed. The judge waits for a QA verdict.</p>
+            <h3>Await the judge</h3>
+            <p data-gate-reason>CI is green. A fresh judge reads the packet.</p>
           </div>
         </div>
       </section>
       <section class="wrap ed-overview" id="authority">
         <div data-reveal>
-          <p class="ed-kicker">Authority by role</p>
-          <h2>Separate work.<br>Separate verdicts.</h2>
+          <p class="ed-kicker">Who decides what</p>
+          <h2>Separate work.<br>Code merges.</h2>
         </div>
         <dl class="ed-defs">
           <div>
-            <dt>Coder</dt>
-            <dd>Builds and updates the change. Review, QA and merge permissions belong to other roles.</dd>
+            <dt>Task session</dt>
+            <dd>Implements the task, runs the tests and /code-review, fixes the findings and opens the PR. It cannot merge.</dd>
           </div>
           <div>
-            <dt>Reviewer</dt>
-            <dd>Checks the diff against the task. Records a pass or actionable findings for the coder.</dd>
-          </div>
-          <div>
-            <dt>QA</dt>
-            <dd>Runs tests against the acceptance criteria and records a separate verdict tied to the checked commit.</dd>
+            <dt>Stop-hook gate</dt>
+            <dd>Code, not a model. Checks the tree, the PR body, the review findings and the evidence, and re-runs every test and command proof before the session may stop.</dd>
           </div>
           <div>
             <dt>Judge</dt>
-            <dd>Applies the configured review and CI gates, checks the current revision and mergeability, and respects project auto-merge settings.</dd>
+            <dd>A fresh, read-only session that never wrote the code. It maps every behaviour change in the diff to a criterion and answers MERGE, REJECT or HOLD.</dd>
+          </div>
+          <div>
+            <dt>Runner</dt>
+            <dd>Code, not a model. Merges with <code>--match-head-commit</code> only on a judge MERGE for the exact head and green checks.</dd>
           </div>
         </dl>
       </section>
       <section class="wrap ed-policy" id="policy" aria-labelledby="policy-title">
-        <div><p class="ed-kicker">Configuration</p><h2 id="policy-title">Choose the gate.</h2></div>
+        <div><p class="ed-kicker">The merge checks</p><h2 id="policy-title">What must be true.</h2></div>
         <dl class="ed-defs">
-          <div><dt>Default checks</dt><dd><code>judge_review_gate=passpass</code> requires passing review and QA. <code>judge_ci_gate=pr</code> waits for green PR checks.</dd></div>
-          <div><dt>CI-led review</dt><dd><code>judge_review_gate=green</code> allows missing PASS verdicts when CI is green on the current head and no current review or QA verdict is FAIL. CI remains required in this mode.</dd></div>
-          <div><dt>Optional CI gate</dt><dd><code>judge_ci_gate=none</code> skips the judge’s PR-check gate under the default review policy. It retains verdict and mergeability checks. Read the configuration guide before changing this policy.</dd></div>
-          <div><dt>Human handoff</dt><dd>Register a project with <code>--no-auto-merge</code> to make the judge stop before merging.</dd></div>
+          <div><dt>Unasked changes</dt><dd>Every behaviour change must quote the criterion that asks for it. A change with none turns a MERGE into a REJECT. We added this after a pilot where the judge passed three side effects nobody asked for.</dd></div>
+          <div><dt>Head and checks</dt><dd>A judge MERGE on this exact head, no conflict, the base merged in, and green, complete PR checks.</dd></div>
+          <div><dt>Risk and main</dt><dd>A risk tier of T2 or lower; a T3 diff waits for you. Main is not frozen, and its last push run is green.</dd></div>
+          <div><dt>Rounds and revert</dt><dd><code>judge_rounds_max</code> and <code>ci_rounds_max</code> cap the rounds before a task goes to you. <code>auto_revert</code> can open a revert PR when a merge turns main red.</dd></div>
         </dl>
-        <p class="ed-policy-source"><a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/judge-ci-gate.md">Read the full merge policy<span aria-hidden="true">↗</span></a> <a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/SETUP.md">Project configuration<span aria-hidden="true">↗</span></a></p>
+        <p class="ed-policy-source"><a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/option-b-runner.md#flow">Read the full merge rules<span aria-hidden="true">↗</span></a> <a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/option-b-runner.md#config-keys">Runner configuration<span aria-hidden="true">↗</span></a></p>
       </section>
       <section class="ed-ledger" id="the-record">
         <div class="wrap ed-proof-pair">
           <div>
-            <p class="ed-kicker">Fictional demo / G-001</p>
+            <p class="ed-kicker">Legacy pipeline demo / G-001</p>
             <h2>A pricing table<br>takes two tries.</h2>
-            <p>The reviewer rejects the first attempt on task T-0003. On the revised commit, review and QA both pass, CI is green and the judge merges pull request #102. The task preserves both attempts.</p>
+            <p>This fictional record comes from the legacy pipeline, with a separate reviewer and QA. The reviewer rejects the first attempt on task T-0003; on the revised commit both pass and pull request #102 merges. The task keeps both attempts.</p>
             <a class="ed-link" href="/demo/task-t-0003.html">Read the task history<span aria-hidden="true">↗</span></a>
           </div>
           <figure class="ed-shot">
@@ -141,8 +141,8 @@
         </div>
       </section>
       <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
-        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Operator guide</span><strong>Follow a worked example</strong><span class="ed-next-desc">Trace a goal, a failed review and the revised change.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
-        <a class="ed-next" href="/demo/quality.html"><span class="ed-kicker">Demo</span><strong>Inspect the quality view</strong><span class="ed-next-desc">Explore rejections, retries and judge decisions.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Operator guide</span><strong>Follow a worked example</strong><span class="ed-next-desc">Trace a legacy demo goal and its revised change.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/demo/quality.html"><span class="ed-kicker">Demo</span><strong>Inspect the quality view</strong><span class="ed-next-desc">Explore rejections and retries in the legacy demo.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
       </nav>
     </main>
     <footer class="site">

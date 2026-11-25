@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111807">
     <script type="module" src="/assets/js/motion.js"></script>
     <script type="module" src="/assets/js/factory.js?v=2026111807"></script>
-    <script type="module" src="/assets/js/editorial.js?v=2026111807"></script>
+    <script type="module" src="/assets/js/editorial.js?v=2026112501"></script>
     <script type="module" src="/assets/js/copy.js"></script>
 <!-- Generated search metadata: tools/site_metadata.py -->
 <link rel="canonical" href="https://hivemill.dev/guides/install/">
@@ -51,36 +51,36 @@
       <section class="wrap ed-opening ed-install-opening">
         <div class="ed-title">
           <p class="ed-kicker">Operator guide / Installation</p>
-          <h1>Install the<br>factory.</h1>
-          <p class="ed-lead">Set up Hivemill on a separate Debian or Ubuntu host. Start with the prerequisites, then run guided setup inside Claude Code.</p>
+          <h1>Install the<br>runner.</h1>
+          <p class="ed-lead">Build the Hivemill runner from source on Linux or macOS. Start with the prerequisites, then add a project and run your first task.</p>
           <a class="ed-link" href="#before-you-start">Check the prerequisites<span aria-hidden="true">↓</span></a>
         </div>
         <div class="ed-command-plate" aria-labelledby="commands-title">
           <div class="ed-plate-heading">
             <span class="ed-dot" aria-hidden="true"></span>
-            <h2 id="commands-title">Inside Claude Code</h2>
+            <h2 id="commands-title">In a terminal</h2>
             <span class="ed-terminal-sign" aria-hidden="true">&gt;_</span>
           </div>
           <ol class="ed-command-list">
             <li>
-              <p>Add the marketplace</p>
+              <p>Clone the repository</p>
               <div class="ed-command">
-                <code id="c1">/plugin marketplace add volekerb/hivemill</code>
-                <button type="button" class="copy" data-copy="c1" aria-label="Copy marketplace command" hidden>Copy</button>
+                <code id="c1">git clone https://github.com/volekerb/hivemill ~/hivemill</code>
+                <button type="button" class="copy" data-copy="c1" aria-label="Copy clone command" hidden>Copy</button>
               </div>
             </li>
             <li>
-              <p>Install the plugin</p>
+              <p>Build the runner</p>
               <div class="ed-command">
-                <code id="c2">/plugin install hivemill</code>
-                <button type="button" class="copy" data-copy="c2" aria-label="Copy plugin command" hidden>Copy</button>
+                <code id="c2">cd ~/hivemill/go &amp;&amp; go build -o ~/.local/bin/hivemill ./cmd/hivemill</code>
+                <button type="button" class="copy" data-copy="c2" aria-label="Copy build command" hidden>Copy</button>
               </div>
             </li>
             <li>
-              <p>Run guided setup</p>
+              <p>Create the home</p>
               <div class="ed-command">
-                <code id="c3">/hivemill:setup</code>
-                <button type="button" class="copy" data-copy="c3" aria-label="Copy setup command" hidden>Copy</button>
+                <code id="c3">hivemill init --home ~/hivemill</code>
+                <button type="button" class="copy" data-copy="c3" aria-label="Copy init command" hidden>Copy</button>
               </div>
             </li>
           </ol>
@@ -94,10 +94,10 @@
               <a href="#before-you-start">Prepare the host</a>
             </li>
             <li>
-              <a href="#setup">Guided setup</a>
+              <a href="#setup">First task</a>
             </li>
             <li>
-              <a href="#check">Verify the install</a>
+              <a href="#check">Run unattended</a>
             </li>
           </ol>
         </nav>
@@ -107,49 +107,49 @@
             <h2 id="before-you-start-title">Prepare the host.</h2>
             <dl class="ed-defs">
               <div>
-                <dt>Linux machine</dt>
-                <dd>Use a separate Debian or Ubuntu machine that can stay on while your laptop is closed. The factory runtime needs Python 3.11 or newer.</dd>
+                <dt>A machine</dt>
+                <dd>Linux or macOS with Go 1.27, git and Python 3. A laptop works; runs pause while it sleeps. A homelab box or server keeps work moving with the laptop closed.</dd>
               </div>
               <div>
                 <dt>Claude Code</dt>
-                <dd>Sign in on the factory machine. Claude Code uses its model provider; self-hosting the factory does not move model inference onto your host.</dd>
+                <dd>Sign in on that machine. Claude Code uses its model provider; self-hosting the runner does not move model inference onto your machine.</dd>
               </div>
               <div>
                 <dt>GitHub access</dt>
-                <dd>Sign in to the GitHub CLI with access to the repository where the factory will open pull requests.</dd>
+                <dd>Sign in to the GitHub CLI with access to the repository where the runner will open pull requests.</dd>
               </div>
               <div>
-                <dt>Optional runtimes</dt>
-                <dd>Cursor Agent CLI supports the Cursor organization and the daily retro agent. A Mac can watch the Linux factory through the Herdr desktop app.</dd>
+                <dt>herdr-core</dt>
+                <dd>The runner starts each session in an <code>hc</code> terminal, which keeps running after you log out. Install <a href="https://herdr.dev">herdr-core</a> first.</dd>
               </div>
             </dl>
           </section>
           <section class="ed-chapter" id="setup" aria-labelledby="setup-title">
-            <p class="ed-kicker">Guided setup</p>
-            <h2 id="setup-title">Bring up the factory.</h2>
-            <p>Run the three commands above in a logged-in Claude Code session on the host. The setup skill guides installation and starts the first agents.</p>
-            <p>For manual installation, host services and configuration, use the full setup guide.</p>
-            <a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/SETUP.md">Read the full setup guide<span aria-hidden="true">↗</span></a>
+            <p class="ed-kicker">First task</p>
+            <h2 id="setup-title">Add a project and a task.</h2>
+            <p>Run the three commands above; add <code>--noreply-email</code> with your GitHub noreply address to <code>init</code>. Then set <code>FACTORY_HOME=~/hivemill</code>. Add your repository with <code>hivemill project add</code>, file a goal with <code>hivemill goal new</code> and a task with <code>hivemill task add</code>. Every acceptance criterion names its proof, or the task is refused.</p>
+            <p>The plugin installer (<code>/hivemill:setup</code>) installs the legacy pipeline, not the runner.</p>
+            <a class="ed-link" href="https://github.com/volekerb/hivemill/blob/main/docs/option-b-runner.md#standalone-install-no-old-factory-cli">Read the full install steps<span aria-hidden="true">↗</span></a>
           </section>
           <section class="ed-chapter" id="check" aria-labelledby="check-title">
-            <p class="ed-kicker">Verification</p>
-            <h2 id="check-title">Inspect the install.</h2>
-            <p>From a checkout of the Hivemill repository, run this read-only check in your own terminal. The report shows which prerequisites the installer sees.</p>
+            <p class="ed-kicker">Operation</p>
+            <h2 id="check-title">Run it unattended.</h2>
+            <p>Check a task against the spec gate before you start it. The command only reads.</p>
             <div class="ed-command">
-              <code id="c4">plugins/hivemill/scripts/install --check</code>
-              <button type="button" class="copy" data-copy="c4" aria-label="Copy check command" hidden>Copy</button>
+              <code id="c4">hivemill task lint T-0001</code>
+              <button type="button" class="copy" data-copy="c4" aria-label="Copy lint command" hidden>Copy</button>
             </div>
-            <p>To preview the installer’s ordered plan before applying it, run the dry run from the same checkout.</p>
+            <p>Then start the daemon under systemd or launchd, or in a terminal, and turn on the planner with <code>hivemill planner start</code>. Read the results per task with the report.</p>
             <div class="ed-command">
-              <code id="c5">plugins/hivemill/scripts/install --dry-run</code>
-              <button type="button" class="copy" data-copy="c5" aria-label="Copy dry-run command" hidden>Copy</button>
+              <code id="c5">hivemill report</code>
+              <button type="button" class="copy" data-copy="c5" aria-label="Copy report command" hidden>Copy</button>
             </div>
           </section>
         </div>
       </div>
       <nav class="ed-nexts wrap" aria-label="Related pages" data-reveal>
-        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Next guide</span><strong>Give the factory a goal</strong><span class="ed-next-desc">Follow a request into its first pull request.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
-        <a class="ed-next" href="/guides/watch/"><span class="ed-kicker">Operations</span><strong>Monitor your factory</strong><span class="ed-next-desc">Find the web UI and Herdr desktop dashboard.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/guides/ask-to-merge/"><span class="ed-kicker">Next guide</span><strong>Give the factory a goal</strong><span class="ed-next-desc">Follow a legacy demo goal into its pull request.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
+        <a class="ed-next" href="/guides/watch/"><span class="ed-kicker">Operations</span><strong>Monitor your factory</strong><span class="ed-next-desc">Reports, the owner queue and the digest.</span><span class="ed-next-arrow" aria-hidden="true">↗</span></a>
       </nav>
     </main>
     <footer class="site">

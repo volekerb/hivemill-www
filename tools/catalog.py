@@ -467,7 +467,7 @@ def cmd_verify(args):
 
 # ---------------------------------------------------------------- render
 
-KINDS = [("role", "Roles", "roles", "Markdown instructions for individual agents."),
+KINDS = [("role", "Roles", "roles", "Markdown instructions for individual agents. Planner, task and task judge run on the Hivemill runner; the others belong to the paused legacy pipeline."),
          ("skill", "Skills", "skills", "Reusable workflows installed through the plugin that carries them."),
          ("plugin", "Plugins", "plugins", "Installable bundles of skills and helper commands."),
          ("dashboard", "Dashboard", "dashboard", "A desktop view of your factory.")]
@@ -858,7 +858,7 @@ def index_page(items, ctx):
     if any(i["id"] == "plugin:hivemill" for i in items):
         out.append('<a class="catalog-feature" href="plugin-hivemill/">'
                    '<div class="feature-caption"><span class="feature-label">Featured plugin</span>'
-                   '<strong>Hivemill installer</strong></div><span class="feature-arrow" aria-hidden="true">↗</span></a>')
+                   '<strong>Legacy pipeline installer</strong></div><span class="feature-arrow" aria-hidden="true">↗</span></a>')
     out.append('</header><div class="catalog wrap" id="library">'
                '<aside class="catalog-collections"><div class="collections-sticky">'
                '<h2 id="collections-title">Collections</h2><nav aria-labelledby="collections-title">'

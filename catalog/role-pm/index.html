@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PM agent role | Hivemill</title>
-<meta name="description" content="Turn a request into requirements, acceptance criteria and a plan.">
+<meta name="description" content="Legacy pipeline (paused): turned a request into requirements and acceptance criteria. The planner and the spec gate replace it.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
 <link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hivemill">
 <meta property="og:title" content="PM agent role | Hivemill">
-<meta property="og:description" content="Turn a request into requirements, acceptance criteria and a plan.">
+<meta property="og:description" content="Legacy pipeline (paused): turned a request into requirements and acceptance criteria. The planner and the spec gate replace it.">
 <meta property="og:url" content="https://hivemill.dev/catalog/role-pm/">
 <meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta property="og:image:width" content="1344">
@@ -27,7 +27,7 @@
 <meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PM agent role | Hivemill">
-<meta name="twitter:description" content="Turn a request into requirements, acceptance criteria and a plan.">
+<meta name="twitter:description" content="Legacy pipeline (paused): turned a request into requirements and acceptance criteria. The planner and the spec gate replace it.">
 <meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hivemill","item":"https://hivemill.dev/"},{"@type":"ListItem","position":2,"name":"Catalog","item":"https://hivemill.dev/catalog/"},{"@type":"ListItem","position":3,"name":"PM agent role","item":"https://hivemill.dev/catalog/role-pm/"}]}</script>
@@ -48,10 +48,10 @@
 <main id="main">
 <p class="sr" role="status" aria-live="polite" id="live"></p>
 <header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb"><a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#roles">Roles</a></nav>
-<div class="component-heading"><div><h1>PM</h1><p>Turn a request into requirements, acceptance criteria and a plan.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#ask"/></svg></div></div></header>
+<div class="component-heading"><div><h1>PM</h1><p>Legacy pipeline (paused): turned a request into requirements and acceptance criteria. The planner and the spec gate replace it.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#ask"/></svg></div></div></header>
 <div class="wrap component-layout"><div class="component-body">
-<section class="component-section" id="use"><h2>When to use it</h2><p>Clarify what should be built and how the team will know it works.</p><h3>Requirements</h3><p>A Hivemill factory checkout. Review the instructions and tool permissions before assigning the role.</p></section>
-<section class="component-section" id="install"><h2>Install</h2><p>Download the role file and adapt its instructions for your agent.</p><div class="snip"><div class="snippet-bar"><span>Role file · Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Role file · Terminal commands for pm">Copy</button></div><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/roles/pm.md</code></pre></div><div class="snip"><div class="snippet-bar"><span>Optional role skills · Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Optional role skills · Terminal commands for pm">Copy</button></div><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/pm/pm-skills</code></pre></div></section>
+<section class="component-section" id="use"><h2>When to use it</h2><p>Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner.</p><h3>Requirements</h3><p>A Hivemill factory checkout. Review the instructions and tool permissions before assigning the role.</p></section>
+<section class="component-section" id="install"><h2>Install</h2><p>Download the role file and adapt its instructions for your agent.</p><div class="snip"><div class="snippet-bar"><span>Role file · Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Role file · Terminal commands for pm">Copy</button></div><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/c58021c92833e4c62466ce95bfb73e957ddb5ef0/roles/pm.md</code></pre></div><div class="snip"><div class="snippet-bar"><span>Optional role skills · Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Optional role skills · Terminal commands for pm">Copy</button></div><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/pm/pm-skills</code></pre></div></section>
 <section class="component-section"><h2>Bundled skills</h2><dl class="bundled-skills"><div><dt>acceptance-template</dt><dd>Make every acceptance item a runnable command with an expected result, quote wording exactly, and add a RISKS section.</dd></div><div><dt>audit-checklist</dt><dd>The pm goal-audit checklist: what to check per task, how to trace success criteria, how to act on gaps.</dd></div><div><dt>audit-scope</dt><dd>What the pm goal audit must not redo, so it stays a paper check of records.</dd></div><div><dt>language-choice</dt><dd>Pick and state the implementation language in a coder spec per the language-policy ADR.</dd></div><div><dt>plan-quality</dt><dd>Rules for plans, build tasks and acceptance criteria that touch shared contracts or guards.</dd></div><div><dt>research-plan</dt><dd>Plan a research goal or task as researcher tasks with a brief, numbered acceptance and an evidence-review task.</dd></div></dl></section>
 <section class="component-section" id="documentation"><h2>Documentation</h2>
 <details class="doc-section" open><summary>Overview</summary><div class="doc"><p>You turn a goal into a plan the team can execute without guessing. You read code but never change it, and never touch git.</p></div></details>
@@ -103,10 +103,10 @@ Paper check of records only: follow the audit-scope skill.
 ### Permissions (own goal only)
 Which lifecycle commands you may run, and which you never run: skill `pm-skills:audit-checklist` (Permissions).</code></pre></div></details></section>
 </div><aside aria-label="Component information"><div class="component-aside"><section><h2>Component details</h2><dl class="component-facts"><dt>Type</dt><dd>Role</dd><dt>Name</dt><dd><code>pm</code></dd>
-<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838"><code>7368c0c3cec3</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/roles/pm.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
+<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/c58021c92833e4c62466ce95bfb73e957ddb5ef0"><code>c58021c92833</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/c58021c92833e4c62466ce95bfb73e957ddb5ef0/roles/pm.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
 <section><h2>Mentioned roles</h2><ul class="component-related"><li><a href="../role-coder/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#coder"/></svg><span>Coder</span><span aria-hidden="true">↗</span></a></li><li><a href="../role-director/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#director"/></svg><span>Director</span><span aria-hidden="true">↗</span></a></li><li><a href="../role-lead/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#team"/></svg><span>Lead</span><span aria-hidden="true">↗</span></a></li></ul></section>
 </div></aside></div>
 </main>
-<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at 7368c0c3cec3 (2026-11-24).</div></footer>
+<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at c58021c92833 (2026-11-25).</div></footer>
 </body>
 </html>

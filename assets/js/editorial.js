@@ -47,20 +47,20 @@ if (gate) {
   function updateVerdict() {
     const review = controls.elements.review.value;
     const qa = controls.elements.qa.value;
-    let decision = 'Await both checks';
-    let explanation = 'Both the reviewer and QA still need to record a verdict on this change.';
+    let decision = 'Await CI';
+    let explanation = 'The judge starts only after CI is green on the current head.';
     if (review === 'fail' || qa === 'fail') {
-      decision = 'Return to the coder';
-      explanation = 'A failed verdict sends the change back with findings. The revised commit needs fresh review and QA.';
+      decision = 'Back to the task session';
+      explanation = 'Red CI or a judge REJECT goes back to the same session with the reasons. After the round cap, the task goes to you.';
     } else if (review === 'pass' && qa === 'pass') {
-      decision = 'Eligible for merge';
-      explanation = 'With both verdicts on the current revision, the judge can merge once the required CI checks pass and the branch is mergeable.';
+      decision = 'Runner merges';
+      explanation = 'With a judge MERGE on this exact head and green checks, the runner merges with --match-head-commit.';
     } else if (review === 'pass') {
-      decision = 'Await QA';
-      explanation = 'The reviewer passed. The judge waits for a QA verdict on the same revision.';
+      decision = 'Await the judge';
+      explanation = 'CI is green. A fresh judge reads the packet.';
     } else if (qa === 'pass') {
-      decision = 'Await review';
-      explanation = 'QA passed. The judge waits for a reviewer verdict on the same revision.';
+      decision = 'Await CI';
+      explanation = 'The judge starts only after CI is green, so a merge verdict cannot come first.';
     }
     title.textContent = decision;
     reason.textContent = explanation;

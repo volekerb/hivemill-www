@@ -13,8 +13,8 @@
   },
   "plugin:hivemill": {
     "icon": "catalog",
-    "summary": "Set up a self-hosted Hivemill factory with the guided installer.",
-    "use_when": "Install the factory on a fresh Debian or Ubuntu host with a logged-in Claude Code.",
+    "summary": "The guided installer for the legacy pipeline. The runner is built from source.",
+    "use_when": "Install the legacy pipeline on a Debian or Ubuntu host. For the runner, follow the installation guide.",
     "requirements": "A fresh Debian or Ubuntu host and a logged-in Claude Code. The installer guide documents the remaining dependencies."
   },
   "plugin:hivemill-spend": {
@@ -25,83 +25,88 @@
   },
   "role:boss": {
     "icon": "boss",
-    "summary": "Turn requests into goals and keep the owner informed.",
-    "use_when": "Give the factory owner one point of contact for goals, progress and decisions."
+    "summary": "Legacy pipeline (paused): was the owner’s chat contact that turned requests into goals. The runner’s planner and owner queue replace it.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:cleaner": {
     "icon": "cleaner",
-    "summary": "Keep factory workspaces tidy through scoped housekeeping tasks.",
-    "use_when": "Assign routine workspace maintenance with explicit limits and checks."
+    "summary": "Legacy pipeline (paused): kept workspaces tidy through scoped housekeeping tasks.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:coder": {
     "icon": "coder",
-    "summary": "Implement a scoped task, open a pull request and address review findings.",
-    "use_when": "Assign an implementation task with clear acceptance criteria and a separate review path."
+    "summary": "Legacy pipeline (paused): implemented a task and opened a pull request for separate review. The runner’s task session replaces it.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:director": {
     "icon": "director",
-    "summary": "Coordinate the factory and assign goals to team leads.",
-    "use_when": "Staff and coordinate work across multiple goals in a Hivemill factory."
+    "summary": "Legacy pipeline (paused): staffed teams and assigned goals to leads. Projects and the planner replace it.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:evaluator": {
     "icon": "evaluator",
-    "summary": "Run an evaluation task inside a controlled sandbox.",
-    "use_when": "Evaluate an agent on a bounded task without granting production access."
+    "summary": "Legacy pipeline (paused): ran an evaluation task inside a controlled sandbox.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:judge": {
     "icon": "merge",
-    "summary": "Apply the project’s merge policy to a checked pull request.",
-    "use_when": "Keep the merge decision separate from implementation, review and QA."
+    "summary": "Legacy pipeline (paused): merged on passing reviewer and QA verdicts. The runner’s task judge and mechanical merge replace it.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:lead": {
     "icon": "team",
-    "summary": "Plan tasks and coordinate delivery of one goal.",
-    "use_when": "Break a goal into scoped tasks and follow the team’s progress."
+    "summary": "Legacy pipeline (paused): planned the tasks of one goal and coordinated its team. The planner replaces it.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
+  },
+  "role:planner": {
+    "icon": "ask",
+    "summary": "Keeps each project’s queue of ready tasks full, splits tasks that are too big and asks the owner when it needs a decision.",
+    "use_when": "Keep the runner busy with small tasks that pass the spec gate, without typing every task yourself."
   },
   "role:pm": {
     "icon": "ask",
-    "summary": "Turn a request into requirements, acceptance criteria and a plan.",
-    "use_when": "Clarify what should be built and how the team will know it works."
+    "summary": "Legacy pipeline (paused): turned a request into requirements and acceptance criteria. The planner and the spec gate replace it.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:qa": {
     "icon": "qa",
-    "summary": "Test a change against its acceptance criteria and record results.",
-    "use_when": "Verify a pull request independently from the agent that implemented it."
+    "summary": "Legacy pipeline (paused): tested a change against its acceptance criteria. The runner’s proof re-runs replace it.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:researcher": {
     "icon": "researcher",
-    "summary": "Investigate one question and produce an evidence-backed report.",
-    "use_when": "Resolve a bounded technical question before committing to an implementation."
+    "summary": "Legacy pipeline (paused): investigated one question and wrote a report. Research as a task kind is planned.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:retro": {
     "icon": "retro",
-    "summary": "Review rejected work and recommend process improvements.",
-    "use_when": "Look for recurring causes in rejected work without changing the active workflow automatically."
+    "summary": "Legacy pipeline (paused): reviewed rejected work and proposed process changes.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:reviewer": {
     "icon": "review",
-    "summary": "Review a pull request against its task and record findings.",
-    "use_when": "Check a proposed change independently before the merge decision."
+    "summary": "Legacy pipeline (paused): reviewed a pull request and recorded findings. /code-review in the task session and the judge replace it.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:scout": {
     "icon": "scout",
-    "summary": "Assess candidate skills through read-only research.",
-    "use_when": "Evaluate a potentially useful skill before adding it to the factory."
+    "summary": "Legacy pipeline (paused): assessed candidate skills through read-only research.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:staff-engineer": {
     "icon": "staff",
-    "summary": "Provide technical advice on a specific engineering decision.",
-    "use_when": "Get a second technical perspective on architecture or a difficult implementation question."
+    "summary": "Legacy pipeline (paused): gave technical advice on one engineering decision.",
+    "use_when": "Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner."
   },
   "role:task": {
     "icon": "coder",
-    "summary": "Carry one task from its specification to an open pull request with passing checks.",
-    "use_when": "Run a single agent per task that implements, tests, reviews and opens the pull request for a separate merge decision."
+    "summary": "One Claude Code session per task: implement, run the tests, run /code-review, fix the findings and open the pull request.",
+    "use_when": "Run each task in one session whose work a Stop-hook gate checks by re-running every test and command proof."
   },
   "role:task-judge": {
     "icon": "merge",
-    "summary": "Decide whether one pull request should merge, from its task, proofs and review record.",
-    "use_when": "Keep the merge decision independent of the agent that wrote the change."
+    "summary": "A fresh, read-only judge that maps every behaviour change in the diff to a criterion and answers MERGE, REJECT or HOLD.",
+    "use_when": "Decide a merge independently of the session that wrote the change, and catch changes nobody asked for."
   },
   "skill:hivemill-spend/agent-context-limits": {
     "icon": "limits",
@@ -117,14 +122,14 @@
   },
   "skill:hivemill/setup": {
     "icon": "install",
-    "summary": "Guide Claude Code through the Hivemill installation.",
-    "use_when": "Set up a factory using the installer rather than assembling its services manually.",
+    "summary": "Guide Claude Code through installing the legacy pipeline.",
+    "use_when": "Set up the legacy pipeline with the installer. For the runner, follow the installation guide.",
     "requirements": "A fresh Debian or Ubuntu host and a logged-in Claude Code. The installer guide documents the remaining dependencies."
   },
   "skill:hivemill/web": {
     "icon": "ask",
-    "summary": "File a web delivery goal from one sentence.",
-    "use_when": "Send a change to a project repository through review, QA and the merge decision."
+    "summary": "Legacy pipeline (paused): file a web delivery goal from one sentence.",
+    "use_when": "Send a change through the legacy pipeline’s review, QA and merge decision."
   },
   "skill:hm-clean": {
     "icon": "clean",

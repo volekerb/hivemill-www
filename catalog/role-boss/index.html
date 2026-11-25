@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Boss agent role | Hivemill</title>
-<meta name="description" content="Turn requests into goals and keep the owner informed.">
+<meta name="description" content="Legacy pipeline (paused): was the owner’s chat contact that turned requests into goals. The runner’s planner and owner queue replace it.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
 <link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hivemill">
 <meta property="og:title" content="Boss agent role | Hivemill">
-<meta property="og:description" content="Turn requests into goals and keep the owner informed.">
+<meta property="og:description" content="Legacy pipeline (paused): was the owner’s chat contact that turned requests into goals. The runner’s planner and owner queue replace it.">
 <meta property="og:url" content="https://hivemill.dev/catalog/role-boss/">
 <meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta property="og:image:width" content="1344">
@@ -27,7 +27,7 @@
 <meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Boss agent role | Hivemill">
-<meta name="twitter:description" content="Turn requests into goals and keep the owner informed.">
+<meta name="twitter:description" content="Legacy pipeline (paused): was the owner’s chat contact that turned requests into goals. The runner’s planner and owner queue replace it.">
 <meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hivemill","item":"https://hivemill.dev/"},{"@type":"ListItem","position":2,"name":"Catalog","item":"https://hivemill.dev/catalog/"},{"@type":"ListItem","position":3,"name":"Boss agent role","item":"https://hivemill.dev/catalog/role-boss/"}]}</script>
@@ -48,10 +48,10 @@
 <main id="main">
 <p class="sr" role="status" aria-live="polite" id="live"></p>
 <header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb"><a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#roles">Roles</a></nav>
-<div class="component-heading"><div><h1>Boss</h1><p>Turn requests into goals and keep the owner informed.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#boss"/></svg></div></div></header>
+<div class="component-heading"><div><h1>Boss</h1><p>Legacy pipeline (paused): was the owner’s chat contact that turned requests into goals. The runner’s planner and owner queue replace it.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#boss"/></svg></div></div></header>
 <div class="wrap component-layout"><div class="component-body">
-<section class="component-section" id="use"><h2>When to use it</h2><p>Give the factory owner one point of contact for goals, progress and decisions.</p><h3>Requirements</h3><p>A Hivemill factory checkout. Review the instructions and tool permissions before assigning the role.</p></section>
-<section class="component-section" id="install"><h2>Install</h2><p>Download the role file and adapt its instructions for your agent.</p><div class="snip"><div class="snippet-bar"><span>Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Terminal commands for boss">Copy</button></div><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/roles/boss.md</code></pre></div></section>
+<section class="component-section" id="use"><h2>When to use it</h2><p>Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner.</p><h3>Requirements</h3><p>A Hivemill factory checkout. Review the instructions and tool permissions before assigning the role.</p></section>
+<section class="component-section" id="install"><h2>Install</h2><p>Download the role file and adapt its instructions for your agent.</p><div class="snip"><div class="snippet-bar"><span>Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Terminal commands for boss">Copy</button></div><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/c58021c92833e4c62466ce95bfb73e957ddb5ef0/roles/boss.md</code></pre></div></section>
 <section class="component-section" id="documentation"><h2>Documentation</h2>
 <details class="doc-section" open><summary>Overview</summary><div class="doc"><p>The owner talks only to you. You turn what they ask for into well-formed goals, hand those to the director, and keep the owner informed. You do not manage teams and you never write code.</p></div></details>
 <details class="doc-section"><summary>When the owner asks for something</summary><div class="doc"><ol><li><p>Check whether it fits an existing goal: <code>factory goal list</code>. If so, send the director an update on it instead of a duplicate.</p></li><li><p>If it&#x27;s new, understand it. Ask only questions whose answers change the outcome, with options and a recommendation. Then create it: <code>factory goal new --title &quot;…&quot; --project &lt;id&gt; --priority 1-3 --intent - &lt;&lt;&#x27;EOF&#x27; …</code>, then <code>factory goal edit &lt;id&gt; --success - &lt;&lt;&#x27;EOF&#x27; …</code> (only one <code>-</code> per call)</p><ul><li><p><strong>intent</strong>: what and why, in the owner&#x27;s words plus your clarifications.</p></li><li><p><strong>success</strong>: concrete, checkable criteria the team is judged on.</p></li><li><p>Priority: 1 = now, 2 = normal, 3 = when idle.</p></li><li><p>A new repo or area needs <code>factory project add</code> first.</p></li></ul></li><li><p>Hand it over: <code>factory msg director &quot;new goal G-xxx&quot; &quot;&lt;one-paragraph brief + anything the owner stressed&gt;&quot; --kind request --goal G-xxx</code>.</p></li><li><p>Tell the owner the goal id and what happens next.</p></li></ol></div></details>
@@ -108,10 +108,10 @@ The daily digest arrives each morning (`daily digest &lt;date&gt;`); `factory di
 - &quot;OWNER-ONLY BLOCKER&quot;: tell the owner at once by owner channel, again at day_start_hour if still open; it stays in `factory res` until a `--kind decision` quotes its M-id. (G-018)
 - Reject owner-action requests without a quoted check on current main (`--help`, valid args, `--dry-run` if any); return them to the director. (M10432)</code></pre></div></details></section>
 </div><aside aria-label="Component information"><div class="component-aside"><section><h2>Component details</h2><dl class="component-facts"><dt>Type</dt><dd>Role</dd><dt>Name</dt><dd><code>boss</code></dd>
-<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838"><code>7368c0c3cec3</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/roles/boss.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
+<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/c58021c92833e4c62466ce95bfb73e957ddb5ef0"><code>c58021c92833</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/c58021c92833e4c62466ce95bfb73e957ddb5ef0/roles/boss.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
 <section><h2>Mentioned roles</h2><ul class="component-related"><li><a href="../role-cleaner/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#cleaner"/></svg><span>Cleaner</span><span aria-hidden="true">↗</span></a></li><li><a href="../role-director/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#director"/></svg><span>Director</span><span aria-hidden="true">↗</span></a></li><li><a href="../role-judge/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#merge"/></svg><span>Judge</span><span aria-hidden="true">↗</span></a></li></ul></section>
 </div></aside></div>
 </main>
-<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at 7368c0c3cec3 (2026-11-24).</div></footer>
+<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at c58021c92833 (2026-11-25).</div></footer>
 </body>
 </html>

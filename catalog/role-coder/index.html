@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Coder agent role | Hivemill</title>
-<meta name="description" content="Implement a scoped task, open a pull request and address review findings.">
+<meta name="description" content="Legacy pipeline (paused): implemented a task and opened a pull request for separate review. The runner’s task session replaces it.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="../../assets/wordmark-light.svg" type="image/svg+xml">
 <link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hivemill">
 <meta property="og:title" content="Coder agent role | Hivemill">
-<meta property="og:description" content="Implement a scoped task, open a pull request and address review findings.">
+<meta property="og:description" content="Legacy pipeline (paused): implemented a task and opened a pull request for separate review. The runner’s task session replaces it.">
 <meta property="og:url" content="https://hivemill.dev/catalog/role-coder/">
 <meta property="og:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta property="og:image:width" content="1344">
@@ -27,7 +27,7 @@
 <meta property="og:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Coder agent role | Hivemill">
-<meta name="twitter:description" content="Implement a scoped task, open a pull request and address review findings.">
+<meta name="twitter:description" content="Legacy pipeline (paused): implemented a task and opened a pull request for separate review. The runner’s task session replaces it.">
 <meta name="twitter:image" content="https://hivemill.dev/assets/brand/hive-mill-master.png">
 <meta name="twitter:image:alt" content="Hivemill honeycomb production line with amber workpieces">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hivemill","item":"https://hivemill.dev/"},{"@type":"ListItem","position":2,"name":"Catalog","item":"https://hivemill.dev/catalog/"},{"@type":"ListItem","position":3,"name":"Coder agent role","item":"https://hivemill.dev/catalog/role-coder/"}]}</script>
@@ -48,10 +48,10 @@
 <main id="main">
 <p class="sr" role="status" aria-live="polite" id="live"></p>
 <header class="component-hero wrap"><nav aria-label="Breadcrumb" class="component-crumb"><a href="../">Catalog</a><span aria-hidden="true">/</span><a href="../#roles">Roles</a></nav>
-<div class="component-heading"><div><h1>Coder</h1><p>Implement a scoped task, open a pull request and address review findings.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#coder"/></svg></div></div></header>
+<div class="component-heading"><div><h1>Coder</h1><p>Legacy pipeline (paused): implemented a task and opened a pull request for separate review. The runner’s task session replaces it.</p></div><div class="component-mark" aria-hidden="true"><svg class="component-symbol" aria-hidden="true"><use href="../../assets/icons/icons.svg#coder"/></svg></div></div></header>
 <div class="wrap component-layout"><div class="component-body">
-<section class="component-section" id="use"><h2>When to use it</h2><p>Assign an implementation task with clear acceptance criteria and a separate review path.</p><h3>Requirements</h3><p>A Hivemill factory checkout. Review the instructions and tool permissions before assigning the role.</p></section>
-<section class="component-section" id="install"><h2>Install</h2><p>Download the role file and adapt its instructions for your agent.</p><div class="snip"><div class="snippet-bar"><span>Role file · Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Role file · Terminal commands for coder">Copy</button></div><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/roles/coder.md</code></pre></div><div class="snip"><div class="snippet-bar"><span>Optional role skills · Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Optional role skills · Terminal commands for coder">Copy</button></div><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/coder/coder-skills</code></pre></div></section>
+<section class="component-section" id="use"><h2>When to use it</h2><p>Read it as a reference for the legacy pipeline, which is paused and kept as the rollback. New work runs on the Hivemill runner.</p><h3>Requirements</h3><p>A Hivemill factory checkout. Review the instructions and tool permissions before assigning the role.</p></section>
+<section class="component-section" id="install"><h2>Install</h2><p>Download the role file and adapt its instructions for your agent.</p><div class="snip"><div class="snippet-bar"><span>Role file · Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Role file · Terminal commands for coder">Copy</button></div><pre class="code"><code>curl -fsSLO https://raw.githubusercontent.com/volekerb/hivemill/c58021c92833e4c62466ce95bfb73e957ddb5ef0/roles/coder.md</code></pre></div><div class="snip"><div class="snippet-bar"><span>Optional role skills · Terminal</span><button class="copy" type="button" hidden data-copy aria-label="Copy Optional role skills · Terminal commands for coder">Copy</button></div><pre class="code"><code>git clone --depth 1 https://github.com/volekerb/hivemill &amp;&amp; claude --plugin-dir hivemill/roles/plugins/coder/coder-skills</code></pre></div></section>
 <section class="component-section"><h2>Bundled skills</h2><dl class="bundled-skills"><div><dt>ci-wait</dt><dd>Wait for PR CI in a background Bash task instead of foreground polling.</dd></div><div><dt>go-change</dt><dd>Checklist for writing idiomatic, safe, stdlib-only Go under go/ with tests and the local toolchain.</dd></div><div><dt>guard-change</dt><dd>Procedure for changing a guard so the PR fixes the whole bypass class and loosens nothing unplanned.</dd></div><div><dt>pr-description</dt><dd>Write a concrete, short PR body in the factory template (Summary, Why, Changes, Test evidence, Risk / rollback).</dd></div><div><dt>pre-pr-check</dt><dd>Self-check that catches the misses a reviewer or QA would otherwise find (unmet spec item, red CI, duplicate def, flaky test, missing PR-body item, unmeasured limit).</dd></div><div><dt>self-review</dt><dd>Independent read of your own diff by one fresh Sonnet subagent using the reviewer checklist, before in_review.</dd></div><div><dt>stuck-and-finish</dt><dd>Coder detail for a wrong or impossible spec, resource problems, and what factory done refuses.</dd></div></dl></section>
 <section class="component-section" id="documentation"><h2>Documentation</h2>
 <details class="doc-section" open><summary>Overview</summary><div class="doc"><p>You build one task, in your own git worktree (your cwd, branch <code>factory/&lt;task&gt;</code>), and open a PR. You never merge, never review your own work, and never push to main.</p></div></details>
@@ -103,10 +103,10 @@ Wrong spec/resource problem: stop, tell your lead (stuck-and-finish skill).
 - Put &quot;Ran N&quot; for the merged tree and origin/main in the PR body; it must not be lower. Renames must never strip `test_` prefixes. (M640)
 - PR body: follow the pr-description skill (.github/pull_request_template.md). (M2502)</code></pre></div></details></section>
 </div><aside aria-label="Component information"><div class="component-aside"><section><h2>Component details</h2><dl class="component-facts"><dt>Type</dt><dd>Role</dd><dt>Name</dt><dd><code>coder</code></dd>
-<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838"><code>7368c0c3cec3</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/7368c0c3cec355e3d3a6a2aa8fc4600f1bb82838/roles/coder.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
+<dt>Revision</dt><dd><a href="https://github.com/volekerb/hivemill/commit/c58021c92833e4c62466ce95bfb73e957ddb5ef0"><code>c58021c92833</code></a></dd></dl><a class="catalog-text-link" href="https://github.com/volekerb/hivemill/blob/c58021c92833e4c62466ce95bfb73e957ddb5ef0/roles/coder.md">View source on GitHub <span aria-hidden="true">↗</span></a></section>
 <section><h2>Mentioned roles</h2><ul class="component-related"><li><a href="../role-lead/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#team"/></svg><span>Lead</span><span aria-hidden="true">↗</span></a></li><li><a href="../role-reviewer/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#review"/></svg><span>Reviewer</span><span aria-hidden="true">↗</span></a></li><li><a href="../role-scout/"><svg class="i" aria-hidden="true"><use href="../../assets/icons/icons.svg#scout"/></svg><span>Scout</span><span aria-hidden="true">↗</span></a></li></ul></section>
 </div></aside></div>
 </main>
-<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at 7368c0c3cec3 (2026-11-24).</div></footer>
+<footer class="site"><div class="wrap"><a class="brand" href="../../">Hivemill</a><p>Open source. Self-hosted. MIT licensed.</p><a href="https://github.com/volekerb/hivemill">GitHub <span aria-hidden="true">↗</span></a></div><div class="wrap footer-note">Built from volekerb/hivemill at c58021c92833 (2026-11-25).</div></footer>
 </body>
 </html>
