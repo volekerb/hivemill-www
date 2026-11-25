@@ -25,7 +25,8 @@ def listed_pages():
     pages = []
     for url in config()['ci']['collect']['url']:
         parts = urlsplit(url)
-        if f'{parts.scheme}://{parts.netloc}' != HOST or parts.query or parts.fragment:
+        if (f'{parts.scheme}://{parts.netloc}' != HOST or parts.query or parts.fragment
+                or not parts.path.endswith('/index.html')):
             raise AssertionError(f'lighthouserc.json URL must be {HOST}/<path>/index.html: {url}')
         pages.append(parts.path.removeprefix('/'))
     return pages

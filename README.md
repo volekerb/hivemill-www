@@ -57,14 +57,14 @@ Set `HIVEMILL_SOURCE` to a clean checkout at `catalog/catalog.json`’s source S
 
 ## Checks
 
-The `lighthouse` job of the `site` workflow runs Lighthouse CI on the tested artifact (`build/site`) before anything deploys. `lighthouserc.json` lists every public page (`tools/site_metadata.py` `page_paths`) and measures each at the default mobile form factor, 3 runs per page. On the median run, performance must be at least 0.9, accessibility at least 0.9 and cumulative layout shift at most 0.01. Reports stay in `.lighthouseci/` and are not uploaded. `tests/test_pages.py` fails when a public page is missing from `lighthouserc.json` or a threshold changes.
+The `lighthouse` job of the `site` workflow runs Lighthouse CI on the tested artifact (`build/site`) on every pull request and push. It does not yet hold back the `deploy` job. `lighthouserc.json` lists every public page (`tools/site_metadata.py` `page_paths`) and measures each at the default mobile form factor, 3 runs per page. On the median run, performance must be at least 0.9, accessibility at least 0.9 and cumulative layout shift at most 0.01. Reports stay in `.lighthouseci/` and are not uploaded. `tests/test_pages.py` fails when a public page is missing from `lighthouserc.json` or a threshold changes.
 
 Run the same checks locally from the repo root (Node and Chrome required; lhci uses the version pinned in the workflow):
 
 ```sh
 .local/venv/bin/python tools/build_site.py --factory .local/demo-source
 npx --yes "@lhci/cli@$(sed -n 's/^ *LHCI_VERSION: "\([0-9.]*\)"$/\1/p' .github/workflows/site.yml)" autorun
-python3 -m unittest discover -s tests -p test_pages.py
+.local/venv/bin/python -m unittest discover -s tests -p test_pages.py
 ```
 
 When you add a public page, add its `http://localhost/<path>/index.html` URL to `lighthouserc.json`.
