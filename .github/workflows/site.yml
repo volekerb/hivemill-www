@@ -56,6 +56,9 @@ jobs:
       - name: Install build and test dependencies
         run: python3 -m pip install -r requirements-dev.txt
 
+      - name: Install the Playwright browser
+        run: python3 -m playwright install --with-deps chromium
+
       - name: Build the public site and isolated demo
         run: python3 tools/build_site.py --factory .local/demo-source
 
@@ -88,6 +91,35 @@ jobs:
           if [ "$pinned" != "$latest" ]; then
             echo "catalog behind main: pinned $pinned, hivemill main is $latest"
           fi
+
+  lighthouse:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Download the tested Pages artifact
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/pages
+
+      - name: Extract the artifact into build/site
+        run: |
+          mkdir -p build/site
+          tar -xf "$RUNNER_TEMP/pages/artifact.tar" -C build/site
+
+      # Mobile (default form factor), 3 runs per page, median run asserted; see lighthouserc.json.
+      # Reports stay on the runner in .lighthouseci/; nothing is uploaded.
+      - name: Lighthouse every public page
+        env:
+          LHCI_VERSION: "0.16.1"
+        run: npx --yes "@lhci/cli@${LHCI_VERSION}" autorun
 
   deploy:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
