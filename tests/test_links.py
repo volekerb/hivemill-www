@@ -1,6 +1,7 @@
 """Committed-source checks: every <img> is sized and labelled; 404.html links resolve."""
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 import sys
 import unittest
 from urllib.parse import unquote, urlsplit
@@ -40,7 +41,7 @@ def pages():
 
 
 def positive_int(value):
-    return (value or '').strip().isascii() and (value or '').strip().isdigit() and int(value) > 0
+    return re.fullmatch(r'[0-9]+', (value or '').strip()) is not None and int(value) > 0
 
 
 def image_problems(attrs):
