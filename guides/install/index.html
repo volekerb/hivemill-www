@@ -10,11 +10,11 @@
     <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/v2.css">
     <link rel="stylesheet" href="/assets/css/factory.css?v=2026111807">
-    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026111807">
+    <link rel="stylesheet" href="/assets/css/editorial.css?v=2026112501">
     <script type="module" src="/assets/js/motion.js"></script>
     <script type="module" src="/assets/js/factory.js?v=2026111807"></script>
     <script type="module" src="/assets/js/editorial.js?v=2026112501"></script>
-    <script type="module" src="/assets/js/copy.js"></script>
+    <script type="module" src="/assets/js/copy.js?v=2026112501"></script>
 <!-- Generated search metadata: tools/site_metadata.py -->
 <link rel="canonical" href="https://hivemill.dev/guides/install/">
 <meta property="og:type" content="website">
@@ -66,21 +66,21 @@
               <p>Clone the repository</p>
               <div class="ed-command">
                 <code id="c1">git clone https://github.com/volekerb/hivemill ~/hivemill</code>
-                <button type="button" class="copy" data-copy="c1" aria-label="Copy clone command" hidden>Copy</button>
+                <button type="button" class="copy" data-copy="c1" aria-label="Copy clone command">Copy</button>
               </div>
             </li>
             <li>
               <p>Build the runner</p>
               <div class="ed-command">
                 <code id="c2">cd ~/hivemill/go &amp;&amp; go build -o ~/.local/bin/hivemill ./cmd/hivemill</code>
-                <button type="button" class="copy" data-copy="c2" aria-label="Copy build command" hidden>Copy</button>
+                <button type="button" class="copy" data-copy="c2" aria-label="Copy build command">Copy</button>
               </div>
             </li>
             <li>
               <p>Create the home in any empty directory</p>
               <div class="ed-command">
                 <code id="c3">hivemill init --home ~/hivemill-home</code>
-                <button type="button" class="copy" data-copy="c3" aria-label="Copy init command" hidden>Copy</button>
+                <button type="button" class="copy" data-copy="c3" aria-label="Copy init command">Copy</button>
               </div>
             </li>
           </ol>
@@ -137,12 +137,12 @@
             <p>Check a task against the spec gate before you start it. The command only reads.</p>
             <div class="ed-command">
               <code id="c4">hivemill task lint T-0001</code>
-              <button type="button" class="copy" data-copy="c4" aria-label="Copy lint command" hidden>Copy</button>
+              <button type="button" class="copy" data-copy="c4" aria-label="Copy lint command">Copy</button>
             </div>
             <p>Then start the daemon under systemd or launchd, or in a terminal, and turn on the planner with <code>hivemill planner start</code>. Read the results per task with the report.</p>
             <div class="ed-command">
               <code id="c5">hivemill report</code>
-              <button type="button" class="copy" data-copy="c5" aria-label="Copy report command" hidden>Copy</button>
+              <button type="button" class="copy" data-copy="c5" aria-label="Copy report command">Copy</button>
             </div>
           </section>
         </div>
