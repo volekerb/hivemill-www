@@ -1,0 +1,72 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "build/site",
+      "numberOfRuns": 3,
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/catalog/dashboard-herdr-core/index.html",
+        "http://localhost/catalog/index.html",
+        "http://localhost/catalog/plugin-hivemill/index.html",
+        "http://localhost/catalog/plugin-hivemill-spend/index.html",
+        "http://localhost/catalog/role-boss/index.html",
+        "http://localhost/catalog/role-cleaner/index.html",
+        "http://localhost/catalog/role-coder/index.html",
+        "http://localhost/catalog/role-director/index.html",
+        "http://localhost/catalog/role-evaluator/index.html",
+        "http://localhost/catalog/role-judge/index.html",
+        "http://localhost/catalog/role-lead/index.html",
+        "http://localhost/catalog/role-pm/index.html",
+        "http://localhost/catalog/role-qa/index.html",
+        "http://localhost/catalog/role-researcher/index.html",
+        "http://localhost/catalog/role-retro/index.html",
+        "http://localhost/catalog/role-reviewer/index.html",
+        "http://localhost/catalog/role-scout/index.html",
+        "http://localhost/catalog/role-staff-engineer/index.html",
+        "http://localhost/catalog/role-task/index.html",
+        "http://localhost/catalog/role-task-judge/index.html",
+        "http://localhost/catalog/skill-hivemill-setup/index.html",
+        "http://localhost/catalog/skill-hivemill-spend-agent-context-limits/index.html",
+        "http://localhost/catalog/skill-hivemill-spend-token-spend-audit/index.html",
+        "http://localhost/catalog/skill-hivemill-web/index.html",
+        "http://localhost/catalog/skill-hm-clean/index.html",
+        "http://localhost/factories/what/index.html",
+        "http://localhost/factories/who-merges/index.html",
+        "http://localhost/film/index.html",
+        "http://localhost/guides/ask-to-merge/index.html",
+        "http://localhost/guides/install/index.html",
+        "http://localhost/guides/watch/index.html",
+        "http://localhost/work-with-me/index.html"
+      ]
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": [
+          "error",
+          {
+            "minScore": 0.9,
+            "aggregationMethod": "median-run"
+          }
+        ],
+        "categories:accessibility": [
+          "error",
+          {
+            "minScore": 0.9,
+            "aggregationMethod": "median-run"
+          }
+        ],
+        "cumulative-layout-shift": [
+          "error",
+          {
+            "maxNumericValue": 0.01,
+            "aggregationMethod": "median-run"
+          }
+        ]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": ".lighthouseci"
+    }
+  }
+}

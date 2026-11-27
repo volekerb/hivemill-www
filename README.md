@@ -55,6 +55,20 @@ After building, run `.local/venv/bin/python -m unittest discover -s tests`. Demo
 
 Set `HIVEMILL_SOURCE` to a clean checkout at `catalog/catalog.json`’s source SHA to include the factory public-text guard. CI checks out the catalog and demo pins separately, runs the full suite, checks catalog output, and verifies all snippet references before publishing. Regenerate catalog pages with `python3 tools/catalog.py render --out catalog/index.html` after editing either catalog template or the generator.
 
+## Checks
+
+The `lighthouse` job of the `site` workflow runs Lighthouse CI on the tested artifact (`build/site`) on every pull request and push. It does not yet hold back the `deploy` job. `lighthouserc.json` lists every public page (`tools/site_metadata.py` `page_paths`) and measures each at the default mobile form factor, 3 runs per page. On the median run, performance must be at least 0.9, accessibility at least 0.9 and cumulative layout shift at most 0.01. Reports stay in `.lighthouseci/` and are not uploaded. `tests/test_pages.py` fails when a public page is missing from `lighthouserc.json` or a threshold changes.
+
+Run the same checks locally from the repo root (Node and Chrome required; lhci uses the version pinned in the workflow):
+
+```sh
+.local/venv/bin/python tools/build_site.py --factory .local/demo-source
+npx --yes "@lhci/cli@$(sed -n 's/^ *LHCI_VERSION: "\([0-9.]*\)"$/\1/p' .github/workflows/site.yml)" autorun
+.local/venv/bin/python -m unittest discover -s tests -p test_pages.py
+```
+
+When you add a public page, add its `http://localhost/<path>/index.html` URL to `lighthouserc.json`.
+
 ## Search metadata and page copy
 
 Each page owns its visible copy, title and description. `tools/site_metadata.py` derives canonical URLs, social previews and the supported structured data from those facts. After changing a title or description, run:
